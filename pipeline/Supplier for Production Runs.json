@@ -1,9 +1,9 @@
 {
-	"name": "test",
+	"name": "Supplier for Production Runs",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_krz",
+				"name": "Supplier for Production Runs",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -84,13 +84,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_krz",
+						"referenceName": "WWSQL003_Portal",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_krz",
+						"referenceName": "DataVerse_SupplierForProductionLines",
 						"type": "DatasetReference"
 					}
 				]
