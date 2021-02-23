@@ -221,17 +221,6 @@
 							},
 							{
 								"source": {
-									"name": "BOM Instructions For This Run",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
-								"sink": {
-									"name": "ww_bominstructionsforthisrun",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "Bottle Laser Code",
 									"type": "String",
 									"physicalType": "nvarchar"
