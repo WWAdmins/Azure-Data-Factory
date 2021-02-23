@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_krz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CommonDataServiceForApps1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CommonDataServiceForAppsEntity",
+		"schema": [],
+		"typeProperties": {
+			"entityName": "ww_supplierforproductionlines"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

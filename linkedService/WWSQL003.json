@@ -1,0 +1,17 @@
+{
+	"name": "WWSQL003",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=WWSQL003;initial catalog=Wineworks.Database",
+			"userName": "Wineworksgroup\\WWG_Service",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0MjIyNGZhNi00ZGRhLTRmMTMtYjY4MC0zN2QyYjZkNDZkNWMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "WWSQL003IntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

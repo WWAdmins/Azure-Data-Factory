@@ -1,0 +1,103 @@
+{
+	"name": "test",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_krz",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "."
+					},
+					{
+						"name": "Destination",
+						"value": "activitypointer"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT \ncast(s.Id as nvarchar) [Supplier Id]\n,Cast([Active] as int)  [Status]\n,c.Name [Supplier Product Category]\n,cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),s.Id, 1000))) as uniqueidentifier) [Supplier for prod lines Id]\n\nFROM [WineWorks.Database].[companies].[Supplier] s\nINNER JOIN lookups.DryGoodsCategory c on c.Id=DryGoodsCategoryId\n",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "CommonDataServiceForAppsSink",
+						"writeBatchSize": 10,
+						"writeBehavior": "upsert"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Supplier Id",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_supplierid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "statecode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Supplier Product Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_supplierproductcategory",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Supplier for prod lines Id",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "ww_supplierforproductionlinesid",
+									"type": "Guid"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_krz",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_krz",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-02-22T03:12:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
