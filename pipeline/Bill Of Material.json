@@ -474,17 +474,6 @@
 							},
 							{
 								"source": {
-									"name": "Carton Inkjet Placement",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
-								"sink": {
-									"name": "ww_cartoninkjetplacement",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "Carton Label",
 									"type": "String",
 									"physicalType": "nvarchar"
