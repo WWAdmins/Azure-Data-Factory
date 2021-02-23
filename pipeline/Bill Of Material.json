@@ -1,0 +1,55 @@
+{
+	"name": "Bill Of Material",
+	"properties": {
+		"activities": [
+			{
+				"name": "Bill Of Material",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT \ncast(bom.Id as nvarchar) [Bom ID], \nbwol.BottlingWorkOrderId as ProductionWorkOrderId, \nbom.StockCode, \nbwol.Sequence, \nbwol.ProductionNotes, \nbook.ProductionLineId, \nbom.StockCodeDescription, \nbwol.CasesToProcess / bom.CartonsPerPallet Pallets, \ncast(bom.BottlesPerCarton * bom.CartonsPerPallet as int) BottlesPerPallet, \ncast(bwol.CasesToProcess * bom.BottlesPerCarton as int) Bottles ,\ncast(sc.StockCode as nvarchar) [Screwcap Stockcode],\nscpt.Name [Screwcap Printing],\nscc.Name [Screwcap Colour],\ncast(cc.StockCode as nvarchar) [Cork Stockcode],\nccpt.Name [Cork Printing],\nccc.Name [Cork Colour],\ncz.Name [Cork Length],\n[c].[BottlingWorkOrderRunAlert] AS [Generic Client Instructions],\n[bwo].[AdditionalInstructions] AS [Work Order Instructions],\n[bwol].[AdditionalInstructions] AS [BOM Instructions For This Run],\n[bom].[AdditionalInstructions] AS [Bom Specific Instructions],\n[book].[ProductionRunNumber] AS [Bottle Laser Code],\n[botlook].[WWName] AS [Bottle],\n[bs].[Name] AS [Bottle Size],\n[bt].[WWCode] AS [Bottle Type],\n[clo].[WWName] AS [Closure],\n[cov].[WWName] AS [Cover],\n[fla].[WWName] AS [Front Label],\ncast([bom].FrontLabelHeight as nvarchar) [Front Label Height],\n[bla].[WWName] AS [Back Label],\ncast([bom].BackLabelHeight as nvarchar) [Back Label Height],\n[ola].[WWName] AS [Other Label],\nCAST([bom].[OtherLabelPlacement] AS NVARCHAR(MAX)) AS [Other Label Placement],\n[ola2].[WWName] AS [Other Label2],\n[bom].OtherLabel2Placement [Other Label2 Placement],\n[blaink].[Name] AS [Back Label Inkjet Code],\n[bom].BackLabelAdditionalText [Back Label Additional Text],\n[bom].BackLabelInkjetPlacement [Back Label Inkjet Placement],\n[div].[WWName] AS [Divider],\n[car].[WWName] AS [Carton],\n[carwinvar].[Name] AS [Carton Variety],\n[cbt].[WWCode] AS [Carton Bottle Type],\n[bom].CartonInkjetText [Carton Inkjet Text],\n[bom].CartonInkjetPlacement [Carton Inkjet Placement],\n[carla].[Name] AS [Carton Label],\n[pal].[WWName] AS [Pallet],\nCASE WHEN [bom].[HardboardTopCover] IS NOT NULL AND [bom].[HardboardTopCover] = 1 THEN 'Yes' WHEN [bom].[HardboardTopCover] IS NOT NULL AND [bom].[HardboardTopCover] = 0 THEN 'No' ELSE '-' END AS [Hardboard Top Cover],\n[sli].[Name] AS [Slipsheet],\n[palstapat].[Name] AS [Pallet Stacking Pattern],\n[extdg1].[WWName] AS [Extra Dry Good1],\n[extdg2].[WWName] AS [Extra Dry Good2]\nFROM \ncompanies.BottlingWorkOrderLine bwol \nINNER join companies.BillOfMaterial bom on bwol.BillOfMaterialId = bom.Id \nINNER JOIN [companies].[BottlingWorkOrder] AS [bwo] ON [bwol].[BottlingWorkOrderId] = [bwo].[Id]\nINNER join companies.ProductionBooking book on bwol.BottlingWorkOrderId = book.BottlingWorkOrderId\nINNER JOIN [companies].[Company] AS c ON c.[Id] = bwo.[CompanyId]\nLEFT JOIN [companies].[DryGood] sc on sc.id = bom.ClosureId and  sc.[DryGoodsCategoryId] = 8\nLEFT JOIN lookups.PrinterType scpt on scpt.Id = sc.ScrewcapPrintTypeId\nLEFT JOIN lookups.Colour scc on scc.Id=sc.ScrewcapColour1Id\nLEFT JOIN [companies].[DryGood] cc on cc.id = bom.ClosureId and  cc.[DryGoodsCategoryId] = 2\nLEFT JOIN lookups.PrinterType ccpt on scpt.Id = cc.CorkPrintTypeId\nLEFT JOIN lookups.Colour ccc on ccc.Id=cc.CoverColour1Id\nLEFT JOIN lookups.CorkSize cz on cz.Id=cc.CorkSizeId\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [botlook] ON [bom].[BottleId] = [botlook].[Id]\nLEFT OUTER JOIN [companies].[DryGood] AS [bot] ON [bom].[BottleId] = [bot].[Id]\nLEFT OUTER JOIN [lookups].[BottleSize] AS [bs] ON [bs].[Id] = [bot].[BottleSizeId]\nLEFT OUTER JOIN [lookups].[BottleType] AS [bt] ON [bt].[Id] = [bot].[BottleTypeId]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [clo] ON [bom].[ClosureId] = [clo].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [cov] ON [bom].[CoverId] = [cov].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [fla] ON [bom].[FrontLabelId] = [fla].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [bla] ON [bom].[BackLabelId] = [bla].[Id]\nLEFT OUTER JOIN [lookups].[InkjetCode] AS [blaink] ON [bom].[BackLabelInkjetCodeId] = [blaink].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [ola] ON [bom].[OtherLabelId] = [ola].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [ola2] ON [bom].[OtherLabel2Id] = [ola2].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [car] ON [bom].[CartonId] = [car].[Id]\nLEFT OUTER JOIN [companies].[DryGood] AS [carton] ON [bom].[CartonId] = [carton].[Id]\nLEFT OUTER JOIN [lookups].[CartonLabel] AS [carla] ON [bom].[CartonLabelId] = [carla].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [div] ON [bom].[DividerId] = [div].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [pal] ON [bom].[PalletId] = [pal].[Id]\nLEFT OUTER JOIN [lookups].[PalletStackingPattern] AS [palstapat] ON [bom].[PalletStackingPatternId] = [palstapat].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [sli] ON [bom].[SlipsheetId] = [sli].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [extdg1] ON [bom].[ExtraDryGood1Id] = [extdg1].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [extdg2] ON [bom].[ExtraDryGood2Id] = [extdg2].[Id]\nLEFT OUTER JOIN [lookups].[Variety] AS [carwinvar] ON [carton].[CartonVarietyId] = [carwinvar].[Id]\t\t\t\t\t\nLEFT OUTER JOIN [lookups].[BottleType] AS [cbt] ON [cbt].[Id] = [carton].[CartonBottleTypeId]\nWHERE bwo.Active=1 and book.ProductionLineId=1 and cast(book.ExpectedStartDateTime as Date) > getdate() - 20",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "CommonDataServiceForAppsSink",
+						"writeBatchSize": 10,
+						"writeBehavior": "upsert"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "WWSQL003_Portal",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "BillOfMaterials",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
