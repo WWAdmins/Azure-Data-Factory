@@ -55,7 +55,7 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "statuscode",
+									"name": "statecode",
 									"type": "Int32"
 								}
 							},
