@@ -232,17 +232,6 @@
 							},
 							{
 								"source": {
-									"name": "Bom Specific Instructions",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "ww_bomspecificinstructions",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "Bottle Laser Code",
 									"type": "String",
 									"physicalType": "nvarchar"
