@@ -342,34 +342,12 @@
 							},
 							{
 								"source": {
-									"name": "Other Label Placement",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
-								"sink": {
-									"name": "ww_otherlabelplacement",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "Other Label2",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "ww_otherlabel2",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Other Label2 Placement",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "ww_otherlabel2placement",
 									"type": "String"
 								}
 							},
