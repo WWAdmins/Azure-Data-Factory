@@ -221,17 +221,6 @@
 							},
 							{
 								"source": {
-									"name": "Generic Client Instructions",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
-								"sink": {
-									"name": "ww_genericclientinstructions",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "Work Order Instructions",
 									"type": "String",
 									"physicalType": "nvarchar"
