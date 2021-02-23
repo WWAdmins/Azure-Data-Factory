@@ -1,9 +1,12 @@
 {
-	"name": "DestinationDataset_krz",
+	"name": "DataVerse_SupplierForProductionLines",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "CommonDataServiceForApps1",
 			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Supplier for Production Runs"
 		},
 		"annotations": [],
 		"type": "CommonDataServiceForAppsEntity",
