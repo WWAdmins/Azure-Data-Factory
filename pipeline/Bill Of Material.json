@@ -529,17 +529,6 @@
 							},
 							{
 								"source": {
-									"name": "Pallet Stacking Pattern",
-									"type": "String",
-									"physicalType": "nvarchar"
-								},
-								"sink": {
-									"name": "ww_palletstackingpattern",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "Extra Dry Good1",
 									"type": "String",
 									"physicalType": "nvarchar"
