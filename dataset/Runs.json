@@ -5,6 +5,9 @@
 			"referenceName": "CommonDataServiceForApps1",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Runs"
+		},
 		"annotations": [],
 		"type": "CommonDataServiceForAppsEntity",
 		"schema": [],
