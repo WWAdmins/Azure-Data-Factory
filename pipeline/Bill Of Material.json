@@ -600,7 +600,7 @@
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "ww_bottlesperpallet",
+									"name": "statecode",
 									"type": "Int32"
 								}
 							}
