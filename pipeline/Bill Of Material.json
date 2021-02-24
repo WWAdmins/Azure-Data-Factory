@@ -221,6 +221,50 @@
 							},
 							{
 								"source": {
+									"name": "Generic Client Instructions",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_genericclientinstructions",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Work Order Instructions",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_workorderinstructions",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BOM Instructions For This Run",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_bominstructionsforthisrun",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Bom Specific Instructions",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ww_bomspecificinstructions",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "Bottle Laser Code",
 									"type": "String",
 									"physicalType": "nvarchar"
@@ -342,12 +386,34 @@
 							},
 							{
 								"source": {
+									"name": "Other Label Placement",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_otherlabelplacement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "Other Label2",
 									"type": "String",
 									"physicalType": "nvarchar"
 								},
 								"sink": {
 									"name": "ww_otherlabel2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Other Label2 Placement",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ww_otherlabel2placement",
 									"type": "String"
 								}
 							},
@@ -441,6 +507,17 @@
 							},
 							{
 								"source": {
+									"name": "Carton Inkjet Placement",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_cartoninkjetplacement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "Carton Label",
 									"type": "String",
 									"physicalType": "nvarchar"
@@ -485,6 +562,17 @@
 							},
 							{
 								"source": {
+									"name": "Pallet Stacking Pattern",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_palletstackingpattern",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "Extra Dry Good1",
 									"type": "String",
 									"physicalType": "nvarchar"
@@ -512,7 +600,7 @@
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "statecode",
+									"name": "ww_bottlesperpallet",
 									"type": "Int32"
 								}
 							}
