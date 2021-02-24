@@ -44,8 +44,8 @@
 							{
 								"source": {
 									"name": "CreatedOn",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTimeOffset",
+									"physicalType": "datetimeoffset"
 								},
 								"sink": {
 									"name": "createdon",
@@ -120,9 +120,9 @@
 							},
 							{
 								"source": {
-									"name": "ProductionLine",
+									"name": "ProductionLineId",
 									"type": "String",
-									"physicalType": "nvarchar"
+									"physicalType": "varchar"
 								},
 								"sink": {
 									"name": "ww_runproductionlinename",
