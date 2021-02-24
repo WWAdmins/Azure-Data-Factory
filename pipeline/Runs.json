@@ -1,6 +1,200 @@
 {
 	"name": "Runs",
 	"properties": {
+		"activities": [
+			{
+				"name": "Runs",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT \n\tbwo.Id as ProductionWorkOrderId,\n\tcast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),BWO.Id, 1000))) as uniqueidentifier) [Run Id],\n\tcast(book.ExpectedStartDateTime as Date) as RunDate,\n\tbook.ProductionRunNumber,\n\tpl.Name as ProductionLine,\n\t[site].Name as [Site],\n\tco.Name as Client,\n\tco.WWCode as ClientWWCode,\n\tbwo.ClientWorkOrderReference,\n\tv.Name as Variety,\nvi.Name + ' ' + v.Name VintageVariety,\n\tbwo.WineVolume,\n\tcast(bwo.Active as int) StateCode,\n\tbwo.AdditionalInstructions,\n\tbgct.Name as BottleGasCoverType,\n\tbwo.CarbonationSaturation,\n\tbwo.ClientBatchCode,\n\tbwo.CO2ReceivalSpecification,\n\tbwo.CreatedBy,\n\tcast(bwo.CreatedOn as datetime) CreatedOn  ,\n\tbwo.ExonetIntegrationError,\n\tbwo.ExonetSalesOrderNumber,\n\tbwo.LastCellarFilterDate,\n\tbwo.Organic,\n\tbwo.PushedToExonet,\n\tbwo.PushedToExonetDate,\n\tbwo.PushedToScale,\n\tbwo.PushedToScaleDate,\n\tbwo.RequestorName,\n\tbwo.ScaleIntegrationError,\n\tbwo.SO2ReceivalSpecification,\n\tbwo.StartupWinemaker,\n\tbwo.UpdatedBy,\n\tbwo.UpdatedOn,\n\tvi.Name as Vintage,\n\tbft.Name as BottlingFiltrationType,\n\tcft.Name as CellarFiltrationType,\n\tec.Name as ExportCertification\nFROM\n\tcompanies.BottlingWorkOrder bwo\n\tleft join companies.Company co on bwo.CompanyId = co.Id\n\tleft join lookups.Site [site] on bwo.SiteId = [site].Id\n\tleft join companies.ProductionBooking book on bwo.Id = book.BottlingWorkOrderId\n\tleft join lookups.ProductionLine pl on book.ProductionLineId = pl.Id\n\tleft join lookups.Variety v on bwo.VarietyId = v.Id\n\tleft join lookups.Vintage vi on bwo.VintageId = vi.Id\n\tleft join lookups.WorkOrderStatus stat on bwo.WorkOrderStatusId = stat.Id\n\tleft join lookups.BottleGasCoverType bgct on bwo.BottleGasCoverTypeId = bgct.Id\n\tleft join companies.BottlingFiltrationType bft on bwo.BottlingFiltrationTypeId = bft.Id\n\tleft join companies.CellarFiltrationType cft on bwo.CellarFiltrationTypeId = cft.Id\n\tleft join lookups.ExportCertification ec on bwo.ExportCertificationId = ec.Id\nWHERE bwo.Active=1 and pl.id=1 and cast(book.ExpectedStartDateTime as Date) > getdate() - 20",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "CommonDataServiceForAppsSink",
+						"writeBatchSize": 10,
+						"writeBehavior": "upsert"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CreatedBy",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "createdbyname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CreatedOn",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "createdon",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "StateCode",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "statecode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Client",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_clientname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ClientWorkOrderReference",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_clientworkorderreference",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "RunDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "ww_rundate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Run Id",
+									"type": "Guid",
+									"physicalType": "uniqueidentifier"
+								},
+								"sink": {
+									"name": "ww_runid",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductionRunNumber",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_runnumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductionLine",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_runproductionlinename",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Variety",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_variety",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Vintage",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_vintage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VintageVariety",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_vintagevariety",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductionWorkOrderId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ww_workorderid",
+									"type": "Int32"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "WWSQL003_Portal",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Runs",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
 		"annotations": []
 	}
 }
