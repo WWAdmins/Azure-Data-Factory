@@ -386,6 +386,17 @@
 							},
 							{
 								"source": {
+									"name": "Other Label Placement",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_otherlabelplacement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "Other Label2",
 									"type": "String",
 									"physicalType": "nvarchar"
