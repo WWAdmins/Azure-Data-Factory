@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "SQLtoDataVerse"
+		},
+		"CommonDataServiceForApps1_password": {
+			"value": ""
+		},
+		"WWSQL003_connectionString": {
+			"value": ""
+		},
+		"WWSQL003_password": {
+			"value": ""
+		},
+		"CommonDataServiceForApps1_properties_typeProperties_username": {
+			"value": "Tejaswi.Datla@wineworks.co.nz"
+		},
+		"WWSQL003_properties_typeProperties_userName": {
+			"value": "Wineworksgroup\\WWG_Service"
+		}
+	}
+}

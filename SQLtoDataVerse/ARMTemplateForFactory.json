@@ -1,0 +1,1144 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "SQLtoDataVerse"
+		},
+		"CommonDataServiceForApps1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'CommonDataServiceForApps1'"
+		},
+		"WWSQL003_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003'"
+		},
+		"WWSQL003_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003'"
+		},
+		"CommonDataServiceForApps1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
+		},
+		"WWSQL003_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Wineworksgroup\\WWG_Service"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Bill Of Material')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Bill Of Material",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT \ncast(bom.Id as nvarchar) [Bom ID], \ncast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),bom.Id, 1000))) as uniqueidentifier) [Bill Of Materials ID],\nbwol.BottlingWorkOrderId as ProductionWorkOrderId, \nbom.StockCode, \nbwol.Sequence, \nbwol.ProductionNotes, \nbook.ProductionLineId, \nbom.StockCodeDescription, \nbwol.CasesToProcess / bom.CartonsPerPallet Pallets, \ncast(bom.BottlesPerCarton * bom.CartonsPerPallet as int) BottlesPerPallet, \ncast(bwol.CasesToProcess * bom.BottlesPerCarton as int) Bottles ,\ncast(sc.StockCode as nvarchar) [Screwcap Stockcode],\nscpt.Name [Screwcap Printing],\nscc.Name [Screwcap Colour],\ncast(cc.StockCode as nvarchar) [Cork Stockcode],\nccpt.Name [Cork Printing],\nccc.Name [Cork Colour],\ncz.Name [Cork Length],\n[c].[BottlingWorkOrderRunAlert] AS [Generic Client Instructions],\n[bwo].[AdditionalInstructions] AS [Work Order Instructions],\n[bwol].[AdditionalInstructions] AS [BOM Instructions For This Run],\n[bom].[AdditionalInstructions] AS [Bom Specific Instructions],\n[book].[ProductionRunNumber] AS [Bottle Laser Code],\n[botlook].[WWName] AS [Bottle],\n[bs].[Name] AS [Bottle Size],\n[bt].[WWCode] AS [Bottle Type],\n[clo].[WWName] AS [Closure],\n[cov].[WWName] AS [Cover],\n[fla].[WWName] AS [Front Label],\ncast([bom].FrontLabelHeight as nvarchar) [Front Label Height],\n[bla].[WWName] AS [Back Label],\ncast([bom].BackLabelHeight as nvarchar) [Back Label Height],\n[ola].[WWName] AS [Other Label],\nCAST([bom].[OtherLabelPlacement] AS NVARCHAR(MAX)) AS [Other Label Placement],\n[ola2].[WWName] AS [Other Label2],\n[bom].OtherLabel2Placement [Other Label2 Placement],\n[blaink].[Name] AS [Back Label Inkjet Code],\n[bom].BackLabelAdditionalText [Back Label Additional Text],\n[bom].BackLabelInkjetPlacement [Back Label Inkjet Placement],\n[div].[WWName] AS [Divider],\n[car].[WWName] AS [Carton],\n[carwinvar].[Name] AS [Carton Variety],\n[cbt].[WWCode] AS [Carton Bottle Type],\n[bom].CartonInkjetText [Carton Inkjet Text],\n[bom].CartonInkjetPlacement [Carton Inkjet Placement],\n[carla].[Name] AS [Carton Label],\n[pal].[WWName] AS [Pallet],\nCASE WHEN [bom].[HardboardTopCover] IS NOT NULL AND [bom].[HardboardTopCover] = 1 THEN 'Yes' WHEN [bom].[HardboardTopCover] IS NOT NULL AND [bom].[HardboardTopCover] = 0 THEN 'No' ELSE '-' END AS [Hardboard Top Cover],\n[sli].[Name] AS [Slipsheet],\n[palstapat].[Name] AS [Pallet Stacking Pattern],\n[extdg1].[WWName] AS [Extra Dry Good1],\n[extdg2].[WWName] AS [Extra Dry Good2],\ncast(case when bom.StatusId = 3 then 0\nelse 1\nend as int) [Status]\n\nFROM \ncompanies.BottlingWorkOrderLine bwol \nINNER join companies.BillOfMaterial bom on bwol.BillOfMaterialId = bom.Id \nINNER JOIN [companies].[BottlingWorkOrder] AS [bwo] ON [bwol].[BottlingWorkOrderId] = [bwo].[Id]\nINNER join companies.ProductionBooking book on bwol.BottlingWorkOrderId = book.BottlingWorkOrderId\nINNER JOIN [companies].[Company] AS c ON c.[Id] = bwo.[CompanyId]\nLEFT JOIN [companies].[DryGood] sc on sc.id = bom.ClosureId and  sc.[DryGoodsCategoryId] = 8\nLEFT JOIN lookups.PrinterType scpt on scpt.Id = sc.ScrewcapPrintTypeId\nLEFT JOIN lookups.Colour scc on scc.Id=sc.ScrewcapColour1Id\nLEFT JOIN [companies].[DryGood] cc on cc.id = bom.ClosureId and  cc.[DryGoodsCategoryId] = 2\nLEFT JOIN lookups.PrinterType ccpt on scpt.Id = cc.CorkPrintTypeId\nLEFT JOIN lookups.Colour ccc on ccc.Id=cc.CoverColour1Id\nLEFT JOIN lookups.CorkSize cz on cz.Id=cc.CorkSizeId\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [botlook] ON [bom].[BottleId] = [botlook].[Id]\nLEFT OUTER JOIN [companies].[DryGood] AS [bot] ON [bom].[BottleId] = [bot].[Id]\nLEFT OUTER JOIN [lookups].[BottleSize] AS [bs] ON [bs].[Id] = [bot].[BottleSizeId]\nLEFT OUTER JOIN [lookups].[BottleType] AS [bt] ON [bt].[Id] = [bot].[BottleTypeId]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [clo] ON [bom].[ClosureId] = [clo].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [cov] ON [bom].[CoverId] = [cov].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [fla] ON [bom].[FrontLabelId] = [fla].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [bla] ON [bom].[BackLabelId] = [bla].[Id]\nLEFT OUTER JOIN [lookups].[InkjetCode] AS [blaink] ON [bom].[BackLabelInkjetCodeId] = [blaink].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [ola] ON [bom].[OtherLabelId] = [ola].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [ola2] ON [bom].[OtherLabel2Id] = [ola2].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [car] ON [bom].[CartonId] = [car].[Id]\nLEFT OUTER JOIN [companies].[DryGood] AS [carton] ON [bom].[CartonId] = [carton].[Id]\nLEFT OUTER JOIN [lookups].[CartonLabel] AS [carla] ON [bom].[CartonLabelId] = [carla].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [div] ON [bom].[DividerId] = [div].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [pal] ON [bom].[PalletId] = [pal].[Id]\nLEFT OUTER JOIN [lookups].[PalletStackingPattern] AS [palstapat] ON [bom].[PalletStackingPatternId] = [palstapat].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [sli] ON [bom].[SlipsheetId] = [sli].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [extdg1] ON [bom].[ExtraDryGood1Id] = [extdg1].[Id]\nLEFT OUTER JOIN [companies].[vwDryGoodName] AS [extdg2] ON [bom].[ExtraDryGood2Id] = [extdg2].[Id]\nLEFT OUTER JOIN [lookups].[Variety] AS [carwinvar] ON [carton].[CartonVarietyId] = [carwinvar].[Id]\t\t\t\t\t\nLEFT OUTER JOIN [lookups].[BottleType] AS [cbt] ON [cbt].[Id] = [carton].[CartonBottleTypeId]\nWHERE bwo.Active=1 and book.ProductionLineId=1 and cast(book.ExpectedStartDateTime as Date) > getdate() - 20\nand bom.StatusId = 3",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "CommonDataServiceForAppsSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Bom ID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_bomid",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Bill Of Materials ID",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "ww_billofmaterialsid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionWorkOrderId",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ww_bomworkorderid",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "StockCode",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ww_bomstockcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Sequence",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ww_bomsequence",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionNotes",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_bomproductionnotes",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "StockCodeDescription",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_stockcodedescription",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Pallets",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 19,
+											"precision": 38
+										},
+										"sink": {
+											"name": "ww_pallets",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "BottlesPerPallet",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ww_bottlesperpallet",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Bottles",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ww_bottles",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Screwcap Stockcode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "crc5d_screwcapstockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Screwcap Printing",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "crc5d_screwcapprinting",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Screwcap Colour",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "crc5d_screwcapcolour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cork Stockcode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "crc5d_corkstockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cork Printing",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "crc5d_corkprinting",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cork Colour",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "crc5d_corkcolour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cork Length",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "crc5d_corklength",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Generic Client Instructions",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_genericclientinstructions",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Work Order Instructions",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_workorderinstructions",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BOM Instructions For This Run",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_bominstructionsforthisrun",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Bom Specific Instructions",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ww_bomspecificinstructions",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Bottle Laser Code",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_bottlelasercode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Bottle",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_bottle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Bottle Size",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_bottlesize",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Bottle Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_bottletype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Closure",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_closure",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cover",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_cover",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Front Label",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_frontlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Front Label Height",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_frontlabelheight",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Back Label",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_backlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Back Label Height",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_backlabelheight",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Other Label",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_otherlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Other Label Placement",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_otherlabelplacement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Other Label2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_otherlabel2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Other Label2 Placement",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ww_otherlabel2placement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Back Label Inkjet Code",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_backlabelinkjetcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Back Label Additional Text",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_backlabeladditionaltext",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Back Label Inkjet Placement",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_backlabelinkjetplacement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Divider",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_divider",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Carton",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_carton",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Carton Variety",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_cartonvariety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Carton Bottle Type",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_cartonbottletype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Carton Inkjet Text",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ww_cartoninkjettext",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Carton Inkjet Placement",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_cartoninkjetplacement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Carton Label",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_cartonlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Pallet",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_pallet",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Hardboard Top Cover",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ww_hardboardtopcover",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Slipsheet",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_slipsheet",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Pallet Stacking Pattern",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_palletstackingpattern",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Extra Dry Good1",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_extradrygood1",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Extra Dry Good2",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_extradrygood2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Status",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "statecode",
+											"type": "Int32"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "WWSQL003_Portal",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "BillOfMaterials",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/WWSQL003_Portal')]",
+				"[concat(variables('factoryId'), '/datasets/BillOfMaterials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Runs')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Runs",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT \n\tbwo.Id as ProductionWorkOrderId,\n\tcast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),BWO.Id, 1000))) as uniqueidentifier) [Run Id],\n\tcast(book.ExpectedStartDateTime as Date) as RunDate,\n\tbook.ProductionRunNumber,\n\tpl.Name as ProductionLine,\n\t[site].Name as [Site],\n\tco.Name as Client,\n\tco.WWCode as ClientWWCode,\n\tbwo.ClientWorkOrderReference,\n\tv.Name as Variety,\nvi.Name + ' ' + v.Name VintageVariety,\n\tbwo.WineVolume,\n\tcast(bwo.Active as int) StateCode,\n\tbwo.AdditionalInstructions,\n\tbgct.Name as BottleGasCoverType,\n\tbwo.CarbonationSaturation,\n\tbwo.ClientBatchCode,\n\tbwo.CO2ReceivalSpecification,\n\tbwo.CreatedBy,\n\tcast(bwo.CreatedOn as datetime) CreatedOn  ,\n\tbwo.ExonetIntegrationError,\n\tbwo.ExonetSalesOrderNumber,\n\tbwo.LastCellarFilterDate,\n\tbwo.Organic,\n\tbwo.PushedToExonet,\n\tbwo.PushedToExonetDate,\n\tbwo.PushedToScale,\n\tbwo.PushedToScaleDate,\n\tbwo.RequestorName,\n\tbwo.ScaleIntegrationError,\n\tbwo.SO2ReceivalSpecification,\n\tbwo.StartupWinemaker,\n\tbwo.UpdatedBy,\n\tbwo.UpdatedOn,\n\tvi.Name as Vintage,\n\tbft.Name as BottlingFiltrationType,\n\tcft.Name as CellarFiltrationType,\n\tec.Name as ExportCertification\nFROM\n\tcompanies.BottlingWorkOrder bwo\n\tleft join companies.Company co on bwo.CompanyId = co.Id\n\tleft join lookups.Site [site] on bwo.SiteId = [site].Id\n\tleft join companies.ProductionBooking book on bwo.Id = book.BottlingWorkOrderId\n\tleft join lookups.ProductionLine pl on book.ProductionLineId = pl.Id\n\tleft join lookups.Variety v on bwo.VarietyId = v.Id\n\tleft join lookups.Vintage vi on bwo.VintageId = vi.Id\n\tleft join lookups.WorkOrderStatus stat on bwo.WorkOrderStatusId = stat.Id\n\tleft join lookups.BottleGasCoverType bgct on bwo.BottleGasCoverTypeId = bgct.Id\n\tleft join companies.BottlingFiltrationType bft on bwo.BottlingFiltrationTypeId = bft.Id\n\tleft join companies.CellarFiltrationType cft on bwo.CellarFiltrationTypeId = cft.Id\n\tleft join lookups.ExportCertification ec on bwo.ExportCertificationId = ec.Id\nWHERE bwo.Active=1 and pl.id=1 and cast(book.ExpectedStartDateTime as Date) > getdate() - 20",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "CommonDataServiceForAppsSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CreatedBy",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "createdbyname",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CreatedOn",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "createdon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "StateCode",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "statecode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Client",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_clientname",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ClientWorkOrderReference",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_clientworkorderreference",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "RunDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "ww_rundate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Run Id",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "ww_runid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionRunNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_runnumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionLine",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_runproductionlinename",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Variety",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_variety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vintage",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_vintage",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "VintageVariety",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_vintagevariety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionWorkOrderId",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ww_workorderid",
+											"type": "Int32"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "WWSQL003_Portal",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Runs",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/WWSQL003_Portal')]",
+				"[concat(variables('factoryId'), '/datasets/Runs')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Supplier for Production Runs')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Supplier for Production Runs",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "."
+							},
+							{
+								"name": "Destination",
+								"value": "activitypointer"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT \ncast(s.Id as nvarchar) [Supplier Id]\n,Cast([Active] as int)  [Status]\n,c.Name [Supplier Product Category]\n,cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),s.Id, 1000))) as uniqueidentifier) [Supplier for prod lines Id]\n,s.Description as [Supplier Name]\n\nFROM [WineWorks.Database].[companies].[Supplier] s\nINNER JOIN lookups.DryGoodsCategory c on c.Id=DryGoodsCategoryId\n",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "CommonDataServiceForAppsSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert"
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Supplier Id",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_supplierid",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Status",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "statecode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier Product Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_supplierproductcategory",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier for prod lines Id",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_supplierforproductionlinesid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "Supplier Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_suppliername",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "WWSQL003_Portal",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DataVerse_SupplierForProductionLines",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2021-02-22T03:12:35Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/WWSQL003_Portal')]",
+				"[concat(variables('factoryId'), '/datasets/DataVerse_SupplierForProductionLines')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BillOfMaterials')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CommonDataServiceForApps1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Bill Of Material"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_billofmaterials"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CommonDataServiceForApps1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataVerse_SupplierForProductionLines')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CommonDataServiceForApps1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Supplier for Production Runs"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_supplierforproductionlines"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CommonDataServiceForApps1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Runs')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CommonDataServiceForApps1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Runs"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_run"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CommonDataServiceForApps1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_Portal')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CommonDataServiceForApps1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "CommonDataServiceForApps",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://wineworksdev.crm6.dynamics.com/",
+					"authenticationType": "Office365",
+					"username": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('CommonDataServiceForApps1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('WWSQL003_connectionString')]",
+					"userName": "[parameters('WWSQL003_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('WWSQL003_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "WWSQL003IntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/WWSQL003IntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003IntegrationRuntime')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		}
+	]
+}

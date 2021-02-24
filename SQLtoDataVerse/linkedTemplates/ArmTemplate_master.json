@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "SQLtoDataVerse"
+		},
+		"CommonDataServiceForApps1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'CommonDataServiceForApps1'"
+		},
+		"WWSQL003_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003'"
+		},
+		"WWSQL003_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003'"
+		},
+		"CommonDataServiceForApps1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
+		},
+		"WWSQL003_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Wineworksgroup\\WWG_Service"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "SQLtoDataVerse_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"CommonDataServiceForApps1_password": {
+						"value": "[parameters('CommonDataServiceForApps1_password')]"
+					},
+					"WWSQL003_connectionString": {
+						"value": "[parameters('WWSQL003_connectionString')]"
+					},
+					"WWSQL003_password": {
+						"value": "[parameters('WWSQL003_password')]"
+					},
+					"CommonDataServiceForApps1_properties_typeProperties_username": {
+						"value": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]"
+					},
+					"WWSQL003_properties_typeProperties_userName": {
+						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
