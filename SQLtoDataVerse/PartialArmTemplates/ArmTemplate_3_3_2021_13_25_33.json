@@ -6,173 +6,12 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "SQLtoDataVerse"
-		},
-		"CommonDataServiceForApps1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'CommonDataServiceForApps1'"
-		},
-		"WWSQL003_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'WWSQL003'"
-		},
-		"WWSQL003_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWSQL003'"
-		},
-		"CommonDataServiceForApps1_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
-		},
-		"WWSQL003_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "Wineworksgroup\\WWG_Service"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/CommonDataServiceForApps1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "CommonDataServiceForApps",
-				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://wineworksdev.crm6.dynamics.com/",
-					"authenticationType": "Office365",
-					"username": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('CommonDataServiceForApps1_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003IntegrationRuntime')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BillOfMaterials')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CommonDataServiceForApps1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Bill Of Material"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_billofmaterials"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CommonDataServiceForApps1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DataVerse_SupplierForProductionLines')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CommonDataServiceForApps1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Supplier for Production Runs"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_supplierforproductionlines"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CommonDataServiceForApps1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Runs')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CommonDataServiceForApps1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Runs"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_run"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CommonDataServiceForApps1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('WWSQL003_connectionString')]",
-					"userName": "[parameters('WWSQL003_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWSQL003_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "WWSQL003IntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/WWSQL003IntegrationRuntime')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_Portal')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Bill Of Material')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -792,25 +631,20 @@
 						"inputs": [
 							{
 								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "BillOfMaterials",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/WWSQL003_Portal')]",
-				"[concat(variables('factoryId'), '/datasets/BillOfMaterials')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Runs')]",
@@ -911,145 +745,20 @@
 						"inputs": [
 							{
 								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Runs",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/WWSQL003_Portal')]",
-				"[concat(variables('factoryId'), '/datasets/Runs')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Supplier for Production Runs')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Supplier for Production Runs",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "."
-							},
-							{
-								"name": "Destination",
-								"value": "activitypointer"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT \ncast(s.Id as nvarchar) [Supplier Id]\n,Cast([Active] as int)  [Status]\n,c.Name [Supplier Product Category]\n,cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),s.Id, 1000))) as uniqueidentifier) [Supplier for prod lines Id]\n,s.Description as [Supplier Name]\n\nFROM [WineWorks.Database].[companies].[Supplier] s\nINNER JOIN lookups.DryGoodsCategory c on c.Id=DryGoodsCategoryId\n",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "CommonDataServiceForAppsSink",
-								"writeBatchSize": 10,
-								"writeBehavior": "upsert"
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Supplier Id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_supplierid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Status",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statecode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier Product Category",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_supplierproductcategory",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier for prod lines Id",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_supplierforproductionlinesid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier Name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_suppliername",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DataVerse_SupplierForProductionLines",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2021-02-22T03:12:35Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/WWSQL003_Portal')]",
-				"[concat(variables('factoryId'), '/datasets/DataVerse_SupplierForProductionLines')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Daily Refresh')]",
@@ -1063,8 +772,7 @@
 						"pipelineReference": {
 							"referenceName": "Bill Of Material",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					}
 				],
 				"type": "ScheduleTrigger",
