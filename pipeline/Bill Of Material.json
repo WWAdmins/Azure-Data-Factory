@@ -81,8 +81,8 @@
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "crc5d_corkstockcode",
-									"type": "String"
+									"name": "ww_bomsequence",
+									"type": "Int32"
 								}
 							},
 							{
