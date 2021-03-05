@@ -611,7 +611,7 @@
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "statuscode",
+									"name": "statecode",
 									"type": "Int32"
 								}
 							}
