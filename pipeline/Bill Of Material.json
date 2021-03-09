@@ -589,7 +589,7 @@
 									"physicalType": "nvarchar"
 								},
 								"sink": {
-									"name": "ww_bottlelasercode",
+									"name": "ww_palletstackingpattern",
 									"type": "String"
 								}
 							},
