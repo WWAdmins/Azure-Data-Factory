@@ -53,6 +53,39 @@
 							},
 							{
 								"source": {
+									"name": "Client",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_clientname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ClientWorkOrderReference",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_clientworkorderreference",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "RunDate",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "ww_rundate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
 									"name": "Run Id",
 									"type": "Guid",
 									"physicalType": "uniqueidentifier"
@@ -82,6 +115,50 @@
 								"sink": {
 									"name": "ww_runproductionlinename",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Variety",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_variety",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Vintage",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_vintage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VintageVariety",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "ww_vintagevariety",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProductionWorkOrderId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ww_workorderid",
+									"type": "Int32"
 								}
 							}
 						],
