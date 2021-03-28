@@ -7,10 +7,10 @@
 		"typeProperties": {
 			"connectionString": "integrated security=True;data source=WWSQL003;initial catalog=Wineworks.Database",
 			"userName": "Wineworksgroup\\WWG_Service",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0MjIyNGZhNi00ZGRhLTRmMTMtYjY4MC0zN2QyYjZkNDZkNWMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjNmFhMjUyMy1mNTgzLTQyMWQtYjc2Zi0zZjQ1N2ZhNDM2YzQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "WWSQL003IntegrationRuntime",
+			"referenceName": "WWSQL003",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
