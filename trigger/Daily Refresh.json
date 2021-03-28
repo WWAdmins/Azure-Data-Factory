@@ -28,13 +28,8 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2021-03-03T00:23:00",
-				"timeZone": "New Zealand Standard Time",
-				"schedule": {
-					"hours": [
-						1
-					]
-				}
+				"startTime": "2021-03-03T01:30:00",
+				"timeZone": "New Zealand Standard Time"
 			}
 		}
 	}
