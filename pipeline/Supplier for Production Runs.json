@@ -26,7 +26,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT \ncast(s.Id as nvarchar) [Supplier Id]\n,Cast([Active] as int)  [Status]\n,c.Name [Supplier Product Category]\n,cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),s.Id, 1000))) as uniqueidentifier) [Supplier for prod lines Id]\n,s.Description as [Supplier Name]\n\nFROM [WineWorks.Database].[companies].[Supplier] s\nINNER JOIN lookups.DryGoodsCategory c on c.Id=DryGoodsCategoryId\n",
+						"sqlReaderQuery": "SELEC\ncast(s.Id as nvarchar) [Supplier Id]\n,Cast([Active] as int)  [Status]\n,c.Name [Supplier Product Category]\n,cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),s.Id, 1000))) as uniqueidentifier) [Supplier for prod lines Id]\n,s.Description as [Supplier Name]\n\nFROM [WineWorks.Database].[companies].[Supplier] s\nINNER JOIN lookups.DryGoodsCategory c on c.Id=DryGoodsCategoryId\n",
 						"partitionOption": "None"
 					},
 					"sink": {
