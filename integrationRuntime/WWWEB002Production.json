@@ -1,0 +1,6 @@
+{
+	"name": "WWWEB002Production",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
