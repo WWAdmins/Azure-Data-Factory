@@ -5,12 +5,12 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=WWSQL003;initial catalog=Wineworks.Database",
+			"connectionString": "integrated security=True;data source=WWWEB002;initial catalog=Wineworks.Database",
 			"userName": "Wineworksgroup\\WWG_Service",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjNmFhMjUyMy1mNTgzLTQyMWQtYjc2Zi0zZjQ1N2ZhNDM2YzQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkYTAzZTgwYS00YjRiLTRlOWItYjNjZS1kNTY5NmMwNDkyNzUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "WWSQL003",
+			"referenceName": "WWWEB002Production",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
