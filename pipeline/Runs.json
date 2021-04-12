@@ -200,7 +200,7 @@
 					{
 						"activity": "Runs",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
