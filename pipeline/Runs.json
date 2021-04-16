@@ -26,7 +26,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "Select * from Dataverse.VWRun",
+						"sqlReaderQuery": "Select * from [dataverse].[vwRuns]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
