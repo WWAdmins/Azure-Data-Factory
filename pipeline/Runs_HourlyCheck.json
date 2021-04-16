@@ -7,7 +7,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "Stored procedure1",
+						"activity": "Proc",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -271,7 +271,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure1",
+				"name": "Proc",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {
