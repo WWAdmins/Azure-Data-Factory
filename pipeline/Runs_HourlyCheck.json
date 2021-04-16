@@ -262,6 +262,10 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "1",
+						"type": "Expression"
+					},
 					"ifTrueActivities": [
 						{
 							"name": "Stored procedure1",
