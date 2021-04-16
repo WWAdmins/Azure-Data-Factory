@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@bool(activity('Stored procedure1').outputequals(\"Yes\"))",
+						"value": "@bool(activity('Stored procedure1').outputequals('Yes'))",
 						"type": "Expression"
 					},
 					"ifTrueActivities": [
