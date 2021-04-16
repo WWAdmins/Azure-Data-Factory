@@ -26,7 +26,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "Select * from [dataverse].[vwRuns]",
+						"sqlReaderQuery": " Select cast(\n        CASE when LineId=1 then '5d3b5dfb-885e-eb11-a812-000d3a6ab826'\n            when LineId=2 then '1b944108-895e-eb11-a812-000d3a6ab826'\n            when LineId=3 then 'cf3a5b0e-895e-eb11-a812-000d3a6ab826'\n            when LineId=4 then 'e4cc751b-895e-eb11-a812-000d3a6ab826'\n            when LineId=5 then '950fcb21-895e-eb11-a812-000d3a6ab826'\n            when LineId=6 then '93dfcc27-895e-eb11-a812-000d3a6ab826'\n            when LineId=15 then 'd244d180-895e-eb11-a812-000d3a6ab826'\n            when LineId=16 then '9768de8c-895e-eb11-a812-000d3a6ab826'\n            when LineId=7 then '0248af39-895e-eb11-a812-000d3a6ab826'\n            when LineId=8 then 'c661c241-895e-eb11-a812-000d3a6ab826'\n            when LineId=9 then '670fcf47-895e-eb11-a812-000d3a6ab826'\n            when LineId=10 then 'f26ef74d-895e-eb11-a812-000d3a6ab826'\n            when LineId=11 then '6dd92d5c-895e-eb11-a812-000d3a6ab826'\n            when LineId=12 then 'a5f0d862-895e-eb11-a812-000d3a6ab826'\n            when LineId=13 then 'b7f25169-895e-eb11-a812-000d3a6ab826'\n            when LineId=14 then '1c49f877-895e-eb11-a812-000d3a6ab826'\n        END as uniqueidentifier) ProductionLine,*\nfrom dataverse.VWRuns",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
