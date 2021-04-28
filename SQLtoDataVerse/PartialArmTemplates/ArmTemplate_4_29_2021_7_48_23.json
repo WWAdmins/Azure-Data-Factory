@@ -1,0 +1,792 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "SQLtoDataVerse"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Runs')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Runs",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "."
+							},
+							{
+								"name": "Destination",
+								"value": "ww_run"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": " Select cast(\n\t\tCASE when ProductionLineId=1 then '95532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=2 then '98532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=3 then '99532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=4 then '9a532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=5 then '9c532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=6 then '9d532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=7 then '9e532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=8 then '9f532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=9 then 'a0532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=10 then 'a1532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=11 then 'a2532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=12 then 'a3532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=13 then 'a5532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=14 then 'a6532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=15 then 'a7532c19-019c-eb11-b1ac-000d3a6ae149'\nwhen ProductionLineId=16 then 'a8532c19-019c-eb11-b1ac-000d3a6ae149'\n\n       END as uniqueidentifier) ProductionLine,*\nfrom dataverse.VWRuns",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "CommonDataServiceForAppsSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert",
+								"ignoreNullValues": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "StateCode",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "statecode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "Client",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_clientname",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ClientWorkOrderReference",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_clientworkorderreference",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PendingUpdate",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "ww_pendingupdate",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "RunDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "ww_rundate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Run Id",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "ww_runid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionRunNumber",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_runnumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionLine",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "ww_runproductionline",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "Variety",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_variety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vintage",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_vintage",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "VintageVariety",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_vintagevariety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ProductionWorkOrderId",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ww_workorderid",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "workOrderType",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ww_workordertype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "UpdatedOn",
+											"type": "DateTimeOffset",
+											"physicalType": "datetimeoffset"
+										},
+										"sink": {
+											"name": "ww_workorderupdatedon",
+											"type": "DateTime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "VWRun",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Runs",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Send fail email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Runs",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-31.australiasoutheast.logic.azure.com:443/workflows/a488ee4e6dd34fbf85d69ff5695dceb8/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=mzFskLc897eR_sPvdtE-f6H8lVCS1H-7qdc-aUnGK8I",
+							"connectVia": {
+								"referenceName": "WWWEB002Production",
+								"type": "IntegrationRuntimeReference"
+							},
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
+							},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Runs_HourlyCheck')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "If Condition1",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "Proc",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@bool(activity('Proc').output.equals('1'))",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Runs_copy1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [
+										{
+											"name": "Source",
+											"value": "."
+										},
+										{
+											"name": "Destination",
+											"value": "ww_run"
+										}
+									],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"sqlReaderQuery": "Select * from [dataverse].[vwRuns]",
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "CommonDataServiceForAppsSink",
+											"writeBatchSize": 10,
+											"writeBehavior": "upsert",
+											"ignoreNullValues": false
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"name": "StateCode",
+														"type": "Int32",
+														"physicalType": "int"
+													},
+													"sink": {
+														"name": "statecode",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "Client",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_clientname",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "ClientWorkOrderReference",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_clientworkorderreference",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "PendingUpdate",
+														"type": "Boolean",
+														"physicalType": "bit"
+													},
+													"sink": {
+														"name": "ww_pendingupdate",
+														"type": "Boolean"
+													}
+												},
+												{
+													"source": {
+														"name": "RunDate",
+														"type": "DateTime",
+														"physicalType": "date"
+													},
+													"sink": {
+														"name": "ww_rundate",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "Run Id",
+														"type": "Guid",
+														"physicalType": "uniqueidentifier"
+													},
+													"sink": {
+														"name": "ww_runid",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "ProductionRunNumber",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_runnumber",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "ProductionLine",
+														"type": "Guid",
+														"physicalType": "uniqueidentifier"
+													},
+													"sink": {
+														"name": "ww_runproductionline",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "Variety",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_variety",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Vintage",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_vintage",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "VintageVariety",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_vintagevariety",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "ProductionWorkOrderId",
+														"type": "Int32",
+														"physicalType": "int"
+													},
+													"sink": {
+														"name": "ww_workorderid",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "workOrderType",
+														"type": "String",
+														"physicalType": "varchar"
+													},
+													"sink": {
+														"name": "ww_workordertype",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "UpdatedOn",
+														"type": "DateTimeOffset",
+														"physicalType": "datetimeoffset"
+													},
+													"sink": {
+														"name": "ww_workorderupdatedon",
+														"type": "DateTime"
+													}
+												}
+											],
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "VWRun1",
+											"type": "DatasetReference"
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "Runs1",
+											"type": "DatasetReference"
+										}
+									]
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "Runs",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [
+										{
+											"name": "Source",
+											"value": "."
+										},
+										{
+											"name": "Destination",
+											"value": "ww_run"
+										}
+									],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"sqlReaderQuery": "Select * from [dataverse].[vwRuns]",
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "CommonDataServiceForAppsSink",
+											"writeBatchSize": 10,
+											"writeBehavior": "upsert",
+											"ignoreNullValues": false
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"name": "StateCode",
+														"type": "Int32",
+														"physicalType": "int"
+													},
+													"sink": {
+														"name": "statecode",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "Client",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_clientname",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "ClientWorkOrderReference",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_clientworkorderreference",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "PendingUpdate",
+														"type": "Boolean",
+														"physicalType": "bit"
+													},
+													"sink": {
+														"name": "ww_pendingupdate",
+														"type": "Boolean"
+													}
+												},
+												{
+													"source": {
+														"name": "RunDate",
+														"type": "DateTime",
+														"physicalType": "date"
+													},
+													"sink": {
+														"name": "ww_rundate",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "Run Id",
+														"type": "Guid",
+														"physicalType": "uniqueidentifier"
+													},
+													"sink": {
+														"name": "ww_runid",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "ProductionRunNumber",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_runnumber",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "ProductionLine",
+														"type": "Guid",
+														"physicalType": "uniqueidentifier"
+													},
+													"sink": {
+														"name": "ww_runproductionline",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "Variety",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_variety",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "Vintage",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_vintage",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "VintageVariety",
+														"type": "String",
+														"physicalType": "nvarchar"
+													},
+													"sink": {
+														"name": "ww_vintagevariety",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "ProductionWorkOrderId",
+														"type": "Int32",
+														"physicalType": "int"
+													},
+													"sink": {
+														"name": "ww_workorderid",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "workOrderType",
+														"type": "String",
+														"physicalType": "varchar"
+													},
+													"sink": {
+														"name": "ww_workordertype",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "UpdatedOn",
+														"type": "DateTimeOffset",
+														"physicalType": "datetimeoffset"
+													},
+													"sink": {
+														"name": "ww_workorderupdatedon",
+														"type": "DateTime"
+													}
+												}
+											],
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "VWRun1",
+											"type": "DatasetReference"
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "Runs1",
+											"type": "DatasetReference"
+										}
+									]
+								},
+								{
+									"name": "Send fail email",
+									"type": "WebActivity",
+									"dependsOn": [
+										{
+											"activity": "Runs",
+											"dependencyConditions": [
+												"Failed"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"url": "https://prod-31.australiasoutheast.logic.azure.com:443/workflows/a488ee4e6dd34fbf85d69ff5695dceb8/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=mzFskLc897eR_sPvdtE-f6H8lVCS1H-7qdc-aUnGK8I",
+										"method": "POST",
+										"headers": {
+											"Content-Type": "application/json"
+										},
+										"body": {
+											"DataFactoryName": "@{pipeline().DataFactory}",
+											"PipelineName": "@{pipeline().Pipeline}",
+											"Subject": "An error has occurred!",
+											"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+											"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Proc",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_RunUpdateCheck]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
