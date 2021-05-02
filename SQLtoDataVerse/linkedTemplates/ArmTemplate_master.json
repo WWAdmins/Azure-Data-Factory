@@ -21,7 +21,7 @@
 		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
-			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
+			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
