@@ -25,7 +25,7 @@
 		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
-			"defaultValue": "Wineworksgroup\\WWG_Service"
+			"defaultValue": "wineworksgroup\\WWG_Service"
 		}
 	},
 	"variables": {
