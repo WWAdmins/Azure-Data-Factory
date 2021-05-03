@@ -678,7 +678,7 @@
 					{
 						"activity": "Bill Of Material",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
