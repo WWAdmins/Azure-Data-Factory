@@ -42,7 +42,7 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "StateCode",
+									"name": "Status",
 									"type": "Int32",
 									"physicalType": "int"
 								},
@@ -119,7 +119,7 @@
 							},
 							{
 								"source": {
-									"name": "ProductionLine",
+									"name": "ProductionLineGUID",
 									"type": "Guid",
 									"physicalType": "uniqueidentifier"
 								},
@@ -185,7 +185,7 @@
 							},
 							{
 								"source": {
-									"name": "UpdatedOn",
+									"name": "LastUpdatedOn",
 									"type": "DateTimeOffset",
 									"physicalType": "datetimeoffset"
 								},
