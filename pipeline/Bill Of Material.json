@@ -649,6 +649,19 @@
 									"name": "statecode",
 									"type": "Int32"
 								}
+							},
+							{
+								"source": {
+									"name": "Depal Bottles Per Pallet",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 4,
+									"precision": 19
+								},
+								"sink": {
+									"name": "ww_depalbottlesperpallet",
+									"type": "Int32"
+								}
 							}
 						],
 						"typeConversion": true,
