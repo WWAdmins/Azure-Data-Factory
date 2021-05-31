@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
+						"sqlReaderQuery": "select *,CONVERT(datetime, \n               SWITCHOFFSET(CONVERT(datetimeoffset, \n                                    DateAdd(hh,-12,LastUpdatedOn) AT TIME ZONE 'New Zealand Standard Time'), \n                            DATENAME(TzOffset, SYSDATETIMEOFFSET()))) [lastUpdatedOnNZST]\n from dataverse.vwBom",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -151,6 +152,19 @@
 								},
 								"sink": {
 									"name": "ww_casestoprocess",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CartonsPerPallet",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 4,
+									"precision": 19
+								},
+								"sink": {
+									"name": "ww_cartonsperpallet",
 									"type": "Decimal"
 								}
 							},
@@ -660,6 +674,17 @@
 								"sink": {
 									"name": "ww_depalbottlesperpallet",
 									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "lastUpdatedOnNZST",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "ww_bomupdatedon",
+									"type": "DateTime"
 								}
 							}
 						],
