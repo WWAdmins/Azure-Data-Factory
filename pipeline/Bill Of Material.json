@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select *,CONVERT(datetime, \n               SWITCHOFFSET(CONVERT(datetimeoffset, \n                                    DateAdd(hh,-12,LastUpdatedOn) AT TIME ZONE 'New Zealand Standard Time'), \n                            DATENAME(TzOffset, SYSDATETIMEOFFSET()))) [lastUpdatedOnNZST]\n from dataverse.vwBom\n where ProductionWorkOrderId = 600325",
+						"sqlReaderQuery": "select *,CONVERT(datetime, \n               SWITCHOFFSET(CONVERT(datetimeoffset, \n                                    DateAdd(hh,-12,LastUpdatedOn) AT TIME ZONE 'New Zealand Standard Time'), \n                            DATENAME(TzOffset, SYSDATETIMEOFFSET()))) [lastUpdatedOnNZST]\n from dataverse.vwBom",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
