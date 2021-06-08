@@ -25,7 +25,7 @@
 		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
-			"defaultValue": "wineworksgroup\\WWG_Service"
+			"defaultValue": "wineworksgroup\\tejaswi.datla"
 		},
 		"containerUri": {
 			"type": "string",
