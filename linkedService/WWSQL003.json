@@ -6,8 +6,8 @@
 		"type": "SqlServer",
 		"typeProperties": {
 			"connectionString": "integrated security=True;data source=WWWEB002;initial catalog=Wineworks.Database",
-			"userName": "wineworksgroup\\tejaswi.datla",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5ZmU5OTdjYy00ZjhjLTQ4MjItOTllYy05MDIyNmQ4NTJiMjUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"userName": "wineworksgroup\\WWG_Service",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzNTBiMmQzNy02YTRkLTQxNzItYmM4YS1jNzI4ZmIyMjgyZTEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "WWWEB002Production",
