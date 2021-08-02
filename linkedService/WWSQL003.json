@@ -7,7 +7,7 @@
 		"typeProperties": {
 			"connectionString": "integrated security=True;data source=WWWEB002;initial catalog=Wineworks.Database",
 			"userName": "wineworksgroup\\WWG_Service",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzNTBiMmQzNy02YTRkLTQxNzItYmM4YS1jNzI4ZmIyMjgyZTEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmM2JhY2FlMS01OTI0LTQ4YWMtYTFlYy05Zjg1NTBlYTAxZDAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "WWWEB002Production",
