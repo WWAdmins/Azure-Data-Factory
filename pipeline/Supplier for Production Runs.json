@@ -105,7 +105,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "WWSQL003_Portal",
+						"referenceName": "WWWEB002",
 						"type": "DatasetReference"
 					}
 				],
