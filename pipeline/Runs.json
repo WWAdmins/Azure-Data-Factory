@@ -237,7 +237,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "WWWEB002",
+						"referenceName": "VWRun",
 						"type": "DatasetReference"
 					}
 				],
