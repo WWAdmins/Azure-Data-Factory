@@ -10,6 +10,9 @@
 		},
 		"annotations": [],
 		"type": "CommonDataServiceForAppsEntity",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"entityName": "ww_billofmaterials"
+		}
 	}
 }
