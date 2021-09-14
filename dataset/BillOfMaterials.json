@@ -2,7 +2,7 @@
 	"name": "BillOfMaterials",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CommonDataServiceForApps1",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -10,9 +10,6 @@
 		},
 		"annotations": [],
 		"type": "CommonDataServiceForAppsEntity",
-		"schema": [],
-		"typeProperties": {
-			"entityName": "ww_billofmaterials"
-		}
+		"schema": []
 	}
 }
