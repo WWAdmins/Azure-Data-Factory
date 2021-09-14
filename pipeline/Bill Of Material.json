@@ -891,7 +891,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "BillOfMaterials",
+						"referenceName": "BOMDataverse",
 						"type": "DatasetReference"
 					}
 				]
