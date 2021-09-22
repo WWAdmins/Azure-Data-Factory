@@ -2,7 +2,7 @@
 	"name": "VWRun",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "WWSQL003",
+			"referenceName": "WWSQL003_Test",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -238,5 +238,6 @@
 			"schema": "dataverse",
 			"table": "vwRuns"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

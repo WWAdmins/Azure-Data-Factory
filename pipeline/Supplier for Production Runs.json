@@ -105,7 +105,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "WWWEB002",
+						"referenceName": "WWSQL003_Portal",
 						"type": "DatasetReference"
 					}
 				],
@@ -153,5 +153,6 @@
 		],
 		"annotations": [],
 		"lastPublishTime": "2021-07-27T02:48:10Z"
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

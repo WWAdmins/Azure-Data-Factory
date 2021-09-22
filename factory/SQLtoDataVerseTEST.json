@@ -1,0 +1,9 @@
+{
+	"name": "SQLtoDataVerseTEST",
+	"location": "australiasoutheast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2d8917e7-f170-4f40-b163-9041cce3273e",
+		"tenantId": "cbc71033-d11b-4a2f-a44a-c0f713502267"
+	}
+}

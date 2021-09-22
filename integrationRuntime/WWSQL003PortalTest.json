@@ -1,0 +1,12 @@
+{
+	"name": "WWSQL003PortalTest",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}

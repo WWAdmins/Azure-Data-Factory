@@ -2,7 +2,7 @@
 	"name": "DataVerse_SupplierForProductionLines",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CommonDataServiceForApps1",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {

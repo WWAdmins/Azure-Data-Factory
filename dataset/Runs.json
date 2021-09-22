@@ -2,7 +2,7 @@
 	"name": "Runs",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CommonDataServiceForApps1",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -14,5 +14,6 @@
 		"typeProperties": {
 			"entityName": "ww_run"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

@@ -1,0 +1,6 @@
+{
+	"name": "WWSQL003IntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
