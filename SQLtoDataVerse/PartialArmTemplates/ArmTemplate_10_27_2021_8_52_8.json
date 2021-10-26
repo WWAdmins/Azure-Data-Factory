@@ -6,74 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "SQLtoDataVerse"
-		},
-		"CommonDataServiceForApps1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'CommonDataServiceForApps1'"
-		},
-		"Dataverse_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Dataverse'"
-		},
-		"DataverseTest_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'DataverseTest'"
-		},
-		"WWSQL003_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'WWSQL003'"
-		},
-		"WWSQL003_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWSQL003'"
-		},
-		"WWSQL003_Test_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'WWSQL003_Test'"
-		},
-		"WWSQL003_Test_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWSQL003_Test'"
-		},
-		"WWWEB002_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'WWWEB002'"
-		},
-		"WWWEB002_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWWEB002'"
-		},
-		"CommonDataServiceForApps1_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
-		},
-		"Dataverse_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
-		},
-		"DataverseTest_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
-		},
-		"WWSQL003_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "wineworksgroup\\WWG_Service"
-		},
-		"WWSQL003_Test_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "wineworksgroup\\WWG_Service"
-		},
-		"WWWEB002_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "wineworksgroup\\WWG_Service"
-		},
-		"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
-		},
-		"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
 		}
 	},
 	"variables": {
@@ -960,15 +892,13 @@
 						"inputs": [
 							{
 								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "BillOfMaterials",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -1007,10 +937,6 @@
 						}
 					}
 				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-08T20:01:07Z"
 			},
@@ -1272,15 +1198,13 @@
 						"inputs": [
 							{
 								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Runs",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -1319,10 +1243,6 @@
 						}
 					}
 				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
 				"annotations": [],
 				"lastPublishTime": "2021-08-30T19:35:11Z"
 			},
@@ -1441,15 +1361,13 @@
 						"inputs": [
 							{
 								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DataVerse_SupplierForProductionLines",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -1488,10 +1406,6 @@
 						}
 					}
 				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
 				"annotations": [],
 				"lastPublishTime": "2021-07-27T02:48:10Z"
 			},
@@ -1835,9 +1749,7 @@
 					"table": "vwRuns"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003_Test')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_Portal')]",
@@ -1856,9 +1768,7 @@
 					"table": "vwBom"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWWEB002')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
@@ -1871,12 +1781,9 @@
 				},
 				"annotations": [],
 				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
+				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWWEB0021')]",
@@ -1895,9 +1802,7 @@
 					"table": "vwBom"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CommonDataServiceForApps1')]",
@@ -1910,10 +1815,10 @@
 					"deploymentType": "Online",
 					"serviceUri": "https://wineworkstest.crm6.dynamics.com/",
 					"authenticationType": "Office365",
-					"username": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]",
+					"username": "Tejaswi.Datla@wineworks.co.nz",
 					"password": {
 						"type": "SecureString",
-						"value": "[parameters('CommonDataServiceForApps1_password')]"
+						"value": "**********"
 					}
 				}
 			},
@@ -1930,10 +1835,10 @@
 					"deploymentType": "Online",
 					"serviceUri": "https://wineworks.crm6.dynamics.com/",
 					"authenticationType": "Office365",
-					"username": "[parameters('Dataverse_properties_typeProperties_username')]",
+					"username": "wwdigital@wineworks.co.nz",
 					"password": {
 						"type": "SecureString",
-						"value": "[parameters('Dataverse_password')]"
+						"value": "**********"
 					}
 				}
 			},
@@ -1950,86 +1855,14 @@
 					"deploymentType": "Online",
 					"serviceUri": "https://wineworkstest.crm6.dynamics.com/",
 					"authenticationType": "Office365",
-					"username": "[parameters('DataverseTest_properties_typeProperties_username')]",
+					"username": "wwdigital@wineworks.co.nz",
 					"password": {
 						"type": "SecureString",
-						"value": "[parameters('DataverseTest_password')]"
+						"value": "**********"
 					}
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('WWSQL003_connectionString')]",
-					"userName": "[parameters('WWSQL003_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWSQL003_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "WWWEB002",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/WWWEB002')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_Test')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('WWSQL003_Test_connectionString')]",
-					"userName": "[parameters('WWSQL003_Test_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWSQL003_Test_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "WWSQL003PortalTest",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/WWSQL003PortalTest')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('WWWEB002_connectionString')]",
-					"userName": "[parameters('WWWEB002_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWWEB002_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "WWWEB002Production",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/WWWEB002Production')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Daily Refresh')]",
@@ -2043,22 +1876,19 @@
 						"pipelineReference": {
 							"referenceName": "Runs",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					},
 					{
 						"pipelineReference": {
 							"referenceName": "Supplier for Production Runs",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					},
 					{
 						"pipelineReference": {
 							"referenceName": "Bill Of Material",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -2081,73 +1911,6 @@
 				"[concat(variables('factoryId'), '/pipelines/Supplier for Production Runs')]",
 				"[concat(variables('factoryId'), '/pipelines/Bill Of Material')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003IntegrationRuntime')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003PortalTest')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {
-					"linkedInfo": {
-						"resourceId": "[parameters('WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId')]",
-						"authorizationType": "Rbac"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {
-					"linkedInfo": {
-						"resourceId": "[parameters('WWWEB002_properties_typeProperties_linkedInfo_resourceId')]",
-						"authorizationType": "Rbac"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWWEB002Production')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/default')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
-			"apiVersion": "2018-06-01",
-			"properties": {},
-			"dependsOn": []
 		}
 	]
 }

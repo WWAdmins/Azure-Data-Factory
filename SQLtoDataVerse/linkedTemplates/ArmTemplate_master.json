@@ -11,6 +11,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'CommonDataServiceForApps1'"
 		},
+		"Dataverse_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Dataverse'"
+		},
+		"DataverseTest_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DataverseTest'"
+		},
 		"WWSQL003_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWSQL003'"
@@ -19,13 +27,53 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWSQL003'"
 		},
+		"WWSQL003_Test_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003_Test'"
+		},
+		"WWSQL003_Test_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003_Test'"
+		},
+		"WWWEB002_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWWEB002'"
+		},
+		"WWWEB002_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWWEB002'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
 		},
+		"Dataverse_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"DataverseTest_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "wineworksgroup\\WWG_Service"
+		},
+		"WWSQL003_Test_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
+		},
+		"WWWEB002_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
+		},
+		"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
+		},
+		"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
 		},
 		"containerUri": {
 			"type": "string",
@@ -57,21 +105,77 @@
 					"CommonDataServiceForApps1_password": {
 						"value": "[parameters('CommonDataServiceForApps1_password')]"
 					},
+					"Dataverse_password": {
+						"value": "[parameters('Dataverse_password')]"
+					},
+					"DataverseTest_password": {
+						"value": "[parameters('DataverseTest_password')]"
+					},
 					"WWSQL003_connectionString": {
 						"value": "[parameters('WWSQL003_connectionString')]"
 					},
 					"WWSQL003_password": {
 						"value": "[parameters('WWSQL003_password')]"
 					},
+					"WWSQL003_Test_connectionString": {
+						"value": "[parameters('WWSQL003_Test_connectionString')]"
+					},
+					"WWSQL003_Test_password": {
+						"value": "[parameters('WWSQL003_Test_password')]"
+					},
+					"WWWEB002_connectionString": {
+						"value": "[parameters('WWWEB002_connectionString')]"
+					},
+					"WWWEB002_password": {
+						"value": "[parameters('WWWEB002_password')]"
+					},
 					"CommonDataServiceForApps1_properties_typeProperties_username": {
 						"value": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]"
 					},
+					"Dataverse_properties_typeProperties_username": {
+						"value": "[parameters('Dataverse_properties_typeProperties_username')]"
+					},
+					"DataverseTest_properties_typeProperties_username": {
+						"value": "[parameters('DataverseTest_properties_typeProperties_username')]"
+					},
+					"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
+						"value": "[parameters('WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
+						"value": "[parameters('WWWEB002_properties_typeProperties_linkedInfo_resourceId')]"
+					},
 					"WWSQL003_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
+					},
+					"WWSQL003_Test_properties_typeProperties_userName": {
+						"value": "[parameters('WWSQL003_Test_properties_typeProperties_userName')]"
+					},
+					"WWWEB002_properties_typeProperties_userName": {
+						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "SQLtoDataVerse_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'SQLtoDataVerse_ArmTemplate_0')]"
+			]
 		}
 	]
 }
