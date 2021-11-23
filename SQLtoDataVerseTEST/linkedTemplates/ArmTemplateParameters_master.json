@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "SQLtoDataVerseTEST"
+		},
+		"CommonDataServiceForApps1_password": {
+			"value": ""
+		},
+		"Dataverse_password": {
+			"value": ""
+		},
+		"DataverseTest_password": {
+			"value": ""
+		},
+		"WWSQL003_connectionString": {
+			"value": ""
+		},
+		"WWSQL003_password": {
+			"value": ""
+		},
+		"WWSQL003_Test_connectionString": {
+			"value": ""
+		},
+		"WWSQL003_Test_password": {
+			"value": ""
+		},
+		"WWWEB002_connectionString": {
+			"value": ""
+		},
+		"WWWEB002_password": {
+			"value": ""
+		},
+		"CommonDataServiceForApps1_properties_typeProperties_username": {
+			"value": "Tejaswi.Datla@wineworks.co.nz"
+		},
+		"Dataverse_properties_typeProperties_username": {
+			"value": "wwdigital@wineworks.co.nz"
+		},
+		"DataverseTest_properties_typeProperties_username": {
+			"value": "wwdigital@wineworks.co.nz"
+		},
+		"WWSQL003_properties_typeProperties_userName": {
+			"value": "wineworksgroup\\WWG_Service"
+		},
+		"WWSQL003_Test_properties_typeProperties_userName": {
+			"value": "wineworksgroup\\WWG_Service"
+		},
+		"WWWEB002_properties_typeProperties_userName": {
+			"value": "wineworksgroup\\WWG_Service"
+		},
+		"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
+		},
+		"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
