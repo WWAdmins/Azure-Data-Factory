@@ -2,7 +2,7 @@
 	"name": "BillOfMaterials",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Dataverse",
+			"referenceName": "DataverseTest",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
