@@ -2,7 +2,7 @@
 	"name": "WWSQL003_Portal",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "WWSQL003_Test",
+			"referenceName": "WWSQL003",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
