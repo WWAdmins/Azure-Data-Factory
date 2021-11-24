@@ -43,6 +43,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
 		},
+		"SQLToDataverseProd_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SQLToDataverseProd'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -74,6 +78,10 @@
 		"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
+		},
+		"SQLToDataverseProd_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
 		}
 	},
 	"variables": {
@@ -1506,7 +1514,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Dataverse",
+					"referenceName": "SQLToDataverseProd",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -1520,7 +1528,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+				"[concat(variables('factoryId'), '/linkedServices/SQLToDataverseProd')]"
 			]
 		},
 		{
@@ -2148,6 +2156,26 @@
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
 			"apiVersion": "2018-06-01",
 			"properties": {},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLToDataverseProd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "CommonDataServiceForApps",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://wineworks.crm6.dynamics.com/",
+					"authenticationType": "Office365",
+					"username": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SQLToDataverseProd_password')]"
+					}
+				}
+			},
 			"dependsOn": []
 		}
 	]

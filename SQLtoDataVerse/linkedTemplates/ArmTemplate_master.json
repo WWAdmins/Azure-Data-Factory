@@ -43,6 +43,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
 		},
+		"SQLToDataverseProd_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SQLToDataverseProd'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -74,6 +78,10 @@
 		"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
+		},
+		"SQLToDataverseProd_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"containerUri": {
 			"type": "string",
@@ -111,6 +119,9 @@
 					"DataverseTest_password": {
 						"value": "[parameters('DataverseTest_password')]"
 					},
+					"SQLToDataverseProd_password": {
+						"value": "[parameters('SQLToDataverseProd_password')]"
+					},
 					"WWSQL003_connectionString": {
 						"value": "[parameters('WWSQL003_connectionString')]"
 					},
@@ -143,6 +154,9 @@
 					},
 					"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('WWWEB002_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"SQLToDataverseProd_properties_typeProperties_username": {
+						"value": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]"
 					},
 					"WWSQL003_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
