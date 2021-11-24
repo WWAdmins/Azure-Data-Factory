@@ -14,6 +14,9 @@
 		"DataverseTest_password": {
 			"value": ""
 		},
+		"SQLToDataverseProd_password": {
+			"value": ""
+		},
 		"WWSQL003_connectionString": {
 			"value": ""
 		},
@@ -39,6 +42,9 @@
 			"value": "wwdigital@wineworks.co.nz"
 		},
 		"DataverseTest_properties_typeProperties_username": {
+			"value": "wwdigital@wineworks.co.nz"
+		},
+		"SQLToDataverseProd_properties_typeProperties_username": {
 			"value": "wwdigital@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {

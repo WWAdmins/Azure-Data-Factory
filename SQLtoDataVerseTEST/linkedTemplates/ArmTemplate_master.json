@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'DataverseTest'"
 		},
+		"SQLToDataverseProd_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SQLToDataverseProd'"
+		},
 		"WWSQL003_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWSQL003'"
@@ -52,6 +56,10 @@
 			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"DataverseTest_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"SQLToDataverseProd_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
@@ -111,6 +119,9 @@
 					"DataverseTest_password": {
 						"value": "[parameters('DataverseTest_password')]"
 					},
+					"SQLToDataverseProd_password": {
+						"value": "[parameters('SQLToDataverseProd_password')]"
+					},
 					"WWSQL003_connectionString": {
 						"value": "[parameters('WWSQL003_connectionString')]"
 					},
@@ -137,6 +148,9 @@
 					},
 					"DataverseTest_properties_typeProperties_username": {
 						"value": "[parameters('DataverseTest_properties_typeProperties_username')]"
+					},
+					"SQLToDataverseProd_properties_typeProperties_username": {
+						"value": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]"
 					},
 					"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId')]"
