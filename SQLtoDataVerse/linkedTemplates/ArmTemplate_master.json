@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'DataverseTest'"
 		},
+		"SQLToDataverseProd_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SQLToDataverseProd'"
+		},
 		"WWSQL003_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWSQL003'"
@@ -43,10 +47,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
 		},
-		"SQLToDataverseProd_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'SQLToDataverseProd'"
-		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -56,6 +56,10 @@
 			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"DataverseTest_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"SQLToDataverseProd_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
@@ -78,10 +82,6 @@
 		"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
-		},
-		"SQLToDataverseProd_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"containerUri": {
 			"type": "string",
@@ -149,14 +149,14 @@
 					"DataverseTest_properties_typeProperties_username": {
 						"value": "[parameters('DataverseTest_properties_typeProperties_username')]"
 					},
+					"SQLToDataverseProd_properties_typeProperties_username": {
+						"value": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]"
+					},
 					"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId')]"
 					},
 					"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('WWWEB002_properties_typeProperties_linkedInfo_resourceId')]"
-					},
-					"SQLToDataverseProd_properties_typeProperties_username": {
-						"value": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]"
 					},
 					"WWSQL003_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"

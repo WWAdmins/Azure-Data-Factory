@@ -59,6 +59,10 @@
 			"type": "string",
 			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
+		"SQLToDataverseProd_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
 		"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
@@ -66,10 +70,6 @@
 		"WWWEB002_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
-		},
-		"SQLToDataverseProd_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
@@ -150,6 +150,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLToDataverseProd')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "CommonDataServiceForApps",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://wineworks.crm6.dynamics.com/",
+					"authenticationType": "Office365",
+					"username": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SQLToDataverseProd_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -217,26 +237,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SQLToDataverseProd')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "CommonDataServiceForApps",
-				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://wineworks.crm6.dynamics.com/",
-					"authenticationType": "Office365",
-					"username": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('SQLToDataverseProd_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/BillOfMaterials')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -288,7 +288,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Dataverse",
+					"referenceName": "SQLToDataverseProd",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -302,7 +302,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+				"[concat(variables('factoryId'), '/linkedServices/SQLToDataverseProd')]"
 			]
 		},
 		{

@@ -924,7 +924,7 @@
 						]
 					},
 					{
-						"name": "Send fail email",
+						"name": "Send failed email",
 						"type": "WebActivity",
 						"dependsOn": [
 							{
