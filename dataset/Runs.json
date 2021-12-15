@@ -2,7 +2,7 @@
 	"name": "Runs",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SQLToDataverseProd",
+			"referenceName": "DataverseTest",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
