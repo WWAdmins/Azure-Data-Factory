@@ -1,5 +1,5 @@
 {
-	"name": "Daily Refresh",
+	"name": "Hourly Refresh",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
