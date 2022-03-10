@@ -1443,7 +1443,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Daily Refresh')]",
+			"name": "[concat(parameters('factoryName'), '/Hourly Refresh')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1475,15 +1475,10 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Day",
+						"frequency": "Hour",
 						"interval": 1,
-						"startTime": "2021-04-14T01:33:00",
-						"timeZone": "New Zealand Standard Time",
-						"schedule": {
-							"hours": [
-								0
-							]
-						}
+						"startTime": "2021-04-14T01:45:00",
+						"timeZone": "New Zealand Standard Time"
 					}
 				}
 			},
