@@ -27,7 +27,7 @@
 		"typeProperties": {
 			"recurrence": {
 				"frequency": "Hour",
-				"interval": 1,
+				"interval": 3,
 				"startTime": "2021-04-14T01:45:00",
 				"timeZone": "New Zealand Standard Time"
 			}
