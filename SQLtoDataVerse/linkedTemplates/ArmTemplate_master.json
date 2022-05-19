@@ -75,6 +75,10 @@
 			"type": "string",
 			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
+		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
 		"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
@@ -151,6 +155,9 @@
 					},
 					"SQLToDataverseProd_properties_typeProperties_username": {
 						"value": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]"
+					},
+					"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+						"value": "[parameters('ProductionLink_properties_typeProperties_linkedInfo_resourceId')]"
 					},
 					"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId')]"

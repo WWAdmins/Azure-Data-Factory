@@ -63,6 +63,10 @@
 			"type": "string",
 			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
+		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
 		"WWSQL003PortalTest_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/Azure-Data-Factory/providers/Microsoft.DataFactory/factories/SQLtoDataVerse/integrationruntimes/WWWEB002Production"
@@ -164,6 +168,22 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('SQLToDataverseProd_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ProductionLink')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"description": "Link to DataverseToSQL",
+				"typeProperties": {
+					"linkedInfo": {
+						"resourceId": "[parameters('ProductionLink_properties_typeProperties_linkedInfo_resourceId')]",
+						"authorizationType": "Rbac"
 					}
 				}
 			},
@@ -392,12 +412,12 @@
 					}
 				},
 				"connectVia": {
-					"referenceName": "WWWEB002Production",
+					"referenceName": "ProductionLink",
 					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/WWWEB002Production')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/ProductionLink')]"
 			]
 		},
 		{
@@ -666,24 +686,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/WWWEB002')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
 		}
 	]
