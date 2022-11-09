@@ -1663,6 +1663,17 @@
 									},
 									{
 										"source": {
+											"name": "ClientWWCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "ww_clientcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "Client",
 											"type": "String",
 											"physicalType": "nvarchar"
