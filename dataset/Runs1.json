@@ -14,5 +14,6 @@
 		"typeProperties": {
 			"entityName": "ww_run"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

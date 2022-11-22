@@ -2,7 +2,7 @@
 	"name": "VWRun",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "WWSQL003_Test",
+			"referenceName": "WWSQL003_TEST",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
