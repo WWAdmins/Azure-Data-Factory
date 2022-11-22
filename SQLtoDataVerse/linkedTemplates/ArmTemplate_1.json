@@ -13,214 +13,364 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Supplier for Production Runs')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/FillerOperation')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Supplier for Production Runs",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "."
-							},
-							{
-								"name": "Destination",
-								"value": "activitypointer"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT\ncast(s.Id as nvarchar) [Supplier Id]\n,Cast([Active] as int)  [Status]\n,c.Name [Supplier Product Category]\n,cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),s.Id, 1000))) as uniqueidentifier) [Supplier for prod lines Id]\n,s.Description as [Supplier Name]\n,C.Name [DryGoodsCategoryName]\n\nFROM [WineWorks.Database].[companies].[Supplier] s\nINNER JOIN lookups.DryGoodsCategory c on c.Id=DryGoodsCategoryId",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "CommonDataServiceForAppsSink",
-								"writeBatchSize": 10,
-								"writeBehavior": "upsert"
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Supplier Id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_supplierid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Status",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statecode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier Product Category",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_supplierproductcategory",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier for prod lines Id",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_supplierforproductionlinesid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier Name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_suppliername",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DryGoodsCategoryName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_drygoodscategory",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DataVerse_SupplierForProductionLines",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Send fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Supplier for Production Runs",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-19.australiasoutheast.logic.azure.com:443/workflows/0ce17bbfafef48aebc2e35e531fd51c3/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=S8w7FykrvK3_j9xtr-WRVEDzc4Qcstem-MDRyDz0C9o",
-							"method": "POST",
-							"headers": {
-								"Content-Type": "application/json"
-							},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Suchetha.Jangili@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"lastPublishTime": "2021-07-27T02:48:10Z"
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_filleroperation"
+				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Hourly Refresh')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/HourlyLabellingLogsheet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Supplier for Production Runs",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Bill Of Material",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Runs",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 1,
-						"startTime": "2021-04-14T01:45:00",
-						"timeZone": "New Zealand Standard Time"
-					}
+					"entityName": "ww_hourlylabellinglogsheet"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Supplier for Production Runs')]"
-			]
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HourlyOperatorBottling')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_operatorbottlinghourly"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HourlyTorqueandVolume')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_hourlytorqueandvolume"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LabelChange')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_labelchange"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LabellingIssues')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_labellingissues"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LabellingPreflight')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_labellingpreflight"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Operator')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_operator"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OperatorBottlingBreakage')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_operatorbottlingbreakage"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OperatorBottlingDowntime')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_operatorbottlingdowntime"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OperatorBottlingPreflight')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_operatorbottling"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PreBottlingAnalysis')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_prebottlinganalysis"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PreBottlingAnalysisRecheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_prebottlinganalysisrecheck"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PrebottlingAnalysisGasAdjustments')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_prebottlinganalysisgasadjustments"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PrebottlingAnalysisSignOff')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_prebottlinganalysissignoff"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PrebottlingAnalysisSulphurAdjustments')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_prebottlinganalysissulphuradj"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ProductionLine')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_productionlinelookup"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QCEndofRun')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_qcendofrun"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QCHourlyCheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_qchourlycheck"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QCStartUp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_qcstartup"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }
