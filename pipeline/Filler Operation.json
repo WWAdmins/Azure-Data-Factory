@@ -63,7 +63,7 @@
 								},
 								"sink": {
 									"name": "Air Ram Screw Capper",
-									"type": "String"
+									"type": "Int32"
 								}
 							},
 							{
@@ -778,16 +778,6 @@
 							},
 							{
 								"source": {
-									"name": "ww_inbottle",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "EOR In Bottle2",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
 									"name": "ww_eorrinseheadinspection",
 									"type": "Int32"
 								},
@@ -893,6 +883,16 @@
 								},
 								"sink": {
 									"name": "Filler Fill Stems Sterile",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_filleroperation",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Filler Operation",
 									"type": "String"
 								}
 							},
@@ -1543,7 +1543,7 @@
 								},
 								"sink": {
 									"name": "Refract",
-									"type": "String"
+									"type": "Decimal"
 								}
 							},
 							{
@@ -1588,7 +1588,7 @@
 							},
 							{
 								"source": {
-									"name": "ww_tankerlookupname",
+									"name": "ww_tankername",
 									"type": "String"
 								},
 								"sink": {
@@ -1854,6 +1854,16 @@
 								"sink": {
 									"name": "Tuck Rollers H4",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_typeofchange",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Type Of Change",
+									"type": "Int32"
 								}
 							},
 							{
