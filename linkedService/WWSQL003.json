@@ -5,9 +5,9 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=WWSQL003;initial catalog=Dataverse;server=WWSQL003;database=Dataverse;trusted_connection=True",
+			"connectionString": "integrated security=True;data source=WWSQL003;initial catalog=Dataverse.staging;server=WWSQL003;database=Dataverse.staging;trusted_connection=True",
 			"userName": "wineworksgroup\\WWG_Service",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0ZjAyMWQzMi0yMzdhLTQ3OGYtOGY3MS1lZmZlODdiZTBjMWMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0ZjZjMjQ0My1iMDY4LTRhZGYtYjExOC0yY2M1MTY4MGJlZmQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1",
