@@ -35,6 +35,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWSQL003'"
 		},
+		"WWSQL003_DV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003_DV'"
+		},
+		"WWSQL003_DV_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003_DV'"
+		},
 		"WWSQL003_Test_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWSQL003_Test'"
@@ -76,6 +84,10 @@
 			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
+		},
+		"WWSQL003_DV_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
@@ -201,6 +213,12 @@
 					"WWSQL003_password": {
 						"value": "[parameters('WWSQL003_password')]"
 					},
+					"WWSQL003_DV_connectionString": {
+						"value": "[parameters('WWSQL003_DV_connectionString')]"
+					},
+					"WWSQL003_DV_password": {
+						"value": "[parameters('WWSQL003_DV_password')]"
+					},
 					"WWWEB002_connectionString": {
 						"value": "[parameters('WWWEB002_connectionString')]"
 					},
@@ -215,6 +233,9 @@
 					},
 					"WWSQL003_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
+					},
+					"WWSQL003_DV_properties_typeProperties_userName": {
+						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
 					},
 					"WWWEB002_properties_typeProperties_userName": {
 						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"

@@ -26,6 +26,12 @@
 		"WWSQL003_password": {
 			"value": ""
 		},
+		"WWSQL003_DV_connectionString": {
+			"value": ""
+		},
+		"WWSQL003_DV_password": {
+			"value": ""
+		},
 		"WWSQL003_Test_connectionString": {
 			"value": ""
 		},
@@ -57,6 +63,9 @@
 			"value": "wwdigital@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {
+			"value": "wineworksgroup\\WWG_Service"
+		},
+		"WWSQL003_DV_properties_typeProperties_userName": {
 			"value": "wineworksgroup\\WWG_Service"
 		},
 		"WWSQL003_Test_properties_typeProperties_userName": {

@@ -13,6 +13,386 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/QC Hourly Check')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "QC Hourly Check",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ww_qchourlycheckname",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QC Hourly Check Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "statuscode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_co2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "CO2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_collectexportsamples",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Collect export samples",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_comments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Comments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "Delete Line",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_do",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "DO",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_flowmeterreading",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Flow meter reading",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_foreignmatter",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Foreign Matter",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_micro",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Micro",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Operator Code",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Production Line",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_qcbottlecode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QC Bottle Code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_qcscrewcapscode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QC Screwcaps Code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tankinuse",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tank in use",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tankjointscheckedforleaks",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tank joints checked for leaks",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_timeofcheck",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Time of check",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Created On",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "importsequencenumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Import Sequence Number",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Modified On",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "overriddencreatedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Record Created On",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_qchourlycheckid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "QC Hourly Check",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_run",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "Run",
+											"type": "Guid"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QCHourlyCheck",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "WWSQL003_QCHourlyCheck",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Merge Statement",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "QC Hourly Check",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[sp_QC Hourly Check]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP Fail Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Merge Statement",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "Email on Failure",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "QC Hourly Check",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-07-03T21:09:59Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/QC Start Up')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1205,358 +1585,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-07-04T22:21:40Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Runs')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Runs",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "."
-							},
-							{
-								"name": "Destination",
-								"value": "ww_run"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": " select  CAST(0 as BIT) as [Micros Needed]\n \n ,cast(  CASE  \n\twhen ProductionLineId=1 then '95532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=2 then '98532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=3 then '99532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=4 then '9a532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=5 then '9c532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=6 then '9d532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=7 then '9e532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=8 then '9f532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=9 then 'a0532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=10 then 'a1532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=11 then 'a2532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=12 then 'a3532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=13 then 'a5532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=14 then 'a6532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=15 then 'a7532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=16 then 'a8532c19-019c-eb11-b1ac-000d3a6ae149'\n\nend as UNIQUEIDENTIFIER)  ProductionLineGUID ,cast(0 as int) as [Status],*\n, CONVERT(datetime, \n               SWITCHOFFSET(CONVERT(datetimeoffset, \n                                    DateAdd(hh,-12,LastUpdatedOn) AT TIME ZONE 'New Zealand Standard Time'), \n                            DATENAME(TzOffset, SYSDATETIMEOFFSET()))) [lastUpdatedOnNZST] from (\n\tSELECT \n        bwo.Id as ProductionWorkOrderId,\n\t\t'Bottling' workOrderType,\n        pl.id as ProductionLineId,\n\t\tcast(0 as bit) PendingUpdate,\n        cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),BWO.Id, 1000))) as uniqueidentifier) [Run Id],\n        cast(book.ExpectedStartDateTime as Date) as RunDate,\n        book.ProductionRunNumber,\n\t\tcast(getdate() as DateTime) as LastCopied,\n        cast(CASE \nwhen ProductionLineId=1 then '95532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=2 then '98532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=3 then '99532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=4 then '9a532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=5 then '9c532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=6 then '9d532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=7 then '9e532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=8 then '9f532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=9 then 'a0532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=10 then 'a1532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=11 then 'a2532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=12 then 'a3532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=13 then 'a5532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=14 then 'a6532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=15 then 'a7532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen ProductionLineId=16 then 'a8532c19-019c-eb11-b1ac-000d3a6ae149'\n\n\n       END as uniqueidentifier\n                ) ProductionLine,\n        [site].Name as [Site],\n        co.Name as Client,\n\t\tco.[WWCode] + ' - ' + co.[Name] AS [Customer ID],\n        co.WWCode as ClientWWCode,\n        bwo.ClientWorkOrderReference,\n        v.Name as Variety,\n        vi.Name + ' ' + v.Name VintageVariety,\n        bwo.WineVolume,\n        cast(bwo.Active as int) StateCode,\n        bwo.AdditionalInstructions,\n        bgct.Name as BottleGasCoverType,\n        bwo.CarbonationSaturation,\n        bwo.ClientBatchCode,\n\t\tSUBSTRING((SELECT ','+lc.Name  AS [text()] FROM companies.BottlingWorkOrderComplexity cc inner join lookups.BottlingWorkOrderComplexity lc ON lc.id=cc.ComplexityId \n\t\tWHERE cc.BottlingWorkOrderId= bwo.Id FOR XML PATH (''), TYPE).value('text()[1]','nvarchar(max)'), 2, 1000) WineHandling,\n        bwo.CO2ReceivalSpecification,\n        bwo.CreatedBy,\n        bwo.CreatedOn,\n        bwo.ExonetIntegrationError,\n        bwo.ExonetSalesOrderNumber,\n        bwo.LastCellarFilterDate,\n        NULL as Organic,\n        bwo.PushedToExonet,\n        bwo.PushedToExonetDate,\n        bwo.PushedToScale,\n        bwo.PushedToScaleDate,\n        bwo.RequestorName,\n        bwo.ScaleIntegrationError,\n        bwo.SO2ReceivalSpecification,\n        bwo.StartupWinemaker,\n        bwo.UpdatedBy,\n        bwo.UpdatedOn,\n        vi.Name as Vintage,\n        bft.Name as BottlingFiltrationType,\n        cft.Name as CellarFiltrationType,\n        ec.Name as ExportCertification,\n\t\tNULL AS [QuantityCases],\n        NULL [UseAllStock],\n        NULL [CaseVariability],\n        NULL  AS [FullProductName],\n        NULL  AS [PackType],\n        NULL  AS [RunLine],\n        NULL  AS [FinishedGoodsStockCode],\n        NULL  AS [StockToConsumeLotRunNo],\n        NULL  AS  [StockToConsumeStockCode],\n        NULL  AS  [StockToConsumeStockCodeDescription],\n        NULL AS [StockToConsumeCaseVariability],\n        NULL as [End Market],\n        (SELECT Max(v) FROM (VALUES (bwo.UpdatedOn)) AS value(v)) as [LastUpdatedOn]\n        FROM\n        companies.BottlingWorkOrder bwo\n        left join companies.Company co on bwo.CompanyId = co.Id\n        left join lookups.Site [site] on bwo.SiteId = [site].Id\n        left join companies.ProductionBooking book on bwo.Id = book.BottlingWorkOrderId\n        left join lookups.ProductionLine pl on book.ProductionLineId = pl.Id\n        left join lookups.Variety v on bwo.VarietyId = v.Id\n        left join lookups.Vintage vi on bwo.VintageId = vi.Id\n        left join lookups.WorkOrderStatus stat on bwo.WorkOrderStatusId = stat.Id\n        left join lookups.BottleGasCoverType bgct on bwo.BottleGasCoverTypeId = bgct.Id\n        left join companies.BottlingFiltrationType bft on bwo.BottlingFiltrationTypeId = bft.Id\n        left join companies.CellarFiltrationType cft on bwo.CellarFiltrationTypeId = cft.Id\n        left join lookups.ExportCertification ec on bwo.ExportCertificationId = ec.Id\n        WHERE  cast(book.ExpectedStartDateTime as Date) > getdate() - 14\n    \n    UNION ALL\n\n    SELECT  \n        rwo.[Id] as ProductionWorkOrderId,\n        'ReWork' workOrderType,\n        book.ProductionLineId,\n\t\tcast(0 as bit) PendingUpdate,\n        cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),rwo.Id, 1000))) as uniqueidentifier) [Run Id],\n  \t\tcast(book.ExpectedStartDateTime as Date) as [RunDate],\n\n        rwo.ProductionRunNumber [ProductionRunNumber],\n\t\tcast(getdate() as DateTime) as LastCopied,\n        cast(\n        CASE \nwhen PL.ID=1 then '95532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=2 then '98532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=3 then '99532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=4 then '9a532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=5 then '9c532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=6 then '9d532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=7 then '9e532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=8 then '9f532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=9 then 'a0532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=10 then 'a1532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=11 then 'a2532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=12 then 'a3532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=13 then 'a5532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=14 then 'a6532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=15 then 'a7532c19-019c-eb11-b1ac-000d3a6ae149'\n\twhen PL.ID=16 then 'a8532c19-019c-eb11-b1ac-000d3a6ae149'\n\n        END as uniqueidentifier) ProductionLine,\n        [site].Name as [Site],\n        c.[Name] AS [Client],\n        c.[WWCode] + ' - ' + c.[Name] AS [Customer ID],\n        c.[WWCode] ClientWWCode,\n        rwo.[ClientWorkOrderReference],\n        V.Name as [Variety],\n        vi.Name + ' ' + v.Name VintageVariety,\n        rwo.CasesToCreate*335.0 WineVolume, --How to calculate from cases to create\n        cast(rwo.Active as int) StateCode,\n        rwo.AdditionalInstructions,\n        NULL as BottleGasCoverType,\n        NULL as CarbonationSaturation,\n        NULL as ClientBatchCode,\n\t\tSUBSTRING((SELECT ','+lc.Name  AS [text()] FROM companies.BottlingWorkOrderComplexity cc inner join lookups.BottlingWorkOrderComplexity lc ON lc.id=cc.ComplexityId \n\t\tWHERE cc.BottlingWorkOrderId= rwo.Id FOR XML PATH (''), TYPE).value('text()[1]','nvarchar(max)'), 2, 1000) WineHandling,\n        NULL as CO2ReceivalSpecification,\n        NULL as CreatedBy,\n        NULL as CreatedOn,\n        NULL as ExonetIntegrationError,\n        NULL as ExonetSalesOrderNumber,\n        NULL as LastCellarFilterDate,\n        NULL as Organic,\n        NULL as PushedToExonet,\n        NULL as PushedToExonetDate,\n        NULL as PushedToScale,\n        NULL as PushedToScaleDate,\n        NULL as RequestorName,\n        NULL as ScaleIntegrationError,\n        NULL as SO2ReceivalSpecification,\n        NULL as StartupWinemaker,\n        rwo.UpdatedBy,\n        rwo.UpdatedOn,\n        NULL as Vintage,\n        NULL as BottlingFiltrationType,\n        NULL as CellarFiltrationType,\n        NULL as ExportCertification,\n        rwo.[CasesToCreate] AS [QuantityCases],\n        rwo.[UseAllStock],\n        CASE WHEN rwo.[UseAllStock] = 0 THEN 'Exact' ELSE 'Use All Stock' END AS [CaseVariability],\n        bom.[StockCodeDescription] AS [FullProductName],\n        bom.[BottlesPerCarton] AS [PackType],\n        pl.[Name] AS [RunLine],\n        bom.[StockCode] AS [FinishedGoodsStockCode],\n        rwo.[StockToConsumeLot] AS [StockToConsumeLotRunNo],\n        cast(conbom.StockCode as nvarchar) [StockToConsumeStockCode],\n        cast(conbom.StockCodeDescription as nvarchar) [StockToConsumeStockCodeDescription],\n        cast(cv.Name as nvarchar) as StockToConsumeCaseVariability,\n        M.WWCode [End Market],\n        (SELECT Max(v) FROM (VALUES (rwo.UpdatedOn), (bom.UpdatedOn)) AS value(v)) as [LastUpdatedOn]\n        FROM [companies].[LabellingOrReworkOrder] rwo\n        INNER JOIN companies.BillOfMaterial conbom on rwo.StockToConsumeBomId =conbom.Id\n        INNER JOIN companies.[Company] AS c ON c.[Id] = rwo.[CompanyId]\n        INNER JOIN companies.[BillOfMaterial] bom ON rwo.[StockToCreateId] = bom.[Id]\n        INNER JOIN companies.ProductionBooking book on rwo.Id = book.LabellingOrReworkOrderId\n        LEFT JOIN companies.ProductionBooking wobook on rwo.ProductionRunNumber =wobook.ProductionRunNumber and wobook.TypeId = 1\n        LEFT JOIN companies.BottlingWorkOrderLine bwol on bwol.BillOfMaterialId = conbom.Id and bwol.BottlingWorkOrderId = wobook.BottlingWorkOrderId\n        LEFT JOIN [lookups].[CaseVariability] cv on bwol.CaseVariabilityId = cv.Id\n        left join lookups.Site [site] on rwo.SiteId = [site].Id\n        left join lookups.ProductionLine pl on book.ProductionLineId = pl.Id\n        left join lookups.Variety v on book.VarietyId = v.Id\n        left join lookups.Vintage vi on book.VintageId = vi.Id\n        left join lookups.WorkOrderStatus stat on rwo.WorkOrderStatusId = stat.Id\n        join lookups.Market M on M.Id= bom.MarketId \n        where cast(book.ExpectedStartDateTime as Date) > getdate() - 14)a",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "CommonDataServiceForAppsSink",
-								"writeBatchSize": 10,
-								"writeBehavior": "upsert"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "StateCode",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "statecode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ClientWWCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_clientcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Client",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_clientname",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ClientWorkOrderReference",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_clientworkorderreference",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "LastCopied",
-											"type": "DateTime",
-											"physicalType": "datetime"
-										},
-										"sink": {
-											"name": "ww_lastcopied",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Micros Needed",
-											"type": "Boolean",
-											"physicalType": "bit"
-										},
-										"sink": {
-											"name": "ww_microsneeded",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "PendingUpdate",
-											"type": "Boolean",
-											"physicalType": "bit"
-										},
-										"sink": {
-											"name": "ww_pendingupdate",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "RunDate",
-											"type": "DateTime",
-											"physicalType": "date"
-										},
-										"sink": {
-											"name": "ww_rundate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Run Id",
-											"type": "Guid",
-											"physicalType": "uniqueidentifier"
-										},
-										"sink": {
-											"name": "ww_runid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ProductionRunNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_runnumber",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ProductionLineGUID",
-											"type": "Guid",
-											"physicalType": "uniqueidentifier"
-										},
-										"sink": {
-											"name": "ww_runproductionline",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "StockToConsumeCaseVariability",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumecasevariability",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "StockToConsumeLotRunNo",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumerun",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "StockToConsumeStockCode",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumestockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "StockToConsumeStockCodeDescription",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumestockcodedescription",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Variety",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_variety",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Vintage",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_vintage",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "VintageVariety",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_vintagevariety",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "WineHandling",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ww_winehandling",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ProductionWorkOrderId",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "ww_workorderid",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "workOrderType",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ww_workordertype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "LastUpdatedOn",
-											"type": "DateTimeOffset",
-											"physicalType": "datetimeoffset"
-										},
-										"sink": {
-											"name": "ww_workorderupdatedon",
-											"type": "DateTime"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Runs",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Send fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Runs",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-31.australiasoutheast.logic.azure.com:443/workflows/a488ee4e6dd34fbf85d69ff5695dceb8/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=mzFskLc897eR_sPvdtE-f6H8lVCS1H-7qdc-aUnGK8I",
-							"method": "POST",
-							"headers": {
-								"Content-Type": "application/json"
-							},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-07-24T22:28:27Z"
 			},
 			"dependsOn": []
 		},
@@ -3736,172 +3764,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Supplier for Production Runs')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Supplier for Production Runs",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "."
-							},
-							{
-								"name": "Destination",
-								"value": "activitypointer"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT\ncast(s.Id as nvarchar) [Supplier Id]\n,Cast([Active] as int)  [Status]\n,c.Name [Supplier Product Category]\n,cast(CONVERT(BINARY(16), REVERSE(CONVERT(BINARY(16),s.Id, 1000))) as uniqueidentifier) [Supplier for prod lines Id]\n,s.Description as [Supplier Name]\n,C.Name [DryGoodsCategoryName]\n\nFROM [WineWorks.Database].[companies].[Supplier] s\nINNER JOIN lookups.DryGoodsCategory c on c.Id=DryGoodsCategoryId",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "CommonDataServiceForAppsSink",
-								"writeBatchSize": 10,
-								"writeBehavior": "upsert"
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Supplier Id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_supplierid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Status",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statecode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier Product Category",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_supplierproductcategory",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier for prod lines Id",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_supplierforproductionlinesid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Supplier Name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_suppliername",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "DryGoodsCategoryName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_drygoodscategory",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "WWSQL003_Portal",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DataVerse_SupplierForProductionLines",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Send fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Supplier for Production Runs",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-19.australiasoutheast.logic.azure.com:443/workflows/0ce17bbfafef48aebc2e35e531fd51c3/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=S8w7FykrvK3_j9xtr-WRVEDzc4Qcstem-MDRyDz0C9o",
-							"method": "POST",
-							"headers": {
-								"Content-Type": "application/json"
-							},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Suchetha.Jangili@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-07-27T02:48:10Z"
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Tanker')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -4380,57 +4242,13 @@
 				"[concat(variables('factoryId'), '/pipelines/Run')]",
 				"[concat(variables('factoryId'), '/pipelines/Run Report - BottleLabelPack')]",
 				"[concat(variables('factoryId'), '/pipelines/Tanker')]",
+				"[concat(variables('factoryId'), '/pipelines/QC Hourly Check')]",
 				"[concat(variables('factoryId'), '/pipelines/QC Start Up')]",
 				"[concat(variables('factoryId'), '/pipelines/Stock checkin')]",
 				"[concat(variables('factoryId'), '/pipelines/Stock checkin entry')]",
 				"[concat(variables('factoryId'), '/pipelines/Supervisor Signoff')]",
 				"[concat(variables('factoryId'), '/pipelines/Supervisor Signoff BOM')]",
 				"[concat(variables('factoryId'), '/pipelines/Site')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Hourly Refresh')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Supplier for Production Runs",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Bill Of Material",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "Runs",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 1,
-						"startTime": "2021-04-14T01:45:00",
-						"timeZone": "New Zealand Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Supplier for Production Runs')]",
-				"[concat(variables('factoryId'), '/pipelines/Runs')]"
 			]
 		}
 	]
