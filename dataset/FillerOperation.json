@@ -2,7 +2,7 @@
 	"name": "FillerOperation",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DataVerse",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
