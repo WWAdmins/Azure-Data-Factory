@@ -583,6 +583,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_authorisedsig",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Authorised Sig",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "statuscode",
 											"type": "Int32"
 										},
@@ -639,6 +649,16 @@
 										"sink": {
 											"name": "DO",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_exportsamplespicked",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Export samples picked",
+											"type": "Int32"
 										}
 									},
 									{
@@ -713,6 +733,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_samplessig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Samples Sig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_tankinuse",
 											"type": "String"
 										},
@@ -733,12 +763,32 @@
 									},
 									{
 										"source": {
+											"name": "ww_timeofauthorisedauditcheck",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Time of Authorised Audit Check",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_timeofcheck",
 											"type": "DateTime"
 										},
 										"sink": {
 											"name": "Time of check",
 											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_visualcolourmatchtankbtl",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Visual Colour Match (Tank/BTL)",
+											"type": "Int32"
 										}
 									},
 									{
