@@ -1,0 +1,8 @@
+{
+	"name": "QCRecheck",
+	"properties": {
+		"annotations": [],
+		"type": "CommonDataServiceForAppsEntity",
+		"schema": []
+	}
+}
