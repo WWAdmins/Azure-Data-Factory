@@ -13,6 +13,141 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_PrebottlingAnalysisSulphurAdjustments')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "PBA  Sulphur Adjustments Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Customer Tank Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "etxt",
+						"type": "bit"
+					},
+					{
+						"name": "Initial 1",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Initial 2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Operator",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PMS (g)",
+						"type": "decimal",
+						"precision": 9,
+						"scale": 5
+					},
+					{
+						"name": "PMS Batch",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PMS Batch expiry date",
+						"type": "date"
+					},
+					{
+						"name": "Required SO2 Result",
+						"type": "decimal",
+						"precision": 9,
+						"scale": 5
+					},
+					{
+						"name": "Retest Result",
+						"type": "decimal",
+						"precision": 9,
+						"scale": 5
+					},
+					{
+						"name": "Run Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Tank Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SO2 Increases PPM",
+						"type": "decimal",
+						"precision": 9,
+						"scale": 5
+					},
+					{
+						"name": "Sparge Time",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Wine Volume",
+						"type": "decimal",
+						"precision": 9,
+						"scale": 5
+					},
+					{
+						"name": "Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Import Sequence Number",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Modified On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Record Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Pre-bottling Analysis Sulphur Adjustments",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Pre-bottling Analysis Sulphur Adjustments"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_ProductionLine')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -295,6 +430,99 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "QC Hourly Check"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_QCRecheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "QC Recheck Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Alcohol in bottle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Alcohol percentage",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "Bottle alcohol 1st Tank",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Delete Line",
+						"type": "bit"
+					},
+					{
+						"name": "Operator Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Refract BTL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Visual Colour Match (Tank/BTL)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Import Sequence Number",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Modified On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Record Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "QC Recheck",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Run",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "QC Recheck"
 				}
 			},
 			"dependsOn": []
@@ -2996,353 +3224,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-04-19T21:09:51Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Breakage Location')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Breakage Location",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": true
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "statecode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "StateCode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_location",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Location",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_breakagelocationid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "BreakageLocation",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "CreatedOn",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ModifiedOn",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "BreakageLocation",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "WWSQL003_BreakageLocation",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-08-10T01:27:10Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Carton Usage Detail')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Carton Usage Detail",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ww_issues",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Issues",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Operator Code",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "statecode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Status",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "CreatedOn",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ModifiedOn",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "importsequencenumber",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Import Sequence Number",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Bill Of Materials",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonusagedetailid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Carton Usage Detail",
-											"type": "Guid"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "CartonUsageDetail",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "WWSQL003_CartonUsageDetail",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Carton Usage Detail",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_Carton Usage Detail]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Data Copy fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Carton Usage Detail",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-02-07T22:56:01Z"
 			},
 			"dependsOn": []
 		}
