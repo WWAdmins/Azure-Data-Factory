@@ -15174,8 +15174,8 @@
 				"lastPublishTime": "2022-10-20T22:40:54Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/WWSQL003_QCRecheck')]",
 				"[concat(variables('factoryId'), '/datasets/QCRecheck')]",
+				"[concat(variables('factoryId'), '/datasets/WWSQL003_QCRecheck')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
 		},
@@ -15228,6 +15228,26 @@
 										"sink": {
 											"name": "Status",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholinbottle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Alcohol in bottle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholintank",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Alcohol in tank",
+											"type": "String"
 										}
 									},
 									{
@@ -15392,6 +15412,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_tanker",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tanker",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_visualcolourmatchtankbtl",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Visual Colour Match (Tank/BTL)",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_wecs",
 											"type": "Int32"
 										},
@@ -15458,6 +15498,36 @@
 										"sink": {
 											"name": "QC Start Up",
 											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refract",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Refract",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refractbtl",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Refract BTL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refracttank",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Refract Tank ",
+											"type": "String"
 										}
 									},
 									{
@@ -19363,6 +19433,26 @@
 				"schema": [],
 				"typeProperties": {
 					"entityName": "ww_qchourlycheck"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/QCRecheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_qcrecheck"
 				}
 			},
 			"dependsOn": [
@@ -25097,26 +25187,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/QCRecheck')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Dataverse",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_qcrecheck"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
-			]
 		}
 	]
 }

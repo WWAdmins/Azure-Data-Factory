@@ -1273,6 +1273,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_alcoholinbottle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Alcohol in bottle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholintank",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Alcohol in tank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_alcoholpercentage",
 											"type": "Decimal"
 										},
@@ -1433,6 +1453,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_tanker",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Tanker",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_visualcolourmatchtankbtl",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Visual Colour Match (Tank/BTL)",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_wecs",
 											"type": "Int32"
 										},
@@ -1499,6 +1539,36 @@
 										"sink": {
 											"name": "QC Start Up",
 											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refract",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Refract",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refractbtl",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Refract BTL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refracttank",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Refract Tank ",
+											"type": "String"
 										}
 									},
 									{
