@@ -25,7 +25,8 @@
 		},
 		"WWSQL003_Test_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'WWSQL003_Test'"
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003_Test'",
+			"defaultValue": "Integrated Security=True;Data Source=WWSQL003;Initial Catalog=Wineworks.Database.TEST"
 		},
 		"WWSQL003_Test_password": {
 			"type": "secureString",
