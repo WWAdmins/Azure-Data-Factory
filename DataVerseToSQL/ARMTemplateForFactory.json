@@ -12734,7 +12734,7 @@
 									},
 									{
 										"source": {
-											"name": "ww_tanker",
+											"name": "ww_tankerlookuptext",
 											"type": "String"
 										},
 										"sink": {
