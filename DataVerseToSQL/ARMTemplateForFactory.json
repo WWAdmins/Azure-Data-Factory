@@ -18928,6 +18928,988 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ww_billofmaterials')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "BOM",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "crc5d_bottlecolour",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_bottlecolour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_bottlestockcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_bottlestockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_corkcolour",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_corkcolour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_corklength",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_corklength",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_corkprinting",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_corkprinting",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_corkstockcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_corkstockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_pallettype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_pallettype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_screwcapcolour",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_screwcapcolour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_screwcapprinting",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_screwcapprinting",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_screwcapstockcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_screwcapstockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "createdon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "statuscode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "statuscode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_backlabel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_backlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_backlabeladditionaltext",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_backlabeladditionaltext",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_backlabelheight",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_backlabelheight",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_backlabelinkjetcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_backlabelinkjetcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_backlabelinkjetplacement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_backlabelinkjetplacement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_billofmaterialsid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_billofmaterialsid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bomid",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bomid",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bominstructionsforthisrun",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bominstructionsforthisrun",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bomproductionnotes",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bomproductionnotes",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bomsequence",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_bomsequence",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bomspecificinstructions",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bomspecificinstructions",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bomstockcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_bomstockcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bomupdatedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_bomupdatedon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bomworkorderid",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_bomworkorderid",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bookingvariety",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bookingvariety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bookingvintage",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bookingvintage",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottledescription",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottledescription",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlelasercode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottlelasercode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlemouldcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottlemouldcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottles",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_bottles",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlesize",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottlesize",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlesperpallet",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_bottlesperpallet",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottletype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottletype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_carton",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_carton",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonbottletype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartonbottletype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartoninkjetplacement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartoninkjetplacement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartoninkjettext",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartoninkjettext",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonlabel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartonlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonowner",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartonowner",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonsperpallet",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_cartonsperpallet",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonsupplier",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartonsupplier",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonvariety",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartonvariety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_casestoprocess",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_casestoprocess",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_casevariability",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_casevariability",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_closure",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_closure",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_completed",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_completed",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkstyle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkstyle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cover",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cover",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_covercolour",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_covercolour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_covercolour1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_covercolour1",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_covercolour2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_covercolour2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_coverprinting",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_coverprinting",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_coverprinttype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_coverprinttype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_coverstockcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_coverstockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_covertype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_covertype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_depalbottlesperpallet",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_depalbottlesperpallet",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_divider",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_divider",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_extradrygood1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_extradrygood1",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_extradrygood2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_extradrygood2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_filtrationtype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_filtrationtype",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_frontlabel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_frontlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_frontlabelheight",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_frontlabelheight",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_genericclientinstructions",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_genericclientinstructions",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_hardboardtopcover",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_hardboardtopcover",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_hasformdata",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_hasformdata",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_lastcopied",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_lastcopied",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_otherlabel",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_otherlabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_otherlabel2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_otherlabel2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_otherlabel2placement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_otherlabel2placement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_otherlabelplacement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_otherlabelplacement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_pallet",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_pallet",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_pallets",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_pallets",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_palletstackingpattern",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_palletstackingpattern",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_slipsheet",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_slipsheet",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_stockcodedescription",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_stockcodedescription",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_useallstock",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_useallstock",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorinrate",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_velcorinrate",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorintreatment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_velcorintreatment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_workorderinstructions",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_workorderinstructions",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "BOM",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "wwsql003_ww_billofmaterials",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Merge Statement",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "BOM",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[usp_ww_billofmaterials]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Data Copy fail email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "BOM",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "itteam@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "SP Fail Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Merge Statement",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "itteam@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/BOM')]",
+				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_billofmaterials')]",
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BOM')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -24664,6 +25646,381 @@
 				"typeProperties": {
 					"schema": "dataverse",
 					"table": "vwBom"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_billofmaterials')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "crc5d_bottlecolour",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_bottlestockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_corkcolour",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_corklength",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_corkprinting",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_corkstockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_pallettype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_screwcapcolour",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_screwcapprinting",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_screwcapstockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_backlabel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_backlabeladditionaltext",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_backlabelheight",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_backlabelinkjetcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_backlabelinkjetplacement",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_billofmaterialsid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bomid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bominstructionsforthisrun",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bomproductionnotes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bomsequence",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_bomspecificinstructions",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bomstockcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_bomupdatedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_bomworkorderid",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_bookingvariety",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bookingvintage",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottledescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlelasercode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlemouldcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottles",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_bottlesize",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlesperpallet",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_bottletype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_carton",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonbottletype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartoninkjetplacement",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartoninkjettext",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonlabel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonowner",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonsperpallet",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_cartonsupplier",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonvariety",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_casestoprocess",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_casevariability",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_closure",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_completed",
+						"type": "bit"
+					},
+					{
+						"name": "ww_corkstyle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cover",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_covercolour",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_covercolour1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_covercolour2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_coverprinting",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_coverprinttype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_coverstockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_covertype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_depalbottlesperpallet",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_divider",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_extradrygood1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_extradrygood2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_filtrationtype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_frontlabel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_frontlabelheight",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_genericclientinstructions",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_hardboardtopcover",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_hasformdata",
+						"type": "bit"
+					},
+					{
+						"name": "ww_lastcopied",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_otherlabel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_otherlabel2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_otherlabel2placement",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_otherlabelplacement",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_pallet",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_pallets",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_palletstackingpattern",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_slipsheet",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stockcodedescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_useallstock",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_velcorinrate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_velcorintreatment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_workorderinstructions",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_billofmaterials"
 				}
 			},
 			"dependsOn": [
