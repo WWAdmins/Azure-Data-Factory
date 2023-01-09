@@ -13,6 +13,306 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/QC Recheck')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "QC Recheck",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ww_qcrecheckname",
+											"type": "String"
+										},
+										"sink": {
+											"name": "QC Recheck Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "statecode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholinbottle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Alcohol in bottle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholpercentage",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Alcohol percentage",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlealcoholfirsttank",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Bottle alcohol 1st Tank",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "Delete Line",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Operator Code",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refractbtl",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Refract BTL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_visualcolourmatchtankbtl",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Visual Colour Match (Tank/BTL)",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Created On",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "importsequencenumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Import Sequence Number",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Modified On",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "overriddencreatedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Record Created On",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_qcrecheckid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "QC Recheck",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_run",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "Run",
+											"type": "Guid"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "QCRecheck",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "WWSQL003_QCRecheck",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Merge Statement",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "QC Recheck",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_QC Recheck]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Data Copy fail email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "QC Recheck",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "SP Fail Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Merge Statement",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-10-20T22:40:54Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/QC Start Up')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -10304,433 +10604,6 @@
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
 								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_run')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Run",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_clientcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_clientcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_clientname",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_clientname",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_clientworkorderreference",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_clientworkorderreference",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_completed",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_completed",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_lastcopied",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_lastcopied",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_microsneeded",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_microsneeded",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_newupdate",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_newupdate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_pendingupdate",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_pendingupdate",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_productid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_rundate",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_rundate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_runid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_runid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_runnumber",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_runnumber",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_runproductionline",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_runproductionline",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stocktoconsumecasevariability",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumecasevariability",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stocktoconsumerun",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumerun",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stocktoconsumestockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumestockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stocktoconsumestockcodedescription",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stocktoconsumestockcodedescription",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_variety",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_variety",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_velcorinrate",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_velcorinrate",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_vintage",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_vintage",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_vintagevariety",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_vintagevariety",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_winehandling",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_winehandling",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_workorderid",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_workorderid",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_workordertype",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_workordertype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_workorderupdatedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_workorderupdatedon",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Run",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_run",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Run",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_ww_run]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Email on Failure BOM",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Run",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
 							}
 						}
 					}
