@@ -1723,6 +1723,279 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_hourlylabellinglogsheet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_alchoholna",
+						"type": "bit"
+					},
+					{
+						"name": "ww_backlabelheight",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_backlabelleanlessthan1mmltor",
+						"type": "bit"
+					},
+					{
+						"name": "ww_backlabellotcodeinkjet",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_backlabellotcodeinkjetcodesampletaken",
+						"type": "bit"
+					},
+					{
+						"name": "ww_backlabellotcodeinkjethourlycodecheck",
+						"type": "bit"
+					},
+					{
+						"name": "ww_barcodecheckdigit",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_barcodena",
+						"type": "bit"
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottleandcapscleansig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_caronvarietyvintage",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonalcoholpercentage",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_cartonbarcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_cartonclosurelessthan10mm",
+						"type": "bit"
+					},
+					{
+						"name": "ww_cartoncountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartoneanplacementsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonfibretear",
+						"type": "bit"
+					},
+					{
+						"name": "ww_cartoninkjetcorrectcode",
+						"type": "bit"
+					},
+					{
+						"name": "ww_cartonlabel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonlabelsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonlotcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonrunnumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonskewlessthan10mm",
+						"type": "bit"
+					},
+					{
+						"name": "ww_cartonssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cartonweightrange",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_checkweighersetpoint",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_closuresacceptablefinishsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_dividersils",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_dividerused",
+						"type": "bit"
+					},
+					{
+						"name": "ww_edgeadhesiontestpass",
+						"type": "bit"
+					},
+					{
+						"name": "ww_fourthlabelheightposition",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_hourlylabellinglogsheetid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_key",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labelalcoholfrontbackcheckedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labelbarcodecheckdigit",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labeldamageruborpick",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labelfrontheight",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labelleanlessthan1mmltor",
+						"type": "bit"
+					},
+					{
+						"name": "ww_labelnationalityfrontbackcorrectsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labelssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labelvarietyvintagecheckedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_lasercodeclearandlegiblesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_palletnumber",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_palletstackingpattern",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_palletstackingpatternmatchessig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_palletsticker",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_palletstidysig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_pallettypesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_rdlabel",
+						"type": "bit"
+					},
+					{
+						"name": "ww_sidegaplessthat4mm",
+						"type": "bit"
+					},
+					{
+						"name": "ww_slipsheetscorrectplacement",
+						"type": "bit"
+					},
+					{
+						"name": "ww_thirdlabelheightposition",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_thlabel",
+						"type": "bit"
+					},
+					{
+						"name": "ww_wrinklesflutesbubblesorcreases",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_hourlylabellinglogsheet"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BOM')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -10277,374 +10550,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-02-07T23:07:35Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Labelling Issues')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Labelling Issues",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ww_labellingissue",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Labelling Issue",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Status",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlerub",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Bottle Rub",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_brokenbottles",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Broken bottles",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonsrejected",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Cartons rejected",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_comments",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Comments",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_damagedscrewcaps",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Damaged screwcaps",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_datetime",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Date Time",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_deleteissue",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "Delete Issue",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_deleterejects",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "Delete Rejects",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_glassdefect",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Glass defects",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_issue",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Issue",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_lowfills",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Low fills",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Operator Code",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_totalrejects",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Total Rejects",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Created On",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "importsequencenumber",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Import Sequence Number",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Modified On",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "overriddencreatedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Record Created On",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_labellingissuesid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Labelling Issues",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Bill of Materials",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ProductionLineId",
-											"type": "Int32"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "LabellingIssues",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "WWSQL003_LabellingIssues",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Labelling Issues",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_Labelling Issues]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Data Copy fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Labelling Issues",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-04-21T20:18:23Z"
 			},
 			"dependsOn": []
 		}
