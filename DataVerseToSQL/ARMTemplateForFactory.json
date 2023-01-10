@@ -49187,6 +49187,1656 @@
 				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_supervisorsignoff')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "crc5d_density",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "crc5d_radialmovementchecksig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_redrawsealcheck",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "new_customertank",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_adjustment",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_adjustmenthasbeenmadesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_averageweight",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_balancecheck",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_capcoloursig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_capilscodesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_capprintingsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_colour",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_colourcheckedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkbaseclearofcorksforeignmatter",
+						"type": "bit"
+					},
+					{
+						"name": "ww_corkbrandingsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcolour",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcolourcheckedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkdepthaftermuselet",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_corkilscodesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkinsertion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_corkinsertionsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corklengthsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkmoisturesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkplungedepth",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_corkprintingsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_datetime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_emptybottleweight",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_fillheight1",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_fillheight2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_fillheight3",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_fillheight4",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_fillheight5",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_gapingbrokenbridges",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_grossweight",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_headspacemeasurementsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_headspacepressuresig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_hourlytorqueandvolumeid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_inversiontesttocheckforleakers",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_isthemuseletsecure",
+						"type": "bit"
+					},
+					{
+						"name": "ww_isthemuseletuniform",
+						"type": "bit"
+					},
+					{
+						"name": "ww_isthetieupright",
+						"type": "bit"
+					},
+					{
+						"name": "ww_key",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_museletbaseclearofmuseletsfm",
+						"type": "bit"
+					},
+					{
+						"name": "ww_nettweight",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_printing",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_printingcheckedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_pulltucktest",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_pulltucktestchecked",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rimimpression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_screwcapperchutecheckedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_screwcapperchutesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_sparkling",
+						"type": "bit"
+					},
+					{
+						"name": "ww_stockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stockcodecheckedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_tafillheight1",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tafillheight2",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tafillheight3",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tafillheight4",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tafillheight5",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tanker",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_tareweight",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_torquebreak1",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak10",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak3",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak4",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak5",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak6",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak7",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak8",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquebreak9",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torquecap1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap10",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap4",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap5",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap6",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap7",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap8",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torquecap9",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_torqueslip1",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip10",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip3",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip4",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip5",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip6",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip7",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip8",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_torqueslip9",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_visualsealonbottle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_winetemperature",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_zorksealcheckok",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_hourlytorqueandvolume"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ww_hourlytorqueandvolume')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Hourly Torque and Volume",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "crc5d_density",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "crc5d_density",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_radialmovementchecksig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_radialmovementchecksig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_redrawsealcheck",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_redrawsealcheck",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "createdon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "statuscode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "statuscode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "new_customertank",
+											"type": "String"
+										},
+										"sink": {
+											"name": "new_customertank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_adjustment",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_adjustment",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_adjustmenthasbeenmadesig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_adjustmenthasbeenmadesig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_averageweight",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_averageweight",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_balancecheck",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_balancecheck",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_billofmaterials",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_billofmaterials",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_capcoloursig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_capcoloursig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_capilscodesig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_capilscodesig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_capprintingsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_capprintingsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_colour",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_colour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_colourcheckedsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_colourcheckedsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkbaseclearofcorksforeignmatter",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_corkbaseclearofcorksforeignmatter",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkbrandingsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkbrandingsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkcolour",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkcolour",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkcolourcheckedsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkcolourcheckedsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkdepthaftermuselet",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_corkdepthaftermuselet",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkilscodesig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkilscodesig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkinsertion",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_corkinsertion",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkinsertionsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkinsertionsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corklengthsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corklengthsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkmoisturesig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkmoisturesig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkplungedepth",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_corkplungedepth",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkprintingsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkprintingsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_datetime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_datetime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight1",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_fillheight1",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight2",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_fillheight2",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight3",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_fillheight3",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight4",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_fillheight4",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight5",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_fillheight5",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_gapingbrokenbridges",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_gapingbrokenbridges",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_grossweight",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_grossweight",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_headspacemeasurementsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_headspacemeasurementsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_headspacepressuresig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_headspacepressuresig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_hourlytorqueandvolumeid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_hourlytorqueandvolumeid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_inversiontesttocheckforleakers",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_inversiontesttocheckforleakers",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_isthemuseletsecure",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_isthemuseletsecure",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_isthemuseletuniform",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_isthemuseletuniform",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_isthetieupright",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_isthetieupright",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_key",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_key",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_museletbaseclearofmuseletsfm",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_museletbaseclearofmuseletsfm",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_nettweight",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_nettweight",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_printing",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_printing",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_printingcheckedsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_printingcheckedsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_pulltucktest",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_pulltucktest",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_pulltucktestchecked",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_pulltucktestchecked",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_rimimpression",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_rimimpression",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_screwcapperchutecheckedsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_screwcapperchutecheckedsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_screwcapperchutesig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_screwcapperchutesig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_sparkling",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_sparkling",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_stockcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_stockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_stockcodecheckedsig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_stockcodecheckedsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight1",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight1",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight3",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight3",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight4",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight4",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight5",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight5",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tanker",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_tanker",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tareweight",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tareweight",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak1",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak1",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak10",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak10",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak2",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak2",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak3",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak3",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak4",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak4",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak5",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak5",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak6",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak6",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak7",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak7",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak8",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak8",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak9",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak9",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap1",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap1",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap10",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap10",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap2",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap3",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap3",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap4",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap4",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap5",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap5",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap6",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap6",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap7",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap7",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap8",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap8",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquecap9",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_torquecap9",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip1",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip1",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip10",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip10",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip2",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip2",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip3",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip3",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip4",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip4",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip5",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip5",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip6",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip6",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip7",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip7",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip8",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip8",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip9",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip9",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_visualsealonbottle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_visualsealonbottle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_winetemperature",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_winetemperature",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_zorksealcheckok",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_zorksealcheckok",
+											"type": "Boolean"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "HourlyTorqueandVolume",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SqlServerTable11",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Merge Statement",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Hourly Torque and Volume",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[usp_ww_hourlytorqueandvolume]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP Fail Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Merge Statement",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "Email on Failure BOM",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Hourly Torque and Volume",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/HourlyTorqueandVolume')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable11')]",
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		}
 	]
 }
