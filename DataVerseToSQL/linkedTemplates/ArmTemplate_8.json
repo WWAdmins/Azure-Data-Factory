@@ -13,6 +13,264 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Run')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Run",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ww_runid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "Run",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_runnumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RunNumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_rundate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "RunDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_workorderid",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "WorkOrderID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_workordertype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "WorkOrderType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_vintage",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Vintage",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_variety",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Variety",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_runproductionline",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ProductionLine",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "CreatedOn",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ModifiedOn",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_completed",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "Completed",
+											"type": "Boolean"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Run",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "WWSQL003_Run",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Merge Statement",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Run",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_Run]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Data Copy fail email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Run",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "itteam@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "SP Fail Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Merge Statement",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "itteam@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-07-04T22:21:40Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Site')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -10646,213 +10904,6 @@
 						"dependsOn": [
 							{
 								"activity": "Labelling Preflight",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_operator')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Operator",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_code",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_code",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_initials",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_initials",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_operatorid",
-											"type": "Guid"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Operator",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_operator",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Operator",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_ww_Operator]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Email on Failure BOM",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Operator",
 								"dependencyConditions": [
 									"Failed"
 								]
