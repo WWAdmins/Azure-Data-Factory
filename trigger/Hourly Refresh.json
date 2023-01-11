@@ -129,6 +129,12 @@
 					"referenceName": "ww_closurebatchsummary",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_hourlylabellinglogsheet",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
