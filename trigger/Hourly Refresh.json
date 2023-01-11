@@ -141,6 +141,12 @@
 					"referenceName": "ww_hourlytorqueandvolume",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_labelchange",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
