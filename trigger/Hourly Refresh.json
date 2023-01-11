@@ -27,6 +27,12 @@
 					"referenceName": "ww_cartonusage",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_cartonusagedetail",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
