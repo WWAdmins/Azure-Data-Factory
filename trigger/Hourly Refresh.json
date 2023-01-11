@@ -99,6 +99,12 @@
 					"referenceName": "ww_runreportbottlelabelpack",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_stockcheckin",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
