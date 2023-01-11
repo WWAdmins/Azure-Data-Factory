@@ -21,6 +21,12 @@
 					"referenceName": "ww_bottlebatchsummary",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_cartonusage",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
