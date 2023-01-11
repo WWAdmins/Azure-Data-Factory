@@ -63,6 +63,12 @@
 					"referenceName": "ww_filleroperation",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_qcendofrun",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
