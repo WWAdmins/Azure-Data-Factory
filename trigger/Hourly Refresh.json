@@ -69,6 +69,12 @@
 					"referenceName": "ww_qcendofrun",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_qchourlycheck",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
