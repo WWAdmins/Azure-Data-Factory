@@ -441,7 +441,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[usp_ww_prebottlinganalysisrecheck"
+					"storedProcedureName": "usp_ww_prebottlinganalysisrecheck"
 				},
 				"linkedServiceName": {
 					"referenceName": "WWSQL003",
