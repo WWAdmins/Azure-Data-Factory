@@ -171,6 +171,12 @@
 					"referenceName": "ww_prebottlinganalysisgasadjustments",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_operatorbottlinghourly",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
