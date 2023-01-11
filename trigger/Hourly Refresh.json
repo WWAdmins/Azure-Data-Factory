@@ -117,6 +117,12 @@
 					"referenceName": "ww_supervisorsignoff",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_supervisorsignoffbom",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
