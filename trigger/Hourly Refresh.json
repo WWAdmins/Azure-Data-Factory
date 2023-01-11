@@ -123,6 +123,12 @@
 					"referenceName": "ww_supervisorsignoffbom",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_closurebatchsummary",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
