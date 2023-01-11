@@ -183,6 +183,12 @@
 					"referenceName": "ww_operatorbottlingdowntime",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_operatorbottlingbreakage",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
