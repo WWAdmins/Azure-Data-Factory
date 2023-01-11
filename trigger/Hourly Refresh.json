@@ -165,6 +165,12 @@
 					"referenceName": "ww_operator",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_prebottlinganalysisgasadjustments",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
