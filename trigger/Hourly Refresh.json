@@ -45,6 +45,12 @@
 					"referenceName": "ww_prebottlinganalysisrecheck",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_tanker",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
