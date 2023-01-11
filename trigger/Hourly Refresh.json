@@ -33,6 +33,12 @@
 					"referenceName": "ww_cartonusagedetail",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_prebottlinganalysis",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
