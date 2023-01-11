@@ -9,6 +9,12 @@
 					"referenceName": "ww_billofmaterials",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_bottlebatchrejects",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
