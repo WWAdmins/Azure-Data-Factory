@@ -111,6 +111,12 @@
 					"referenceName": "ww_stockcheckinentry",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_supervisorsignoff",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
