@@ -105,6 +105,12 @@
 					"referenceName": "ww_stockcheckin",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_stockcheckinentry",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
