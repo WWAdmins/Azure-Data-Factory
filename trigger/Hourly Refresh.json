@@ -135,6 +135,12 @@
 					"referenceName": "ww_hourlylabellinglogsheet",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_hourlytorqueandvolume",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
