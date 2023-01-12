@@ -1,5 +1,5 @@
 {
-	"name": "Hourly Refresh",
+	"name": "Daily Refresh",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
@@ -183,12 +183,18 @@
 					"referenceName": "ww_prebottlinganalysissignoff",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_billofmaterials",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Hour",
+				"frequency": "Day",
 				"interval": 1,
 				"startTime": "2021-04-14T01:45:00",
 				"timeZone": "New Zealand Standard Time"
