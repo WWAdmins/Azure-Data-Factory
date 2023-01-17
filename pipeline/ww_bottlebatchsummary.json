@@ -111,7 +111,7 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_importsequencenumber",
+									"name": "importsequencenumber",
 									"type": "Int32"
 								}
 							},
