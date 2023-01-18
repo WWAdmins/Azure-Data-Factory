@@ -317,6 +317,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_prebottlinganalysisrechecksummaryname",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_prebottlinganalysisrechecksummaryname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_productionline",
 									"type": "Int32"
 								},
