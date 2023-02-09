@@ -193,8 +193,7 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_bottlingfrom",
-									"type": "Boolean"
+									"name": "ww_bottlingfrom"
 								}
 							},
 							{
@@ -203,8 +202,7 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_bottlingto",
-									"type": "Boolean"
+									"name": "ww_bottlingto"
 								}
 							},
 							{
