@@ -107,7 +107,17 @@
 							},
 							{
 								"source": {
-									"name": "ww_importsequencenumber",
+									"name": "ww_comments",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_comments",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "importsequencenumber",
 									"type": "Int32"
 								},
 								"sink": {
