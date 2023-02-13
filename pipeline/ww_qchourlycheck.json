@@ -228,6 +228,16 @@
 							},
 							{
 								"source": {
+									"name": "crc5d_shakendo",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "crc5d_ShakenDO",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_tankinuse",
 									"type": "String"
 								},
