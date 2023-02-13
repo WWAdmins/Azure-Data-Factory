@@ -1938,6 +1938,16 @@
 							},
 							{
 								"source": {
+									"name": "crc5d_shakendoendofrun",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "crc5d_ShakenDOEndofrun",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_sparkling",
 									"type": "Boolean"
 								},
