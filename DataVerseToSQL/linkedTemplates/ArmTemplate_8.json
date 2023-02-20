@@ -8593,7 +8593,7 @@
 										},
 										"sink": {
 											"name": "ww_typeofchange",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{

@@ -23873,7 +23873,7 @@
 										},
 										"sink": {
 											"name": "ww_typeofchange",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -50957,6 +50957,36 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Every 10 minutes')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "ww_bottlebatchsummary",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 10,
+						"startTime": "2023-02-13T23:06:00",
+						"timeZone": "New Zealand Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Every 30 Minutes')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -51180,13 +51210,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_bottlebatchsummary",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -51230,38 +51253,7 @@
 				"[concat(variables('factoryId'), '/pipelines/ww_operatorbottlingbreakage')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysissignoff')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_billofmaterials')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchrejects')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Every 10 minutes')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Bottle Batch Summary",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 10,
-						"startTime": "2023-02-13T23:06:00",
-						"timeZone": "New Zealand Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Bottle Batch Summary')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchrejects')]"
 			]
 		},
 		{
