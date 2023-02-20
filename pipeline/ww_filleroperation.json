@@ -1897,12 +1897,6 @@
 								}
 							},
 							{
-								"sink": {
-									"name": "ww_rollerslubed",
-									"type": "String"
-								}
-							},
-							{
 								"source": {
 									"name": "ww_run",
 									"type": "Guid"
