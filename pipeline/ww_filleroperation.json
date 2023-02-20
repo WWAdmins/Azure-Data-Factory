@@ -1897,6 +1897,12 @@
 								}
 							},
 							{
+								"sink": {
+									"name": "ww_rollerslubed",
+									"type": "String"
+								}
+							},
+							{
 								"source": {
 									"name": "ww_run",
 									"type": "Guid"
@@ -2333,7 +2339,7 @@
 								},
 								"sink": {
 									"name": "ww_typeofchange",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
