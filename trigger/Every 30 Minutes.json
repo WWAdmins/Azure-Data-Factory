@@ -1,5 +1,5 @@
 {
-	"name": "Daily Refresh",
+	"name": "Every 30 Minutes",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
@@ -200,8 +200,8 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Day",
-				"interval": 1,
+				"frequency": "Minute",
+				"interval": 30,
 				"startTime": "2021-04-14T01:45:00",
 				"timeZone": "New Zealand Standard Time"
 			}
