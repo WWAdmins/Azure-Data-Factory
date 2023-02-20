@@ -2,7 +2,7 @@
 	"name": "PrebottlingAnalysisSignOff",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SQLToDataverseProd",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
