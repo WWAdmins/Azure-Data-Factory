@@ -893,7 +893,7 @@
 								},
 								"sink": {
 									"name": "ww_docketvessel",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
