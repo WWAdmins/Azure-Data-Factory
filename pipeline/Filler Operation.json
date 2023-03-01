@@ -2506,7 +2506,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "An error has occurred!",
 						"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-						"EmailTo": "itteam@wineworks.co.nz"
+						"EmailTo": "wwsql_admins@wineworks.co.nz"
 					}
 				}
 			},
