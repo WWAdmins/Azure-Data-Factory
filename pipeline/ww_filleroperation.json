@@ -293,7 +293,7 @@
 								},
 								"sink": {
 									"name": "ww_allfilterspresent",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
