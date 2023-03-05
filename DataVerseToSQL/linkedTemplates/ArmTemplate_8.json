@@ -4604,7 +4604,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					},
@@ -4636,7 +4636,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					}
@@ -4891,7 +4891,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					},
@@ -4923,7 +4923,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					}
@@ -5232,7 +5232,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					},
@@ -5291,7 +5291,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					}
@@ -6553,7 +6553,7 @@
 										},
 										"sink": {
 											"name": "ww_allfilterspresent",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -7153,7 +7153,7 @@
 										},
 										"sink": {
 											"name": "ww_docketvessel",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -8263,7 +8263,7 @@
 										},
 										"sink": {
 											"name": "ww_sterilizationprocess",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
