@@ -2003,7 +2003,7 @@
 								},
 								"sink": {
 									"name": "ww_sterilizationprocess",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
