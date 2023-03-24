@@ -567,6 +567,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_rinsergassupplyccp1",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_RinserGasSupplyCCP1",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_rinserlowpressurecutoutsig",
 									"type": "String"
 								},
