@@ -7278,6 +7278,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_eorrinsergarsupplyccp1",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_EORRinserGarSupplyCCP1",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_eorrinsergaswatersupplyline1",
 											"type": "Decimal"
 										},
@@ -8093,6 +8103,26 @@
 										},
 										"sink": {
 											"name": "ww_rinsergassupplyco2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_rinsergassupplyccp1",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_RinserGasSupplyCCP1",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_rinsergassupplypressure",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_RinserGasSupplyPressure",
 											"type": "Decimal"
 										}
 									},
