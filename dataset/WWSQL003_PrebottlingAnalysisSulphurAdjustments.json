@@ -126,7 +126,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Pre-bottling Analysis Sulphur Adjustments"
+			"table": "ww_prebottlinganalysissulphuradj"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
