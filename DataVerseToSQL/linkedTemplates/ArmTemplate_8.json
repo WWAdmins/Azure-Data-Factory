@@ -7108,6 +7108,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_dateoflastintegritycheck",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_dateoflastintegritycheck",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_density",
 											"type": "Decimal"
 										},
