@@ -8568,6 +8568,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_returnedtostockdecimal",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_ReturnedtostockDecimal",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_stockcheckinid",
 											"type": "Guid"
 										},
