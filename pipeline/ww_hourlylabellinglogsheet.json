@@ -81,7 +81,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_backlabelleanlessthan1mmltor"
+									"name": "ww_backlabelleanlessthan1mmltor",
+									"type": "Int32"
 								}
 							},
 							{
@@ -90,7 +91,8 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "ww_backlabellotcodeinkjet"
+									"name": "ww_backlabellotcodeinkjet",
+									"type": "String"
 								}
 							},
 							{
@@ -99,7 +101,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_backlabellotcodeinkjetcodesampletaken"
+									"name": "ww_backlabellotcodeinkjetcodesampletaken",
+									"type": "Int32"
 								}
 							},
 							{
@@ -108,7 +111,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_backlabellotcodeinkjethourlycodecheck"
+									"name": "ww_backlabellotcodeinkjethourlycodecheck",
+									"type": "Int32"
 								}
 							},
 							{
@@ -187,7 +191,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_cartonclosurelessthan10mm"
+									"name": "ww_cartonclosurelessthan10mm",
+									"type": "Int32"
 								}
 							},
 							{
@@ -216,7 +221,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_cartonfibretear"
+									"name": "ww_cartonfibretear",
+									"type": "Int32"
 								}
 							},
 							{
@@ -225,7 +231,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_cartoninkjetcorrectcode"
+									"name": "ww_cartoninkjetcorrectcode",
+									"type": "Int32"
 								}
 							},
 							{
@@ -274,7 +281,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_cartonskewlessthan10mm"
+									"name": "ww_cartonskewlessthan10mm",
+									"type": "Int32"
 								}
 							},
 							{
@@ -353,7 +361,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_edgeadhesiontestpass"
+									"name": "ww_edgeadhesiontestpass",
+									"type": "Int32"
 								}
 							},
 							{
@@ -432,7 +441,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_labelleanlessthan1mmltor"
+									"name": "ww_labelleanlessthan1mmltor",
+									"type": "Int32"
 								}
 							},
 							{
@@ -551,7 +561,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_rdlabel"
+									"name": "ww_rdlabel",
+									"type": "Int32"
 								}
 							},
 							{
@@ -560,7 +571,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_sidegaplessthat4mm"
+									"name": "ww_sidegaplessthat4mm",
+									"type": "Int32"
 								}
 							},
 							{
@@ -569,7 +581,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_slipsheetscorrectplacement"
+									"name": "ww_slipsheetscorrectplacement",
+									"type": "Int32"
 								}
 							},
 							{
@@ -588,7 +601,8 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_thlabel"
+									"name": "ww_thlabel",
+									"type": "Int32"
 								}
 							},
 							{
