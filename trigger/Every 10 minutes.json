@@ -9,6 +9,12 @@
 					"referenceName": "ww_bottlebatchsummary",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_runreportbottlelabelpack",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
