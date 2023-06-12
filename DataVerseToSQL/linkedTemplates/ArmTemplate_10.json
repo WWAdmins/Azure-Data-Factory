@@ -980,6 +980,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_runreportbottlelabelpack",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -1082,13 +1089,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "ww_run",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_runreportbottlelabelpack",
 							"type": "PipelineReference"
 						},
 						"parameters": {}

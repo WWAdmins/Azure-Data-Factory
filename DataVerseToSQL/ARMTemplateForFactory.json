@@ -51441,6 +51441,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_runreportbottlelabelpack",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -51454,7 +51461,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
 			]
 		},
 		{
@@ -51545,13 +51553,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "ww_run",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_runreportbottlelabelpack",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -51706,7 +51707,6 @@
 				"[concat(variables('factoryId'), '/pipelines/ww_qcrecheck')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_qcstartup')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_run')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_stockcheckin')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_stockcheckinentry')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_supervisorsignoff')]",
