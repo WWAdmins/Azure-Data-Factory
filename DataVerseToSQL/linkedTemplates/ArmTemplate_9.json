@@ -2483,6 +2483,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_lenticularfilteroptions",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_LenticularFilteroptions",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_litmuspapertestinproduct",
 											"type": "Boolean"
 										},
@@ -2688,6 +2698,26 @@
 										},
 										"sink": {
 											"name": "ww_rinserbottlegripperclearancesig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_rinsercleanliness",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_RinserCleanliness",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_rinsercleanlinesssig",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_RinserCleanlinessSig",
 											"type": "String"
 										}
 									},
