@@ -29306,7 +29306,7 @@
 										},
 										"sink": {
 											"name": "ww_lasercodeasperspec",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -29316,7 +29316,7 @@
 										},
 										"sink": {
 											"name": "ww_lasercodeonbottle",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -29516,7 +29516,7 @@
 										},
 										"sink": {
 											"name": "ww_rinseheadinspection",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -29526,7 +29526,7 @@
 										},
 										"sink": {
 											"name": "ww_rinseheadmedium",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
