@@ -1373,7 +1373,7 @@
 								},
 								"sink": {
 									"name": "ww_isthisanorganicproduct",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
