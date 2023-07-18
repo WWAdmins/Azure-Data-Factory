@@ -143,7 +143,7 @@
 								},
 								"sink": {
 									"name": "crc5d_rinsermedium",
-									"type": "Boolean"
+									"type": "String"
 								}
 							},
 							{
