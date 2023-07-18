@@ -1034,7 +1034,7 @@
 								},
 								"sink": {
 									"name": "ww_rockstopper",
-									"type": "Boolean"
+									"type": "String"
 								}
 							},
 							{
