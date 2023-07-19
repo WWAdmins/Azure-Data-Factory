@@ -6403,7 +6403,7 @@
 										},
 										"sink": {
 											"name": "crc5d_rinsermedium",
-											"type": "Boolean"
+											"type": "String"
 										}
 									},
 									{
@@ -7213,7 +7213,7 @@
 										},
 										"sink": {
 											"name": "ww_eorbottlingto",
-											"type": "Boolean"
+											"type": "String"
 										}
 									},
 									{
@@ -7273,7 +7273,7 @@
 										},
 										"sink": {
 											"name": "ww_eorrinseheadinspection",
-											"type": "Boolean"
+											"type": "String"
 										}
 									},
 									{
@@ -7283,7 +7283,7 @@
 										},
 										"sink": {
 											"name": "ww_eorrinseheadmedium",
-											"type": "Boolean"
+											"type": "String"
 										}
 									},
 									{
@@ -7633,7 +7633,7 @@
 										},
 										"sink": {
 											"name": "ww_isthisanorganicproduct",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
