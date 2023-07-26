@@ -88,12 +88,42 @@
 							},
 							{
 								"source": {
+									"name": "ww_co2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_co2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_deleteline",
 									"type": "Boolean"
 								},
 								"sink": {
 									"name": "ww_deleteline",
 									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_do",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_do",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_foreignmatter",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_foreignmatter",
+									"type": "Decimal"
 								}
 							},
 							{
