@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "QC Start Up",
+				"name": "QC Re check",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -217,7 +217,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "QC Start Up",
+						"activity": "QC Re check",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -244,7 +244,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "QC Start Up",
+						"activity": "QC Re check",
 						"dependencyConditions": [
 							"Failed"
 						]
