@@ -28250,7 +28250,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "PalletStacking",
+								"referenceName": "OperatorBottlingBreakage",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -28362,7 +28362,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/PalletStacking')]",
+				"[concat(variables('factoryId'), '/datasets/OperatorBottlingBreakage')]",
 				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_operatorbottlingbreakage')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
@@ -33813,6 +33813,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_shakendo",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_shakendo",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_runname",
 											"type": "String"
 										},
@@ -38224,6 +38234,26 @@
 				"schema": [],
 				"typeProperties": {
 					"entityName": "ww_operator"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OperatorBottlingBreakage')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_operatorbottlingbreakage"
 				}
 			},
 			"dependsOn": [
@@ -47879,7 +47909,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "ww_palletstacking"
+					"table": "ww_operatorbottlingbreakage"
 				}
 			},
 			"dependsOn": [
