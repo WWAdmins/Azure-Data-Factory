@@ -1,15 +1,15 @@
 {
-	"name": "OperatorBottlingBreakage",
+	"name": "PalletStacking",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DataVerse",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "CommonDataServiceForAppsEntity",
 		"schema": [],
 		"typeProperties": {
-			"entityName": "ww_operatorbottlingbreakage"
+			"entityName": "ww_palletstacking"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
