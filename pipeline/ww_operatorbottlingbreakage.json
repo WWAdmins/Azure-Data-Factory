@@ -321,7 +321,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "usp_ww_operatorbottlingbreakage"
+					"storedProcedureName": "usp_ww_palletstacking"
 				},
 				"linkedServiceName": {
 					"referenceName": "WWSQL003",
