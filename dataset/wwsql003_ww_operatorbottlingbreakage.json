@@ -134,7 +134,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "ww_palletstacking"
+			"table": "ww_operatorbottlingbreakage"
 		}
 	}
 }
