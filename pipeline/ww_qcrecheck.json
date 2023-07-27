@@ -178,6 +178,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_shakendo",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_shakendo",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_runname",
 									"type": "String"
 								},
