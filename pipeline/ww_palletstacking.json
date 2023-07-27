@@ -52,27 +52,7 @@
 								},
 								"sink": {
 									"name": "statuscode",
-									"type": "Boolean"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_areaclean",
 									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_areaclean",
-									"type": "Boolean"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_arearetimed",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_arearetimed",
-									"type": "Boolean"
 								}
 							},
 							{
@@ -87,101 +67,21 @@
 							},
 							{
 								"source": {
-									"name": "ww_bottlecount",
+									"name": "ww_cartons",
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_bottlecount",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_breakagelocation",
-									"type": "Guid"
-								},
-								"sink": {
-									"name": "ww_breakagelocation",
-									"type": "Guid"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_breakages",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_breakages",
-									"type": "Boolean"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_brokenbottles",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_brokenbottles",
+									"name": "ww_cartons",
 									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"name": "ww_colleaguesign",
+									"name": "ww_lpn",
 									"type": "String"
 								},
 								"sink": {
-									"name": "ww_colleaguesign",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_comments",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_comments",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_deleteline",
-									"type": "Boolean"
-								},
-								"sink": {
-									"name": "ww_deleteline",
-									"type": "Boolean"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_disposedbottles",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_disposedbottles",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_filleropsig",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_filleropsig",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_locationofbreak",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_locationofbreak",
+									"name": "ww_lpn",
 									"type": "String"
 								}
 							},
@@ -197,91 +97,31 @@
 							},
 							{
 								"source": {
-									"name": "ww_nobreakagessig",
-									"type": "String"
+									"name": "ww_palletnumber",
+									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_nobreakagessig",
-									"type": "String"
+									"name": "ww_palletnumber",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"name": "ww_operatorbottlingbreakageid",
+									"name": "ww_palletstackingid",
 									"type": "Guid"
 								},
 								"sink": {
-									"name": "ww_operatorbottlingbreakageid",
+									"name": "ww_PalletStackingId",
 									"type": "Guid"
 								}
 							},
 							{
 								"source": {
-									"name": "ww_operatorcode",
+									"name": "ww_psimportsequencenumber",
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "ww_operatorcode",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_productionline",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_productionline",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_resultofacrash",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_resultofacrash",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_startuptime",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "ww_startuptime",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_timeofbreak",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "ww_timeofbreak",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_type",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_type",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_typeofglassbreak",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "ww_typeofglassbreak",
+									"name": "ww_psimportsequencenumber",
 									"type": "Int32"
 								}
 							}
