@@ -19,7 +19,9 @@
 						"type": "CommonDataServiceForAppsSource"
 					},
 					"sink": {
-						"type": "SqlServerSink"
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true
 					},
 					"enableStaging": false,
 					"translator": {
