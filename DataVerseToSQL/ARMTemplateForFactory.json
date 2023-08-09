@@ -20224,7 +20224,9 @@
 								"type": "CommonDataServiceForAppsSource"
 							},
 							"sink": {
-								"type": "SqlServerSink"
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true
 							},
 							"enableStaging": false,
 							"translator": {
@@ -30854,7 +30856,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz;lab.ml@wineworks.co.nz"
 							}
 						}
 					},
@@ -30886,7 +30888,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz;lab.ml@wineworks.co.nz"
 							}
 						}
 					}
@@ -51799,6 +51801,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_prebottlinganalysis",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -51813,7 +51822,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysis')]"
 			]
 		},
 		{
