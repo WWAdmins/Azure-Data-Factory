@@ -51801,6 +51801,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_prebottlinganalysis",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -51815,7 +51822,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysis')]"
 			]
 		},
 		{
@@ -51836,13 +51844,6 @@
 					{
 						"pipelineReference": {
 							"referenceName": "ww_cartonusagedetail",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_prebottlinganalysis",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -52050,7 +52051,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_cartonusage')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_cartonusagedetail')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysis')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysisrecheck')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_tanker')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_site')]",
