@@ -15,12 +15,6 @@
 					"referenceName": "ww_runreportbottlelabelpack",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "ww_prebottlinganalysis",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
