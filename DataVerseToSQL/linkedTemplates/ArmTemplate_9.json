@@ -1529,7 +1529,7 @@
 										},
 										"sink": {
 											"name": "ww_areaclean",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -1539,7 +1539,7 @@
 										},
 										"sink": {
 											"name": "ww_arearetimed",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -1579,7 +1579,7 @@
 										},
 										"sink": {
 											"name": "ww_breakages",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{

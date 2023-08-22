@@ -21685,7 +21685,7 @@
 										},
 										"sink": {
 											"name": "crc5d_rinsermedium",
-											"type": "String"
+											"type": "Int32"
 										}
 									},
 									{
@@ -22555,7 +22555,7 @@
 										},
 										"sink": {
 											"name": "ww_eorrinseheadinspection",
-											"type": "String"
+											"type": "Int32"
 										}
 									},
 									{
@@ -22565,7 +22565,7 @@
 										},
 										"sink": {
 											"name": "ww_eorrinseheadmedium",
-											"type": "String"
+											"type": "Int32"
 										}
 									},
 									{
@@ -22855,7 +22855,7 @@
 										},
 										"sink": {
 											"name": "ww_inbottle",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -23375,7 +23375,7 @@
 										},
 										"sink": {
 											"name": "ww_refractverification",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -24025,7 +24025,7 @@
 										},
 										"sink": {
 											"name": "ww_visualcolourmatchtankbtl",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -28024,7 +28024,7 @@
 										},
 										"sink": {
 											"name": "ww_areaclean",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -28034,7 +28034,7 @@
 										},
 										"sink": {
 											"name": "ww_arearetimed",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -28074,7 +28074,7 @@
 										},
 										"sink": {
 											"name": "ww_breakages",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
