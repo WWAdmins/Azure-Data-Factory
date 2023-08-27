@@ -2817,7 +2817,7 @@
 										},
 										"sink": {
 											"name": "ww_foreignbodyvisualcheck",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -2907,7 +2907,7 @@
 										},
 										"sink": {
 											"name": "ww_glassfragments",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -2917,7 +2917,7 @@
 										},
 										"sink": {
 											"name": "ww_glassfragmentscheck",
-											"type": "Int32"
+											"type": "Boolean"
 										}
 									},
 									{
@@ -3327,7 +3327,7 @@
 										},
 										"sink": {
 											"name": "ww_rockstopper",
-											"type": "String"
+											"type": "Int32"
 										}
 									},
 									{
