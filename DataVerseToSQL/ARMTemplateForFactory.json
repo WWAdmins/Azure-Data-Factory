@@ -30790,7 +30790,8 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "CommonDataServiceForAppsSource"
+								"type": "CommonDataServiceForAppsSource",
+								"query": "<fetch>  \n   <entity name='ww_prebottlinganalysis'>   \n      <all-attributes/>      \n\t\t  <filter type='and'>   \n\t\t\t\t<condition attribute='ww_tankerlookup' operator='not-null' />   \n\t\t  </filter>  \n   </entity>   \n</fetch>  "
 							},
 							"sink": {
 								"type": "SqlServerSink"
