@@ -590,7 +590,7 @@
 								},
 								"sink": {
 									"name": "ww_checksizeofcap",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -1950,7 +1950,7 @@
 								},
 								"sink": {
 									"name": "ww_rockstopperpresentoptions",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -2560,7 +2560,7 @@
 								},
 								"sink": {
 									"name": "ww_winepump",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
