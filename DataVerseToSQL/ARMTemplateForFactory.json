@@ -22294,7 +22294,7 @@
 										},
 										"sink": {
 											"name": "ww_checksizeofcap",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -22714,7 +22714,7 @@
 										},
 										"sink": {
 											"name": "ww_eorinbottle",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -23649,6 +23649,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_rockstopperpresentoptions",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_rockstopperpresentoptions",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_run",
 											"type": "Guid"
 										},
@@ -24254,7 +24264,7 @@
 										},
 										"sink": {
 											"name": "ww_winepump",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
