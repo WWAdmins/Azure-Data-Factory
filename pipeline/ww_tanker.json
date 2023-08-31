@@ -117,7 +117,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Tanker",
+						"referenceName": "AuditLog",
 						"type": "DatasetReference"
 					}
 				],
