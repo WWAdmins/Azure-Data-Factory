@@ -64,6 +64,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_inactive",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_inactive",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_name",
 									"type": "String"
 								},
