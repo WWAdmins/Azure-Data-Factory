@@ -1,5 +1,5 @@
 {
-	"name": "AuditLog",
+	"name": "ww_auditlog",
 	"properties": {
 		"activities": [
 			{
