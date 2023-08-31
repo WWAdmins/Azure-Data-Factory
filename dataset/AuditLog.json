@@ -1,5 +1,5 @@
 {
-	"name": "Tanker",
+	"name": "AuditLog",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Dataverse",
