@@ -236,7 +236,7 @@
 				"type": "CommonDataServiceForAppsEntity",
 				"schema": [],
 				"typeProperties": {
-					"entityName": "ww_auditlog"
+					"entityName": "ww_tanker"
 				}
 			},
 			"dependsOn": [

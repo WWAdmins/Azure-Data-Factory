@@ -18736,51 +18736,11 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "ww_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "statecode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Status",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_tankerid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "TankerId",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_volume",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Volume",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
 											"name": "createdon",
 											"type": "DateTime"
 										},
 										"sink": {
-											"name": "CreatedOn",
+											"name": "createdon",
 											"type": "DateTime"
 										}
 									},
@@ -18790,8 +18750,38 @@
 											"type": "DateTime"
 										},
 										"sink": {
-											"name": "ModifiedOn",
+											"name": "modifiedon",
 											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "statuscode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "statuscode",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_inactive",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_inactive",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_name",
+											"type": "String"
 										}
 									},
 									{
@@ -18800,8 +18790,28 @@
 											"type": "Guid"
 										},
 										"sink": {
-											"name": "Site",
+											"name": "ww_site",
 											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tankerid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_tankerid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_volume",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_volume",
+											"type": "Int32"
 										}
 									}
 								]
@@ -18809,14 +18819,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "AuditLog",
+								"referenceName": "Tanker",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "WWSQL003_AuditLog",
+								"referenceName": "WWSQL003_Tanker",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -18877,7 +18887,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					},
@@ -18909,7 +18919,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "itteam@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					}
@@ -18922,8 +18932,8 @@
 				"lastPublishTime": "2022-02-07T23:37:49Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AuditLog')]",
-				"[concat(variables('factoryId'), '/datasets/WWSQL003_AuditLog')]",
+				"[concat(variables('factoryId'), '/datasets/Tanker')]",
+				"[concat(variables('factoryId'), '/datasets/WWSQL003_Tanker')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
 		},
@@ -19058,7 +19068,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "WWSQL003_AuditLog",
+								"referenceName": "WWSQL003_Tanker",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -19165,7 +19175,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AuditLog')]",
-				"[concat(variables('factoryId'), '/datasets/WWSQL003_AuditLog')]",
+				"[concat(variables('factoryId'), '/datasets/WWSQL003_Tanker')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
 		},
@@ -39110,7 +39120,7 @@
 				"type": "CommonDataServiceForAppsEntity",
 				"schema": [],
 				"typeProperties": {
-					"entityName": "ww_auditlog"
+					"entityName": "ww_tanker"
 				}
 			},
 			"dependsOn": [
@@ -41399,6 +41409,26 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Tanker')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_tanker"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003LabellingPreflight')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -41413,62 +41443,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Labelling Preflight"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_AuditLog')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "TankerId",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Volume",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Site",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_auditlog"
 				}
 			},
 			"dependsOn": [
@@ -45773,6 +45747,62 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Supervisor Signoff BOM"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_Tanker')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TankerId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Volume",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CreatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ModifiedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Site",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_tanker"
 				}
 			},
 			"dependsOn": [
