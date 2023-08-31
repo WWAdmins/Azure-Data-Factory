@@ -30917,7 +30917,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "wwsql003_ww_operatorbottlingbreakage",
+								"referenceName": "wwsql003_ww_palletstacking",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -31043,7 +31043,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/PalletStacking')]",
-				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_operatorbottlingbreakage')]",
+				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_palletstacking')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
 		},
@@ -45851,6 +45851,69 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_auditlog')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_action",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_auditlogid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_form",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operator",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_text",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_auditlog"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_billofmaterials')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -49863,6 +49926,76 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_palletstacking')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_cartons",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_lpn",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_palletnumber",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_PalletStackingId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_psimportsequencenumber",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_palletstacking"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_prebottlinganalysis2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -53685,69 +53818,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_auditlog')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_action",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_auditlogid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_form",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operator",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_text",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_auditlog"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
 		}
 	]
 }
