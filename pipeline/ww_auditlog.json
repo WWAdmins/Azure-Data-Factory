@@ -19,7 +19,9 @@
 						"type": "CommonDataServiceForAppsSource"
 					},
 					"sink": {
-						"type": "SqlServerSink"
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -126,7 +128,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "WWSQL003_Tanker",
+						"referenceName": "wwsql003_ww_auditlog",
 						"type": "DatasetReference"
 					}
 				]
