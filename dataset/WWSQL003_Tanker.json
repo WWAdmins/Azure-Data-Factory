@@ -1,5 +1,5 @@
 {
-	"name": "WWSQL003_AuditLog",
+	"name": "WWSQL003_Tanker",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "WWSQL003",
@@ -45,7 +45,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "ww_auditlog"
+			"table": "ww_tanker"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
