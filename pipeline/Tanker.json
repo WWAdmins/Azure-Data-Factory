@@ -27,51 +27,11 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "ww_name",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Name",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "statecode",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "Status",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_tankerid",
-									"type": "Guid"
-								},
-								"sink": {
-									"name": "TankerId",
-									"type": "Guid"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_volume",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "Volume",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
 									"name": "createdon",
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "CreatedOn",
+									"name": "createdon",
 									"type": "DateTime"
 								}
 							},
@@ -81,8 +41,38 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "ModifiedOn",
+									"name": "modifiedon",
 									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "statuscode",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "statuscode",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_inactive",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_inactive",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_name",
+									"type": "String"
 								}
 							},
 							{
@@ -91,8 +81,28 @@
 									"type": "Guid"
 								},
 								"sink": {
-									"name": "Site",
+									"name": "ww_site",
 									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_tankerid",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "ww_tankerid",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_volume",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_volume",
+									"type": "Int32"
 								}
 							}
 						]
@@ -100,13 +110,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AuditLog",
+						"referenceName": "Tanker",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "WWSQL003_AuditLog",
+						"referenceName": "WWSQL003_Tanker",
 						"type": "DatasetReference"
 					}
 				]
@@ -165,7 +175,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "An error has occurred!",
 						"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-						"EmailTo": "itteam@wineworks.co.nz"
+						"EmailTo": "wwsql_admins@wineworks.co.nz"
 					}
 				}
 			},
@@ -196,7 +206,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "An error has occurred!",
 						"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-						"EmailTo": "itteam@wineworks.co.nz"
+						"EmailTo": "wwsql_admins@wineworks.co.nz"
 					}
 				}
 			}
