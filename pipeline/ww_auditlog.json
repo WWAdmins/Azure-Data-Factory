@@ -126,7 +126,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "WWSQL003_AuditLog",
+						"referenceName": "WWSQL003_Tanker",
 						"type": "DatasetReference"
 					}
 				]
