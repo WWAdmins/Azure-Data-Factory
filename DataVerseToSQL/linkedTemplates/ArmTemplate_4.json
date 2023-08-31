@@ -1810,7 +1810,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "ww_tanker"
+					"table": "Tanker"
 				}
 			},
 			"dependsOn": []
