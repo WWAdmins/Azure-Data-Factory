@@ -26585,6 +26585,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_labelsperroll",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_labelsperroll",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_lean",
 											"type": "Decimal"
 										},
