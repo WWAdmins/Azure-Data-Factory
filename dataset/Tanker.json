@@ -2,14 +2,14 @@
 	"name": "Tanker",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DataVerse",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "CommonDataServiceForAppsEntity",
 		"schema": [],
 		"typeProperties": {
-			"entityName": "ww_tanker"
+			"entityName": "ww_auditlog"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
