@@ -6543,6 +6543,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_numberpercarton",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_numberpercarton",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_operatorcode",
 											"type": "Int32"
 										},
