@@ -27,11 +27,51 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "ww_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "statecode",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_tankerid",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "TankerId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_volume",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Volume",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "createdon",
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "createdon",
+									"name": "CreatedOn",
 									"type": "DateTime"
 								}
 							},
@@ -41,78 +81,18 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "modifiedon",
+									"name": "ModifiedOn",
 									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
-									"name": "statuscode",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "statuscode",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_action",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_action",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_auditlogid",
+									"name": "ww_site",
 									"type": "Guid"
 								},
 								"sink": {
-									"name": "ww_auditlogid",
+									"name": "Site",
 									"type": "Guid"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_form",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_form",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_name",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_name",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_operator",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_operator",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "ww_text",
-									"type": "String"
-								},
-								"sink": {
-									"name": "ww_text",
-									"type": "String"
 								}
 							}
 						]
@@ -126,7 +106,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "WWSQL003_AuditLog",
+						"referenceName": "WWSQL003_Tanker",
 						"type": "DatasetReference"
 					}
 				]
