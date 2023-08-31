@@ -1,5 +1,5 @@
 {
-	"name": "WWSQL003_AuditLog",
+	"name": "WWSQL003_Tanker",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "WWSQL003",
