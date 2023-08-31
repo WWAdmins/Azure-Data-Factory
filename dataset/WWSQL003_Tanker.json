@@ -45,7 +45,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "ww_tanker"
+			"table": "ww_auditlog"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
