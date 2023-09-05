@@ -114,6 +114,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_barcode",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_barcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_billofmaterials",
 									"type": "Guid"
 								},
