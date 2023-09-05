@@ -2866,6 +2866,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_acceptablefinish",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_acceptablefinish",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_alchoholna",
 											"type": "Boolean"
 										},
@@ -3302,6 +3312,16 @@
 										"sink": {
 											"name": "ww_palletnumber",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_palletoperatorcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_palletoperatorcode",
+											"type": "String"
 										}
 									},
 									{
