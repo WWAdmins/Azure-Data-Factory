@@ -36,12 +36,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "PrebottlingAnalysisSignOff",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "QC End of Run",
 					"type": "PipelineReference"
 				}
