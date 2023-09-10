@@ -126,12 +126,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Stock checkin entry",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Site",
 					"type": "PipelineReference"
 				}
