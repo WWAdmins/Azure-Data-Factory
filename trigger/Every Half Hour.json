@@ -138,12 +138,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Supervisor Signoff",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Site",
 					"type": "PipelineReference"
 				}
