@@ -144,12 +144,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Supervisor Signoff BOM",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Site",
 					"type": "PipelineReference"
 				}
