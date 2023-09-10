@@ -12,12 +12,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Pre-Bottling Analysis",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Pre-Bottling Analysis Recheck",
 					"type": "PipelineReference"
 				}
