@@ -36,12 +36,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "QC End of Run",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "QC Start Up",
 					"type": "PipelineReference"
 				}
