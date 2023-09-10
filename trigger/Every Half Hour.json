@@ -108,12 +108,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Filler Operation",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "ProductionLine",
 					"type": "PipelineReference"
 				}
