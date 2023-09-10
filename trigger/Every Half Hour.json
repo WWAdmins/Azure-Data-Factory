@@ -120,12 +120,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Carton Usage",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Carton Usage Detail",
 					"type": "PipelineReference"
 				}
