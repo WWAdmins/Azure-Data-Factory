@@ -90,12 +90,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Hourly Torque and Volume",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "ProductionLine",
 					"type": "PipelineReference"
 				}
