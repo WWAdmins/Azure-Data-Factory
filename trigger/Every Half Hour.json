@@ -18,12 +18,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "Operator Bottling Breakage",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "Operator Bottling Downtime",
 					"type": "PipelineReference"
 				}
