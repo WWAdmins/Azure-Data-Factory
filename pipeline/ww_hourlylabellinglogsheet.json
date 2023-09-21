@@ -164,6 +164,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_bloweron",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_bloweron",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_bottleandcapscleansig",
 									"type": "String"
 								},
@@ -209,6 +219,16 @@
 								},
 								"sink": {
 									"name": "ww_cartonclosurelessthan10mm",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_cartoncode",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_cartoncode",
 									"type": "Int32"
 								}
 							},
@@ -284,6 +304,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_cartonoperatorcode",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_cartonoperatorcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_cartonrunnumber",
 									"type": "String"
 								},
@@ -339,6 +369,26 @@
 								},
 								"sink": {
 									"name": "ww_closuresacceptablefinishsig",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_correctcolourprint",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_correctcolourprint",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_countofsamplestaken",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_countofsamplestaken",
 									"type": "String"
 								}
 							},
@@ -484,6 +534,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_lasercode",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_lasercode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_labelvarietyvintagecheckedsig",
 									"type": "String"
 								},
@@ -600,6 +660,26 @@
 								"sink": {
 									"name": "ww_sidegaplessthat4mm",
 									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_sidegap1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_sidegap1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_sidegap2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_sidegap2",
+									"type": "Decimal"
 								}
 							},
 							{
