@@ -6611,6 +6611,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_checkbottlelasercodelegibleandcorrect",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Checkbottlelasercodelegibleandcorrect",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_corkcorrectchangepartssig",
 											"type": "String"
 										},
@@ -6727,6 +6737,16 @@
 										"sink": {
 											"name": "ww_filtrationcorrectvalvesopenclosedsig",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_isthisrunorganicvegan",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_IsthisrunOrganicVegan",
+											"type": "Boolean"
 										}
 									},
 									{
@@ -6967,6 +6987,16 @@
 										"sink": {
 											"name": "ww_supervisorsignoffbomid",
 											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_typeofchange",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Typeofchange",
+											"type": "Int32"
 										}
 									},
 									{
