@@ -21414,6 +21414,414 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ww_supervisorsignoffbomhourlycheck')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Supervisor Signoff BOM Hourly Check",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Clean",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "createdon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "statuscode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "statuscode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_allknivesbladesandscissorslabelled",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Allknivesbladesandscissorslabelled",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_allrinserjetsworkingccp1100",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_AllrinserjetsworkingCCP1100",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_anybrokenglassinthemachines",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Anybrokenglassinthemachines",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_billofmaterials",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_BillofMaterials",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlelasercode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Bottlelasercode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlesincartongluestriplabelsandprintco",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_BottlesincartonGluestripLabelsandPrintco",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_comments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Comments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_correctlabelheightandgaps",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Correctlabelheightandgaps",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_depalbottlerecordfilledoutcorrectly",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Depalbottlerecordfilledoutcorrectly",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillerrecordfilledoutcorrectly",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Fillerrecordfilledoutcorrectly",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_labelinkjetcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Labelinkjetcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_labellerrecordfilledoutcorrectly",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Labellerrecordfilledoutcorrectly",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_OperatorCode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_pallettypestackingpatternslipsheetandwrap",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_PallettypeStackingpatternSlipsheetandwrap",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_ppewornnoeatingdrinkingchewinggum",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_PPEwornnoeatingdrinkingchewinggum",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Productionline",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_screwcapperclearanceccp2inspec2530mm",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_ScrewcapperclearanceCCP2inspec2530mm",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_supervisorsignoffbomhourlycheckid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_SupervisorSignoffBOMHourlyCheckId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_supervisorsignoffhourlychecknae",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_SupervisorSignoffHourlyCheckNae",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_timeofcheck",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_Timeofcheck",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SupervisorSignoffbomhourlycheck",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "wwsql003_ww_supervisorsignoffbomhourlycheck",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Merge Statement",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Supervisor Signoff BOM Hourly Check",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[usp_ww_supervisorsignoffbomhourlycheck]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP Fail Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Merge Statement",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "Email on Failure",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Supervisor Signoff BOM Hourly Check",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "Clean",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[usp_clean_ww_supervisorsignoffbomhourlycheck]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SupervisorSignoffbomhourlycheck')]",
+				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_supervisorsignoffbomhourlycheck')]",
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ww_tanker')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -23966,6 +24374,26 @@
 				"schema": [],
 				"typeProperties": {
 					"entityName": "ww_supervisorsignoffbom"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SupervisorSignoffbomhourlycheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_supervisorsignoffbomhourlycheck"
 				}
 			},
 			"dependsOn": [
@@ -35452,6 +35880,140 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "ww_supervisorsignoffbom"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_supervisorsignoffbomhourlycheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Allknivesbladesandscissorslabelled",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_AllrinserjetsworkingCCP1100",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Anybrokenglassinthemachines",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_BillofMaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_Bottlelasercode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_BottlesincartonGluestripLabelsandPrintco",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_Correctlabelheightandgaps",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Depalbottlerecordfilledoutcorrectly",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Fillerrecordfilledoutcorrectly",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Labelinkjetcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_Labellerrecordfilledoutcorrectly",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_OperatorCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_PallettypeStackingpatternSlipsheetandwrap",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_PPEwornnoeatingdrinkingchewinggum",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_ScrewcapperclearanceCCP2inspec2530mm",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_SupervisorSignoffBOMHourlyCheckId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_SupervisorSignoffHourlyCheckNae",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_Timeofcheck",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_supervisorsignoffbomhourlycheck"
 				}
 			},
 			"dependsOn": [
