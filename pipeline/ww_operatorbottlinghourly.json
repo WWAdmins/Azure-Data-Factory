@@ -651,7 +651,7 @@
 								},
 								"sink": {
 									"name": "ww_inbottle",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
@@ -661,7 +661,7 @@
 								},
 								"sink": {
 									"name": "ww_intank",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
