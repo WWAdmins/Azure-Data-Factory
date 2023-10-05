@@ -74,12 +74,12 @@
 							},
 							{
 								"source": {
-									"name": "ww_cartons",
-									"type": "Int32"
+									"name": "ww_cartoncount",
+									"type": "Decimal"
 								},
 								"sink": {
-									"name": "ww_cartons",
-									"type": "Int32"
+									"name": "ww_cartoncount",
+									"type": "Decimal"
 								}
 							},
 							{
@@ -130,6 +130,16 @@
 								"sink": {
 									"name": "ww_psimportsequencenumber",
 									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_stackingpattern",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_stackingpattern",
+									"type": "String"
 								}
 							}
 						]
