@@ -36503,6 +36503,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_prebottlinganalysissulphuradj",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -36545,7 +36552,8 @@
 				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysissignoff')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_billofmaterials')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchrejects')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_palletstacking')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_palletstacking')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysissulphuradj')]"
 			]
 		},
 		{
