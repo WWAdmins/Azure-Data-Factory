@@ -19721,6 +19721,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_sequence",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_sequence",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_stockcheckinentryid",
 											"type": "Guid"
 										},
