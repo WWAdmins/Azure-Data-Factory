@@ -2791,7 +2791,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[usp_Filler Operation]"
+					"storedProcedureName": "usp_clean_ww_filleroperation"
 				},
 				"linkedServiceName": {
 					"referenceName": "WWSQL003",
