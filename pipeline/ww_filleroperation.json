@@ -245,6 +245,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_alcoholbottle",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_alcoholbottle",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_alcoholinbottlesig",
 									"type": "String"
 								},
@@ -291,6 +301,26 @@
 								"sink": {
 									"name": "ww_alcoholsterilisationsig",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_alcoholtank",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_alcoholtank",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_alcoholverification",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_alcoholverification",
+									"type": "Int32"
 								}
 							},
 							{
@@ -2761,7 +2791,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[sp_Filler Operation]"
+					"storedProcedureName": "[dbo].[usp_Filler Operation]"
 				},
 				"linkedServiceName": {
 					"referenceName": "WWSQL003",
