@@ -36631,6 +36631,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_supervisorsignoffbomhourlycheck",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -36647,7 +36654,8 @@
 				"[concat(variables('factoryId'), '/pipelines/BOM')]",
 				"[concat(variables('factoryId'), '/pipelines/ProductionLine')]",
 				"[concat(variables('factoryId'), '/pipelines/Site')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_auditlog')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_auditlog')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_supervisorsignoffbomhourlycheck')]"
 			]
 		},
 		{
