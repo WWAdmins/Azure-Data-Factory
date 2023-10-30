@@ -27,6 +27,12 @@
 					"referenceName": "ww_auditlog",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_supervisorsignoffbomhourlycheck",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
