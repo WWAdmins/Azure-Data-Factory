@@ -189,6 +189,12 @@
 					"referenceName": "ww_prebottlinganalysissulphuradj",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_supervisorsignoffbomhourlycheck",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
