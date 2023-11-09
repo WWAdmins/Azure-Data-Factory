@@ -36550,6 +36550,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_supervisorsignoffbomhourlycheck",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -36593,7 +36600,8 @@
 				"[concat(variables('factoryId'), '/pipelines/ww_billofmaterials')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchrejects')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_palletstacking')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysissulphuradj')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysissulphuradj')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_supervisorsignoffbomhourlycheck')]"
 			]
 		},
 		{
