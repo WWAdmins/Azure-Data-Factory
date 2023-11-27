@@ -3604,6 +3604,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_rinserpressureccp2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_RinserpressureCCP2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "crc5d_rockstoppertagnumberchecked",
 											"type": "String"
 										},
@@ -3724,6 +3734,16 @@
 									},
 									{
 										"source": {
+											"name": "crc5d_alcoholspraycenteringbells",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_Alcoholspraycenteringbells",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_alcoholsterilisation",
 											"type": "Int32"
 										},
@@ -3834,6 +3854,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_bottlecounter",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_BottleCounter",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_blcodeheight",
 											"type": "String"
 										},
@@ -3890,6 +3920,26 @@
 										"sink": {
 											"name": "ww_bucketsflowedintime",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_camsensorchecked",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Camsensorchecked",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_camsensorcomments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Camsensorcomments",
+											"type": "String"
 										}
 									},
 									{
@@ -4209,6 +4259,16 @@
 										},
 										"sink": {
 											"name": "ww_corkervacuumpumponsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_correctbottlerecipeandtype",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_Correctbottlerecipeandtype",
 											"type": "String"
 										}
 									},
@@ -4644,6 +4704,46 @@
 									},
 									{
 										"source": {
+											"name": "ww_filtersbowlendtemp",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_FiltersBowlEndTemp",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_filtersbowlfinishtime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_FiltersBowlFinishTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_filtersbowlstarttemp",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_FiltersBowlStartTemp",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_filtersbowlstarttime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_FiltersBowlStartTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_finalfilterpresent",
 											"type": "Int32"
 										},
@@ -4869,6 +4969,16 @@
 										},
 										"sink": {
 											"name": "ww_jawlubecheckedsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_kegsflushed",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_KegsFlushed",
 											"type": "String"
 										}
 									},
@@ -5140,6 +5250,16 @@
 										"sink": {
 											"name": "ww_operatorcode",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_organicgasthroughcomments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_OrganicGasThroughComments",
+											"type": "String"
 										}
 									},
 									{
@@ -5444,6 +5564,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_screwcapcork",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_ScrewcapCork",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_setpointtemperaturec",
 											"type": "Decimal"
 										},
@@ -5494,6 +5624,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_sterilisefiltersbowl",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_SteriliseFiltersBowl",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_sterilisevelcorin",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_SteriliseVelcorin",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_sterilizationfilterintegrityverification",
 											"type": "String"
 										},
@@ -5864,6 +6014,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_velcorincannisterbatch",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_VelcorinCannisterBatch",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorincannisterexpiry",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_VelcorinCannisterExpiry",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_velcorindateandbatchofbottle",
 											"type": "String"
 										},
@@ -5924,6 +6094,36 @@
 									},
 									{
 										"source": {
+											"name": "ww_velcorinstarttime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_VelcorinStartTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorinendtemp",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_VelcorinEndTemp",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorinfinishtime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_VelcorinFinishTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_velcorinsterilizationcompletedsig",
 											"type": "String"
 										},
@@ -5950,6 +6150,16 @@
 										"sink": {
 											"name": "ww_velcorinunitlinessig",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorinstarttemp",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_VelcorinStartTemp",
+											"type": "Decimal"
 										}
 									},
 									{
