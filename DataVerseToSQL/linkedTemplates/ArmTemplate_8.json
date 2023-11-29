@@ -1690,11 +1690,31 @@
 									},
 									{
 										"source": {
+											"name": "ww_greentag",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_greentag",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_initials",
 											"type": "String"
 										},
 										"sink": {
 											"name": "ww_initials",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_notes",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_notes",
 											"type": "String"
 										}
 									},
