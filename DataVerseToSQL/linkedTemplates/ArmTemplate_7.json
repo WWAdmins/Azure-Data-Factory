@@ -11465,6 +11465,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_datecurrentbottleopened",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_Datecurrentbottleopened",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_deleteline",
 											"type": "Boolean"
 										},
@@ -12301,6 +12311,36 @@
 										"sink": {
 											"name": "ww_velcorinalarmssig",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorincannisterbatch",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_VelcorinCannisterBatch",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorincannisterchanged",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_Velcorincannisterchanged",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorincannisterexpiry",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_VelcorinCannisterExpiry",
+											"type": "DateTime"
 										}
 									},
 									{
