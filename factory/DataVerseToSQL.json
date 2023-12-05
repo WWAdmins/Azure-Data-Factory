@@ -1,5 +1,13 @@
 {
 	"name": "DataVerseToSQL",
+	"properties": {
+		"globalParameters": {
+			"env": {
+				"type": "string",
+				"value": "prod"
+			}
+		}
+	},
 	"location": "australiasoutheast",
 	"identity": {
 		"type": "SystemAssigned",
