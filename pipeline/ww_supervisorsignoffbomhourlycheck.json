@@ -23,7 +23,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "CommonDataServiceForAppsSource"
+						"type": "CommonDataServiceForAppsSource",
+						"query": "select * from ww_supervisorsignoffbomhourlycheck where ww_billofmaterials is not null"
 					},
 					"sink": {
 						"type": "SqlServerSink"
