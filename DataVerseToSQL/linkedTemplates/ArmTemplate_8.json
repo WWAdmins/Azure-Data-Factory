@@ -8106,7 +8106,8 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "CommonDataServiceForAppsSource"
+								"type": "CommonDataServiceForAppsSource",
+								"query": "<fetch>\n  <entity name=\"ww_supervisorsignoffbomhourlycheck\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"ww_billofmaterials\" operator=\"not-null\" />\n    </filter>\n  </entity>\n</fetch>\n"
 							},
 							"sink": {
 								"type": "SqlServerSink"
