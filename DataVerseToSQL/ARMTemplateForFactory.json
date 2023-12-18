@@ -30,7 +30,7 @@
 		"WWSQL003_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWSQL003'",
-			"defaultValue": "Integrated Security=True;Data Source=WWSQL003;Initial Catalog=Dataverse.staging;server=WWSQL003;database=Dataverse.staging;trusted_connection=True"
+			"defaultValue": "Integrated Security=True;Data Source=WWSQL003;Initial Catalog=Dataverse.Staging;server=WWSQL003;database=Dataverse.Staging;trusted_connection=True"
 		},
 		"WWSQL003_password": {
 			"type": "secureString",
@@ -21723,7 +21723,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
-								"query": "<fetch>\n  <entity name=\"ww_supervisorsignoffbomhourlycheck\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"ww_billofmaterials\" operator=\"not-null\" />\n    </filter>\n  </entity>\n</fetch>\n"
+								"query": "<fetch xmlns:generator='MarkMpn.SQL4CDS'>\n  <entity name='ww_supervisorsignoffbomhourlycheck'>\n    <all-attributes />\n    <filter>\n      <condition attribute='ww_billofmaterials' operator='not-null' />\n    </filter>\n  </entity>\n</fetch>"
 							},
 							"sink": {
 								"type": "SqlServerSink"
@@ -36910,13 +36910,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_supervisorsignoffbomhourlycheck",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -36933,8 +36926,7 @@
 				"[concat(variables('factoryId'), '/pipelines/BOM')]",
 				"[concat(variables('factoryId'), '/pipelines/ProductionLine')]",
 				"[concat(variables('factoryId'), '/pipelines/Site')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_auditlog')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_supervisorsignoffbomhourlycheck')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_auditlog')]"
 			]
 		},
 		{
