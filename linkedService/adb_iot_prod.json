@@ -1,0 +1,28 @@
+{
+	"name": "adb_iot_prod",
+	"properties": {
+		"description": "Azure Databricks PRODUCTION Workspace",
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_adb_iot_prod",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "DataVerseAccessKey"
+			},
+			"newClusterNodeType": "Standard_DS3_v2",
+			"newClusterNumOfWorker": "1",
+			"newClusterSparkEnvVars": {
+				"WORKSPACE_ENV": "prod",
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "13.3.x-scala2.12",
+			"clusterOption": "Fixed",
+			"newClusterInitScripts": []
+		}
+	}
+}
