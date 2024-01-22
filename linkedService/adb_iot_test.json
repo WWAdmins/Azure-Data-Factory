@@ -1,0 +1,28 @@
+{
+	"name": "adb_iot_test",
+	"properties": {
+		"description": "Azure Databricks TEST Workspace",
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "kv_adb_iot_test",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "DataVerseAccessKey"
+			},
+			"newClusterNodeType": "Standard_DS3_v2",
+			"newClusterNumOfWorker": "1",
+			"newClusterSparkEnvVars": {
+				"WORKSPACE_ENV": "test",
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "13.3.x-scala2.12",
+			"clusterOption": "Fixed",
+			"newClusterInitScripts": []
+		}
+	}
+}
