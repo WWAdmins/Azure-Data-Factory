@@ -17,7 +17,17 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "IOT_TEST_dataflow",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"parameters": {
+							"startTime": {
+								"value": "'@{pipeline().parameters.triggerStart}'",
+								"type": "Expression"
+							},
+							"endTime": {
+								"value": "'@{pipeline().parameters.triggerEnd}'",
+								"type": "Expression"
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
