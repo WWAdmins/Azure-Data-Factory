@@ -13,6 +13,805 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_Stockcheckinentry')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Time Loaded",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Delete Line",
+						"type": "bit"
+					},
+					{
+						"name": "Item Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LPN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Modified on",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Operator Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Production Line",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Quantity decimal",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "Run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Import Sequence Number",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Record Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Stock checkin entry",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Stock checkin entry"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_Stockcheckinentry1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Time Loaded",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Delete Line",
+						"type": "bit"
+					},
+					{
+						"name": "Item Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LPN",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Modified on",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Operator Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Production Line",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Quantity decimal",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 5
+					},
+					{
+						"name": "Run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Import Sequence Number",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Record Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Stock checkin entry",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Stock checkin entry"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_SupervisorSignoff')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "All DG removed sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Any cap bottle changes sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper compression correct sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper correct dispenser clearance sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper cut caps sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper gas flow in bottle mouth sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper gas flow meter sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper missing cap detector sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper tank gas sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper top plate neck guide sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper tuck challenge test sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper tuck thread redraw sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork correct corking bells sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork headspace pressure sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork timing sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Depal bottle board filled out sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Depal summary sheet correct sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filler correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filler correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filler low fill detector sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filtration correct to spec sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filtration correct valves open closed sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux all caps torqued down",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct compression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct dispenser plate clearance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct screwcapper compression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct springs in capper heads",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux torque settings",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Missing label sensors on sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Notes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Operator Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PET correct springs in capper sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PET laser power turned down sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pre-flight checksheet completed sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Production Line",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Pump flow",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser Correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser full coverage sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser low pressure cutout sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Visible glass on the line sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Volume difference",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Import Sequence Number",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Modified On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Record Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Supervisor Signoff",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Run",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Supervisor Signoff"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_SupervisorSignoffBOM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "All DG removed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "All DG removed sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Any cap bottle changes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Any cap bottle changes sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper compression correct sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper correct dispenser clearance sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper cut caps sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper gas flow in bottle mouth sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper gas flow meter sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper missing cap detector sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper tank gas sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper top plate neck guide sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper tuck challenge test sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Capper tuck thread redraw sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork correct corking bells sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork headspace pressure sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Cork timing sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Depal bottle board filled out sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Depal summary sheet correct sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filler correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filler correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filler low fill detector sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filtration correct to spec sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Filtration correct valves open closed sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux all caps torqued down",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct compression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct dispenser plate clearance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct screwcapper compression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux correct springs in capper heads",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Lux torque settings",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Missing label sensors on sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Notes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Operator Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PET correct springs in capper sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PET laser power turned down sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Pre-flight checksheet completed sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Production Line",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Pump flow",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser Correct change parts sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser correct height sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser full coverage sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Rinser low pressure cutout sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Visible glass on the line sig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Volume difference",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Import Sequence Number",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Modified On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Record Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Supervisor Signoff BOM",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Bill of Materials",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Supervisor Signoff BOM"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_Tanker')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TankerId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Volume",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CreatedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ModifiedOn",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Site",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Tanker"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWWEB0021')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dataverse",
+					"table": "vwBom"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_auditlog')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2696,1423 +3495,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "ww_labelchange"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_labellingissues')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_bottlerub",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_brokenbottles",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_cartonsrejected",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_comments",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_damagedscrewcaps",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_datetime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_deleteissue",
-						"type": "bit"
-					},
-					{
-						"name": "ww_deleterejects",
-						"type": "bit"
-					},
-					{
-						"name": "ww_glassdefect",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_issue",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_labellingissue",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_labellingissuesid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_lowfills",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_totalrejects",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_labellingissues"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_labellingpreflight')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "bit"
-					},
-					{
-						"name": "crc5d_lasercodecheck",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_backlabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_backlabeladditionaltext",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_backlabelinkjetcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_backlabelinkjetplacement",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_billofmaterialsinstructionsforthisrun",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_billofmaterialsspecificinstructions",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bom3rdlabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bom3rdlabelposition",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bom4thlabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bom4thlabelposition",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bombacklabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bombacklabelheight",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bombacklabelinkjetcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomcartoncode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomcartoninkjet",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomcartoninkjetplacement",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomcartonlabelinstruction",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomcartonlabeltype",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomextraitem",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomextraitem2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomfrontlabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomfrontlabelheight",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomgenericinstruction",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bominstructionsforthisrun",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomlabeladditionaltext",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomlabelinkjetplacement",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bompalletstackingpattern",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomslipsheet",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomspecificinstructions",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bomworkorderinstructions",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_cartonilscode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_cartoninkjet",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_cartoninkjetplacement",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_cartonlabels",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_cartons",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_caseerectoroverpackerscissorscheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_caselabellerscissorscheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_closuresilscodecorrectsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_divider",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_dividersilscode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_dividersscissorscheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_dividerused",
-						"type": "bit"
-					},
-					{
-						"name": "ww_extraitem",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_extraitem2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_fourthlabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_frontlabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_genericclientinstructions",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_labeldetectionon",
-						"type": "bit"
-					},
-					{
-						"name": "ww_labellerscissorscheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_labellingpreflightid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_labelpositionamended",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_lasercodeonbottle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_lineclearfrompreviousjob",
-						"type": "bit"
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pallet",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_palletnumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_palletscorrecttospec",
-						"type": "bit"
-					},
-					{
-						"name": "ww_pallettypecheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_sampleattachedtospec",
-						"type": "bit"
-					},
-					{
-						"name": "ww_slipsheet",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_stacking",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_startupinitial",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_startuptime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_thirdlabel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_uv",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_varietyvintage",
-						"type": "bit"
-					},
-					{
-						"name": "ww_weighalarmon",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_workorderinstructions",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_labellingpreflight"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_operator')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "bit"
-					},
-					{
-						"name": "ww_code",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_initials",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorid",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_operator"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_operatorbottlingbreakage')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "bit"
-					},
-					{
-						"name": "ww_areaclean",
-						"type": "bit"
-					},
-					{
-						"name": "ww_arearetimed",
-						"type": "bit"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_bottlecount",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_breakagelocation",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_breakages",
-						"type": "bit"
-					},
-					{
-						"name": "ww_brokenbottles",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_colleaguesign",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_disposedbottles",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_filleropsig",
-						"type": "varchar"
-					},
-					{
-						"name": "ww_glassfragmentsvisible",
-						"type": "bit"
-					},
-					{
-						"name": "ww_locationofbreak",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_nobreakagessig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorbottlingbreakageid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_resultofacrash",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_startuptime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_timeofbreak",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_type",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_typeofglassbreak",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_operatorbottlingbreakage"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_operatorbottlingdowntime')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "bit"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorbottlingdowntimeid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_reason",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_start",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_stop",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_totalminutes",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_operatorbottlingdowntime"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_operatorbottlinghourly2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_authorisedsig",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_autolevelmanometer",
-						"type": "bit"
-					},
-					{
-						"name": "ww_bardifferential",
-						"type": "bit"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_bottlecodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlecoloursig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlelasersticker",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_bottlelaserstickersig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlenumberasperlasercoder",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_bottlerubmark",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_bottleshapesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlevacuum",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bottlevacuumaccordingtorecipe",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bottlingfrom",
-						"type": "bit"
-					},
-					{
-						"name": "ww_bottlingto",
-						"type": "bit"
-					},
-					{
-						"name": "ww_bowlmn2pressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bowlvacuum",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bucketsflowedintime",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bucketsflowedtime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_capdetectoronsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_checkdocketandphysicallycheckwineisrun",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_chippednecks",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_co2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_collectexportsamples",
-						"type": "bit"
-					},
-					{
-						"name": "ww_corkervacuum",
-						"type": "bit"
-					},
-					{
-						"name": "ww_corkervacuum08to10bar",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_counterpressureinlet",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_counterpressureoutlet",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_deoxn2pressre",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_deoxvacuumpressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_do2frombottle",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_do2fromvessel",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_exportsamplespicked",
-						"type": "bit"
-					},
-					{
-						"name": "ww_fillerbowlpressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_fillerbowltemperature",
-						"type": "bit"
-					},
-					{
-						"name": "ww_fillerhead",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_fillerspeed",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillertemperature40c",
-						"type": "bit"
-					},
-					{
-						"name": "ww_fillertipsealsvisualchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_fillheight",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_fillheightdetectoronsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_filterdifferential",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_filtrationpressuregauge",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_finalfilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_flowmetercheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_foreignbodyvisualcheck",
-						"type": "bit"
-					},
-					{
-						"name": "ww_foreignmattersig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_gasblowonbottle",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gascoveronbowl",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gasfeedtocorker",
-						"type": "bit"
-					},
-					{
-						"name": "ww_gasfeedtocorker1030kpa",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gasflowratetobowlline2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gasflowtocap",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gaspressuretobottlingtank",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_glassfragments",
-						"type": "bit"
-					},
-					{
-						"name": "ww_glassfragmentscheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_glassfragmentsexplanation",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_inbottle",
-						"type": "bit"
-					},
-					{
-						"name": "ww_intank",
-						"type": "bit"
-					},
-					{
-						"name": "ww_lasercodeasperspec",
-						"type": "bit"
-					},
-					{
-						"name": "ww_lasercodeonbottle",
-						"type": "bit"
-					},
-					{
-						"name": "ww_lenticularfilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_litmuspapertestinproduct",
-						"type": "bit"
-					},
-					{
-						"name": "ww_n2buffervesselpressure",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_neckcheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_notes",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorbottlinghourlyid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_palletnumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pittingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_prefilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_prepcheck2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_prepcheck3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_prepchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pumpnumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pumpnumberbendpanel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_pumpspeed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinseheadinspection",
-						"type": "bit"
-					},
-					{
-						"name": "ww_rinseheadmedium",
-						"type": "bit"
-					},
-					{
-						"name": "ww_rinsejetcoveragesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinserbottlegripperclearancesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinsergassupplyco2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsergaswatersupply",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsergaswatersupplyline1",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsergaswatersupplyline2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsern2pressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinserpressurefluctuations",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsertipsvisualchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinserwatersupply",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsewater045mprefilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsewater12mprefilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rockstopper",
-						"type": "bit"
-					},
-					{
-						"name": "ww_rockstopperfilter",
-						"type": "bit"
-					},
-					{
-						"name": "ww_samplessig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_screencheckfordoserate",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_selflevelling",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_sparkling",
-						"type": "bit"
-					},
-					{
-						"name": "ww_stockcodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tankchangeflowedintimesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tankjointscheckedfornleakssig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tankpressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_temperature",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_timeofauthorisedauditcheck",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_timeofcheckmicrosampletaken",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_tkinjectionmanometer",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_velcorinalarmssig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_velcorinchangebottlelightsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_velcorindosingrate",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_velcorntime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_venttubecount",
-						"type": "bit"
-					},
-					{
-						"name": "ww_visualfloatiescheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_visualleakssig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_warmingtunnelrunningtemperature",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_winetemperatureinternalprobe40c",
-						"type": "bit"
-					},
-					{
-						"name": "ww_winetempinternalprobe",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_xraychallengetest",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_operatorbottlinghourly"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_palletstacking')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_cartons",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_lpn",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_palletnumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_PalletStackingId",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_psimportsequencenumber",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_palletstacking"
 				}
 			},
 			"dependsOn": []
