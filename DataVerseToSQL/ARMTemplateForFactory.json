@@ -37166,7 +37166,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "iotdev/bronze/dataverse/ww_qcendofrun/",
+						"folderPath": "iottest/bronze/dataverse/ww_qcendofrun/",
 						"fileSystem": "dls-fs-iot"
 					},
 					"compressionCodec": "snappy"
