@@ -68,6 +68,33 @@
 					"referenceName": "adb_iot_test",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "run_completed_trigger",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "bronze_to_silver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/Run completed trigger"
+				},
+				"linkedServiceName": {
+					"referenceName": "adb_iot_test",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"concurrency": 1,
