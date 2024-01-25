@@ -63,13 +63,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
 		},
-		"dlsadbiottest_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
-		},
 		"dlsadbiotprod_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'dlsadbiotprod'"
+		},
+		"dlsadbiottest_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
 		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
@@ -111,6 +111,14 @@
 			"type": "string",
 			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
+		"dlsadbiotprod_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://dlsadbiotprod.dfs.core.windows.net/"
+		},
+		"dlsadbiottest_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://dlsadbiottest.dfs.core.windows.net/"
+		},
 		"kv_adb_iot_prod_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-prod.vault.azure.net/"
@@ -119,18 +127,6 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
-		"dlsadbiottest_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://dlsadbiottest.dfs.core.windows.net/"
-		},
-		"dlsadbiotprod_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://dlsadbiotprod.dfs.core.windows.net/"
-		},
 		"IOT_TEST-window-trigger_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -138,6 +134,10 @@
 		"IOT_TEST-window-trigger_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
 		},
 		"containerUri": {
 			"type": "string",
@@ -184,11 +184,11 @@
 					"WWSQL003_Test_password": {
 						"value": "[parameters('WWSQL003_Test_password')]"
 					},
-					"dlsadbiottest_accountKey": {
-						"value": "[parameters('dlsadbiottest_accountKey')]"
-					},
 					"dlsadbiotprod_accountKey": {
 						"value": "[parameters('dlsadbiotprod_accountKey')]"
+					},
+					"dlsadbiottest_accountKey": {
+						"value": "[parameters('dlsadbiottest_accountKey')]"
 					},
 					"CommonDataServiceForApps1_properties_typeProperties_username": {
 						"value": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]"
@@ -205,6 +205,12 @@
 					"WWSQL003_Test_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_Test_properties_typeProperties_userName')]"
 					},
+					"dlsadbiotprod_properties_typeProperties_url": {
+						"value": "[parameters('dlsadbiotprod_properties_typeProperties_url')]"
+					},
+					"dlsadbiottest_properties_typeProperties_url": {
+						"value": "[parameters('dlsadbiottest_properties_typeProperties_url')]"
+					},
 					"kv_adb_iot_prod_properties_typeProperties_baseUrl": {
 						"value": "[parameters('kv_adb_iot_prod_properties_typeProperties_baseUrl')]"
 					},
@@ -213,12 +219,6 @@
 					},
 					"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('ProductionLink_properties_typeProperties_linkedInfo_resourceId')]"
-					},
-					"dlsadbiottest_properties_typeProperties_url": {
-						"value": "[parameters('dlsadbiottest_properties_typeProperties_url')]"
-					},
-					"dlsadbiotprod_properties_typeProperties_url": {
-						"value": "[parameters('dlsadbiotprod_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -257,33 +257,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"FileServer1_password": {
-						"value": "[parameters('FileServer1_password')]"
-					},
-					"WWSQL003_connectionString": {
-						"value": "[parameters('WWSQL003_connectionString')]"
-					},
-					"WWSQL003_password": {
-						"value": "[parameters('WWSQL003_password')]"
-					},
-					"WWSQL003_DV_connectionString": {
-						"value": "[parameters('WWSQL003_DV_connectionString')]"
-					},
-					"WWSQL003_DV_password": {
-						"value": "[parameters('WWSQL003_DV_password')]"
-					},
-					"FileServer1_properties_typeProperties_host": {
-						"value": "[parameters('FileServer1_properties_typeProperties_host')]"
-					},
-					"FileServer1_properties_typeProperties_userId": {
-						"value": "[parameters('FileServer1_properties_typeProperties_userId')]"
-					},
-					"WWSQL003_properties_typeProperties_userName": {
-						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
-					},
-					"WWSQL003_DV_properties_typeProperties_userName": {
-						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -305,11 +278,38 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"FileServer1_password": {
+						"value": "[parameters('FileServer1_password')]"
+					},
+					"WWSQL003_connectionString": {
+						"value": "[parameters('WWSQL003_connectionString')]"
+					},
+					"WWSQL003_password": {
+						"value": "[parameters('WWSQL003_password')]"
+					},
+					"WWSQL003_DV_connectionString": {
+						"value": "[parameters('WWSQL003_DV_connectionString')]"
+					},
+					"WWSQL003_DV_password": {
+						"value": "[parameters('WWSQL003_DV_password')]"
+					},
 					"WWWEB002_connectionString": {
 						"value": "[parameters('WWWEB002_connectionString')]"
 					},
 					"WWWEB002_password": {
 						"value": "[parameters('WWWEB002_password')]"
+					},
+					"FileServer1_properties_typeProperties_host": {
+						"value": "[parameters('FileServer1_properties_typeProperties_host')]"
+					},
+					"FileServer1_properties_typeProperties_userId": {
+						"value": "[parameters('FileServer1_properties_typeProperties_userId')]"
+					},
+					"WWSQL003_properties_typeProperties_userName": {
+						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
+					},
+					"WWSQL003_DV_properties_typeProperties_userName": {
+						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
 					},
 					"WWWEB002_properties_typeProperties_userName": {
 						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"

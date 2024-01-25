@@ -7,6 +7,28 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"FileServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FileServer1'"
+		},
+		"WWSQL003_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003'",
+			"defaultValue": "Integrated Security=True;Data Source=WWSQL003;Initial Catalog=Dataverse.Staging;server=WWSQL003;database=Dataverse.Staging;trusted_connection=True"
+		},
+		"WWSQL003_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003'"
+		},
+		"WWSQL003_DV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003_DV'",
+			"defaultValue": "Integrated Security=True;Data Source=wwsql003;Initial Catalog=DataVerse"
+		},
+		"WWSQL003_DV_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003_DV'"
+		},
 		"WWWEB002_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWWEB002'",
@@ -15,6 +37,22 @@
 		"WWWEB002_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
+		},
+		"FileServer1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Users\\tejaswi.datla\\Desktop\\TopMovies_Part1"
+		},
+		"FileServer1_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "tejaswi.Datla@wineworks.co.nz"
+		},
+		"WWSQL003_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
+		},
+		"WWSQL003_DV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
 		"WWWEB002_properties_typeProperties_userName": {
 			"type": "string",
@@ -25,6 +63,126 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SupervisorSignoffBOM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_supervisorsignoffbom"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SupervisorSignoffbomhourlycheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_supervisorsignoffbomhourlycheck"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Tanker')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_tanker"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FileServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('FileServer1_properties_typeProperties_host')]",
+					"userId": "[parameters('FileServer1_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('FileServer1_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('WWSQL003_connectionString')]",
+					"userName": "[parameters('WWSQL003_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('WWSQL003_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_DV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('WWSQL003_DV_connectionString')]",
+					"userName": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('WWSQL003_DV_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -43,37 +201,6 @@
 				"connectVia": {
 					"referenceName": "ProductionLink",
 					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/adb_iot_test')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Azure Databricks TEST Workspace",
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "kv_adb_iot_test",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "DataVerseAccessKey"
-					},
-					"newClusterNodeType": "Standard_DS3_v2",
-					"newClusterNumOfWorker": "1",
-					"newClusterSparkEnvVars": {
-						"WORKSPACE_ENV": "test",
-						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
-					},
-					"newClusterVersion": "13.3.x-scala2.12",
-					"clusterOption": "Fixed",
-					"newClusterInitScripts": []
 				}
 			},
 			"dependsOn": []
@@ -110,140 +237,33 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_qcendofrun')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/adb_iot_test')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
+				"description": "Azure Databricks TEST Workspace",
 				"annotations": [],
-				"type": "Parquet",
+				"type": "AzureDatabricks",
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_qcendofrun/",
-						"fileSystem": "dls-fs-iot"
+					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_adb_iot_test",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "DataVerseAccessKey"
 					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_run')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_run/",
-						"fileSystem": "dls-fs-iot"
+					"newClusterNodeType": "Standard_DS3_v2",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkEnvVars": {
+						"WORKSPACE_ENV": "test",
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
 					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_operatorbottlingdowntime')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_operatorbottlingdowntime/",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_bottlebatchsummary')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_bottlebatchsummary/",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_billofmaterials')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_billofmaterials/",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_productionline')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_productionlinelookup/",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
+					"newClusterVersion": "13.3.x-scala2.12",
+					"clusterOption": "Fixed",
+					"newClusterInitScripts": []
+				}
 			},
 			"dependsOn": []
 		},
@@ -757,7 +777,9 @@
 					"table": "Filler operation_Test"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
@@ -1244,7 +1266,9 @@
 					"table": "ww_hourlytorqueandvolume"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerTable11')]",
@@ -1731,7 +1755,9 @@
 					"table": "ww_hourlytorqueandvolume"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003LabellingPreflight')]",
@@ -1750,7 +1776,9 @@
 					"table": "Labelling Preflight"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_BOM')]",
@@ -1783,7 +1811,9 @@
 					"table": "Bill of Materials"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_BottleBatchRejects')]",
@@ -1802,7 +1832,9 @@
 					"table": "Bottle Batch Rejects"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_BottleBatchSummary')]",
@@ -1821,7 +1853,9 @@
 					"table": "Bottle Batch Summary"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_BreakageLocation')]",
@@ -1866,7 +1900,9 @@
 					"table": "BreakageLocation"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_CartonUsage')]",
@@ -1959,7 +1995,9 @@
 					"table": "Carton Usage"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_CartonUsageDetail')]",
@@ -2022,7 +2060,9 @@
 					"table": "Carton Usage Detail"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_ClosureBatchSummary')]",
@@ -2127,7 +2167,9 @@
 					"table": "Closure Batch Summary"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
 		}
 	]
 }

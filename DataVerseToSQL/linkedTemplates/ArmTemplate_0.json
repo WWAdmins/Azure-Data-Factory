@@ -32,13 +32,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWSQL003_Test'"
 		},
-		"dlsadbiottest_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
-		},
 		"dlsadbiotprod_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'dlsadbiotprod'"
+		},
+		"dlsadbiottest_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
 		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
@@ -60,6 +60,14 @@
 			"type": "string",
 			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
+		"dlsadbiotprod_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://dlsadbiotprod.dfs.core.windows.net/"
+		},
+		"dlsadbiottest_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://dlsadbiottest.dfs.core.windows.net/"
+		},
 		"kv_adb_iot_prod_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-prod.vault.azure.net/"
@@ -71,14 +79,6 @@
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
-		"dlsadbiottest_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://dlsadbiottest.dfs.core.windows.net/"
-		},
-		"dlsadbiotprod_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://dlsadbiotprod.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -185,6 +185,42 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/dlsadbiotprod')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Data Lake Storage iot PROD",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('dlsadbiotprod_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('dlsadbiotprod_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dlsadbiottest')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data Lake Storage Gen 2 for Databricks TEST storage",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('dlsadbiottest_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('dlsadbiottest_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/kv_adb_iot_prod')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -274,142 +310,128 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dlsadbiottest')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Data Lake Storage Gen 2 for Databricks TEST storage",
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('dlsadbiottest_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('dlsadbiottest_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dlsadbiotprod')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Azure Data Lake Storage iot PROD",
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('dlsadbiotprod_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('dlsadbiotprod_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AuditLog')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_billofmaterials')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Dataverse",
+					"referenceName": "dlsadbiottest",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
+				"type": "Parquet",
 				"typeProperties": {
-					"entityName": "ww_tanker"
-				}
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iottest/bronze/dataverse/ww_billofmaterials/",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/BOM')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_bottlebatchsummary')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Dataverse",
+					"referenceName": "dlsadbiottest",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
+				"type": "Parquet",
 				"typeProperties": {
-					"entityName": "ww_billofmaterials"
-				}
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iottest/bronze/dataverse/ww_bottlebatchsummary/",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/BillOfMaterials')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_operatorbottlingdowntime')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "SQLToDataverseProd",
+					"referenceName": "dlsadbiottest",
 					"type": "LinkedServiceReference"
 				},
-				"folder": {
-					"name": "Bill Of Material"
-				},
 				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
+				"type": "Parquet",
 				"typeProperties": {
-					"entityName": "ww_billofmaterials"
-				}
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iottest/bronze/dataverse/ww_operatorbottlingdowntime/",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLToDataverseProd')]"
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/BottleBatchRejects')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_productionline')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Dataverse",
+					"referenceName": "dlsadbiottest",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
+				"type": "Parquet",
 				"typeProperties": {
-					"entityName": "ww_bottlebatchrejects"
-				}
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iottest/bronze/dataverse/ww_productionlinelookup/",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/BottleBatchSummary')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_qcendofrun')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Dataverse",
+					"referenceName": "dlsadbiottest",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
+				"type": "Parquet",
 				"typeProperties": {
-					"entityName": "ww_bottlebatchsummary"
-				}
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iottest/bronze/dataverse/ww_qcendofrun/",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
 			]
 		}
 	]
