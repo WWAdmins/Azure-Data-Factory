@@ -127,11 +127,11 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"IOT_TEST-window-trigger_properties_pipeline_parameters_triggerStart": {
+		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"IOT_TEST-window-trigger_properties_pipeline_parameters_triggerEnd": {
+		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -434,11 +434,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"IOT_TEST-window-trigger_properties_pipeline_parameters_triggerStart": {
-						"value": "[parameters('IOT_TEST-window-trigger_properties_pipeline_parameters_triggerStart')]"
+					"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
+						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]"
 					},
-					"IOT_TEST-window-trigger_properties_pipeline_parameters_triggerEnd": {
-						"value": "[parameters('IOT_TEST-window-trigger_properties_pipeline_parameters_triggerEnd')]"
+					"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
+						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerEnd')]"
 					}
 				}
 			},
