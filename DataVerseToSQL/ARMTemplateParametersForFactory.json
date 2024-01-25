@@ -92,10 +92,10 @@
 		"kv_adb_iot_test_properties_typeProperties_baseUrl": {
 			"value": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"iot-test-window-trigger_properties_pipeline_parameters_triggerStart": {
+		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
-		"iot-test-window-trigger_properties_pipeline_parameters_triggerEnd": {
+		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {

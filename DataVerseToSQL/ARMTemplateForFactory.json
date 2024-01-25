@@ -127,11 +127,11 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"iot-test-window-trigger_properties_pipeline_parameters_triggerStart": {
+		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"iot-test-window-trigger_properties_pipeline_parameters_triggerEnd": {
+		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -1148,8 +1148,6 @@
 					{
 						"name": "run_completed_trigger",
 						"type": "DatabricksNotebook",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "bronze_to_silver",
@@ -37377,7 +37375,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/iot-test-window-trigger')]",
+			"name": "[concat(parameters('factoryName'), '/iot-test-trigger-window')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -37389,15 +37387,15 @@
 						"type": "PipelineReference"
 					},
 					"parameters": {
-						"triggerStart": "[parameters('iot-test-window-trigger_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('iot-test-window-trigger_properties_pipeline_parameters_triggerEnd')]"
+						"triggerStart": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerEnd')]"
 					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
 					"frequency": "Hour",
 					"interval": 1,
-					"startTime": "2024-01-25T21:20:00Z",
+					"startTime": "2024-01-25T23:45:00Z",
 					"delay": "00:05:00",
 					"maxConcurrency": 1,
 					"retryPolicy": {
