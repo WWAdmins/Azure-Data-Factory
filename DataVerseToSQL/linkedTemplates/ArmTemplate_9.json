@@ -7,11 +7,11 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
-		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
+		"iot-test-window-trigger_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
+		"iot-test-window-trigger_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		}
@@ -6077,7 +6077,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/iot-test-trigger-window')]",
+			"name": "[concat(parameters('factoryName'), '/iot-test-window-trigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -6089,15 +6089,15 @@
 						"type": "PipelineReference"
 					},
 					"parameters": {
-						"triggerStart": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerEnd')]"
+						"triggerStart": "[parameters('iot-test-window-trigger_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('iot-test-window-trigger_properties_pipeline_parameters_triggerEnd')]"
 					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
 					"frequency": "Hour",
 					"interval": 1,
-					"startTime": "2024-01-26T21:20:00Z",
+					"startTime": "2024-01-25T21:20:00Z",
 					"delay": "00:05:00",
 					"maxConcurrency": 1,
 					"retryPolicy": {

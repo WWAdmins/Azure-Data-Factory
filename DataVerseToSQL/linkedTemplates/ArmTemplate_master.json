@@ -127,17 +127,17 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"iot-test-window-trigger_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"iot-test-window-trigger_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
 		"containerUri": {
 			"type": "string",
@@ -434,11 +434,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
-						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]"
+					"iot-test-window-trigger_properties_pipeline_parameters_triggerStart": {
+						"value": "[parameters('iot-test-window-trigger_properties_pipeline_parameters_triggerStart')]"
 					},
-					"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
-						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerEnd')]"
+					"iot-test-window-trigger_properties_pipeline_parameters_triggerEnd": {
+						"value": "[parameters('iot-test-window-trigger_properties_pipeline_parameters_triggerEnd')]"
 					}
 				}
 			},
