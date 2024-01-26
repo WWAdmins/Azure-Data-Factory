@@ -92,14 +92,14 @@
 		"kv_adb_iot_test_properties_typeProperties_baseUrl": {
 			"value": "https://kv-adb-iot-test.vault.azure.net/"
 		},
+		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
 			"value": "@trigger().outputs.windowEndTime"
-		},
-		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
-			"value": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
 		},
 		"containerUri": {
 			"value": ""
