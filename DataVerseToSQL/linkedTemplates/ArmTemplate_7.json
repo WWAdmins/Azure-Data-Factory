@@ -2836,6 +2836,8 @@
 					{
 						"name": "run_completed_trigger",
 						"type": "DatabricksNotebook",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "silver_to_gold",
