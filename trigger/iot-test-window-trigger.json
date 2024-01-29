@@ -3,6 +3,16 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Stopped",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "IOT_TEST_CDC_databricks",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"triggerStart": "@trigger().outputs.windowStartTime",
+				"triggerEnd": "@trigger().outputs.windowEndTime"
+			}
+		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Hour",
