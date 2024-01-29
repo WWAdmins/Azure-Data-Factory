@@ -2,7 +2,7 @@
 	"name": "iot-test-window-trigger",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "IOT_TEST_CDC_databricks",
