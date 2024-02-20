@@ -1241,6 +1241,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_atpswabsnottaken",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_ATPswabsnottaken",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_blsampleattachedtospecsheet",
 											"type": "String"
 										},
@@ -1251,12 +1261,22 @@
 									},
 									{
 										"source": {
+											"name": "ww_startuptimebottlelasercodetime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_StartUpTimebottlelasercodetime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_bottlealcoholfirsttank",
 											"type": "Int32"
 										},
 										"sink": {
 											"name": "ww_bottlealcoholfirsttank",
-											"type": "Int32"
+											"type": "Boolean"
 										}
 									},
 									{
@@ -1327,6 +1347,26 @@
 										"sink": {
 											"name": "ww_customertankername",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_dco2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Ww_DCO2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_do2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Ww_DO2",
+											"type": "Decimal"
 										}
 									},
 									{
@@ -1507,6 +1547,16 @@
 										"sink": {
 											"name": "ww_wecsyesno",
 											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_winetemperaturefiller",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_WineTemperatureFiller",
+											"type": "Decimal"
 										}
 									},
 									{

@@ -127,10 +127,6 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -138,6 +134,10 @@
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
 		}
 	},
 	"variables": {
@@ -18030,6 +18030,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_atpswabsnottaken",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_ATPswabsnottaken",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_blsampleattachedtospecsheet",
 											"type": "String"
 										},
@@ -18040,12 +18050,22 @@
 									},
 									{
 										"source": {
+											"name": "ww_startuptimebottlelasercodetime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_StartUpTimebottlelasercodetime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_bottlealcoholfirsttank",
 											"type": "Int32"
 										},
 										"sink": {
 											"name": "ww_bottlealcoholfirsttank",
-											"type": "Int32"
+											"type": "Boolean"
 										}
 									},
 									{
@@ -18116,6 +18136,26 @@
 										"sink": {
 											"name": "ww_customertankername",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_dco2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Ww_DCO2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_do2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "Ww_DO2",
+											"type": "Decimal"
 										}
 									},
 									{
@@ -18296,6 +18336,16 @@
 										"sink": {
 											"name": "ww_wecsyesno",
 											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_winetemperaturefiller",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_WineTemperatureFiller",
+											"type": "Decimal"
 										}
 									},
 									{
@@ -37402,6 +37452,41 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/iot-test-trigger-window')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "IOT_TEST_CDC_databricks",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerEnd')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2024-01-29T22:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/IOT_TEST_CDC_databricks')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ProductionLink')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -37775,41 +37860,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/iot-test-trigger-window')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "IOT_TEST_CDC_databricks",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerEnd')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 1,
-					"startTime": "2024-01-29T22:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/IOT_TEST_CDC_databricks')]"
-			]
 		}
 	]
 }
