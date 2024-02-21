@@ -11867,6 +11867,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "Ww_DeleteLine",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_do",
 											"type": "Boolean"
 										},
