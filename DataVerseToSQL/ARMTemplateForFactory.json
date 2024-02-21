@@ -8914,6 +8914,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_corkinsertionchecked",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_CorkInsertionChecked",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_corkinsertionsig",
 											"type": "String"
 										},
@@ -8930,6 +8940,16 @@
 										"sink": {
 											"name": "ww_corklengthsig",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkmoisturereading",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_Corkmoisturereading",
+											"type": "Int32"
 										}
 									},
 									{
@@ -9064,11 +9084,41 @@
 									},
 									{
 										"source": {
+											"name": "ww_headspacemeasurement",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_HeadSpaceMeasurement",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_headspacemeasurementsig",
 											"type": "String"
 										},
 										"sink": {
 											"name": "ww_headspacemeasurementsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_headspacepressuremeasurement",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_HeadSpacePressureMeasurement",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_headspacemeasurementcomments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Ww_HeadSpaceMeasurementComments",
 											"type": "String"
 										}
 									},
