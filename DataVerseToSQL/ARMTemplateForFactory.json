@@ -17116,12 +17116,52 @@
 									},
 									{
 										"source": {
+											"name": "ww_bottlingfromtextlookup",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Ww_BottlingFromtextlookup",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlingto",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_BottlingTo",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_checktime",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Ww_CheckTime",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_endofrunsamples",
 											"type": "Int32"
 										},
 										"sink": {
 											"name": "ww_endofrunsamples",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_finalbottlecount",
+											"type": "String"
+										},
+										"sink": {
+											"name": "WW_FinalBottleCount",
+											"type": "String"
 										}
 									},
 									{
@@ -17141,6 +17181,36 @@
 										},
 										"sink": {
 											"name": "ww_flowmeter",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_flowmetercheck",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_Flowmetercheck",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_glassfragmentscheck",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Ww_GlassFragmentCheck",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_inbottle",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_Inbottle",
 											"type": "Int32"
 										}
 									},
@@ -17216,6 +17286,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_rinseheadmedium",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_Rinseheadmedium",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_rinsergassupplyccp1",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "Ww_RinserGasSupplyCCP1",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_run",
 											"type": "Guid"
 										},
@@ -17232,6 +17322,26 @@
 										"sink": {
 											"name": "ww_runendtime",
 											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorinproductionmodeoff",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_VelcorinProductionmodeoff",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorinsystemdrained",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_VelcorinSystemdrained",
+											"type": "String"
 										}
 									}
 								]
