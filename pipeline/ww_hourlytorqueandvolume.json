@@ -274,6 +274,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_corkinsertionchecked",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Ww_CorkInsertionChecked",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_corkinsertionsig",
 									"type": "String"
 								},
@@ -290,6 +300,16 @@
 								"sink": {
 									"name": "ww_corklengthsig",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_corkmoisturereading",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Ww_Corkmoisturereading",
+									"type": "Int32"
 								}
 							},
 							{
@@ -424,11 +444,41 @@
 							},
 							{
 								"source": {
+									"name": "ww_headspacemeasurement",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Ww_HeadSpaceMeasurement",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_headspacemeasurementsig",
 									"type": "String"
 								},
 								"sink": {
 									"name": "ww_headspacemeasurementsig",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_headspacepressuremeasurement",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Ww_HeadSpacePressureMeasurement",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_headspacemeasurementcomments",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Ww_HeadSpaceMeasurementComments",
 									"type": "String"
 								}
 							},
@@ -1105,8 +1155,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
@@ -1136,8 +1186,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
