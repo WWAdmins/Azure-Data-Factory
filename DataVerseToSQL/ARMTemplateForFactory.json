@@ -4668,6 +4668,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_filtrationtyperequired",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Filtrationtyperequired",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "crc5d_glassbottlecheck",
 											"type": "String"
 										},
@@ -4748,6 +4758,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_rinsertipsalcsprayed",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_Rinsertipsalcsprayed",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "crc5d_rockstoppertagnumberchecked",
 											"type": "String"
 										},
@@ -4794,6 +4814,16 @@
 										"sink": {
 											"name": "statuscode",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_sterilisationnotes",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Ww_sterilisationNotes",
+											"type": "String"
 										}
 									},
 									{
@@ -4938,6 +4968,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_authoriseroperatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_authoriseroperatorcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_balancecheckcalibration",
 											"type": "String"
 										},
@@ -5078,6 +5118,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_capdetectorset",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Capdetectorset",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_ccp1allheadsactivating",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_CCP1Allheadsactivating",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_ccbrand",
 											"type": "String"
 										},
@@ -5214,6 +5274,16 @@
 										"sink": {
 											"name": "ww_ccp2completed",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_changesterilisationprocess",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_ChangeSterilisationProcess",
+											"type": "Int32"
 										}
 									},
 									{
@@ -5408,6 +5478,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_correctcappingheads",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_correctcappingheads",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_corkinsertion",
 											"type": "Int32"
 										},
@@ -5513,6 +5593,16 @@
 										},
 										"sink": {
 											"name": "ww_cunotagnumberchecked",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_currentbom",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Ww_CurrentBOM",
 											"type": "String"
 										}
 									},
@@ -5808,12 +5898,32 @@
 									},
 									{
 										"source": {
+											"name": "ww_fillingheadbells",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_Fillingheadbells",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_fillheightdetectoronsig",
 											"type": "String"
 										},
 										"sink": {
 											"name": "ww_fillheightdetectoronsig",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheightdetectorset",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Fillheightdetectorset",
+											"type": "Int32"
 										}
 									},
 									{
@@ -6128,6 +6238,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_lenticularfilteroptions",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_LenticularFilterOptions",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_linecleared",
 											"type": "String"
 										},
@@ -6344,6 +6464,26 @@
 										"sink": {
 											"name": "ww_mlrinsertemp",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_mlrollerslubed",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_MLRollersLubed",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_mlscrewcapperchutechecked",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_MLScrewcapperchutechecked",
+											"type": "Int32"
 										}
 									},
 									{
@@ -6484,6 +6624,16 @@
 										"sink": {
 											"name": "ww_printingcheckedsig",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productcheckedandmatches",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Productcheckedandmatches",
+											"type": "Int32"
 										}
 									},
 									{
@@ -6638,6 +6788,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_rockstopperfilter",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Ww_RockstopperFilter",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_rinserwatersupply",
 											"type": "Decimal"
 										},
@@ -6684,6 +6844,16 @@
 										"sink": {
 											"name": "ww_run",
 											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_runrinserinmanualmode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Runrinserinmanualmode",
+											"type": "Int32"
 										}
 									},
 									{
