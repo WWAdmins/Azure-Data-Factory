@@ -79,7 +79,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Ww_BottlingFromtextlookup",
+									"name": "ww_BottlingFromtextlookup",
 									"type": "String"
 								}
 							},
@@ -89,7 +89,7 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "Ww_BottlingTo",
+									"name": "ww_BottlingTo",
 									"type": "Int32"
 								}
 							},
@@ -99,7 +99,7 @@
 									"type": "DateTime"
 								},
 								"sink": {
-									"name": "Ww_CheckTime",
+									"name": "ww_CheckTime",
 									"type": "DateTime"
 								}
 							},
@@ -119,7 +119,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "WW_FinalBottleCount",
+									"name": "ww_FinalBottleCount",
 									"type": "String"
 								}
 							},
@@ -149,7 +149,7 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "Ww_Flowmetercheck",
+									"name": "ww_Flowmetercheck",
 									"type": "Int32"
 								}
 							},
@@ -159,7 +159,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "Ww_GlassFragmentCheck",
+									"name": "ww_GlassFragmenstCheck",
 									"type": "String"
 								}
 							},
@@ -249,7 +249,7 @@
 									"type": "Int32"
 								},
 								"sink": {
-									"name": "Ww_Rinseheadmedium",
+									"name": "ww_Rinseheadmedium",
 									"type": "Int32"
 								}
 							},
@@ -259,7 +259,7 @@
 									"type": "Boolean"
 								},
 								"sink": {
-									"name": "Ww_RinserGasSupplyCCP1",
+									"name": "ww_RinserGasSupplyCCP1",
 									"type": "Boolean"
 								}
 							},
