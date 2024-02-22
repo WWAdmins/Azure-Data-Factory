@@ -4762,7 +4762,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "Ww_Rinsertipsalcsprayed",
+											"name": "ww_Rinsertipsalcsprayed",
 											"type": "Int32"
 										}
 									},
@@ -4822,7 +4822,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Ww_sterilisationNotes",
+											"name": "ww_sterilisationNotes",
 											"type": "String"
 										}
 									},
@@ -5602,7 +5602,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "Ww_CurrentBOM",
+											"name": "ww_CurrentBOM",
 											"type": "String"
 										}
 									},
@@ -5902,7 +5902,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "Ww_Fillingheadbells",
+											"name": "ww_Fillingheadbells",
 											"type": "Int32"
 										}
 									},
@@ -6792,7 +6792,7 @@
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "Ww_RockstopperFilter",
+											"name": "ww_RockstopperFilter",
 											"type": "Int32"
 										}
 									},
