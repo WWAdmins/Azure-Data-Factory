@@ -16682,7 +16682,7 @@
 											"type": "Boolean"
 										},
 										"sink": {
-											"name": "Ww_DeleteLine",
+											"name": "ww_DeleteLine",
 											"type": "Boolean"
 										}
 									},
