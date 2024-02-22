@@ -18016,7 +18016,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"name": "Ww_DCO2",
+											"name": "ww_DCO2",
 											"type": "Decimal"
 										}
 									},
@@ -18106,7 +18106,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"name": "Ww_DO2",
+											"name": "ww_DO2",
 											"type": "Decimal"
 										}
 									},
