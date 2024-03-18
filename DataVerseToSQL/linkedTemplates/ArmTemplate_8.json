@@ -485,6 +485,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_cartonbatch",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_CartonBatch",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_cartonowner",
 											"type": "String"
 										},
