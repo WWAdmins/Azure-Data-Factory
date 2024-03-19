@@ -195,6 +195,12 @@
 					"referenceName": "ww_supervisorsignoffbomhourlycheck",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_hourlycartonusage",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
