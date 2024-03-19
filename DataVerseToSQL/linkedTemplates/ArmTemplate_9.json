@@ -129,6 +129,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_comments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Comments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_endofrunsamples",
 											"type": "Int32"
 										},
