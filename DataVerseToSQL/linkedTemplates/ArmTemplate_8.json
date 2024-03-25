@@ -3114,6 +3114,16 @@
 									},
 									{
 										"source": {
+											"name": "crc5d_alcoholsprayrinserfingersandvalves",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_Alcoholsprayrinserfingersandvalves",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_alcoholsterilisation",
 											"type": "Int32"
 										},
@@ -5967,6 +5977,451 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-07-26T22:14:19Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ww_hourlycartonusage')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Hourly Carton Usage",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Clean",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ww_alcohol",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_alcohol",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholna",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_alcoholna",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_barcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_barcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_barcodena",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_barcodena",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_billofmaterials",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_billofmaterials",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonclosure",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_cartonclosure",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartoncode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartoncode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartondamage",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_cartondamage",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonfibretear",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_cartonfibretear",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartoninkjetcorrectcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_cartoninkjetcorrectcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonskew",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_cartonskew",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cartonvarietyvintage",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_cartonvarietyvintage",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_country",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_country",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "CreatedOn",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_dividerused",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_dividerused",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_dividersils",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_dividersils",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_hourlycartonusageid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_hourlycartonusageid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "importsequencenumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "importsequencenumber",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_key",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_key",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_lotcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_lotcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ModifiedOn",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_operatorcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_operatorcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_quantity",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_quantity",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_runnumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_runnumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "statuscode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "statuscode",
+											"type": "Int32"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "HourlyCartonUsage",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "wwsql003_ww_hourlycartonusage",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Merge Statement",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Hourly Carton Usage",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[usp_ww_hourlycartonusage]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Data Copy fail email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Hourly Carton Usage",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "SP Fail Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Merge Statement",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
+							}
+						}
+					},
+					{
+						"name": "Clean",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[usp_clean_ww_hourlycartonusage]"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
@@ -13546,589 +14001,6 @@
 						"userProperties": [],
 						"typeProperties": {
 							"storedProcedureName": "[[dbo].[usp_clean_ww_prebottlinganalysisgasadjustments]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_prebottlinganalysisrecheck')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Pre-Bottling Analysis Recheck",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Clean",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "crc5d_fiapprovedby",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_fiapprovedby",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_fichange",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "crc5d_fichange",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_refract",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "crc5d_refract",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_refractvalue",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "crc5d_refractvalue",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_alc",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_alc",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_alcnum",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_alcnum",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_alcoholbydistil",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_alcoholbydistil",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_basedo",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_basedo",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_co2",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_co2",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_customertankname",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_customertankname",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_density",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_density",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_distill",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_distill",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_distillnum",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_distillnum",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_etxt",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_etxt",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_extraanalysis",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_extraanalysis",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_fi",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_fi",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_fiissueemailsent",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_fiissueemailsent",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_fso2",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_fso2",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_greentag",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_greentag",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_initials",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_initials",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_notes",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_notes",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operator",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_operator",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_pbatankerlookup",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_pbatankerlookup",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_ph",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_ph",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_prebottlinganalysisrecheckid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_prebottlinganalysisrecheckid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_prebottlinganalysisrechecksummaryname",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_prebottlinganalysisrechecksummaryname",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_run",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_run",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_tanker",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_tanker",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_tankerlookup",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_tankerlookup",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_tankerlookuptext",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_tankerlookuptext",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_temp",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_temp",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_tso2",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_tso2",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_tso2mg",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_tso2mg",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_tso2num",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_tso2num",
-											"type": "Decimal"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "PreBottlingAnalysisRecheck",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_prebottlinganalysisrecheck1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Pre-Bottling Analysis Recheck",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "usp_ww_prebottlinganalysisrecheck"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "wwsql_admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Email on Failure BOM",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Pre-Bottling Analysis Recheck",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "wwsql_admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Clean",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_clean_ww_prebottlinganalysisrecheck]"
 						},
 						"linkedServiceName": {
 							"referenceName": "WWSQL003",
