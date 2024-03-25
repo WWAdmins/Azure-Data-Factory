@@ -335,6 +335,16 @@
 							},
 							{
 								"source": {
+									"name": "crc5d_alcoholsprayrinserfingersandvalves",
+									"type": "String"
+								},
+								"sink": {
+									"name": "crc5d_Alcoholsprayrinserfingersandvalves",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_alcoholsterilisation",
 									"type": "Int32"
 								},
