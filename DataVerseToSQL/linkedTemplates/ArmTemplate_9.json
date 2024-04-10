@@ -3160,12 +3160,42 @@
 									},
 									{
 										"source": {
+											"name": "ww_do",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_do",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_co2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_co2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_do2",
 											"type": "Decimal"
 										},
 										"sink": {
 											"name": "ww_DO2",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_foreignmatter",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_foreignmatter",
+											"type": "String"
 										}
 									},
 									{
