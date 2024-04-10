@@ -5603,7 +5603,7 @@
 										},
 										"sink": {
 											"name": "ww_cunopresent",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -6894,6 +6894,16 @@
 										"sink": {
 											"name": "ww_ScrewcapCork",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_screwcapperchutecheckedeor",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_ScrewcapperchutecheckedEOR",
+											"type": "String"
 										}
 									},
 									{
