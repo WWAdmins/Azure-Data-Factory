@@ -19244,7 +19244,7 @@
 										},
 										"sink": {
 											"name": "ww_visualcolourmatchtankbtl",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
