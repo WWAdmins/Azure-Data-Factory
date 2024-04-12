@@ -4419,6 +4419,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_productcheckedandmatches",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Productcheckedandmatches",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_productionline",
 											"type": "Int32"
 										},
