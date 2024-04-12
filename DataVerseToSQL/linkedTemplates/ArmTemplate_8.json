@@ -12340,6 +12340,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_tanker",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_tanker",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_temperature",
 											"type": "Decimal"
 										},
