@@ -725,6 +725,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_checkallbleedvalvesareclosed",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_CheckAllBleedValvesareClosed",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_ccplainprinted",
 									"type": "String"
 								},
@@ -1475,6 +1485,26 @@
 							},
 							{
 								"source": {
+									"name": "ww_firstflush",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_FirstFlush",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_firstflushfilter",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_FirstFlushFilter",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_fliesinthefillerroom",
 									"type": "Boolean"
 								},
@@ -1661,6 +1691,26 @@
 								"sink": {
 									"name": "ww_KegsFlushed",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_kegsreturnedtotank",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_KegsReturnedToTank",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_kegstodrain",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_KegsToDrain",
+									"type": "Decimal"
 								}
 							},
 							{
