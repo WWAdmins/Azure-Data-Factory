@@ -7472,7 +7472,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "AuditLog",
+								"referenceName": "Tanker",
 								"type": "DatasetReference",
 								"parameters": {}
 							}

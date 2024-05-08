@@ -23467,7 +23467,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "AuditLog",
+								"referenceName": "Tanker",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -23598,7 +23598,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AuditLog')]",
+				"[concat(variables('factoryId'), '/datasets/Tanker')]",
 				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_tanker')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
