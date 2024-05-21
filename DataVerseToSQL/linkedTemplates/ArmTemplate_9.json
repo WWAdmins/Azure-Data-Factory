@@ -7545,7 +7545,7 @@
 						}
 					},
 					{
-						"name": "Email on Failure BOM",
+						"name": "Email on Failure Tanker",
 						"type": "WebActivity",
 						"dependsOn": [
 							{

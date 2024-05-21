@@ -2412,11 +2412,13 @@
 					},
 					{
 						"name": "ww_areaclean",
-						"type": "bit"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "ww_arearetimed",
-						"type": "bit"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "ww_billofmaterials",
@@ -2429,12 +2431,12 @@
 					},
 					{
 						"name": "ww_breakagelocation",
-						"type": "int",
-						"precision": 10
+						"type": "uniqueidentifier"
 					},
 					{
 						"name": "ww_breakages",
-						"type": "bit"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "ww_brokenbottles",
@@ -2443,8 +2445,11 @@
 					},
 					{
 						"name": "ww_colleaguesign",
-						"type": "int",
-						"precision": 10
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_comments",
+						"type": "nvarchar"
 					},
 					{
 						"name": "ww_deleteline",
@@ -2461,12 +2466,12 @@
 					},
 					{
 						"name": "ww_glassfragmentsvisible",
-						"type": "bit"
+						"type": "int",
+						"precision": 10
 					},
 					{
 						"name": "ww_locationofbreak",
-						"type": "int",
-						"precision": 10
+						"type": "nvarchar"
 					},
 					{
 						"name": "ww_name",
