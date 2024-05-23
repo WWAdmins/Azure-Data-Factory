@@ -183,6 +183,12 @@
 								}
 							},
 							{
+								"sink": {
+									"name": "ww_glassfragmentsvisible",
+									"type": "Int32"
+								}
+							},
+							{
 								"source": {
 									"name": "ww_locationofbreak",
 									"type": "String"
