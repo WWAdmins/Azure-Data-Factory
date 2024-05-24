@@ -486,6 +486,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_fillheightchallengetested",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_fillheightchallengetested",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_fillheightdetectoronsig",
 									"type": "String"
 								},
@@ -596,6 +606,16 @@
 							},
 							{
 								"source": {
+									"name": "crc5d_gasfirstblow",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "crc5d_gasfirstblow",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_gasflowratetobowlline2",
 									"type": "Decimal"
 								},
@@ -672,6 +692,36 @@
 								"sink": {
 									"name": "ww_intank",
 									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_inertgaspressure",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_inertgaspressure",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_kegsflowedintime",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "ww_kegsflowedintime",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_knifebladecheck",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_knifebladecheck",
+									"type": "String"
 								}
 							},
 							{
@@ -882,6 +932,26 @@
 								"sink": {
 									"name": "ww_pumpspeed",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_rimdetectionlighton",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_rimdetectionlighton",
+									"type": "Boolean"
 								}
 							},
 							{
@@ -1122,6 +1192,16 @@
 								"sink": {
 									"name": "ww_tankchangeflowedintimesig",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_tankgas",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_tankgas",
+									"type": "Decimal"
 								}
 							},
 							{
