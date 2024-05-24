@@ -7737,12 +7737,162 @@
 									},
 									{
 										"source": {
+											"name": "ww_emptybottleweight1",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight1",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight10",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight10",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight11",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight11",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight12",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight12",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight3",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight3",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight4",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight4",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight5",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight5",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight6",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight6",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight7",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight7",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight8",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight8",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_emptybottleweight9",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_emptybottleweight9",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_fillheight1",
 											"type": "Int32"
 										},
 										"sink": {
 											"name": "ww_fillheight1",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight10",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fillheight10",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight11",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fillheight11",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight12",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fillheight12",
+											"type": "Decimal"
 										}
 									},
 									{
@@ -7783,6 +7933,166 @@
 										"sink": {
 											"name": "ww_fillheight5",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight6",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fillheight6",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight7",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fillheight7",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight8",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fillheight8",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fillheight9",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fillheight9",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight1",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight1",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight10",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight10",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight11",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight11",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight12",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight12",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight3",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight3",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight4",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight4",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight5",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight5",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight6",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight6",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight7",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight7",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight8",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight8",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_fullbottleweight9",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_fullbottleweight9",
+											"type": "Decimal"
 										}
 									},
 									{
@@ -7967,6 +8277,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_productcheckedandmatches",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_productcheckedandmatches",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_productionline",
 											"type": "Int32"
 										},
@@ -8067,6 +8387,36 @@
 									},
 									{
 										"source": {
+											"name": "ww_tafillheight10",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight10",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight11",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight11",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight12",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight12",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_tafillheight2",
 											"type": "Decimal"
 										},
@@ -8102,6 +8452,46 @@
 										},
 										"sink": {
 											"name": "ww_tafillheight5",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight6",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight6",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight7",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight7",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight8",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight8",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_tafillheight9",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_tafillheight9",
 											"type": "Decimal"
 										}
 									},
