@@ -2934,6 +2934,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_internalvisualcheckofrecoverytank",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_internalvisualcheckofrecoverytank",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "crc5d_numberontagsfilters",
 											"type": "String"
 										},
@@ -3170,6 +3180,36 @@
 										"sink": {
 											"name": "ww_alcoholverification",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholverificationdischargethebowl",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_alcoholverificationdischargethebowl",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholverificationrecheckvessel",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_alcoholverificationrecheckvessel",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_alcoholverificationtakeanotherroundoff",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_alcoholverificationtakeanotherroundoff",
+											"type": "Boolean"
 										}
 									},
 									{
@@ -4934,6 +4974,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_recirculatewine",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_recirculatewine",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_productlinecheck",
 											"type": "String"
 										},
@@ -4990,6 +5040,76 @@
 										"sink": {
 											"name": "ww_refractverification",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refractverificationdischargethebowl",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_refractverificationdischargethebowl",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refractverificationrecheckvessel",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_refractverificationrecheckvessel",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_refractverificationtakeanotherroundoff",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_refractverificationtakeanotherroundoff",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_retestalcoholverificationinspecification",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_retestalcoholverificationinspecification",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_retestrefractverificationinspecification",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_retestRefractverificationinspecification",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_retestvisualcolourmatch",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_retestvisualcolourmatch",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_retestvisualcolourmatchcomments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_retestvisualcolourmatchcomments",
+											"type": "String"
 										}
 									},
 									{
@@ -5870,6 +5990,16 @@
 										"sink": {
 											"name": "ww_winetempinternalprobe",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_winemakerapproved",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_winemakerapproved",
+											"type": "Boolean"
 										}
 									},
 									{
