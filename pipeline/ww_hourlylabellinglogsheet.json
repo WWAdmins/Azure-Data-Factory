@@ -144,6 +144,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_operatorcode",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_operatorcode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_barcodena",
 									"type": "Boolean"
 								},
@@ -640,6 +650,16 @@
 								"sink": {
 									"name": "ww_productionline",
 									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
 								}
 							},
 							{
@@ -785,8 +805,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
@@ -816,8 +836,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
