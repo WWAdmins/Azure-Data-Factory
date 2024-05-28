@@ -6480,6 +6480,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_quantity",
 											"type": "Decimal"
 										},
@@ -6793,6 +6803,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_barcodena",
 											"type": "Boolean"
 										},
@@ -7289,6 +7309,16 @@
 										"sink": {
 											"name": "ww_productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
@@ -9320,6 +9350,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_stockcode",
 											"type": "String"
 										},
@@ -9689,6 +9729,16 @@
 										"sink": {
 											"name": "ww_productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
@@ -11252,6 +11302,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_resultofacrash",
 											"type": "Int32"
 										},
@@ -11570,6 +11630,16 @@
 										},
 										"sink": {
 											"name": "ww_reason",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
 											"type": "String"
 										}
 									},
@@ -14516,6 +14586,16 @@
 										"sink": {
 											"name": "ww_productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{

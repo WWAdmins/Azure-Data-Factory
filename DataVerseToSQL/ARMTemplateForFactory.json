@@ -8288,6 +8288,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_quantity",
 											"type": "Decimal"
 										},
@@ -8605,6 +8615,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_barcodena",
 											"type": "Boolean"
 										},
@@ -9101,6 +9121,16 @@
 										"sink": {
 											"name": "ww_productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
@@ -11140,6 +11170,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_stockcode",
 											"type": "String"
 										},
@@ -11513,6 +11553,16 @@
 										"sink": {
 											"name": "ww_productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
@@ -13088,6 +13138,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_resultofacrash",
 											"type": "Int32"
 										},
@@ -13410,6 +13470,16 @@
 										},
 										"sink": {
 											"name": "ww_reason",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
 											"type": "String"
 										}
 									},
@@ -16376,6 +16446,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_resultrequired",
 											"type": "Decimal"
 										},
@@ -16939,6 +17019,16 @@
 										"sink": {
 											"name": "ww_productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
@@ -17967,6 +18057,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_requiredso2result",
 											"type": "Decimal"
 										},
@@ -18903,6 +19003,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_run",
 											"type": "Guid"
 										},
@@ -19326,6 +19436,16 @@
 										},
 										"sink": {
 											"name": "ww_qcrecheckname",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
 											"type": "String"
 										}
 									},
@@ -21870,6 +21990,16 @@
 										"sink": {
 											"name": "ww_quantitydecimal",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{

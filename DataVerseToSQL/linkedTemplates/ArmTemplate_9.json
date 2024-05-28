@@ -388,6 +388,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_run",
 											"type": "Guid"
 										},
@@ -1404,6 +1414,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_requiredso2result",
 											"type": "Decimal"
 										},
@@ -2332,6 +2352,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_run",
 											"type": "Guid"
 										},
@@ -2751,6 +2781,16 @@
 										},
 										"sink": {
 											"name": "ww_qcrecheckname",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
 											"type": "String"
 										}
 									},
@@ -5271,6 +5311,16 @@
 										"sink": {
 											"name": "ww_quantitydecimal",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
