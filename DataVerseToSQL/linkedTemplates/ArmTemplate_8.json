@@ -1184,6 +1184,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_rejectcomments",
 											"type": "String"
 										},
@@ -1460,7 +1470,7 @@
 									},
 									{
 										"source": {
-											"name": "ww_importsequencenumber",
+											"name": "importsequencenumber",
 											"type": "Int32"
 										},
 										"sink": {
@@ -1556,6 +1566,16 @@
 										"sink": {
 											"name": "ww_productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
