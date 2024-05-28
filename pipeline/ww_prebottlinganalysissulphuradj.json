@@ -204,6 +204,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_requiredso2result",
 									"type": "Decimal"
 								},
