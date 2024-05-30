@@ -816,6 +816,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_numberofkegs",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "ww_numberofkegs",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_operatorbottlinghourlyid",
 									"type": "Guid"
 								},
