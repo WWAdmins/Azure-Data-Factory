@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "CommonDataServiceForAppsSource",
-						"query": "<fetch>  \n   <entity name='ww_prebottlinganalysis'>   \n      <all-attributes/>      \n\t\t  <filter type='and'>   \n\t\t\t\t<condition attribute='ww_tankerlookup' operator='not-null' />   \n\t\t  </filter>  \n   </entity>   \n</fetch>  "
+						"query": "<fetch>  \n   <entity name='ww_prebottlinganalysis'>   \n      <all-attributes/>      \n\t\t  <filter type='or'>   \n\t\t\t\t<condition attribute='ww_tankerlookup' operator='not-null' />   \n\t\t  </filter>  \n   </entity>   \n</fetch>  "
 					},
 					"sink": {
 						"type": "SqlServerSink"
@@ -74,10 +74,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_alc",
-									"type": "Int32"
-								},
 								"sink": {
 									"name": "ww_alc",
 									"type": "Int32"
@@ -124,10 +120,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_alcoholbydistillation",
-									"type": "String"
-								},
 								"sink": {
 									"name": "ww_alcoholbydistillation",
 									"type": "String"
@@ -234,20 +226,12 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_initials",
-									"type": "String"
-								},
 								"sink": {
 									"name": "ww_initials",
 									"type": "String"
 								}
 							},
 							{
-								"source": {
-									"name": "ww_initialscheck",
-									"type": "String"
-								},
 								"sink": {
 									"name": "ww_initialscheck",
 									"type": "String"
@@ -294,10 +278,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_operator",
-									"type": "String"
-								},
 								"sink": {
 									"name": "ww_operator",
 									"type": "String"
@@ -344,13 +324,15 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_productionline",
-									"type": "Int32"
-								},
 								"sink": {
 									"name": "ww_productionline",
 									"type": "Int32"
+								}
+							},
+							{
+								"sink": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
 								}
 							},
 							{
@@ -374,10 +356,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_sealid",
-									"type": "Int32"
-								},
 								"sink": {
 									"name": "ww_sealid",
 									"type": "Int32"
@@ -444,10 +422,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_ts02",
-									"type": "Int32"
-								},
 								"sink": {
 									"name": "ww_ts02",
 									"type": "Int32"
@@ -546,8 +520,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
@@ -577,8 +551,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
