@@ -74,6 +74,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ww_alc",
+									"type": "Int32"
+								},
 								"sink": {
 									"name": "ww_alc",
 									"type": "Int32"
@@ -120,6 +124,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ww_alcoholbydistillationl",
+									"type": "String"
+								},
 								"sink": {
 									"name": "ww_alcoholbydistillation",
 									"type": "String"
@@ -226,12 +234,20 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ww_initials",
+									"type": "String"
+								},
 								"sink": {
 									"name": "ww_initials",
 									"type": "String"
 								}
 							},
 							{
+								"source": {
+									"name": "ww_initialscheck",
+									"type": "String"
+								},
 								"sink": {
 									"name": "ww_initialscheck",
 									"type": "String"
@@ -278,6 +294,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ww_operator",
+									"type": "String"
+								},
 								"sink": {
 									"name": "ww_operator",
 									"type": "String"
@@ -324,12 +344,20 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ww_productionline",
+									"type": "Int32"
+								},
 								"sink": {
 									"name": "ww_productionline",
 									"type": "Int32"
 								}
 							},
 							{
+								"source": {
+									"name": "ww_reasonfordeletion",
+									"type": "String"
+								},
 								"sink": {
 									"name": "ww_reasonfordeletion",
 									"type": "String"
@@ -356,6 +384,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ww_sealid",
+									"type": "Int32"
+								},
 								"sink": {
 									"name": "ww_sealid",
 									"type": "Int32"
@@ -422,6 +454,10 @@
 								}
 							},
 							{
+								"source": {
+									"name": "ww_ts02",
+									"type": "Int32"
+								},
 								"sink": {
 									"name": "ww_ts02",
 									"type": "Int32"
