@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Clean",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -23,16 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "CommonDataServiceForAppsSource",
-						"additionalColumns": [
-							{
-								"name": "ww_glassfragmentsvisible",
-								"value": {
-									"value": "@activity('Lookup1').output.firstRow",
-									"type": "Expression"
-								}
-							}
-						]
+						"type": "CommonDataServiceForAppsSource"
 					},
 					"sink": {
 						"type": "SqlServerSink"
@@ -192,13 +183,9 @@
 								}
 							},
 							{
-								"source": {
-									"name": "ww_glassfragmentsvisible",
-									"type": "String"
-								},
 								"sink": {
 									"name": "ww_glassfragmentsvisible",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -444,35 +431,6 @@
 				"linkedServiceName": {
 					"referenceName": "WWSQL003",
 					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Lookup1",
-				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "Clean",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "CommonDataServiceForAppsSource"
-					},
-					"dataset": {
-						"referenceName": "OperatorBottlingBreakage",
-						"type": "DatasetReference"
-					}
 				}
 			}
 		],
