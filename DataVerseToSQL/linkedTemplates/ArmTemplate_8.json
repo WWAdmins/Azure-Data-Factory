@@ -10356,6 +10356,46 @@
 									},
 									{
 										"source": {
+											"name": "ww_ccp3rdlabelmatchesimageonspec",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_CCP3rdlabelmatchesimageonspec",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_ccp4thlabelmatchesimageonspec",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_CCP4thlabelmatchesimageonspec",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_ccpbacklabelmatchesimageonspec",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_CCPbacklabelmatchesimageonspec",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_ccpfrontlabelmatchesimageonspec",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_CCPfrontlabelmatchesimageonspec",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_closuresilscodecorrectsig",
 											"type": "String"
 										},
