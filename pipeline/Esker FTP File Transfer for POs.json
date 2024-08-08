@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"wildcardFileName": "ERPID*",
+							"wildcardFileName": "ERPID_*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -97,8 +97,7 @@
 					"enableLogging": true,
 					"storeSettings": {
 						"type": "FileServerReadSettings",
-						"recursive": true,
-						"wildcardFileName": "ERPID",
+						"fileListPath": "ERPID__ProjectCodes__08-08-2024 0156 PM.csv",
 						"enablePartitionDiscovery": false
 					}
 				}
