@@ -9,7 +9,8 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "FileServerLocation"
+				"type": "FileServerLocation",
+				"fileName": "VM SOH By lot code.csv"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
