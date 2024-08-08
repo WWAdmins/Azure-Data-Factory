@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FileServer1'"
 		},
+		"SFTP_Linked_Service_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SFTP_Linked_Service'"
+		},
 		"SQLToDataverseProd_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLToDataverseProd'"
@@ -85,11 +89,19 @@
 		},
 		"FileServer1_properties_typeProperties_host": {
 			"type": "string",
-			"defaultValue": "C:\\Users\\tejaswi.datla\\Desktop\\TopMovies_Part1"
+			"defaultValue": "\\\\WWMULTI001\\Indevin\\"
 		},
 		"FileServer1_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "tejaswi.Datla@wineworks.co.nz"
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"SFTP_Linked_Service_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "sftp.cloud.statelake.io"
+		},
+		"SFTP_Linked_Service_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "indevin.wineworks"
 		},
 		"SQLToDataverseProd_properties_typeProperties_username": {
 			"type": "string",
@@ -175,6 +187,9 @@
 					"DataverseTest_password": {
 						"value": "[parameters('DataverseTest_password')]"
 					},
+					"SFTP_Linked_Service_password": {
+						"value": "[parameters('SFTP_Linked_Service_password')]"
+					},
 					"SQLToDataverseProd_password": {
 						"value": "[parameters('SQLToDataverseProd_password')]"
 					},
@@ -198,6 +213,12 @@
 					},
 					"DataverseTest_properties_typeProperties_username": {
 						"value": "[parameters('DataverseTest_properties_typeProperties_username')]"
+					},
+					"SFTP_Linked_Service_properties_typeProperties_host": {
+						"value": "[parameters('SFTP_Linked_Service_properties_typeProperties_host')]"
+					},
+					"SFTP_Linked_Service_properties_typeProperties_userName": {
+						"value": "[parameters('SFTP_Linked_Service_properties_typeProperties_userName')]"
 					},
 					"SQLToDataverseProd_properties_typeProperties_username": {
 						"value": "[parameters('SQLToDataverseProd_properties_typeProperties_username')]"
@@ -433,6 +454,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_8')]"
+			]
+		},
+		{
+			"name": "DataVerseToSQL_ArmTemplate_10",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_10.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]"
@@ -443,7 +484,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_8')]"
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_9')]"
 			]
 		}
 	]

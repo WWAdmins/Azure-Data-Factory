@@ -40,11 +40,11 @@
 		},
 		"FileServer1_properties_typeProperties_host": {
 			"type": "string",
-			"defaultValue": "C:\\Users\\tejaswi.datla\\Desktop\\TopMovies_Part1"
+			"defaultValue": "\\\\WWMULTI001\\Indevin\\"
 		},
 		"FileServer1_properties_typeProperties_userId": {
 			"type": "string",
-			"defaultValue": "tejaswi.Datla@wineworks.co.nz"
+			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
@@ -63,6 +63,42 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/StockCheckin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_stockcheckin"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Stockcheckinentry')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_stockcheckinentry"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SupervisorSignoff')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1778,6 +1814,82 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/WWMULTI001_Indevin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FileServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": "VM SOH By lot code.csv"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Warehouse",
+						"type": "String"
+					},
+					{
+						"name": "Item",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
+						"name": "Client Stock Code",
+						"type": "String"
+					},
+					{
+						"name": "Client Stock Code2",
+						"type": "String"
+					},
+					{
+						"name": "Lot",
+						"type": "String"
+					},
+					{
+						"name": "On Hand",
+						"type": "String"
+					},
+					{
+						"name": "Allocated",
+						"type": "String"
+					},
+					{
+						"name": "Pending",
+						"type": "String"
+					},
+					{
+						"name": "Unit",
+						"type": "String"
+					},
+					{
+						"name": "Receipted",
+						"type": "String"
+					},
+					{
+						"name": "Last Picked",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FileServer1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003LabellingPreflight')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1869,213 +1981,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Bottle Batch Summary"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_BreakageLocation')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "StateCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Location",
-						"type": "nvarchar"
-					},
-					{
-						"name": "BreakageLocation",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "BreakageLocation"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_CartonUsage')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Carton Owner",
-						"type": "varchar"
-					},
-					{
-						"name": "Deleted Line",
-						"type": "bit"
-					},
-					{
-						"name": "LPN",
-						"type": "varchar"
-					},
-					{
-						"name": "Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Pallet Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Quantity",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Reference",
-						"type": "varchar"
-					},
-					{
-						"name": "Reference Date",
-						"type": "date"
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Supplier",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Bill Of Materials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Carton Usage",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Carton Usage"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_CartonUsageDetail')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Issues",
-						"type": "varchar"
-					},
-					{
-						"name": "Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bill Of Materials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Carton Usage Detail",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Carton Usage Detail"
 				}
 			},
 			"dependsOn": [

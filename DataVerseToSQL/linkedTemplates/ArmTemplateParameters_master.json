@@ -17,6 +17,9 @@
 		"FileServer1_password": {
 			"value": ""
 		},
+		"SFTP_Linked_Service_password": {
+			"value": ""
+		},
 		"SQLToDataverseProd_password": {
 			"value": ""
 		},
@@ -60,10 +63,16 @@
 			"value": "wwdigital@wineworks.co.nz"
 		},
 		"FileServer1_properties_typeProperties_host": {
-			"value": "C:\\Users\\tejaswi.datla\\Desktop\\TopMovies_Part1"
+			"value": "\\\\WWMULTI001\\Indevin\\"
 		},
 		"FileServer1_properties_typeProperties_userId": {
-			"value": "tejaswi.Datla@wineworks.co.nz"
+			"value": "wwdigital@wineworks.co.nz"
+		},
+		"SFTP_Linked_Service_properties_typeProperties_host": {
+			"value": "sftp.cloud.statelake.io"
+		},
+		"SFTP_Linked_Service_properties_typeProperties_userName": {
+			"value": "indevin.wineworks"
 		},
 		"SQLToDataverseProd_properties_typeProperties_username": {
 			"value": "wwdigital@wineworks.co.nz"
