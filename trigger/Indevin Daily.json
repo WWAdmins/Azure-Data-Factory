@@ -1,0 +1,29 @@
+{
+	"name": "Indevin Daily",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Indevin FTP File Transfer",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2024-08-11T21:44:00",
+				"timeZone": "New Zealand Standard Time",
+				"schedule": {
+					"hours": [
+						8
+					]
+				}
+			}
+		}
+	}
+}
