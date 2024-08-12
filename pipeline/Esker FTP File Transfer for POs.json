@@ -97,7 +97,8 @@
 					"enableLogging": true,
 					"storeSettings": {
 						"type": "FileServerReadSettings",
-						"fileListPath": "ERPID__ProjectCodes__08-08-2024 0156 PM.csv",
+						"recursive": true,
+						"wildcardFileName": "ERPID__ProjectCodes__*",
 						"enablePartitionDiscovery": false
 					}
 				}
