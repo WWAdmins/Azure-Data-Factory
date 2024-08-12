@@ -9911,6 +9911,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_downtimehours",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_downtimehours",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_internalnotes",
 											"type": "String"
 										},
@@ -10046,6 +10056,16 @@
 										},
 										"sink": {
 											"name": "ww_pluscasesdispatchedoffline",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productionlabourhours",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_productionlabourhours",
 											"type": "Decimal"
 										}
 									},
