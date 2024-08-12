@@ -75,6 +75,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
 		},
+		"EskerFTPWW_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'EskerFTPWW'"
+		},
+		"EskerSFTP_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'EskerSFTP'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -89,7 +97,7 @@
 		},
 		"FileServer1_properties_typeProperties_host": {
 			"type": "string",
-			"defaultValue": "\\\\WWMULTI001\\Indevin\\"
+			"defaultValue": "\\\\WWMULTI001\\Indevin"
 		},
 		"FileServer1_properties_typeProperties_userId": {
 			"type": "string",
@@ -151,6 +159,22 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
 		},
+		"EskerFTPWW_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\WWMULTI001\\Esker"
+		},
+		"EskerFTPWW_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"EskerSFTP_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "sftp-ae5.ondemand.esker.com"
+		},
+		"EskerSFTP_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Invoices@05284907.20003690"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -205,6 +229,9 @@
 					"dlsadbiottest_accountKey": {
 						"value": "[parameters('dlsadbiottest_accountKey')]"
 					},
+					"EskerSFTP_password": {
+						"value": "[parameters('EskerSFTP_password')]"
+					},
 					"CommonDataServiceForApps1_properties_typeProperties_username": {
 						"value": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]"
 					},
@@ -240,6 +267,12 @@
 					},
 					"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('ProductionLink_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"EskerSFTP_properties_typeProperties_host": {
+						"value": "[parameters('EskerSFTP_properties_typeProperties_host')]"
+					},
+					"EskerSFTP_properties_typeProperties_userName": {
+						"value": "[parameters('EskerSFTP_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -320,6 +353,9 @@
 					"WWWEB002_password": {
 						"value": "[parameters('WWWEB002_password')]"
 					},
+					"EskerFTPWW_password": {
+						"value": "[parameters('EskerFTPWW_password')]"
+					},
 					"FileServer1_properties_typeProperties_host": {
 						"value": "[parameters('FileServer1_properties_typeProperties_host')]"
 					},
@@ -334,6 +370,12 @@
 					},
 					"WWWEB002_properties_typeProperties_userName": {
 						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"
+					},
+					"EskerFTPWW_properties_typeProperties_host": {
+						"value": "[parameters('EskerFTPWW_properties_typeProperties_host')]"
+					},
+					"EskerFTPWW_properties_typeProperties_userId": {
+						"value": "[parameters('EskerFTPWW_properties_typeProperties_userId')]"
 					}
 				}
 			},

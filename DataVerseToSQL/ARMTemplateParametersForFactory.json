@@ -53,6 +53,12 @@
 		"dlsadbiottest_accountKey": {
 			"value": ""
 		},
+		"EskerFTPWW_password": {
+			"value": ""
+		},
+		"EskerSFTP_password": {
+			"value": ""
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"value": "Tejaswi.Datla@wineworks.co.nz"
 		},
@@ -63,7 +69,7 @@
 			"value": "wwdigital@wineworks.co.nz"
 		},
 		"FileServer1_properties_typeProperties_host": {
-			"value": "\\\\WWMULTI001\\Indevin\\"
+			"value": "\\\\WWMULTI001\\Indevin"
 		},
 		"FileServer1_properties_typeProperties_userId": {
 			"value": "wwdigital@wineworks.co.nz"
@@ -109,6 +115,18 @@
 		},
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"EskerFTPWW_properties_typeProperties_host": {
+			"value": "\\\\WWMULTI001\\Esker"
+		},
+		"EskerFTPWW_properties_typeProperties_userId": {
+			"value": "wwdigital@wineworks.co.nz"
+		},
+		"EskerSFTP_properties_typeProperties_host": {
+			"value": "sftp-ae5.ondemand.esker.com"
+		},
+		"EskerSFTP_properties_typeProperties_userName": {
+			"value": "Invoices@05284907.20003690"
 		}
 	}
 }

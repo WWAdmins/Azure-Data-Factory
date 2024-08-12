@@ -44,6 +44,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
 		},
+		"EskerSFTP_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'EskerSFTP'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -91,6 +95,14 @@
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"EskerSFTP_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "sftp-ae5.ondemand.esker.com"
+		},
+		"EskerSFTP_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Invoices@05284907.20003690"
 		}
 	},
 	"variables": {
@@ -343,6 +355,52 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EskerSFTP')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('EskerSFTP_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('EskerSFTP_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('EskerSFTP_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Indevin Daily')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2024-08-11T21:44:00",
+						"timeZone": "New Zealand Standard Time",
+						"schedule": {
+							"hours": [
+								8
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_billofmaterials')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -382,56 +440,6 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"folderPath": "iottest/bronze/dataverse/ww_bottlebatchsummary/",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_operatorbottlingdowntime')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_operatorbottlingdowntime/",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_productionline')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_productionlinelookup/",
 						"fileSystem": "dls-fs-iot"
 					},
 					"compressionCodec": "snappy"
