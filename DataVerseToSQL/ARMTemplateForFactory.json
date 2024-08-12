@@ -8386,6 +8386,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_cartonlabelused",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_cartonlabelused",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_cartonskew",
 											"type": "Int32"
 										},
