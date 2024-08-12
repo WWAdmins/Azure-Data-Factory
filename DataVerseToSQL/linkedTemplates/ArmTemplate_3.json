@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"EskerFTPWW_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'EskerFTPWW'"
+		},
 		"FileServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FileServer1'"
@@ -38,9 +42,13 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
 		},
-		"EskerFTPWW_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'EskerFTPWW'"
+		"EskerFTPWW_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\WWMULTI001\\Esker"
+		},
+		"EskerFTPWW_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
 		},
 		"FileServer1_properties_typeProperties_host": {
 			"type": "string",
@@ -61,20 +69,30 @@
 		"WWWEB002_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "wineworksgroup\\WWG_Service"
-		},
-		"EskerFTPWW_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "\\\\WWMULTI001\\Esker"
-		},
-		"EskerFTPWW_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/RunReportBottleLabelPack')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_runreportbottlelabelpack"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Runs')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -218,6 +236,28 @@
 				"schema": [],
 				"typeProperties": {
 					"entityName": "ww_tanker"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EskerFTPWW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('EskerFTPWW_properties_typeProperties_host')]",
+					"userId": "[parameters('EskerFTPWW_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('EskerFTPWW_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []
@@ -373,42 +413,19 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/EskerFTPWW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('EskerFTPWW_properties_typeProperties_host')]",
-					"userId": "[parameters('EskerFTPWW_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('EskerFTPWW_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EskerSFTP')]",
+			"name": "[concat(parameters('factoryName'), '/EskerWWFTP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "EskerSFTP",
+					"referenceName": "EskerFTPWW",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "SftpLocation",
-						"folderPath": "/In_MasterData"
+						"type": "FileServerLocation"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -417,7 +434,9 @@
 				},
 				"schema": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EskerFTPWW')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SQL003_FOTest')]",
@@ -1909,82 +1928,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWMULTI001_Indevin')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "FileServer1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "VM SOH By lot code.csv"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Warehouse",
-						"type": "String"
-					},
-					{
-						"name": "Item",
-						"type": "String"
-					},
-					{
-						"name": "Description",
-						"type": "String"
-					},
-					{
-						"name": "Client Stock Code",
-						"type": "String"
-					},
-					{
-						"name": "Client Stock Code2",
-						"type": "String"
-					},
-					{
-						"name": "Lot",
-						"type": "String"
-					},
-					{
-						"name": "On Hand",
-						"type": "String"
-					},
-					{
-						"name": "Allocated",
-						"type": "String"
-					},
-					{
-						"name": "Pending",
-						"type": "String"
-					},
-					{
-						"name": "Unit",
-						"type": "String"
-					},
-					{
-						"name": "Receipted",
-						"type": "String"
-					},
-					{
-						"name": "Last Picked",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/FileServer1')]"
 			]
 		}
 	]

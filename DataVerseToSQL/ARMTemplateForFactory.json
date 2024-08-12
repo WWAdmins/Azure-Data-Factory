@@ -19,6 +19,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'DataverseTest'"
 		},
+		"EskerFTPWW_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'EskerFTPWW'"
+		},
+		"EskerSFTP_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'EskerSFTP'"
+		},
 		"FileServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FileServer1'"
@@ -75,14 +83,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
 		},
-		"EskerFTPWW_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'EskerFTPWW'"
-		},
-		"EskerSFTP_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'EskerSFTP'"
-		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -94,6 +94,22 @@
 		"DataverseTest_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"EskerFTPWW_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\WWMULTI001\\Esker"
+		},
+		"EskerFTPWW_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"EskerSFTP_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "sftp-ae5.ondemand.esker.com"
+		},
+		"EskerSFTP_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Invoices@05284907.20003690"
 		},
 		"FileServer1_properties_typeProperties_host": {
 			"type": "string",
@@ -158,22 +174,6 @@
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
-		"EskerFTPWW_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "\\\\WWMULTI001\\Esker"
-		},
-		"EskerFTPWW_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
-		},
-		"EskerSFTP_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "sftp-ae5.ondemand.esker.com"
-		},
-		"EskerSFTP_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "Invoices@05284907.20003690"
 		}
 	},
 	"variables": {
@@ -1091,6 +1091,128 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/BreakageLocation')]",
 				"[concat(variables('factoryId'), '/datasets/WWSQL003_BreakageLocation')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Esker FTP File Transfer for POs')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Esker",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"wildcardFileName": "ERPID_*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "SftpWriteSettings",
+									"operationTimeout": "01:00:00",
+									"useTempFileRename": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "EskerWWFTP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "EskerSFTP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Delete1",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "Esker",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "EskerWWFTP",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"logStorageSettings": {
+								"linkedServiceName": {
+									"referenceName": "dlsadbiottest",
+									"type": "LinkedServiceReference"
+								},
+								"path": "eskerlogging"
+							},
+							"enableLogging": true,
+							"storeSettings": {
+								"type": "FileServerReadSettings",
+								"recursive": true,
+								"wildcardFileName": "ERPID__ProjectCodes__*",
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/EskerWWFTP')]",
+				"[concat(variables('factoryId'), '/datasets/EskerSFTP')]",
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
 			]
 		},
 		{
@@ -23205,6 +23327,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_bottleregisterchecked",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Bottleregisterchecked",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_cappercompressioncorrectsig",
 											"type": "String"
 										},
@@ -23370,6 +23502,16 @@
 										},
 										"sink": {
 											"name": "ww_corktimingsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkervacuumpulledinbottles",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Corkervacuumpulledinbottles",
 											"type": "String"
 										}
 									},
@@ -23635,6 +23777,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_rimdetection",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Rimdetection",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_rinsercorrectchangepartssig",
 											"type": "String"
 										},
@@ -23680,6 +23832,16 @@
 										},
 										"sink": {
 											"name": "ww_rinserlowpressurecutoutsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_sterilecabin",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_SterileCabin",
 											"type": "String"
 										}
 									},
@@ -24883,6 +25045,59 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EskerSFTP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EskerSFTP",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"folderPath": "/In_MasterData"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EskerSFTP')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EskerWWFTP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EskerFTPWW",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EskerFTPWW')]"
 			]
 		},
 		{
@@ -39014,6 +39229,51 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EskerFTPWW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('EskerFTPWW_properties_typeProperties_host')]",
+					"userId": "[parameters('EskerFTPWW_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('EskerFTPWW_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EskerSFTP')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('EskerSFTP_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('EskerSFTP_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('EskerSFTP_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/FileServer1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -39683,6 +39943,31 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Indevin Daily')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2024-08-11T21:44:00",
+						"timeZone": "New Zealand Standard Time",
+						"schedule": {
+							"hours": [
+								8
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/iot-test-trigger-window')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -40090,251 +40375,6 @@
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
 			"apiVersion": "2018-06-01",
 			"properties": {},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Esker FTP File Transfer for POs')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Esker",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"wildcardFileName": "ERPID_*",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "SftpWriteSettings",
-									"operationTimeout": "01:00:00",
-									"useTempFileRename": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "EskerWWFTP",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "EskerSFTP",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Delete1",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "Esker",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "EskerWWFTP",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"logStorageSettings": {
-								"linkedServiceName": {
-									"referenceName": "dlsadbiottest",
-									"type": "LinkedServiceReference"
-								},
-								"path": "eskerlogging"
-							},
-							"enableLogging": true,
-							"storeSettings": {
-								"type": "FileServerReadSettings",
-								"recursive": true,
-								"wildcardFileName": "ERPID__ProjectCodes__*",
-								"enablePartitionDiscovery": false
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/EskerWWFTP')]",
-				"[concat(variables('factoryId'), '/datasets/EskerSFTP')]",
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EskerFTPWW')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('EskerFTPWW_properties_typeProperties_host')]",
-					"userId": "[parameters('EskerFTPWW_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('EskerFTPWW_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EskerWWFTP')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "EskerFTPWW",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/EskerFTPWW')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EskerSFTP')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Sftp",
-				"typeProperties": {
-					"host": "[parameters('EskerSFTP_properties_typeProperties_host')]",
-					"port": 22,
-					"skipHostKeyValidation": true,
-					"authenticationType": "Basic",
-					"userName": "[parameters('EskerSFTP_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('EskerSFTP_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EskerSFTP')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "EskerSFTP",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "SftpLocation",
-						"folderPath": "/In_MasterData"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/EskerSFTP')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Indevin Daily')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2024-08-11T21:44:00",
-						"timeZone": "New Zealand Standard Time",
-						"schedule": {
-							"hours": [
-								8
-							]
-						}
-					}
-				}
-			},
 			"dependsOn": []
 		}
 	]
