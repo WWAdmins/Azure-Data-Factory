@@ -11,8 +11,8 @@
 			{
 				"name": "crc5d_density",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "crc5d_radialmovementchecksig",
@@ -46,8 +46,8 @@
 			{
 				"name": "ww_adjustment",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_adjustmenthasbeenmadesig",
@@ -56,8 +56,8 @@
 			{
 				"name": "ww_averageweight",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_balancecheck",
@@ -66,6 +66,16 @@
 			{
 				"name": "ww_billofmaterials",
 				"type": "uniqueidentifier"
+			},
+			{
+				"name": "ww_bucketflowedtime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ww_bucketskegsflowedintime",
+				"type": "nvarchar"
 			},
 			{
 				"name": "ww_capcoloursig",
@@ -118,12 +128,22 @@
 				"precision": 10
 			},
 			{
+				"name": "ww_CorkInsertionChecked",
+				"type": "int",
+				"precision": 10
+			},
+			{
 				"name": "ww_corkinsertionsig",
 				"type": "nvarchar"
 			},
 			{
 				"name": "ww_corklengthsig",
 				"type": "nvarchar"
+			},
+			{
+				"name": "ww_Corkmoisturereading",
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "ww_corkmoisturesig",
@@ -151,13 +171,103 @@
 			{
 				"name": "ww_emptybottleweight",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight1",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight10",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight11",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight12",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight2",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight3",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight4",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight5",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight6",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight7",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight8",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_emptybottleweight9",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_fillheight1",
 				"type": "int",
 				"precision": 10
+			},
+			{
+				"name": "ww_fillheight10",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fillheight11",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fillheight12",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_fillheight2",
@@ -180,17 +290,135 @@
 				"precision": 10
 			},
 			{
+				"name": "ww_fillheight6",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fillheight7",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fillheight8",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fillheight9",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_flowedfrom",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ww_flowedto",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ww_fullbottleweight1",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight10",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight11",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight12",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight2",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight3",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight4",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight5",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight6",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight7",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight8",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_fullbottleweight9",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
 				"name": "ww_gapingbrokenbridges",
 				"type": "nvarchar"
 			},
 			{
 				"name": "ww_grossweight",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_HeadSpaceMeasurement",
+				"type": "int",
+				"precision": 10
 			},
 			{
 				"name": "ww_headspacemeasurementsig",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ww_HeadSpacePressureMeasurement",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ww_HeadSpaceMeasurementComments",
 				"type": "nvarchar"
 			},
 			{
@@ -228,8 +456,8 @@
 			{
 				"name": "ww_nettweight",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_operatorcode",
@@ -245,6 +473,11 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "ww_productcheckedandmatches",
+				"type": "int",
+				"precision": 10
+			},
+			{
 				"name": "ww_productionline",
 				"type": "int",
 				"precision": 10
@@ -255,6 +488,10 @@
 			},
 			{
 				"name": "ww_pulltucktestchecked",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ww_reasonfordeletion",
 				"type": "nvarchar"
 			},
 			{
@@ -284,32 +521,80 @@
 			{
 				"name": "ww_tafillheight1",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tafillheight10",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tafillheight11",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tafillheight12",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_tafillheight2",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_tafillheight3",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_tafillheight4",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_tafillheight5",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tafillheight6",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tafillheight7",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tafillheight8",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tafillheight9",
+				"type": "decimal",
+				"precision": 20,
+				"scale": 7
+			},
+			{
+				"name": "ww_tankchangedflowedintime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
 			},
 			{
 				"name": "ww_tanker",
@@ -318,8 +603,8 @@
 			{
 				"name": "ww_tareweight",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_torquebreak1",
@@ -468,8 +753,8 @@
 			{
 				"name": "ww_winetemperature",
 				"type": "decimal",
-				"precision": 11,
-				"scale": 5
+				"precision": 20,
+				"scale": 7
 			},
 			{
 				"name": "ww_zorksealcheckok",
