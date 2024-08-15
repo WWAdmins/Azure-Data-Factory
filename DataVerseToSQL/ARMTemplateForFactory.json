@@ -19789,6 +19789,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_comments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_comments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_deleteline",
 											"type": "Boolean"
 										},
@@ -19839,6 +19849,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_qcrecheckid",
 											"type": "Guid"
 										},
@@ -19905,6 +19925,16 @@
 										"sink": {
 											"name": "ww_runname",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_timeofcheck",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_timeofcheck",
+											"type": "DateTime"
 										}
 									},
 									{
@@ -24326,11 +24356,11 @@
 									{
 										"source": {
 											"name": "ww_deleteline",
-											"type": "String"
+											"type": "Boolean"
 										},
 										"sink": {
 											"name": "ww_deleteline",
-											"type": "String"
+											"type": "Boolean"
 										}
 									},
 									{

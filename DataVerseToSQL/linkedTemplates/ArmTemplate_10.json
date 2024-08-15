@@ -2393,11 +2393,11 @@
 									{
 										"source": {
 											"name": "ww_deleteline",
-											"type": "String"
+											"type": "Boolean"
 										},
 										"sink": {
 											"name": "ww_deleteline",
-											"type": "String"
+											"type": "Boolean"
 										}
 									},
 									{
