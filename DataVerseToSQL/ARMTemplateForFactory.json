@@ -14342,6 +14342,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_closuretypechecked",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_closuretypechecked",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_co2",
 											"type": "Decimal"
 										},
@@ -14598,6 +14608,26 @@
 										"sink": {
 											"name": "ww_flowmetercheck",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_flowedfrom",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_flowedfrom",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_flowedto",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_flowedto",
+											"type": "String"
 										}
 									},
 									{
@@ -14948,6 +14978,16 @@
 										"sink": {
 											"name": "ww_prepcheck3",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productcheckedandmatches",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_productcheckedandmatches",
+											"type": "Int32"
 										}
 									},
 									{
