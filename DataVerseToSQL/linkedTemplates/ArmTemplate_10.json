@@ -2392,6 +2392,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_deleteline",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_deleteline",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_depalbottlerecordfilledoutcorrectly",
 											"type": "Int32"
 										},
@@ -2468,6 +2478,16 @@
 										"sink": {
 											"name": "ww_Productionline",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_Reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_Reasonfordeletion",
+											"type": "String"
 										}
 									},
 									{
