@@ -48,6 +48,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
 		},
+		"wineworksinternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'wineworksinternal'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -401,6 +405,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wineworksinternal')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('wineworksinternal_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_billofmaterials')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -415,31 +432,6 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"folderPath": "iottest/bronze/dataverse/ww_billofmaterials/",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_bottlebatchsummary')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/ww_bottlebatchsummary/",
 						"fileSystem": "dls-fs-iot"
 					},
 					"compressionCodec": "snappy"

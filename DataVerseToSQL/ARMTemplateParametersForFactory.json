@@ -59,6 +59,9 @@
 		"dlsadbiottest_accountKey": {
 			"value": ""
 		},
+		"wineworksinternal_connectionString": {
+			"value": ""
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"value": "Tejaswi.Datla@wineworks.co.nz"
 		},

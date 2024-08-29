@@ -83,6 +83,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'dlsadbiottest'"
 		},
+		"wineworksinternal_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'wineworksinternal'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -231,6 +235,9 @@
 					},
 					"dlsadbiottest_accountKey": {
 						"value": "[parameters('dlsadbiottest_accountKey')]"
+					},
+					"wineworksinternal_connectionString": {
+						"value": "[parameters('wineworksinternal_connectionString')]"
 					},
 					"CommonDataServiceForApps1_properties_typeProperties_username": {
 						"value": "[parameters('CommonDataServiceForApps1_properties_typeProperties_username')]"
