@@ -89,7 +89,7 @@
 					},
 					"logStorageSettings": {
 						"linkedServiceName": {
-							"referenceName": "dlsadbiottest",
+							"referenceName": "wineworksinternal",
 							"type": "LinkedServiceReference"
 						},
 						"path": "eskerlogging"
