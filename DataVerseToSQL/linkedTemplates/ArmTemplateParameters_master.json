@@ -30,25 +30,25 @@
 			"value": ""
 		},
 		"WWSQL003_connectionString": {
-			"value": "Integrated Security=True;Data Source=WWSQL003;Initial Catalog=Dataverse.Staging;server=WWSQL003;database=Dataverse.Staging;trusted_connection=True"
+			"value": "integrated security=True;Data Source=WWSQL003;Initial Catalog=Dataverse.Staging;trusted_connection=True"
 		},
 		"WWSQL003_password": {
 			"value": ""
 		},
 		"WWSQL003_DV_connectionString": {
-			"value": "Integrated Security=True;Data Source=wwsql003;Initial Catalog=DataVerse"
+			"value": "integrated security=True;Data Source=wwsql003;Initial Catalog=DataVerse"
 		},
 		"WWSQL003_DV_password": {
 			"value": ""
 		},
 		"WWSQL003_Test_connectionString": {
-			"value": "Integrated Security=True;Data Source=WWSQL003;Initial Catalog=Wineworks.Database.TEST"
+			"value": "integrated security=True;Data Source=WWSQL003;Initial Catalog=Wineworks.Database.TEST"
 		},
 		"WWSQL003_Test_password": {
 			"value": ""
 		},
 		"WWWEB002_connectionString": {
-			"value": "Integrated Security=True;Data Source=portal_data.wineworks.co.nz;Initial Catalog=wineworks.Database;server=portal_data.wineworks.co.nz;database=wineworks.Database;trusted_connection=True"
+			"value": "integrated security=True;Data Source=portal_data.wineworks.co.nz;Initial Catalog=wineworks.Database;trusted_connection=True"
 		},
 		"WWWEB002_password": {
 			"value": ""
