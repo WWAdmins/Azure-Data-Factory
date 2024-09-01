@@ -201,6 +201,12 @@
 					"referenceName": "ww_hourlycartonusage",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_palletstackinghourly",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
