@@ -9865,6 +9865,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_averagevolume",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_averagevolume",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_balancecheck",
 											"type": "String"
 										},
