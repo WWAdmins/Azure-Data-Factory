@@ -15823,6 +15823,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"name": "modifiedon",
 											"type": "DateTime"
 										},
