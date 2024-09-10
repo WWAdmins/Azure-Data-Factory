@@ -58,7 +58,7 @@
 		},
 		"Dataverse_properties_typeProperties_username": {
 			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
+			"defaultValue": "wwdigital02@wineworks.co.nz"
 		},
 		"DataverseTest_properties_typeProperties_username": {
 			"type": "string",
