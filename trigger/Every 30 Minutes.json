@@ -207,6 +207,12 @@
 					"referenceName": "ww_palletstackinghourly",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_prebottlinganalysis",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
