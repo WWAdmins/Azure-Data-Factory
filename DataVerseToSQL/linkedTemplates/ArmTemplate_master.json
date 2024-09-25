@@ -97,7 +97,7 @@
 		},
 		"DataverseTest_properties_typeProperties_username": {
 			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
+			"defaultValue": "wwdigital02@wineworks.co.nz"
 		},
 		"EskerFTPWW_properties_typeProperties_host": {
 			"type": "string",
@@ -195,7 +195,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_0",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -288,7 +288,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_1",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -308,7 +308,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_2",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -328,7 +328,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_3",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -357,12 +357,6 @@
 					"WWSQL003_DV_password": {
 						"value": "[parameters('WWSQL003_DV_password')]"
 					},
-					"WWWEB002_connectionString": {
-						"value": "[parameters('WWWEB002_connectionString')]"
-					},
-					"WWWEB002_password": {
-						"value": "[parameters('WWWEB002_password')]"
-					},
 					"EskerFTPWW_properties_typeProperties_host": {
 						"value": "[parameters('EskerFTPWW_properties_typeProperties_host')]"
 					},
@@ -380,9 +374,6 @@
 					},
 					"WWSQL003_DV_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
-					},
-					"WWWEB002_properties_typeProperties_userName": {
-						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -393,7 +384,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_4",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -403,6 +394,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"WWWEB002_connectionString": {
+						"value": "[parameters('WWWEB002_connectionString')]"
+					},
+					"WWWEB002_password": {
+						"value": "[parameters('WWWEB002_password')]"
+					},
+					"WWWEB002_properties_typeProperties_userName": {
+						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -413,7 +413,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_5",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -433,7 +433,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_6",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -453,7 +453,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_7",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -473,7 +473,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_8",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -493,7 +493,7 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_9",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
@@ -513,11 +513,31 @@
 		{
 			"name": "DataVerseToSQL_ArmTemplate_10",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
+			"apiVersion": "2024-03-01",
 			"properties": {
 				"mode": "incremental",
 				"templateLink": {
 					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_10.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_9')]"
+			]
+		},
+		{
+			"name": "DataVerseToSQL_ArmTemplate_11",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_11.json', parameters('containerSasToken'))]",
 					"contentVersion": "1.0.0.0"
 				},
 				"parameters": {
@@ -533,7 +553,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_9')]"
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_10')]"
 			]
 		}
 	]

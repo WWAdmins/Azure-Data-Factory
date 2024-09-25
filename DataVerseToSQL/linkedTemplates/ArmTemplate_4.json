@@ -6,12 +6,446 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
+		},
+		"WWWEB002_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWWEB002'",
+			"defaultValue": "integrated security=True;Data Source=portal_data.wineworks.co.nz;Initial Catalog=wineworks.Database;trusted_connection=True"
+		},
+		"WWWEB002_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWWEB002'"
+		},
+		"WWWEB002_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('WWWEB002_connectionString')]",
+					"userName": "[parameters('WWWEB002_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('WWWEB002_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "ProductionLink",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adb_iot_prod')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Databricks PRODUCTION Workspace",
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_adb_iot_prod",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "DataVerseAccessKey"
+					},
+					"newClusterNodeType": "Standard_DS3_v2",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkEnvVars": {
+						"WORKSPACE_ENV": "prod",
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "13.3.x-scala2.12",
+					"clusterOption": "Fixed",
+					"newClusterInitScripts": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adb_iot_test')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Databricks TEST Workspace",
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_adb_iot_test",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "DataVerseAccessKey"
+					},
+					"newClusterNodeType": "Standard_DS3_v2",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkEnvVars": {
+						"WORKSPACE_ENV": "test",
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "13.3.x-scala2.12",
+					"clusterOption": "Fixed",
+					"newClusterInitScripts": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/G2 Dataverse to Databricks RunStartEndsTEST')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get RunStartEnds",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "RunStartEndsTEST",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ADLS_RunStartEndTEST",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "bronze-silver-gold",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Get RunStartEnds",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+							"baseParameters": {
+								"END_TIMESTAMP": {
+									"value": "@pipeline().parameters.triggerEnd",
+									"type": "Expression"
+								},
+								"MODIFIEDON_COLUMN": {
+									"value": "@pipeline().parameters.modifiedonColumn",
+									"type": "Expression"
+								},
+								"PARTITION_COLUMN": {
+									"value": "@pipeline().parameters.partitionColumn",
+									"type": "Expression"
+								},
+								"TABLE_NAME": {
+									"value": "@pipeline().parameters.tableName",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION": {
+									"value": "@pipeline().parameters.partitionBySecondary",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION_NAME": {
+									"value": "@pipeline().parameters.secondaryPartitionColumnName",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "adb_iot_test",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "run_durations_trigger",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "bronze-silver-gold",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/run_duration_trigger"
+						},
+						"linkedServiceName": {
+							"referenceName": "adb_iot_test",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "crc5d_runstartend"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "crc5d_runstartend"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/G2 Dataverse to DatabricksTEST Downtimes')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Downtimes",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DowntimesTest",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ADLS_DowntimeTEST",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "bronze-silver-gold",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Downtimes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+							"baseParameters": {
+								"END_TIMESTAMP": {
+									"value": "@pipeline().parameters.triggerEnd",
+									"type": "Expression"
+								},
+								"MODIFIEDON_COLUMN": {
+									"value": "@pipeline().parameters.modifiedonColumn",
+									"type": "Expression"
+								},
+								"PARTITION_COLUMN": {
+									"value": "@pipeline().parameters.partitionColumn",
+									"type": "Expression"
+								},
+								"TABLE_NAME": {
+									"value": "@pipeline().parameters.tableName",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION": {
+									"value": "@pipeline().parameters.partitionBySecondary",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION_NAME": {
+									"value": "@pipeline().parameters.secondaryPartitionColumnName",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "adb_iot_test",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "crc5d_newtableid"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "crc5d_newtable"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EskerWWFTP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EskerFTPWW",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SQL003_FOTest')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -2773,1135 +3207,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Hourly Labelling Logsheet"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_HourlyOperatorBottling')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Authorised Sig",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bill of Materials ID",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bottle Code Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bottle Colour Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bottle laser sticker",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bottle laser sticker sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bottle Number as Per Laser Coder",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bottle Rub Mark",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bottle Shape Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bottling from",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bottling to",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bowl Vacuum",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Check docket and physically check wine is run",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Collect Export Samples",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Corker Vacuum",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Corker Vacuum -0.8 to -1.0bar",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Delete Line",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "DO2 from Bottle",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "DO2 from vessel",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Export samples picked",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Fill Height",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Filler Head # ",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Filler Speed",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Filter Differential",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Filtration Pressure Gauge",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Final Filter",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Flow Meter Check",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Foreign Body / Visual Check",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Gas feed to corker",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Gas feed to corker 10 - 30kpa",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Gas Flow rate to Bowl (Line 2)",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Gas pressure to bottling tank",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Glass Fragments Check",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "In bottle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "In tank",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Laser code as per spec",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Laser code on bottle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Lenticular Filter",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "N2 buffer vessel pressure",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Neck Check",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Pre Filter",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Prep Check 2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Prep Check 3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Prep Check Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Pump Speed",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Rinse head inspection",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Rinse head medium",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Rinser Gas/Water Supply Line1",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Rinser Gas/Water Supply Line2",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Rinser Pressure Fluctuations",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Rockstopper",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Rockstopper Filter",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Samples Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Stock Code Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Temperature",
-						"type": "decimal",
-						"precision": 5,
-						"scale": 2
-					},
-					{
-						"name": "Time of Authorised Audit Check",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Time of Check - Micro Sample Taken",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "X-Ray Challenge Test",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Modified On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Record Created On",
-						"type": "date"
-					},
-					{
-						"name": "Operator Bottling Hourly",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Bill of Materials",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Hourly Operator Bottling"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_HourlyTorqueandVolume')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Key",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Adjustment",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 5
-					},
-					{
-						"name": "Average Weight",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 5
-					},
-					{
-						"name": "Cap Colour Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cap ILS Code Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cap Printing Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork Branding Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork ILS Code Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork Insertion Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork Length Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork Moisture Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork Printing Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Date Time",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Delete Line",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Density",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 5
-					},
-					{
-						"name": "Empty Bottle Weight",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 5
-					},
-					{
-						"name": "Fill Height 1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Fill Height 2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Fill Height 3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Fill Height 4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Fill Height 5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Gaping / Broken Bridges",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Gross Weight",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 5
-					},
-					{
-						"name": "Head Space Measurement Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Head Space Pressure Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Nett Weight",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 5
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Pull Tuck Test",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Radial Movement Check Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Redraw Seal Check",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Rim Impression",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Screwcapper chute Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Tare Weight",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 5
-					},
-					{
-						"name": "Torque Break 1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 10",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 6",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 7",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 8",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Break 9",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque cap 1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 10",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 4",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 5",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 6",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 7",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 8",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque cap 9",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Torque Slip 1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 10",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 6",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 7",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 8",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Torque Slip 9",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Modified On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Record Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Hourly Torque and Volume",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Bill of Materials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Tanker",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Hourly Torque and Volume"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_LabelChange')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bill of Material ID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Delete Line",
-						"type": "bit"
-					},
-					{
-						"name": "Gap",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 4
-					},
-					{
-						"name": "Height",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 4
-					},
-					{
-						"name": "Labels match spec Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Lean",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 4
-					},
-					{
-						"name": "Pallet Number",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Stock Code",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Modified On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Record Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Label Change",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Label Change"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_LabellingIssues')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Labelling Issue",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bottle Rub",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Broken bottles",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Cartons rejected",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Comments",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Damaged screwcaps",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Date Time",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Delete Issue",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Delete Rejects",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Glass defects",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Issue",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Low fills",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Total Rejects",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Modified On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Record Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Labelling Issues",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Bill of Materials",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Labelling Issues"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_Operator')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Initials",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Modified On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Record Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Operator",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Operator"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_OperatorBottlingBreakage')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Area clean",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Area retimed",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bottle Count",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Breakages",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Broken Bottles",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Colleague Sign",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Delete Line",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Disposed bottles",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Filler Op Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Glass fragments visible",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Location of break",
-						"type": "nvarchar"
-					},
-					{
-						"name": "No breakages Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Result of a crash",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Start up time",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Time of break",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Type",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Modified On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Record Created On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Operator Bottling Breakage",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Bill of Materials",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Operator Bottling Breakage"
 				}
 			},
 			"dependsOn": []

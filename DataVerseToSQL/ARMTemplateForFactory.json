@@ -97,7 +97,7 @@
 		},
 		"DataverseTest_properties_typeProperties_username": {
 			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
+			"defaultValue": "wwdigital02@wineworks.co.nz"
 		},
 		"EskerFTPWW_properties_typeProperties_host": {
 			"type": "string",
@@ -1217,6 +1217,323 @@
 				"[concat(variables('factoryId'), '/datasets/EskerWWFTP')]",
 				"[concat(variables('factoryId'), '/datasets/EskerSFTP')]",
 				"[concat(variables('factoryId'), '/linkedServices/wineworksinternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/G2 Dataverse to Databricks RunStartEndsTEST')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get RunStartEnds",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "RunStartEndsTEST",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ADLS_RunStartEndTEST",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "bronze-silver-gold",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Get RunStartEnds",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+							"baseParameters": {
+								"END_TIMESTAMP": {
+									"value": "@pipeline().parameters.triggerEnd",
+									"type": "Expression"
+								},
+								"MODIFIEDON_COLUMN": {
+									"value": "@pipeline().parameters.modifiedonColumn",
+									"type": "Expression"
+								},
+								"PARTITION_COLUMN": {
+									"value": "@pipeline().parameters.partitionColumn",
+									"type": "Expression"
+								},
+								"TABLE_NAME": {
+									"value": "@pipeline().parameters.tableName",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION": {
+									"value": "@pipeline().parameters.partitionBySecondary",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION_NAME": {
+									"value": "@pipeline().parameters.secondaryPartitionColumnName",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "adb_iot_test",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "run_durations_trigger",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "bronze-silver-gold",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/run_duration_trigger"
+						},
+						"linkedServiceName": {
+							"referenceName": "adb_iot_test",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "crc5d_runstartend"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "crc5d_runstartend"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RunStartEndsTEST')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_RunStartEndTEST')]",
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/G2 Dataverse to DatabricksTEST Downtimes')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Downtimes",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DowntimesTest",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ADLS_DowntimeTEST",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "bronze-silver-gold",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Downtimes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+							"baseParameters": {
+								"END_TIMESTAMP": {
+									"value": "@pipeline().parameters.triggerEnd",
+									"type": "Expression"
+								},
+								"MODIFIEDON_COLUMN": {
+									"value": "@pipeline().parameters.modifiedonColumn",
+									"type": "Expression"
+								},
+								"PARTITION_COLUMN": {
+									"value": "@pipeline().parameters.partitionColumn",
+									"type": "Expression"
+								},
+								"TABLE_NAME": {
+									"value": "@pipeline().parameters.tableName",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION": {
+									"value": "@pipeline().parameters.partitionBySecondary",
+									"type": "Expression"
+								},
+								"SECONDARY_PARTITION_NAME": {
+									"value": "@pipeline().parameters.secondaryPartitionColumnName",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "adb_iot_test",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "crc5d_newtableid"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "crc5d_newtable"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DowntimesTest')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_DowntimeTEST')]",
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
 			]
 		},
 		{
@@ -25395,6 +25712,31 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_DowntimeTEST')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dlsadbiottest",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iottest/bronze/dataverse/crc5d_newtable/landing",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_IOT_TEST_ww_billofmaterials')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -25534,6 +25876,31 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"folderPath": "iottest/bronze/dataverse/ww_run/",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_RunStartEndTEST')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dlsadbiottest",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iotdev/bronze/dataverse/crc5d_runstartend/landing",
 						"fileSystem": "dls-fs-iot"
 					},
 					"compressionCodec": "snappy"
@@ -25748,6 +26115,26 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DowntimesTest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataverseTest",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "crc5d_newtable"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataverseTest')]"
 			]
 		},
 		{
@@ -26347,6 +26734,26 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RunStartEndsTEST')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataverseTest",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "crc5d_runstartend"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataverseTest')]"
 			]
 		},
 		{
@@ -40752,13 +41159,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_prebottlinganalysis",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -40773,8 +41173,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysis')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
 			]
 		},
 		{
@@ -41022,6 +41421,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_prebottlinganalysis",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -41068,7 +41474,8 @@
 				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysissulphuradj')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_supervisorsignoffbomhourlycheck')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_hourlycartonusage')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_palletstackinghourly')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_palletstackinghourly')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysis')]"
 			]
 		},
 		{
