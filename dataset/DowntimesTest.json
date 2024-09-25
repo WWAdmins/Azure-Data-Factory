@@ -1,5 +1,5 @@
 {
-	"name": "Downtimes",
+	"name": "DowntimesTest",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "DataverseTest",
