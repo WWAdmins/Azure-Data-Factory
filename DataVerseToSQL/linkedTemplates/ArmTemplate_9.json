@@ -13502,7 +13502,7 @@
 										},
 										"sink": {
 											"name": "ww_rockstopperfilter",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
