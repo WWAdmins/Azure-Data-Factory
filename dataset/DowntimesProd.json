@@ -1,8 +1,8 @@
 {
-	"name": "DowntimesTest",
+	"name": "DowntimesProd",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DataverseTest",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
