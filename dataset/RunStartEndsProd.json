@@ -1,8 +1,8 @@
 {
-	"name": "RunStartEndsTEST",
+	"name": "RunStartEndsProd",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DataverseTest",
+			"referenceName": "Dataverse",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
