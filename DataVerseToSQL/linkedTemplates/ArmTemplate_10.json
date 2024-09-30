@@ -6,6 +6,34 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "crc5d_guid"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "crc5d_newtable"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
 		}
 	},
 	"variables": {
@@ -9259,41 +9287,42 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Every 10 minutes')]",
+			"name": "[concat(parameters('factoryName'), '/downtimes_databricksTEST_15mins')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "ww_bottlebatchsummary",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to DatabricksTEST Downtimes",
+						"type": "PipelineReference"
 					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_runreportbottlelabelpack",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
+					"parameters": {
+						"triggerStart": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
 					}
-				],
-				"type": "ScheduleTrigger",
+				},
+				"type": "TumblingWindowTrigger",
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 10,
-						"startTime": "2023-02-13T23:06:00",
-						"timeZone": "New Zealand Standard Time"
-					}
+					"frequency": "Minute",
+					"interval": 15,
+					"startTime": "2024-09-30T21:30:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
-			]
+			"dependsOn": []
 		}
 	]
 }

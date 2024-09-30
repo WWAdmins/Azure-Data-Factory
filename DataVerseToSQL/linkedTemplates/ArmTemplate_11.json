@@ -7,6 +7,34 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartend"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartend"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -20,6 +48,79 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/runstartends_databricksTEST_15mins')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to Databricks RunStartEndsTEST",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('runstartends_databricksTEST_15mins_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('runstartends_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('runstartends_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('runstartends_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('runstartends_databricksTEST_15mins_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('runstartends_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('runstartends_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 15,
+					"startTime": "2024-09-30T21:30:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Every 10 minutes')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "ww_bottlebatchsummary",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_runreportbottlelabelpack",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 10,
+						"startTime": "2023-02-13T23:06:00",
+						"timeZone": "New Zealand Standard Time"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Every 30 Minutes')]",
 			"type": "Microsoft.DataFactory/factories/triggers",

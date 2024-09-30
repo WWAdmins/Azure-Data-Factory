@@ -148,7 +148,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "RunStartEndsTEST",
+								"referenceName": "RunStartEndsProd",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -318,7 +318,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "DowntimesTest",
+								"referenceName": "DowntimesProd",
 								"type": "DatasetReference",
 								"parameters": {}
 							}

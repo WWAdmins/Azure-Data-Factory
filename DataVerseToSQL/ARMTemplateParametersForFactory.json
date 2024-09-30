@@ -130,6 +130,48 @@
 		},
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
+			"value": "modifiedon"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
+			"value": "crc5d_guid"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
+			"value": "crc5d_newtable"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
+			"value": "false"
+		},
+		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"value": "false"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
+			"value": "modifiedon"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
+			"value": "crc5d_runstartend"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
+			"value": "crc5d_runstartend"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
+			"value": "false"
+		},
+		"runstartends_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"value": "false"
 		}
 	}
 }

@@ -360,12 +360,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DowntimesTest')]",
+			"name": "[concat(parameters('factoryName'), '/DowntimesProd')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "DataverseTest",
+					"referenceName": "Dataverse",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
