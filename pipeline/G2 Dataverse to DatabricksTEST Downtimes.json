@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "CommonDataServiceForAppsSource",
-						"query": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')"
+						"query": {
+							"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+							"type": "Expression"
+						}
 					},
 					"sink": {
 						"type": "ParquetSink",
@@ -32,7 +35,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DowntimesTest",
+						"referenceName": "DowntimesProd",
 						"type": "DatasetReference"
 					}
 				],
@@ -65,12 +68,30 @@
 				"typeProperties": {
 					"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
 					"baseParameters": {
-						"END_TIMESTAMP": "@pipeline().parameters.triggerEnd",
-						"MODIFIEDON_COLUMN": "@pipeline().parameters.modifiedonColumn",
-						"PARTITION_COLUMN": "@pipeline().parameters.partitionColumn",
-						"TABLE_NAME": "@pipeline().parameters.tableName",
-						"SECONDARY_PARTITION": "@pipeline().parameters.partitionBySecondary",
-						"SECONDARY_PARTITION_NAME": "@pipeline().parameters.secondaryPartitionColumnName"
+						"END_TIMESTAMP": {
+							"value": "@pipeline().parameters.triggerEnd",
+							"type": "Expression"
+						},
+						"MODIFIEDON_COLUMN": {
+							"value": "@pipeline().parameters.modifiedonColumn",
+							"type": "Expression"
+						},
+						"PARTITION_COLUMN": {
+							"value": "@pipeline().parameters.partitionColumn",
+							"type": "Expression"
+						},
+						"TABLE_NAME": {
+							"value": "@pipeline().parameters.tableName",
+							"type": "Expression"
+						},
+						"SECONDARY_PARTITION": {
+							"value": "@pipeline().parameters.partitionBySecondary",
+							"type": "Expression"
+						},
+						"SECONDARY_PARTITION_NAME": {
+							"value": "@pipeline().parameters.secondaryPartitionColumnName",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
