@@ -98,6 +98,33 @@
 					"referenceName": "adb_iot_test",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "oee-trigger",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "bronze-silver-gold",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/oee_interval_trigger"
+				},
+				"linkedServiceName": {
+					"referenceName": "adb_iot_test",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
