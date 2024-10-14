@@ -7,31 +7,31 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn": {
 			"type": "string",
 			"defaultValue": "modifiedon"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn": {
 			"type": "string",
-			"defaultValue": "crc5d_guid"
+			"defaultValue": "crc5d_runstartend"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName": {
 			"type": "string",
-			"defaultValue": "crc5d_newtable"
+			"defaultValue": "crc5d_runstartend"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary": {
 			"type": "string",
 			"defaultValue": "false"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"type": "string",
 			"defaultValue": "false"
 		},
@@ -49,7 +49,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/downtimes_databricksTEST_15mins')]",
+			"name": "[concat(parameters('factoryName'), '/runstartends_databricksTEST_15min')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -57,28 +57,27 @@
 				"runtimeState": "Started",
 				"pipeline": {
 					"pipelineReference": {
-						"referenceName": "G2 Dataverse to DatabricksTEST Downtimes",
+						"referenceName": "G2 Dataverse to Databricks RunStartEndsTEST",
 						"type": "PipelineReference"
 					},
 					"parameters": {
-						"triggerStart": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+						"triggerStart": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName')]"
 					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
 					"frequency": "Minute",
 					"interval": 15,
-					"startTime": "2024-09-30T21:30:00Z",
+					"startTime": "2024-10-14T19:30:00Z",
 					"delay": "00:05:00",
 					"maxConcurrency": 1,
 					"retryPolicy": {
-						"count": 3,
 						"intervalInSeconds": 30
 					},
 					"dependsOn": []
