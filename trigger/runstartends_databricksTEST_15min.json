@@ -2,7 +2,22 @@
 	"name": "runstartends_databricksTEST_15min",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "G2 Dataverse to Databricks RunStartEndsTEST",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"triggerStart": "@trigger().outputs.windowStartTime",
+				"triggerEnd": "@trigger().outputs.windowEndTime",
+				"modifiedonColumn": "modifiedon",
+				"partitionColumn": "crc5d_runstartend",
+				"tableName": "crc5d_runstartend",
+				"partitionBySecondary": "false",
+				"secondaryPartitionColumnName": "false"
+			}
+		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Minute",
