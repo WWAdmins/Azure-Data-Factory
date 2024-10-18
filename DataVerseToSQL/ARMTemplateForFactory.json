@@ -203,10 +203,6 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
 		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -234,6 +230,10 @@
 		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"type": "string",
 			"defaultValue": "false"
+		},
+		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
 		}
 	},
 	"variables": {
@@ -20677,7 +20677,7 @@
 										},
 										"sink": {
 											"name": "ww_bottlealcoholfirsttank",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -41716,6 +41716,45 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/runstartends_databricksTEST_15min')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to Databricks RunStartEndsTEST",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 15,
+					"startTime": "2024-10-14T19:30:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to Databricks RunStartEndsTEST')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ProductionLink')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -42089,45 +42128,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/runstartends_databricksTEST_15min')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "G2 Dataverse to Databricks RunStartEndsTEST",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 15,
-					"startTime": "2024-10-14T19:30:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to Databricks RunStartEndsTEST')]"
-			]
 		}
 	]
 }
