@@ -18831,6 +18831,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_co2saturationandtolerance",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_co2saturationandtolerance",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_co2dorecheckzlagas",
 											"type": "Int32"
 										},
@@ -19037,6 +19047,16 @@
 										"sink": {
 											"name": "ww_spargeinlinezpssp",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_sparkling",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_sparkling",
+											"type": "Boolean"
 										}
 									},
 									{
