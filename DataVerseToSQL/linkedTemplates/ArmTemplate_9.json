@@ -12587,6 +12587,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_charmattankc02",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_charmattankc02",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_checkdocketandphysicallycheckwineisrun",
 											"type": "String"
 										},
@@ -12633,6 +12643,26 @@
 										"sink": {
 											"name": "ww_collectexportsamples",
 											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkinsertion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkinsertion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_corkerclearance",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_corkerclearance",
+											"type": "String"
 										}
 									},
 									{
@@ -12717,6 +12747,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_dissolvedc02inbottle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_dissolvedc02inbottle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_do2frombottle",
 											"type": "Decimal"
 										},
@@ -13023,6 +13063,36 @@
 										"sink": {
 											"name": "ww_glassfragmentsexplanation",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_glassfragmentswithblank",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "crc5d_glassfragmentswithblank",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_headspacemeasurement",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_headspacemeasurement",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_headspacepressure",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_headspacepressure",
+											"type": "Decimal"
 										}
 									},
 									{
@@ -13163,6 +13233,16 @@
 										"sink": {
 											"name": "ww_notes",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_numberofforeignbodiespresent",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_numberofforeignbodiespresent",
+											"type": "Decimal"
 										}
 									},
 									{
@@ -13532,6 +13612,26 @@
 										},
 										"sink": {
 											"name": "ww_selflevelling",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_shakendorequired",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "crc5d_shakendorequired",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_shakendostartofrun",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "crc5d_shakendostartofrun",
 											"type": "Decimal"
 										}
 									},
