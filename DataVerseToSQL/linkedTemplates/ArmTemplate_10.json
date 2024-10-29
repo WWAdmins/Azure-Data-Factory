@@ -504,7 +504,7 @@
 									},
 									{
 										"source": {
-											"name": "ww_alcoholbydistillationl",
+											"name": "ww_alcoholbydistillation",
 											"type": "String"
 										},
 										"sink": {
@@ -604,6 +604,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_gatecode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_gatecode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_greentag",
 											"type": "String"
 										},
@@ -685,7 +695,7 @@
 									{
 										"source": {
 											"name": "ww_operatorcode",
-											"type": "Int32"
+											"type": "String"
 										},
 										"sink": {
 											"name": "ww_operatorcode",
@@ -824,6 +834,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_tempcheck",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_tempcheck",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_temprackingvalve",
 											"type": "Decimal"
 										},
@@ -864,12 +884,32 @@
 									},
 									{
 										"source": {
+											"name": "ww_volumecheck",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_volumecheck",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_volumeunder500",
 											"type": "Boolean"
 										},
 										"sink": {
 											"name": "ww_volumeunder500",
 											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_winery",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_winery",
+											"type": "String"
 										}
 									}
 								]
