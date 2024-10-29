@@ -14170,6 +14170,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_operator",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_operator",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_palletnumber",
 											"type": "Int32"
 										},
