@@ -10365,6 +10365,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_comments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_comments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_corkbaseclearofcorksforeignmatter",
 											"type": "Boolean"
 										},
