@@ -579,6 +579,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_9')]"
+			]
+		},
+		{
+			"name": "DataVerseToSQL_ArmTemplate_11",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_11.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart')]"
@@ -600,26 +620,6 @@
 					},
 					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
 						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_9')]"
-			]
-		},
-		{
-			"name": "DataVerseToSQL_ArmTemplate_11",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2024-03-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_11.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					},
 					"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart')]"
