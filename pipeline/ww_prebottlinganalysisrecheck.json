@@ -424,6 +424,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_tempcheck",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_tempcheck",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_tso2",
 									"type": "Int32"
 								},
