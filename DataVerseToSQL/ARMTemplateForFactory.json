@@ -13026,6 +13026,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_cartonscheckedandmatches",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_cartonscheckedandmatches",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_caseerectoroverpackerscissorscheck",
 											"type": "Int32"
 										},
@@ -13082,6 +13092,16 @@
 										"sink": {
 											"name": "ww_CCPfrontlabelmatchesimageonspec",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_cleanskin",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_cleanskin",
+											"type": "Boolean"
 										}
 									},
 									{
