@@ -7,6 +7,15 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"WWSQL003_DV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003_DV'",
+			"defaultValue": "integrated security=True;Data Source=wwsql003;Initial Catalog=DataVerse"
+		},
+		"WWSQL003_DV_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003_DV'"
+		},
 		"WWWEB002_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWWEB002'",
@@ -15,6 +24,10 @@
 		"WWWEB002_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
+		},
+		"WWSQL003_DV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
 		"WWWEB002_properties_typeProperties_userName": {
 			"type": "string",
@@ -25,6 +38,28 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_DV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('WWSQL003_DV_connectionString')]",
+					"userName": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('WWSQL003_DV_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -110,32 +145,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Winery')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Dataverse",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_winery"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/G2 Dataverse to Databricks RunStartEndsTEST')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Get RunStartEnds",
-						"type": "Copy",
+						"name": "IsNewData",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -148,115 +165,146 @@
 						"typeProperties": {
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-									"type": "Expression"
-								}
+								"query": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')"
 							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "ParquetWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
+							"dataset": {
 								"referenceName": "RunStartEndsProd",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ADLS_RunStartEndTEST",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "bronze-silver-gold",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Get RunStartEnds",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
-							"baseParameters": {
-								"END_TIMESTAMP": {
-									"value": "@pipeline().parameters.triggerEnd",
-									"type": "Expression"
-								},
-								"MODIFIEDON_COLUMN": {
-									"value": "@pipeline().parameters.modifiedonColumn",
-									"type": "Expression"
-								},
-								"PARTITION_COLUMN": {
-									"value": "@pipeline().parameters.partitionColumn",
-									"type": "Expression"
-								},
-								"TABLE_NAME": {
-									"value": "@pipeline().parameters.tableName",
-									"type": "Expression"
-								},
-								"SECONDARY_PARTITION": {
-									"value": "@pipeline().parameters.partitionBySecondary",
-									"type": "Expression"
-								},
-								"SECONDARY_PARTITION_NAME": {
-									"value": "@pipeline().parameters.secondaryPartitionColumnName",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "adb_iot_test",
-							"type": "LinkedServiceReference"
 						}
 					},
 					{
-						"name": "run_durations_trigger",
-						"type": "DatabricksNotebook",
+						"name": "If Condition1",
+						"type": "IfCondition",
 						"dependsOn": [
 							{
-								"activity": "bronze-silver-gold",
+								"activity": "IsNewData",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							}
 						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/run_duration_trigger"
-						},
-						"linkedServiceName": {
-							"referenceName": "adb_iot_test",
-							"type": "LinkedServiceReference"
+							"expression": {
+								"value": "@contains(activity('IsNewData').output, 'firstRow')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Get RunStartEnds",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "CommonDataServiceForAppsSource",
+											"query": {
+												"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "RunStartEndsProd",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_RunStartEndTEST",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								},
+								{
+									"name": "bronze-silver-gold",
+									"type": "DatabricksNotebook",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+										"baseParameters": {
+											"END_TIMESTAMP": {
+												"value": "@pipeline().parameters.triggerEnd",
+												"type": "Expression"
+											},
+											"MODIFIEDON_COLUMN": {
+												"value": "@pipeline().parameters.modifiedonColumn",
+												"type": "Expression"
+											},
+											"PARTITION_COLUMN": {
+												"value": "@pipeline().parameters.partitionColumn",
+												"type": "Expression"
+											},
+											"TABLE_NAME": {
+												"value": "@pipeline().parameters.tableName",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION": {
+												"value": "@pipeline().parameters.partitionBySecondary",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION_NAME": {
+												"value": "@pipeline().parameters.secondaryPartitionColumnName",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_test",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "run_durations_trigger",
+									"type": "DatabricksNotebook",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/run_duration_trigger"
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_test",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
 						}
 					}
 				],

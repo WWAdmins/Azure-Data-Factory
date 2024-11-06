@@ -407,12 +407,6 @@
 					"WWSQL003_password": {
 						"value": "[parameters('WWSQL003_password')]"
 					},
-					"WWSQL003_DV_connectionString": {
-						"value": "[parameters('WWSQL003_DV_connectionString')]"
-					},
-					"WWSQL003_DV_password": {
-						"value": "[parameters('WWSQL003_DV_password')]"
-					},
 					"EskerFTPWW_properties_typeProperties_host": {
 						"value": "[parameters('EskerFTPWW_properties_typeProperties_host')]"
 					},
@@ -427,9 +421,6 @@
 					},
 					"WWSQL003_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
-					},
-					"WWSQL003_DV_properties_typeProperties_userName": {
-						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -451,11 +442,20 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"WWSQL003_DV_connectionString": {
+						"value": "[parameters('WWSQL003_DV_connectionString')]"
+					},
+					"WWSQL003_DV_password": {
+						"value": "[parameters('WWSQL003_DV_password')]"
+					},
 					"WWWEB002_connectionString": {
 						"value": "[parameters('WWWEB002_connectionString')]"
 					},
 					"WWWEB002_password": {
 						"value": "[parameters('WWWEB002_password')]"
+					},
+					"WWSQL003_DV_properties_typeProperties_userName": {
+						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
 					},
 					"WWWEB002_properties_typeProperties_userName": {
 						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"

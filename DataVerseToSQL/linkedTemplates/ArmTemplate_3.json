@@ -24,15 +24,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWSQL003'"
 		},
-		"WWSQL003_DV_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'WWSQL003_DV'",
-			"defaultValue": "integrated security=True;Data Source=wwsql003;Initial Catalog=DataVerse"
-		},
-		"WWSQL003_DV_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWSQL003_DV'"
-		},
 		"EskerFTPWW_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "\\\\WWMULTI001\\Esker"
@@ -52,10 +43,6 @@
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "wwdigital02@wineworks.co.nz"
-		},
-		"WWSQL003_DV_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "wineworksgroup\\WWG_Service"
 		}
 	},
 	"variables": {
@@ -336,6 +323,24 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Winery')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_winery"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/lockcode')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -410,28 +415,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('WWSQL003_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_DV')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('WWSQL003_DV_connectionString')]",
-					"userName": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWSQL003_DV_password')]"
 					}
 				},
 				"connectVia": {
