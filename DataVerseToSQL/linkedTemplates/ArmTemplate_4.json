@@ -165,7 +165,10 @@
 						"typeProperties": {
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
-								"query": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')"
+								"query": {
+									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
 							},
 							"dataset": {
 								"referenceName": "RunStartEndsProd",

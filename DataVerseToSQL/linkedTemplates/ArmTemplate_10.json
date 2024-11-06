@@ -6707,7 +6707,7 @@
 										},
 										"sink": {
 											"name": "ww_bottlealcoholfirsttank",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
