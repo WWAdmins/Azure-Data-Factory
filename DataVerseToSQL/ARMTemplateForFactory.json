@@ -1355,7 +1355,192 @@
 												"type": "ParquetWriteSettings"
 											}
 										},
-										"enableStaging": false
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"name": "crc5d_productionlineid",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "crc5d_productionlineid",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "owningbusinessunit",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "owningbusinessunit",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "statecode",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "statecode",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_runstartendid",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "crc5d_runstartendid",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "createdby",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "createdby",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_uniqueid",
+														"type": "String"
+													},
+													"sink": {
+														"name": "crc5d_uniqueid",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_enddatetime",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "crc5d_enddatetime",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "timezoneruleversionnumber",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "timezoneruleversionnumber",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "ownerid",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "ownerid",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "modifiedon",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "modifiedon",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "modifiedby",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "modifiedby",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "owninguser",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "owninguser",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_runstartend",
+														"type": "String"
+													},
+													"sink": {
+														"name": "crc5d_runstartend",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "createdon",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "createdon",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "statuscode",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "statuscode",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_startdatetime",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "crc5d_startdatetime",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_lastpallettime",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "crc5d_lastpallettime",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_lastpalletid",
+														"type": "String"
+													},
+													"sink": {
+														"name": "crc5d_lastpalletid",
+														"type": "String"
+													}
+												}
+											]
+										}
 									},
 									"inputs": [
 										{
@@ -1375,7 +1560,14 @@
 								{
 									"name": "bronze-silver-gold",
 									"type": "DatabricksNotebook",
-									"dependsOn": [],
+									"dependsOn": [
+										{
+											"activity": "Get RunStartEnds",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
 									"policy": {
 										"timeout": "0.12:00:00",
 										"retry": 0,
@@ -1421,7 +1613,14 @@
 								{
 									"name": "run_durations_trigger",
 									"type": "DatabricksNotebook",
-									"dependsOn": [],
+									"dependsOn": [
+										{
+											"activity": "bronze-silver-gold",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
 									"policy": {
 										"timeout": "0.12:00:00",
 										"retry": 0,
