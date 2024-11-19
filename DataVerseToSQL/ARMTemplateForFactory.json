@@ -8300,6 +8300,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_stockcodechecked",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_stockcodechecked",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_tanker",
 											"type": "Guid"
 										},
@@ -27106,7 +27116,8 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "SftpLocation"
+						"type": "SftpLocation",
+						"folderPath": "/Live/StockOnHand"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

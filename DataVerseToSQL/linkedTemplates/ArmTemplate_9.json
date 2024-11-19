@@ -6133,6 +6133,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_stockcodechecked",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_stockcodechecked",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_tanker",
 											"type": "Guid"
 										},

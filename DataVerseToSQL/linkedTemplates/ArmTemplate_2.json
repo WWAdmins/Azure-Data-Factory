@@ -97,7 +97,8 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "SftpLocation"
+						"type": "SftpLocation",
+						"folderPath": "/Live/StockOnHand"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
