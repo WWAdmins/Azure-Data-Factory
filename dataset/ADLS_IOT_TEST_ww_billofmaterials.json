@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "iottest/bronze/dataverse/ww_billofmaterials/",
+				"folderPath": "iottest/bronze/dataverse/ww_billofmaterials/landing",
 				"fileSystem": "dls-fs-iot"
 			},
 			"compressionCodec": "snappy"
