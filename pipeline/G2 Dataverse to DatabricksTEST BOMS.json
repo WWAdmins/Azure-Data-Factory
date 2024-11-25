@@ -139,7 +139,7 @@
 			},
 			"partitionColumn": {
 				"type": "string",
-				"defaultValue": "ww_bomworkorderid"
+				"defaultValue": "ww_billofmaterialsid"
 			},
 			"tableName": {
 				"type": "string",
