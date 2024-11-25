@@ -38,6 +38,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@contains(activity('IsNewData').output, 'firstRow')",
+						"type": "Expression"
+					},
 					"ifTrueActivities": [
 						{
 							"name": "Run copy",
