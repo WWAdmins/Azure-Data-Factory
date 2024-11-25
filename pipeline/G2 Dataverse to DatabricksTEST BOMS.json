@@ -29,7 +29,7 @@
 				}
 			},
 			{
-				"name": "If Condition1",
+				"name": "If Condition BOMS",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
@@ -41,6 +41,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"expression": {
+						"value": "@contains(activity('IsNewData').output, 'firstRow')",
+						"type": "Expression"
+					},
 					"ifTrueActivities": [
 						{
 							"name": "BOM_copy",
