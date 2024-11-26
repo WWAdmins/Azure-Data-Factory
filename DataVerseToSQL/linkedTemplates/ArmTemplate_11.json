@@ -35,6 +35,62 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
+		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterialsid"
+		},
+		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterials"
+		},
+		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_runid"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_run"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
 		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -60,62 +116,6 @@
 			"defaultValue": "false"
 		},
 		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "ww_billofmaterialsid"
-		},
-		"test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "ww_billofmaterials"
-		},
-		"test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "ww_runid"
-		},
-		"test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "ww_run"
-		},
-		"test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_secondaryPartitionColumnName": {
 			"type": "string",
 			"defaultValue": "false"
 		},
@@ -1906,6 +1906,82 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/iottest_ww_billofmaterials_1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to DatabricksTEST BOMS",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2024-11-26T21:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/iottest_ww_run_1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to DatabricksTEST Run",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2024-11-26T21:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/runstartends_databricksTEST_15min')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -1938,78 +2014,6 @@
 						"intervalInSeconds": 30
 					},
 					"dependsOn": []
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/test_ww_billofmaterials_1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "G2 Dataverse to DatabricksTEST BOMS",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"triggerStart": "[parameters('test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_triggerStart')]",
-							"triggerEnd": "[parameters('test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_triggerEnd')]",
-							"modifiedonColumn": "[parameters('test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_modifiedonColumn')]",
-							"partitionColumn": "[parameters('test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_partitionColumn')]",
-							"tableName": "[parameters('test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_tableName')]",
-							"partitionBySecondary": "[parameters('test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_partitionBySecondary')]",
-							"secondaryPartitionColumnName": "[parameters('test_ww_billofmaterials_1hour_properties_G2 Dataverse to DatabricksTEST BOMS_parameters_secondaryPartitionColumnName')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 1,
-						"startTime": "2024-11-26T21:00:00",
-						"timeZone": "New Zealand Standard Time"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/test_ww_run_1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "G2 Dataverse to DatabricksTEST Run",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"triggerStart": "[parameters('test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_triggerStart')]",
-							"triggerEnd": "[parameters('test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_triggerEnd')]",
-							"modifiedonColumn": "[parameters('test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_modifiedonColumn')]",
-							"partitionColumn": "[parameters('test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_partitionColumn')]",
-							"tableName": "[parameters('test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_tableName')]",
-							"partitionBySecondary": "[parameters('test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_partitionBySecondary')]",
-							"secondaryPartitionColumnName": "[parameters('test_ww_run_1hour_properties_G2 Dataverse to DatabricksTEST Run_parameters_secondaryPartitionColumnName')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 1,
-						"startTime": "2024-11-26T21:00:00",
-						"timeZone": "New Zealand Standard Time"
-					}
 				}
 			},
 			"dependsOn": []
