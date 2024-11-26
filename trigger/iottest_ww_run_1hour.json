@@ -3,6 +3,21 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "G2 Dataverse to DatabricksTEST Run",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"triggerStart": "@trigger().outputs.windowStartTime",
+				"triggerEnd": "@trigger().outputs.windowEndTime",
+				"modifiedonColumn": "modifiedon",
+				"partitionColumn": "ww_runid",
+				"tableName": "ww_run",
+				"partitionBySecondary": "false",
+				"secondaryPartitionColumnName": "false"
+			}
+		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Hour",
