@@ -63,6 +63,62 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_runid"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_run"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"iottest_ww_bom_1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"iottest_ww_bom_1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"iottest_ww_bom_1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"iottest_ww_bom_1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterialsid"
+		},
+		"iottest_ww_bom_1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterials"
+		},
+		"iottest_ww_bom_1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"iottest_ww_bom_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -1876,6 +1932,80 @@
 					"frequency": "Minute",
 					"interval": 15,
 					"startTime": "2024-10-14T19:30:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/iottest_ww_run_1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to DatabricksTEST Run",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2024-11-27T21:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/iottest_ww_bom_1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to DatabricksTEST BOMS",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('iottest_ww_bom_1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('iottest_ww_bom_1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('iottest_ww_bom_1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('iottest_ww_bom_1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('iottest_ww_bom_1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('iottest_ww_bom_1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('iottest_ww_bom_1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2024-11-27T21:00:00Z",
 					"delay": "00:05:00",
 					"maxConcurrency": 1,
 					"retryPolicy": {
