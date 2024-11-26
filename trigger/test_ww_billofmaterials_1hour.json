@@ -1,0 +1,17 @@
+{
+	"name": "test_ww_billofmaterials_1hour",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2024-11-26T21:00:00",
+				"timeZone": "New Zealand Standard Time"
+			}
+		}
+	}
+}
