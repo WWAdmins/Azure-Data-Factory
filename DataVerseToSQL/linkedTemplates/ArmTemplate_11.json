@@ -340,6 +340,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_capperknifebladecheck",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_capperknifebladecheck",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_cappermissingcapdetectorsig",
 											"type": "String"
 										},
@@ -385,6 +395,16 @@
 										},
 										"sink": {
 											"name": "ww_cappertuckthreadredrawsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_caselabellerscissorscheck",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_caselabellerscissorscheck",
 											"type": "String"
 										}
 									},
@@ -480,6 +500,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_dividersscissorscheck",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_dividersscissorscheck",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_fillercorrectchangepartssig",
 											"type": "String"
 										},
@@ -540,12 +570,32 @@
 									},
 									{
 										"source": {
+											"name": "ww_knifebladecheck",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_knifebladecheck",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_labelpreflightchecksheetcompletedsig",
 											"type": "String"
 										},
 										"sink": {
 											"name": "ww_labelpreflightchecksheetcompletedsig",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_labellerscissorscheck",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_labellerscissorscheck",
+											"type": "Int32"
 										}
 									},
 									{
