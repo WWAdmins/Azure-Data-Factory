@@ -2,7 +2,7 @@
 	"name": "runstartends_databricksTEST_15min",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "G2 Dataverse to Databricks RunStartEndsTEST",
