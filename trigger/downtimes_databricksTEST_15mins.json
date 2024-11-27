@@ -2,7 +2,7 @@
 	"name": "downtimes_databricksTEST_15mins",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "G2 Dataverse to DatabricksTEST Downtimes",
