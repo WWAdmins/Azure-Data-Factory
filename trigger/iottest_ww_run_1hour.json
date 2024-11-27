@@ -2,7 +2,7 @@
 	"name": "iottest_ww_run_1hour",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "G2 Dataverse to DatabricksTEST Run",
