@@ -85,7 +85,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ADLS_DowntimeTEST",
+									"referenceName": "ADLS_DowntimePROD",
 									"type": "DatasetReference"
 								}
 							]
