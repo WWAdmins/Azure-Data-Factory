@@ -8,6 +8,9 @@
 		"CommonDataServiceForApps1_password": {
 			"value": ""
 		},
+		"DataNow_password": {
+			"value": ""
+		},
 		"Dataverse_password": {
 			"value": ""
 		},
@@ -64,6 +67,15 @@
 		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"value": "Tejaswi.Datla@wineworks.co.nz"
+		},
+		"DataNow_properties_typeProperties_server": {
+			"value": "WWSQL003"
+		},
+		"DataNow_properties_typeProperties_database": {
+			"value": "DataNow"
+		},
+		"DataNow_properties_typeProperties_userName": {
+			"value": "wineworksgroup\\WWG_Service"
 		},
 		"Dataverse_properties_typeProperties_username": {
 			"value": "wwdigital02@wineworks.co.nz"
@@ -191,25 +203,28 @@
 		"iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"value": "false"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerStart": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerEnd": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_modifiedonColumn": {
 			"value": "modifiedon"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionColumn": {
 			"value": "crc5d_guid"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_tableName": {
 			"value": "crc5d_newtable"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionBySecondary": {
 			"value": "false"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"value": "false"
+		},
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_dropDataverseDefaults": {
 			"value": "false"
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart": {

@@ -6,18 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
-		},
-		"EskerFTPWW_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'EskerFTPWW'"
-		},
-		"EskerFTPWW_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "\\\\WWMULTI001\\Esker"
-		},
-		"EskerFTPWW_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "wwdigital@wineworks.co.nz"
 		}
 	},
 	"variables": {
@@ -370,23 +358,23 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/EskerFTPWW')]",
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksDeltaLake')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "FileServer",
+				"type": "AzureDatabricksDeltaLake",
 				"typeProperties": {
-					"host": "[parameters('EskerFTPWW_properties_typeProperties_host')]",
-					"userId": "[parameters('EskerFTPWW_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('EskerFTPWW_password')]"
+					"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
+					"clusterId": "1127-225400-jhhgl2nb",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_adb_iot_prod",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "DataVerseAccessKey"
 					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": []

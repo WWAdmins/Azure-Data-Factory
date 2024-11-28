@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"DataNow_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DataNow'"
+		},
+		"EskerFTPWW_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'EskerFTPWW'"
+		},
 		"FileServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FileServer1'"
@@ -38,6 +46,26 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
 		},
+		"DataNow_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "WWSQL003"
+		},
+		"DataNow_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DataNow"
+		},
+		"DataNow_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
+		},
+		"EskerFTPWW_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\WWMULTI001\\Esker"
+		},
+		"EskerFTPWW_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
 		"FileServer1_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "\\\\WWMULTI001\\Indevin"
@@ -63,6 +91,54 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DataNow')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('DataNow_properties_typeProperties_server')]",
+					"database": "[parameters('DataNow_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "Windows",
+					"userName": "[parameters('DataNow_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DataNow_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EskerFTPWW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('EskerFTPWW_properties_typeProperties_host')]",
+					"userId": "[parameters('EskerFTPWW_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('EskerFTPWW_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/FileServer1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -1871,7 +1947,9 @@
 				},
 				"schema": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EskerFTPWW')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SQL003_FOTest')]",
@@ -3741,62 +3819,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Labelling Preflight"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_BOM')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Bill of Material",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "BOM ID",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Work Order ID",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Bill of Materials"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003_BottleBatchRejects')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Bottle Batch Rejects"
 				}
 			},
 			"dependsOn": [

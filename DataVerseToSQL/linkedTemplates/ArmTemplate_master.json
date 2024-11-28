@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'CommonDataServiceForApps1'"
 		},
+		"DataNow_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DataNow'"
+		},
 		"Dataverse_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Dataverse'"
@@ -90,6 +94,18 @@
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
+		},
+		"DataNow_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "WWSQL003"
+		},
+		"DataNow_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DataNow"
+		},
+		"DataNow_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
 		"Dataverse_properties_typeProperties_username": {
 			"type": "string",
@@ -259,31 +275,35 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_modifiedonColumn": {
 			"type": "string",
 			"defaultValue": "modifiedon"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionColumn": {
 			"type": "string",
 			"defaultValue": "crc5d_guid"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_tableName": {
 			"type": "string",
 			"defaultValue": "crc5d_newtable"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionBySecondary": {
 			"type": "string",
 			"defaultValue": "false"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_dropDataverseDefaults": {
 			"type": "string",
 			"defaultValue": "false"
 		},
@@ -506,15 +526,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"EskerFTPWW_password": {
-						"value": "[parameters('EskerFTPWW_password')]"
-					},
-					"EskerFTPWW_properties_typeProperties_host": {
-						"value": "[parameters('EskerFTPWW_properties_typeProperties_host')]"
-					},
-					"EskerFTPWW_properties_typeProperties_userId": {
-						"value": "[parameters('EskerFTPWW_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -536,6 +547,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"DataNow_password": {
+						"value": "[parameters('DataNow_password')]"
+					},
+					"EskerFTPWW_password": {
+						"value": "[parameters('EskerFTPWW_password')]"
+					},
 					"FileServer1_password": {
 						"value": "[parameters('FileServer1_password')]"
 					},
@@ -556,6 +573,21 @@
 					},
 					"WWWEB002_password": {
 						"value": "[parameters('WWWEB002_password')]"
+					},
+					"DataNow_properties_typeProperties_server": {
+						"value": "[parameters('DataNow_properties_typeProperties_server')]"
+					},
+					"DataNow_properties_typeProperties_database": {
+						"value": "[parameters('DataNow_properties_typeProperties_database')]"
+					},
+					"DataNow_properties_typeProperties_userName": {
+						"value": "[parameters('DataNow_properties_typeProperties_userName')]"
+					},
+					"EskerFTPWW_properties_typeProperties_host": {
+						"value": "[parameters('EskerFTPWW_properties_typeProperties_host')]"
+					},
+					"EskerFTPWW_properties_typeProperties_userId": {
+						"value": "[parameters('EskerFTPWW_properties_typeProperties_userId')]"
 					},
 					"FileServer1_properties_typeProperties_host": {
 						"value": "[parameters('FileServer1_properties_typeProperties_host')]"
@@ -775,26 +807,29 @@
 					"iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
 						"value": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
 					},
-					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
-						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart')]"
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerStart": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerStart')]"
 					},
-					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd": {
-						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd')]"
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerEnd": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerEnd')]"
 					},
-					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn": {
-						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn')]"
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_modifiedonColumn": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_modifiedonColumn')]"
 					},
-					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn": {
-						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn')]"
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionColumn": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionColumn')]"
 					},
-					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName": {
-						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName')]"
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_tableName": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_tableName')]"
 					},
-					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary": {
-						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary')]"
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionBySecondary": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionBySecondary')]"
 					},
-					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					},
+					"prod-databricks-downtime-30mins_properties_pipeline_parameters_dropDataverseDefaults": {
+						"value": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_dropDataverseDefaults')]"
 					},
 					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart')]"
@@ -837,6 +872,26 @@
 					},
 					"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
 						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_10')]"
+			]
+		},
+		{
+			"name": "DataVerseToSQL_ArmTemplate_12",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_12.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]"
@@ -847,7 +902,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_10')]"
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_11')]"
 			]
 		}
 	]

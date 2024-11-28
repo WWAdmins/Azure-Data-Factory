@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'CommonDataServiceForApps1'"
 		},
+		"DataNow_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DataNow'"
+		},
 		"Dataverse_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Dataverse'"
@@ -90,6 +94,18 @@
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
+		},
+		"DataNow_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "WWSQL003"
+		},
+		"DataNow_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "DataNow"
+		},
+		"DataNow_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
 		"Dataverse_properties_typeProperties_username": {
 			"type": "string",
@@ -259,31 +275,35 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_modifiedonColumn": {
 			"type": "string",
 			"defaultValue": "modifiedon"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionColumn": {
 			"type": "string",
 			"defaultValue": "crc5d_guid"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_tableName": {
 			"type": "string",
 			"defaultValue": "crc5d_newtable"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionBySecondary": {
 			"type": "string",
 			"defaultValue": "false"
 		},
-		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-downtime-30mins_properties_pipeline_parameters_dropDataverseDefaults": {
 			"type": "string",
 			"defaultValue": "false"
 		},
@@ -35274,6 +35294,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_Datanow_Run')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataNow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Run_IOT"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataNow')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_lockcode')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -42845,6 +42886,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksDeltaLake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
+					"clusterId": "1127-225400-jhhgl2nb",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_adb_iot_prod",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "DataVerseAccessKey"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/kv_adb_iot_prod')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CommonDataServiceForApps1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -42863,6 +42928,34 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataNow')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('DataNow_properties_typeProperties_server')]",
+					"database": "[parameters('DataNow_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "Windows",
+					"userName": "[parameters('DataNow_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DataNow_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Dataverse')]",
@@ -43837,32 +43930,33 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtimes-30mins')]",
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtime-30mins')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "PROD Databricks Downtimes",
 						"type": "PipelineReference"
 					},
 					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+						"triggerStart": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]",
+						"dropDataverseDefaults": "[parameters('prod-databricks-downtime-30mins_properties_pipeline_parameters_dropDataverseDefaults')]"
 					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
 					"frequency": "Minute",
 					"interval": 30,
-					"startTime": "2024-11-28T01:00:00Z",
+					"startTime": "2024-11-28T21:00:00Z",
 					"delay": "00:05:00",
 					"maxConcurrency": 1,
 					"retryPolicy": {
