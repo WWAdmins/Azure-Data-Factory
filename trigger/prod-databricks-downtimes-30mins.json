@@ -3,6 +3,21 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "PROD Databricks Downtimes",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"triggerStart": "@trigger().outputs.windowStartTime",
+				"triggerEnd": "@trigger().outputs.windowEndTime",
+				"modifiedonColumn": "modifiedon",
+				"partitionColumn": "crc5d_guid",
+				"tableName": "crc5d_newtable",
+				"partitionBySecondary": "false",
+				"secondaryPartitionColumnName": "false"
+			}
+		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Minute",
