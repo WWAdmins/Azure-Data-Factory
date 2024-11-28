@@ -112,8 +112,8 @@
 							"typeProperties": {
 								"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
 								"baseParameters": {
-									"END_TIMESTAMP": {
-										"value": "@pipeline().parameters.triggerEnd",
+									"DROP_DATAVERSE_DEFAULTS": {
+										"value": "@pipeline().parameters.dropDataverseDefaults",
 										"type": "Expression"
 									},
 									"MODIFIEDON_COLUMN": {
@@ -198,6 +198,10 @@
 				"defaultValue": "false"
 			},
 			"secondaryPartitionColumnName": {
+				"type": "string",
+				"defaultValue": "false"
+			},
+			"dropDataverseDefaults": {
 				"type": "string",
 				"defaultValue": "false"
 			}
