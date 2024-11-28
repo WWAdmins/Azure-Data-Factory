@@ -287,34 +287,6 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
-		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
 		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -795,27 +767,6 @@
 					},
 					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
 						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					},
-					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart": {
-						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart')]"
-					},
-					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerEnd": {
-						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerEnd')]"
-					},
-					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_modifiedonColumn": {
-						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_modifiedonColumn')]"
-					},
-					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionColumn": {
-						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionColumn')]"
-					},
-					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_tableName": {
-						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_tableName')]"
-					},
-					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionBySecondary": {
-						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionBySecondary')]"
-					},
-					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
 					},
 					"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart')]"
