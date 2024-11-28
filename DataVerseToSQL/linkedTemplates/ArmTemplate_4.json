@@ -913,7 +913,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -1322,7 +1322,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -1367,7 +1367,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -1544,7 +1544,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -1589,7 +1589,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
