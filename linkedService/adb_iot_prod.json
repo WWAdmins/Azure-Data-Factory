@@ -30,7 +30,7 @@
 			"newClusterVersion": "13.3.x-scala2.12",
 			"clusterOption": "Fixed",
 			"newClusterInitScripts": [],
-			"dataSecurityMode": "USER_ISOLATION"
+			"dataSecurityMode": "SINGLE_USER"
 		}
 	}
 }
