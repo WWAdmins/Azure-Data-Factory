@@ -1,5 +1,5 @@
 {
-	"name": "wwsql003_Datanow",
+	"name": "wwsql003_Datanow_Run",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "DataNow",
