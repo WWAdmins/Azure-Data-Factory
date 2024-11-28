@@ -259,38 +259,6 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
 		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -346,6 +314,38 @@
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"type": "string",
 			"defaultValue": "false"
+		},
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartend"
+		},
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartend"
+		},
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
 		}
 	},
 	"variables": {
@@ -2637,6 +2637,635 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/WWMULTI001_Indevin')]",
 				"[concat(variables('factoryId'), '/datasets/Indevin_SFTP')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PROD Databricks Downtimes')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "IsNewData",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"dataset": {
+								"referenceName": "DowntimesProd",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "If Condition Downtimes",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "IsNewData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@contains(activity('IsNewData').output, 'firstRow')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Downtimes_copy1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "CommonDataServiceForAppsSource",
+											"query": {
+												"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "DowntimesProd",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_DowntimePROD",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								},
+								{
+									"name": "bronze-silver-gold_copy1",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "Downtimes_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+										"baseParameters": {
+											"DROP_DATAVERSE_DEFAULTS": {
+												"value": "@pipeline().parameters.dropDataverseDefaults",
+												"type": "Expression"
+											},
+											"MODIFIEDON_COLUMN": {
+												"value": "@pipeline().parameters.modifiedonColumn",
+												"type": "Expression"
+											},
+											"PARTITION_COLUMN": {
+												"value": "@pipeline().parameters.partitionColumn",
+												"type": "Expression"
+											},
+											"TABLE_NAME": {
+												"value": "@pipeline().parameters.tableName",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION": {
+												"value": "@pipeline().parameters.partitionBySecondary",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION_NAME": {
+												"value": "@pipeline().parameters.secondaryPartitionColumnName",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_prod",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "oee-trigger_copy1",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "bronze-silver-gold_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/BI/triggers/oee_interval_trigger"
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_prod",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "crc5d_newtableid"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "crc5d_newtable"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"dropDataverseDefaults": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DowntimesProd')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_DowntimePROD')]",
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PROD Databricks RunStartEnds')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "IsNewData",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"dataset": {
+								"referenceName": "RunStartEndsProd",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "If Condition1",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "IsNewData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@contains(activity('IsNewData').output, 'firstRow')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Get RunStartEnds",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "CommonDataServiceForAppsSource",
+											"query": {
+												"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"name": "crc5d_productionlineid",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "crc5d_productionlineid",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "owningbusinessunit",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "owningbusinessunit",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "statecode",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "statecode",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_runstartendid",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "crc5d_runstartendid",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "createdby",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "createdby",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_uniqueid",
+														"type": "String"
+													},
+													"sink": {
+														"name": "crc5d_uniqueid",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_enddatetime",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "crc5d_enddatetime",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "timezoneruleversionnumber",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "timezoneruleversionnumber",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "ownerid",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "ownerid",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "modifiedon",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "modifiedon",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "modifiedby",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "modifiedby",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "owninguser",
+														"type": "Guid"
+													},
+													"sink": {
+														"name": "owninguser",
+														"type": "Guid"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_runstartend",
+														"type": "String"
+													},
+													"sink": {
+														"name": "crc5d_runstartend",
+														"type": "String"
+													}
+												},
+												{
+													"source": {
+														"name": "createdon",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "createdon",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "statuscode",
+														"type": "Int32"
+													},
+													"sink": {
+														"name": "statuscode",
+														"type": "Int32"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_startdatetime",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "crc5d_startdatetime",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_lastpallettime",
+														"type": "DateTime"
+													},
+													"sink": {
+														"name": "crc5d_lastpallettime",
+														"type": "DateTime"
+													}
+												},
+												{
+													"source": {
+														"name": "crc5d_lastpalletid",
+														"type": "String"
+													},
+													"sink": {
+														"name": "crc5d_lastpalletid",
+														"type": "String"
+													}
+												}
+											]
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "RunStartEndsProd",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_RunStartEndPROD",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								},
+								{
+									"name": "bronze-silver-gold",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "Get RunStartEnds",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+										"baseParameters": {
+											"END_TIMESTAMP": {
+												"value": "@pipeline().parameters.triggerEnd",
+												"type": "Expression"
+											},
+											"MODIFIEDON_COLUMN": {
+												"value": "@pipeline().parameters.modifiedonColumn",
+												"type": "Expression"
+											},
+											"PARTITION_COLUMN": {
+												"value": "@pipeline().parameters.partitionColumn",
+												"type": "Expression"
+											},
+											"TABLE_NAME": {
+												"value": "@pipeline().parameters.tableName",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION": {
+												"value": "@pipeline().parameters.partitionBySecondary",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION_NAME": {
+												"value": "@pipeline().parameters.secondaryPartitionColumnName",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_prod",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "run_durations_trigger",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "bronze-silver-gold",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/BI/triggers/run_duration_trigger"
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_prod",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "crc5d_runstartend"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "crc5d_runstartend"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/RunStartEndsProd')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_RunStartEndPROD')]",
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
 			]
 		},
 		{
@@ -27073,6 +27702,31 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_DowntimePROD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dlsadbiotprod",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iotprod/bronze/dataverse/crc5d_newtable/landing",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_DowntimeTEST')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -27245,6 +27899,31 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_RunStartEndPROD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dlsadbiotprod",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iotprod/bronze/dataverse/crc5d_runstartend/landing",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
 			]
 		},
 		{
@@ -43150,6 +43829,86 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtimes-30mins')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks Downtimes",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 30,
+					"startTime": "2024-11-28T01:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PROD Databricks Downtimes')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-runstartends-30mins')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks RunStartEnds",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 30,
+					"startTime": "2024-11-27T01:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PROD Databricks RunStartEnds')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/runstartends_databricksTEST_15min')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -43562,765 +44321,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PROD Databricks Downtimes')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "IsNewData",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-									"type": "Expression"
-								}
-							},
-							"dataset": {
-								"referenceName": "DowntimesProd",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "If Condition Downtimes",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "IsNewData",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@contains(activity('IsNewData').output, 'firstRow')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Downtimes_copy1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "CommonDataServiceForAppsSource",
-											"query": {
-												"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-												"type": "Expression"
-											}
-										},
-										"sink": {
-											"type": "ParquetSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
-											"formatSettings": {
-												"type": "ParquetWriteSettings"
-											}
-										},
-										"enableStaging": false
-									},
-									"inputs": [
-										{
-											"referenceName": "DowntimesProd",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "ADLS_DowntimePROD",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "bronze-silver-gold_copy1",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "Downtimes_copy1",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
-										"baseParameters": {
-											"DROP_DATAVERSE_DEFAULTS": {
-												"value": "@pipeline().parameters.dropDataverseDefaults",
-												"type": "Expression"
-											},
-											"MODIFIEDON_COLUMN": {
-												"value": "@pipeline().parameters.modifiedonColumn",
-												"type": "Expression"
-											},
-											"PARTITION_COLUMN": {
-												"value": "@pipeline().parameters.partitionColumn",
-												"type": "Expression"
-											},
-											"TABLE_NAME": {
-												"value": "@pipeline().parameters.tableName",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION": {
-												"value": "@pipeline().parameters.partitionBySecondary",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION_NAME": {
-												"value": "@pipeline().parameters.secondaryPartitionColumnName",
-												"type": "Expression"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "oee-trigger_copy1",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "bronze-silver-gold_copy1",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/BI/triggers/oee_interval_trigger"
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"triggerStart": {
-						"type": "string"
-					},
-					"triggerEnd": {
-						"type": "string"
-					},
-					"modifiedonColumn": {
-						"type": "string",
-						"defaultValue": "modifiedon"
-					},
-					"partitionColumn": {
-						"type": "string",
-						"defaultValue": "crc5d_newtableid"
-					},
-					"tableName": {
-						"type": "string",
-						"defaultValue": "crc5d_newtable"
-					},
-					"partitionBySecondary": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"secondaryPartitionColumnName": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"dropDataverseDefaults": {
-						"type": "string",
-						"defaultValue": "false"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DowntimesProd')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_DowntimePROD')]",
-				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_DowntimePROD')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiotprod",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iotprod/bronze/dataverse/crc5d_newtable/landing",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_RunStartEndPROD')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiotprod",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iotprod/bronze/dataverse/crc5d_runstartend/landing",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PROD Databricks RunStartEnds')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "IsNewData",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-									"type": "Expression"
-								}
-							},
-							"dataset": {
-								"referenceName": "RunStartEndsProd",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "If Condition1",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "IsNewData",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@contains(activity('IsNewData').output, 'firstRow')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Get RunStartEnds",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "CommonDataServiceForAppsSource",
-											"query": {
-												"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-												"type": "Expression"
-											}
-										},
-										"sink": {
-											"type": "ParquetSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
-											"formatSettings": {
-												"type": "ParquetWriteSettings"
-											}
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"mappings": [
-												{
-													"source": {
-														"name": "crc5d_productionlineid",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "crc5d_productionlineid",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "owningbusinessunit",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "owningbusinessunit",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "statecode",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "statecode",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_runstartendid",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "crc5d_runstartendid",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "createdby",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "createdby",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_uniqueid",
-														"type": "String"
-													},
-													"sink": {
-														"name": "crc5d_uniqueid",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_enddatetime",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "crc5d_enddatetime",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "timezoneruleversionnumber",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "timezoneruleversionnumber",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "ownerid",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "ownerid",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "modifiedon",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "modifiedon",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "modifiedby",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "modifiedby",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "owninguser",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "owninguser",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_runstartend",
-														"type": "String"
-													},
-													"sink": {
-														"name": "crc5d_runstartend",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "createdon",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "createdon",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "statuscode",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "statuscode",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_startdatetime",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "crc5d_startdatetime",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_lastpallettime",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "crc5d_lastpallettime",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_lastpalletid",
-														"type": "String"
-													},
-													"sink": {
-														"name": "crc5d_lastpalletid",
-														"type": "String"
-													}
-												}
-											]
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "RunStartEndsProd",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "ADLS_RunStartEndPROD",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "bronze-silver-gold",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "Get RunStartEnds",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
-										"baseParameters": {
-											"END_TIMESTAMP": {
-												"value": "@pipeline().parameters.triggerEnd",
-												"type": "Expression"
-											},
-											"MODIFIEDON_COLUMN": {
-												"value": "@pipeline().parameters.modifiedonColumn",
-												"type": "Expression"
-											},
-											"PARTITION_COLUMN": {
-												"value": "@pipeline().parameters.partitionColumn",
-												"type": "Expression"
-											},
-											"TABLE_NAME": {
-												"value": "@pipeline().parameters.tableName",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION": {
-												"value": "@pipeline().parameters.partitionBySecondary",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION_NAME": {
-												"value": "@pipeline().parameters.secondaryPartitionColumnName",
-												"type": "Expression"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "run_durations_trigger",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "bronze-silver-gold",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/BI/triggers/run_duration_trigger"
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"triggerStart": {
-						"type": "string"
-					},
-					"triggerEnd": {
-						"type": "string"
-					},
-					"modifiedonColumn": {
-						"type": "string",
-						"defaultValue": "modifiedon"
-					},
-					"partitionColumn": {
-						"type": "string",
-						"defaultValue": "crc5d_runstartend"
-					},
-					"tableName": {
-						"type": "string",
-						"defaultValue": "crc5d_runstartend"
-					},
-					"partitionBySecondary": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"secondaryPartitionColumnName": {
-						"type": "string",
-						"defaultValue": "false"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/RunStartEndsProd')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_RunStartEndPROD')]",
-				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtimes-30mins')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PROD Databricks Downtimes",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 30,
-					"startTime": "2024-11-28T01:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PROD Databricks Downtimes')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-runstartends-30mins')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PROD Databricks RunStartEnds",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 30,
-					"startTime": "2024-11-27T01:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PROD Databricks RunStartEnds')]"
-			]
 		}
 	]
 }

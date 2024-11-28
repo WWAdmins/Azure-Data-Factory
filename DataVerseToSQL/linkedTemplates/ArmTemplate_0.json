@@ -418,12 +418,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_DowntimeTEST')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_DowntimePROD')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "dlsadbiottest",
+					"referenceName": "dlsadbiotprod",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -431,7 +431,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "iottest/bronze/dataverse/crc5d_newtable/landing",
+						"folderPath": "iotprod/bronze/dataverse/crc5d_newtable/landing",
 						"fileSystem": "dls-fs-iot"
 					},
 					"compressionCodec": "snappy"
@@ -439,7 +439,7 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
 			]
 		}
 	]

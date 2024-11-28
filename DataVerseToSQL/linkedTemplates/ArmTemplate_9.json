@@ -13,403 +13,301 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/PROD Databricks RunStartEnds')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/IOT_TEST_dataflow')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "IsNewData",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-									"type": "Expression"
-								}
-							},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
 							"dataset": {
-								"referenceName": "RunStartEndsProd",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "If Condition1",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "IsNewData",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@contains(activity('IsNewData').output, 'firstRow')",
-								"type": "Expression"
+								"referenceName": "QCEndofRun",
+								"type": "DatasetReference"
 							},
-							"ifTrueActivities": [
-								{
-									"name": "Get RunStartEnds",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "CommonDataServiceForAppsSource",
-											"query": {
-												"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-												"type": "Expression"
-											}
-										},
-										"sink": {
-											"type": "ParquetSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
-											"formatSettings": {
-												"type": "ParquetWriteSettings"
-											}
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"mappings": [
-												{
-													"source": {
-														"name": "crc5d_productionlineid",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "crc5d_productionlineid",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "owningbusinessunit",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "owningbusinessunit",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "statecode",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "statecode",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_runstartendid",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "crc5d_runstartendid",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "createdby",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "createdby",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_uniqueid",
-														"type": "String"
-													},
-													"sink": {
-														"name": "crc5d_uniqueid",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_enddatetime",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "crc5d_enddatetime",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "timezoneruleversionnumber",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "timezoneruleversionnumber",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "ownerid",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "ownerid",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "modifiedon",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "modifiedon",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "modifiedby",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "modifiedby",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "owninguser",
-														"type": "Guid"
-													},
-													"sink": {
-														"name": "owninguser",
-														"type": "Guid"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_runstartend",
-														"type": "String"
-													},
-													"sink": {
-														"name": "crc5d_runstartend",
-														"type": "String"
-													}
-												},
-												{
-													"source": {
-														"name": "createdon",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "createdon",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "statuscode",
-														"type": "Int32"
-													},
-													"sink": {
-														"name": "statuscode",
-														"type": "Int32"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_startdatetime",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "crc5d_startdatetime",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_lastpallettime",
-														"type": "DateTime"
-													},
-													"sink": {
-														"name": "crc5d_lastpallettime",
-														"type": "DateTime"
-													}
-												},
-												{
-													"source": {
-														"name": "crc5d_lastpalletid",
-														"type": "String"
-													},
-													"sink": {
-														"name": "crc5d_lastpalletid",
-														"type": "String"
-													}
-												}
-											]
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "RunStartEndsProd",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "ADLS_RunStartEndPROD",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "bronze-silver-gold",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "Get RunStartEnds",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
-										"baseParameters": {
-											"END_TIMESTAMP": {
-												"value": "@pipeline().parameters.triggerEnd",
-												"type": "Expression"
-											},
-											"MODIFIEDON_COLUMN": {
-												"value": "@pipeline().parameters.modifiedonColumn",
-												"type": "Expression"
-											},
-											"PARTITION_COLUMN": {
-												"value": "@pipeline().parameters.partitionColumn",
-												"type": "Expression"
-											},
-											"TABLE_NAME": {
-												"value": "@pipeline().parameters.tableName",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION": {
-												"value": "@pipeline().parameters.partitionBySecondary",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION_NAME": {
-												"value": "@pipeline().parameters.secondaryPartitionColumnName",
-												"type": "Expression"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "run_durations_trigger",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "bronze-silver-gold",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/BI/triggers/run_duration_trigger"
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
+							"name": "qcendofrun",
+							"description": "Import data from QCEndofRun"
+						},
+						{
+							"dataset": {
+								"referenceName": "Run",
+								"type": "DatasetReference"
+							},
+							"name": "Run"
+						},
+						{
+							"dataset": {
+								"referenceName": "BOM",
+								"type": "DatasetReference"
+							},
+							"name": "Bom"
+						},
+						{
+							"dataset": {
+								"referenceName": "ProductionLine",
+								"type": "DatasetReference"
+							},
+							"name": "productionline",
+							"description": "Import data from ProductionLine"
+						},
+						{
+							"dataset": {
+								"referenceName": "OperatorBottlingDowntime",
+								"type": "DatasetReference"
+							},
+							"name": "operatorbottlingdowntime"
+						},
+						{
+							"dataset": {
+								"referenceName": "BottleBatchSummary",
+								"type": "DatasetReference"
+							},
+							"name": "bottlebatchsummary"
 						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"triggerStart": {
-						"type": "string"
-					},
-					"triggerEnd": {
-						"type": "string"
-					},
-					"modifiedonColumn": {
-						"type": "string",
-						"defaultValue": "modifiedon"
-					},
-					"partitionColumn": {
-						"type": "string",
-						"defaultValue": "crc5d_runstartend"
-					},
-					"tableName": {
-						"type": "string",
-						"defaultValue": "crc5d_runstartend"
-					},
-					"partitionBySecondary": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"secondaryPartitionColumnName": {
-						"type": "string",
-						"defaultValue": "false"
-					}
-				},
-				"annotations": []
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "ADLS_IOT_TEST_ww_qcendofrun",
+								"type": "DatasetReference"
+							},
+							"name": "wwqcendofrunsink",
+							"description": "Export data to ADLS_IOT_TEST_ww_qcendofrun"
+						},
+						{
+							"dataset": {
+								"referenceName": "ADLS_IOT_TEST_ww_run",
+								"type": "DatasetReference"
+							},
+							"name": "wwrunsink"
+						},
+						{
+							"dataset": {
+								"referenceName": "ADLS_IOT_TEST_ww_billofmaterials",
+								"type": "DatasetReference"
+							},
+							"name": "wwbomsink",
+							"description": "Export data to ADLS_ww_billofmaterials"
+						},
+						{
+							"dataset": {
+								"referenceName": "ADLS_IOT_TEST_ww_productionline",
+								"type": "DatasetReference"
+							},
+							"name": "wwproductionlinesink"
+						},
+						{
+							"dataset": {
+								"referenceName": "ADLS_IOT_TEST_ww_operatorbottlingdowntime",
+								"type": "DatasetReference"
+							},
+							"name": "wwoperatorbottlingdowntimesink",
+							"description": "Export data to ADLS_ww_operatorbottlingdowntime"
+						},
+						{
+							"dataset": {
+								"referenceName": "ADLS_IOT_TEST_ww_bottlebatchsummary",
+								"type": "DatasetReference"
+							},
+							"name": "wwbottlebatchsummarysink"
+						}
+					],
+					"transformations": [
+						{
+							"name": "qcendofrunWithPartitionColumn"
+						},
+						{
+							"name": "RunWithPartitionColumns"
+						},
+						{
+							"name": "BOMWithhPartitionColumns"
+						},
+						{
+							"name": "ProductionlineWithPartitionColumn"
+						},
+						{
+							"name": "operatorbottlingdowntimeWithPartitionColumns"
+						},
+						{
+							"name": "bottlebatchsummaryWithPartition"
+						}
+					],
+					"scriptLines": [
+						"parameters{",
+						"     startTime as string,",
+						"     endTime as string",
+						"}",
+						"source(output(",
+						"          {@odata.etag} as string,",
+						"          createdby as string,",
+						"          modifiedby as string,",
+						"          ownerid as string,",
+						"          owningbusinessunit as string,",
+						"          owninguser as string,",
+						"          ww_run as string,",
+						"          createdon as string,",
+						"          modifiedon as string,",
+						"          statecode as string,",
+						"          statuscode as string,",
+						"          timezoneruleversionnumber as string,",
+						"          ww_bottlecounter as string,",
+						"          ww_endofrunsamples as string,",
+						"          ww_endofsamples as string,",
+						"          ww_flowmeter as string,",
+						"          ww_lasercounter as string,",
+						"          ww_magnumwhitetape as string,",
+						"          ww_operatorcode as string,",
+						"          ww_productionline as string,",
+						"          ww_qcendofrunid as string,",
+						"          ww_qcendofrunname as string,",
+						"          ww_rejectcounter as string,",
+						"          ww_runendtime as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: (concat('<fetch><entity name=\"ww_qcendofrun\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> qcendofrun",
+						"source(output(",
+						"          {@odata.etag} as string,",
+						"          createdby as string,",
+						"          modifiedby as string,",
+						"          ownerid as string,",
+						"          owningbusinessunit as string,",
+						"          owninguser as string,",
+						"          ww_runproductionline as string,",
+						"          createdon as string,",
+						"          modifiedon as string,",
+						"          statecode as string,",
+						"          statuscode as string,",
+						"          timezoneruleversionnumber as string,",
+						"          ww_clientcode as string,",
+						"          ww_clientname as string,",
+						"          ww_clientworkorderreference as string,",
+						"          ww_completed as string,",
+						"          ww_lastcopied as string,",
+						"          ww_microsneeded as string,",
+						"          ww_pendingupdate as string,",
+						"          ww_rundate as string,",
+						"          ww_runid as string,",
+						"          ww_runnumber as string,",
+						"          ww_stocktoconsumecasevariability as string,",
+						"          ww_stocktoconsumerun as string,",
+						"          ww_stocktoconsumestockcode as string,",
+						"          ww_stocktoconsumestockcodedescription as string,",
+						"          ww_variety as string,",
+						"          ww_vintage as string,",
+						"          ww_vintagevariety as string,",
+						"          ww_winehandling as string,",
+						"          ww_workorderid as string,",
+						"          ww_workordertype as string,",
+						"          ww_workorderupdatedon as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: (concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> Run",
+						"source(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: (concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> Bom",
+						"source(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: (concat('<fetch><entity name=\"ww_productionlinelookup\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> productionline",
+						"source(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: (concat('<fetch><entity name=\"ww_operatorbottlingdowntime\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> operatorbottlingdowntime",
+						"source(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     query: (concat('<fetch><entity name=\"ww_bottlebatchsummary\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> bottlebatchsummary",
+						"qcendofrun derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
+						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> qcendofrunWithPartitionColumn",
+						"Run derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
+						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> RunWithPartitionColumns",
+						"Bom derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
+						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> BOMWithhPartitionColumns",
+						"productionline derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
+						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> ProductionlineWithPartitionColumn",
+						"operatorbottlingdowntime derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
+						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> operatorbottlingdowntimeWithPartitionColumns",
+						"bottlebatchsummary derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
+						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> bottlebatchsummaryWithPartition",
+						"qcendofrunWithPartitionColumn sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('key',",
+						"          0,",
+						"          date,",
+						"          hour",
+						"     )) ~> wwqcendofrunsink",
+						"RunWithPartitionColumns sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('key',",
+						"          0,",
+						"          date,",
+						"          hour",
+						"     )) ~> wwrunsink",
+						"BOMWithhPartitionColumns sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('key',",
+						"          0,",
+						"          date,",
+						"          hour",
+						"     )) ~> wwbomsink",
+						"ProductionlineWithPartitionColumn sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('key',",
+						"          0,",
+						"          date,",
+						"          hour",
+						"     )) ~> wwproductionlinesink",
+						"operatorbottlingdowntimeWithPartitionColumns sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('key',",
+						"          0,",
+						"          date,",
+						"          hour",
+						"     )) ~> wwoperatorbottlingdowntimesink",
+						"bottlebatchsummaryWithPartition sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('key',",
+						"          0,",
+						"          date,",
+						"          hour",
+						"     )) ~> wwbottlebatchsummarysink"
+					]
+				}
 			},
 			"dependsOn": []
 		},
@@ -1594,7 +1492,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/IOT_TEST_dataflow')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Indevin FTP File Transfer')]",

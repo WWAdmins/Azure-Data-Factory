@@ -13,6 +13,423 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_prebottlinganalysis2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "crc5d_refractvalue",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_alc",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_alcbydistil",
+						"type": "bit"
+					},
+					{
+						"name": "ww_alcnum",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_alcnumrackingvalve",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_alcohol",
+						"type": "bit"
+					},
+					{
+						"name": "ww_alcoholbydistillation",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_basedo",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_co2",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_customertankname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_density",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_etxt",
+						"type": "bit"
+					},
+					{
+						"name": "ww_fi",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_fiissueemailsent",
+						"type": "bit"
+					},
+					{
+						"name": "ww_greentag",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_initials",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_initialscheck",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_location",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_lockcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_lockid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_notes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operator",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_ph",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_prebottlinganalysisid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_prebottlinganalysissummaryname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_refract",
+						"type": "bit"
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_sealid",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_sealnumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_so2f",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tankerlookup",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_tankvolume",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_temp",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_temprackingvalve",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_ts02",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_ts02num",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tso2",
+						"type": "bit"
+					},
+					{
+						"name": "ww_volumeunder500",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_prebottlinganalysis"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_prebottlinganalysisgasadjustments1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_adjustmentoff",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_adjustmenton",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_co2",
+						"type": "bit"
+					},
+					{
+						"name": "ww_co2gasused",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_co2resultrequired",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_co2retest",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_customertankname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_do",
+						"type": "bit"
+					},
+					{
+						"name": "ww_doadjustmentoff",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_doadjustmenton",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_dogasused",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_doorco2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_dorestest",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_doresultrequired",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_etxt",
+						"type": "bit"
+					},
+					{
+						"name": "ww_gas_used",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_off",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_on",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operator",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_pbagasadjustmentsname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_prebottlinganalysisgasadjustmentsid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_resultrequired",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_tanker",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_tankerlookup",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_tankerlookuptext",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_totalsparging",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_prebottlinganalysisgasadjustments"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_prebottlinganalysisrecheck1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2689,525 +3106,6 @@
 					"schema": "dbo",
 					"table": "ww_winery"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/IOT_TEST_dataflow')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "QCEndofRun",
-								"type": "DatasetReference"
-							},
-							"name": "qcendofrun",
-							"description": "Import data from QCEndofRun"
-						},
-						{
-							"dataset": {
-								"referenceName": "Run",
-								"type": "DatasetReference"
-							},
-							"name": "Run"
-						},
-						{
-							"dataset": {
-								"referenceName": "BOM",
-								"type": "DatasetReference"
-							},
-							"name": "Bom"
-						},
-						{
-							"dataset": {
-								"referenceName": "ProductionLine",
-								"type": "DatasetReference"
-							},
-							"name": "productionline",
-							"description": "Import data from ProductionLine"
-						},
-						{
-							"dataset": {
-								"referenceName": "OperatorBottlingDowntime",
-								"type": "DatasetReference"
-							},
-							"name": "operatorbottlingdowntime"
-						},
-						{
-							"dataset": {
-								"referenceName": "BottleBatchSummary",
-								"type": "DatasetReference"
-							},
-							"name": "bottlebatchsummary"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "ADLS_IOT_TEST_ww_qcendofrun",
-								"type": "DatasetReference"
-							},
-							"name": "wwqcendofrunsink",
-							"description": "Export data to ADLS_IOT_TEST_ww_qcendofrun"
-						},
-						{
-							"dataset": {
-								"referenceName": "ADLS_IOT_TEST_ww_run",
-								"type": "DatasetReference"
-							},
-							"name": "wwrunsink"
-						},
-						{
-							"dataset": {
-								"referenceName": "ADLS_IOT_TEST_ww_billofmaterials",
-								"type": "DatasetReference"
-							},
-							"name": "wwbomsink",
-							"description": "Export data to ADLS_ww_billofmaterials"
-						},
-						{
-							"dataset": {
-								"referenceName": "ADLS_IOT_TEST_ww_productionline",
-								"type": "DatasetReference"
-							},
-							"name": "wwproductionlinesink"
-						},
-						{
-							"dataset": {
-								"referenceName": "ADLS_IOT_TEST_ww_operatorbottlingdowntime",
-								"type": "DatasetReference"
-							},
-							"name": "wwoperatorbottlingdowntimesink",
-							"description": "Export data to ADLS_ww_operatorbottlingdowntime"
-						},
-						{
-							"dataset": {
-								"referenceName": "ADLS_IOT_TEST_ww_bottlebatchsummary",
-								"type": "DatasetReference"
-							},
-							"name": "wwbottlebatchsummarysink"
-						}
-					],
-					"transformations": [
-						{
-							"name": "qcendofrunWithPartitionColumn"
-						},
-						{
-							"name": "RunWithPartitionColumns"
-						},
-						{
-							"name": "BOMWithhPartitionColumns"
-						},
-						{
-							"name": "ProductionlineWithPartitionColumn"
-						},
-						{
-							"name": "operatorbottlingdowntimeWithPartitionColumns"
-						},
-						{
-							"name": "bottlebatchsummaryWithPartition"
-						}
-					],
-					"scriptLines": [
-						"parameters{",
-						"     startTime as string,",
-						"     endTime as string",
-						"}",
-						"source(output(",
-						"          {@odata.etag} as string,",
-						"          createdby as string,",
-						"          modifiedby as string,",
-						"          ownerid as string,",
-						"          owningbusinessunit as string,",
-						"          owninguser as string,",
-						"          ww_run as string,",
-						"          createdon as string,",
-						"          modifiedon as string,",
-						"          statecode as string,",
-						"          statuscode as string,",
-						"          timezoneruleversionnumber as string,",
-						"          ww_bottlecounter as string,",
-						"          ww_endofrunsamples as string,",
-						"          ww_endofsamples as string,",
-						"          ww_flowmeter as string,",
-						"          ww_lasercounter as string,",
-						"          ww_magnumwhitetape as string,",
-						"          ww_operatorcode as string,",
-						"          ww_productionline as string,",
-						"          ww_qcendofrunid as string,",
-						"          ww_qcendofrunname as string,",
-						"          ww_rejectcounter as string,",
-						"          ww_runendtime as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     query: (concat('<fetch><entity name=\"ww_qcendofrun\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> qcendofrun",
-						"source(output(",
-						"          {@odata.etag} as string,",
-						"          createdby as string,",
-						"          modifiedby as string,",
-						"          ownerid as string,",
-						"          owningbusinessunit as string,",
-						"          owninguser as string,",
-						"          ww_runproductionline as string,",
-						"          createdon as string,",
-						"          modifiedon as string,",
-						"          statecode as string,",
-						"          statuscode as string,",
-						"          timezoneruleversionnumber as string,",
-						"          ww_clientcode as string,",
-						"          ww_clientname as string,",
-						"          ww_clientworkorderreference as string,",
-						"          ww_completed as string,",
-						"          ww_lastcopied as string,",
-						"          ww_microsneeded as string,",
-						"          ww_pendingupdate as string,",
-						"          ww_rundate as string,",
-						"          ww_runid as string,",
-						"          ww_runnumber as string,",
-						"          ww_stocktoconsumecasevariability as string,",
-						"          ww_stocktoconsumerun as string,",
-						"          ww_stocktoconsumestockcode as string,",
-						"          ww_stocktoconsumestockcodedescription as string,",
-						"          ww_variety as string,",
-						"          ww_vintage as string,",
-						"          ww_vintagevariety as string,",
-						"          ww_winehandling as string,",
-						"          ww_workorderid as string,",
-						"          ww_workordertype as string,",
-						"          ww_workorderupdatedon as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     query: (concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> Run",
-						"source(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     query: (concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> Bom",
-						"source(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     query: (concat('<fetch><entity name=\"ww_productionlinelookup\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> productionline",
-						"source(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     query: (concat('<fetch><entity name=\"ww_operatorbottlingdowntime\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> operatorbottlingdowntime",
-						"source(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     query: (concat('<fetch><entity name=\"ww_bottlebatchsummary\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',$startTime,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',$endTime,'\"/></filter></entity></fetch>'))) ~> bottlebatchsummary",
-						"qcendofrun derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
-						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> qcendofrunWithPartitionColumn",
-						"Run derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
-						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> RunWithPartitionColumns",
-						"Bom derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
-						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> BOMWithhPartitionColumns",
-						"productionline derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
-						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> ProductionlineWithPartitionColumn",
-						"operatorbottlingdowntime derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
-						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> operatorbottlingdowntimeWithPartitionColumns",
-						"bottlebatchsummary derive(hour = toString(hour(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))),",
-						"          date = concat(toString(year(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(month(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))), '-', toString(dayOfMonth(toTimestamp($endTime, 'yyyy-MM-dd\\'T\\'HH:mm:ss'))))) ~> bottlebatchsummaryWithPartition",
-						"qcendofrunWithPartitionColumn sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'parquet',",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('key',",
-						"          0,",
-						"          date,",
-						"          hour",
-						"     )) ~> wwqcendofrunsink",
-						"RunWithPartitionColumns sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'parquet',",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('key',",
-						"          0,",
-						"          date,",
-						"          hour",
-						"     )) ~> wwrunsink",
-						"BOMWithhPartitionColumns sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'parquet',",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('key',",
-						"          0,",
-						"          date,",
-						"          hour",
-						"     )) ~> wwbomsink",
-						"ProductionlineWithPartitionColumn sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'parquet',",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('key',",
-						"          0,",
-						"          date,",
-						"          hour",
-						"     )) ~> wwproductionlinesink",
-						"operatorbottlingdowntimeWithPartitionColumns sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'parquet',",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('key',",
-						"          0,",
-						"          date,",
-						"          hour",
-						"     )) ~> wwoperatorbottlingdowntimesink",
-						"bottlebatchsummaryWithPartition sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'parquet',",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('key',",
-						"          0,",
-						"          date,",
-						"          hour",
-						"     )) ~> wwbottlebatchsummarysink"
-					]
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PROD Databricks Downtimes')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "IsNewData",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-									"type": "Expression"
-								}
-							},
-							"dataset": {
-								"referenceName": "DowntimesProd",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "If Condition Downtimes",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "IsNewData",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@contains(activity('IsNewData').output, 'firstRow')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Downtimes_copy1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "CommonDataServiceForAppsSource",
-											"query": {
-												"value": "@concat('<fetch><entity name=\"crc5d_newtable\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-												"type": "Expression"
-											}
-										},
-										"sink": {
-											"type": "ParquetSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
-											"formatSettings": {
-												"type": "ParquetWriteSettings"
-											}
-										},
-										"enableStaging": false
-									},
-									"inputs": [
-										{
-											"referenceName": "DowntimesProd",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "ADLS_DowntimePROD",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "bronze-silver-gold_copy1",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "Downtimes_copy1",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
-										"baseParameters": {
-											"DROP_DATAVERSE_DEFAULTS": {
-												"value": "@pipeline().parameters.dropDataverseDefaults",
-												"type": "Expression"
-											},
-											"MODIFIEDON_COLUMN": {
-												"value": "@pipeline().parameters.modifiedonColumn",
-												"type": "Expression"
-											},
-											"PARTITION_COLUMN": {
-												"value": "@pipeline().parameters.partitionColumn",
-												"type": "Expression"
-											},
-											"TABLE_NAME": {
-												"value": "@pipeline().parameters.tableName",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION": {
-												"value": "@pipeline().parameters.partitionBySecondary",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION_NAME": {
-												"value": "@pipeline().parameters.secondaryPartitionColumnName",
-												"type": "Expression"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "oee-trigger_copy1",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "bronze-silver-gold_copy1",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/BI/triggers/oee_interval_trigger"
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"triggerStart": {
-						"type": "string"
-					},
-					"triggerEnd": {
-						"type": "string"
-					},
-					"modifiedonColumn": {
-						"type": "string",
-						"defaultValue": "modifiedon"
-					},
-					"partitionColumn": {
-						"type": "string",
-						"defaultValue": "crc5d_newtableid"
-					},
-					"tableName": {
-						"type": "string",
-						"defaultValue": "crc5d_newtable"
-					},
-					"partitionBySecondary": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"secondaryPartitionColumnName": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"dropDataverseDefaults": {
-						"type": "string",
-						"defaultValue": "false"
-					}
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		}
