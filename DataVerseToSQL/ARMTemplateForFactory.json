@@ -27992,6 +27992,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksDeltaLake')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksDeltaLake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLakeDataset",
+				"typeProperties": {
+					"database": "iotprod.gold",
+					"table": "gold_crc5d_runstartend"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricksDeltaLake')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BOM')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -42894,7 +42915,7 @@
 				"type": "AzureDatabricksDeltaLake",
 				"typeProperties": {
 					"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
-					"clusterId": "1127-225400-jhhgl2nb",
+					"clusterId": "1129-001949-pjqex8bl",
 					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -43935,7 +43956,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "PROD Databricks Downtimes",
