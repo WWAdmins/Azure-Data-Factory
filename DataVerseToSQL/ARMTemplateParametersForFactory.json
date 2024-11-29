@@ -247,6 +247,30 @@
 		},
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerEnd": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_modifiedonColumn": {
+			"value": "modifiedon"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionColumn": {
+			"value": "crc5d_guid"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_tableName": {
+			"value": "crc5d_newtable"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_partitionBySecondary": {
+			"value": "false"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"value": "false"
+		},
+		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_dropDataverseDefaults": {
+			"value": "false"
 		}
 	}
 }
