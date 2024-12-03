@@ -7,9 +7,6 @@
 		},
 		"annotations": [],
 		"type": "AzureDatabricksDeltaLakeDataset",
-		"typeProperties": {
-			"table": ""
-		},
 		"schema": []
 	}
 }
