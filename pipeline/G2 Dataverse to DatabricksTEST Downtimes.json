@@ -135,6 +135,10 @@
 									"SECONDARY_PARTITION_NAME": {
 										"value": "@pipeline().parameters.secondaryPartitionColumnName",
 										"type": "Expression"
+									},
+									"DROP_DATAVERSE_DEFAULTS": {
+										"value": "@pipeline().parameters.dropDataverseDefaults",
+										"type": "Expression"
 									}
 								}
 							},
@@ -200,6 +204,10 @@
 				"defaultValue": "false"
 			},
 			"secondaryPartitionColumnName": {
+				"type": "string",
+				"defaultValue": "false"
+			},
+			"dropDataverseDefaults": {
 				"type": "string",
 				"defaultValue": "false"
 			}
