@@ -307,9 +307,69 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "crc5d_newtableid"
+		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "crc5d_newtable"
+		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"test-databricks-downtimes-1day_properties_pipeline_parameters_dropDataverseDefaults": {
+			"type": "string",
+			"defaultValue": "false"
+		},
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"test-databricks-runstartends-1day_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"test-databricks-runstartends-1day_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"test-databricks-runstartends-1day_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"test-databricks-runstartends-1day_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartend"
+		},
+		"test-databricks-runstartends-1day_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartend"
+		},
+		"test-databricks-runstartends-1day_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"test-databricks-runstartends-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
 		},
 		"containerUri": {
 			"type": "string",
@@ -775,6 +835,71 @@
 					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
 						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
 					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_triggerStart": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_triggerStart')]"
+					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_triggerEnd": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_triggerEnd')]"
+					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_modifiedonColumn": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_modifiedonColumn')]"
+					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_partitionColumn": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_partitionColumn')]"
+					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_tableName": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_tableName')]"
+					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_partitionBySecondary": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_partitionBySecondary')]"
+					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					},
+					"test-databricks-downtimes-1day_properties_pipeline_parameters_dropDataverseDefaults": {
+						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_dropDataverseDefaults')]"
+					},
+					"test-databricks-runstartends-1day_properties_pipeline_parameters_triggerStart": {
+						"value": "[parameters('test-databricks-runstartends-1day_properties_pipeline_parameters_triggerStart')]"
+					},
+					"test-databricks-runstartends-1day_properties_pipeline_parameters_triggerEnd": {
+						"value": "[parameters('test-databricks-runstartends-1day_properties_pipeline_parameters_triggerEnd')]"
+					},
+					"test-databricks-runstartends-1day_properties_pipeline_parameters_modifiedonColumn": {
+						"value": "[parameters('test-databricks-runstartends-1day_properties_pipeline_parameters_modifiedonColumn')]"
+					},
+					"test-databricks-runstartends-1day_properties_pipeline_parameters_partitionColumn": {
+						"value": "[parameters('test-databricks-runstartends-1day_properties_pipeline_parameters_partitionColumn')]"
+					},
+					"test-databricks-runstartends-1day_properties_pipeline_parameters_tableName": {
+						"value": "[parameters('test-databricks-runstartends-1day_properties_pipeline_parameters_tableName')]"
+					},
+					"test-databricks-runstartends-1day_properties_pipeline_parameters_partitionBySecondary": {
+						"value": "[parameters('test-databricks-runstartends-1day_properties_pipeline_parameters_partitionBySecondary')]"
+					},
+					"test-databricks-runstartends-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+						"value": "[parameters('test-databricks-runstartends-1day_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_10')]"
+			]
+		},
+		{
+			"name": "DataVerseToSQL_ArmTemplate_12",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_12.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
 					"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]"
 					},
@@ -784,7 +909,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_10')]"
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_11')]"
 			]
 		}
 	]
