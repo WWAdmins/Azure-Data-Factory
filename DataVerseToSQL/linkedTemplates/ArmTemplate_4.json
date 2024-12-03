@@ -635,6 +635,8 @@
 								{
 									"name": "run_durations_trigger",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "bronze-silver-gold",
@@ -1044,6 +1046,8 @@
 								{
 									"name": "oee-trigger_copy1",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "bronze-silver-gold_copy1",
@@ -1936,10 +1940,7 @@
 				},
 				"annotations": [],
 				"type": "AzureDatabricksDeltaLakeDataset",
-				"typeProperties": {
-					"database": "iotprod.gold",
-					"table": "gold_crc5d_runstartend"
-				},
+				"typeProperties": {},
 				"schema": []
 			},
 			"dependsOn": []

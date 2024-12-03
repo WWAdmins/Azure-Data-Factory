@@ -365,12 +365,12 @@
 				"annotations": [],
 				"type": "AzureDatabricksDeltaLake",
 				"typeProperties": {
-					"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
-					"clusterId": "1129-001949-pjqex8bl",
+					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+					"clusterId": "1202-224757-mx7ooohn",
 					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
-							"referenceName": "kv_adb_iot_prod",
+							"referenceName": "kv_adb_iot_test",
 							"type": "LinkedServiceReference"
 						},
 						"secretName": "DataVerseAccessKey"

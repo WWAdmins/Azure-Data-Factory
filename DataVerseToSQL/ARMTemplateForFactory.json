@@ -183,34 +183,6 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_guid"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_newtable"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -332,34 +304,6 @@
 			"defaultValue": "false"
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"type": "string",
 			"defaultValue": "false"
 		},
@@ -1745,6 +1689,8 @@
 								{
 									"name": "run_durations_trigger",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "bronze-silver-gold",
@@ -2158,6 +2104,8 @@
 								{
 									"name": "oee-trigger_copy1",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "bronze-silver-gold_copy1",
@@ -28002,10 +27950,7 @@
 				},
 				"annotations": [],
 				"type": "AzureDatabricksDeltaLakeDataset",
-				"typeProperties": {
-					"database": "iotprod.gold",
-					"table": "gold_crc5d_runstartend"
-				},
+				"typeProperties": {},
 				"schema": []
 			},
 			"dependsOn": [
@@ -42914,12 +42859,12 @@
 				"annotations": [],
 				"type": "AzureDatabricksDeltaLake",
 				"typeProperties": {
-					"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
-					"clusterId": "1129-001949-pjqex8bl",
+					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+					"clusterId": "1202-224757-mx7ooohn",
 					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
-							"referenceName": "kv_adb_iot_prod",
+							"referenceName": "kv_adb_iot_test",
 							"type": "LinkedServiceReference"
 						},
 						"secretName": "DataVerseAccessKey"
@@ -42927,7 +42872,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/kv_adb_iot_prod')]"
+				"[concat(variables('factoryId'), '/linkedServices/kv_adb_iot_test')]"
 			]
 		},
 		{
@@ -43796,46 +43741,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/downtimes_databricksTEST_15mins')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "G2 Dataverse to DatabricksTEST Downtimes",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 15,
-					"startTime": "2024-09-30T21:30:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to DatabricksTEST Downtimes')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/iot-test-trigger-window')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -44029,45 +43934,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PROD Databricks RunStartEnds')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/runstartends_databricksTEST_15min')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "G2 Dataverse to Databricks RunStartEndsTEST",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 15,
-					"startTime": "2024-10-14T19:30:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to Databricks RunStartEndsTEST')]"
 			]
 		},
 		{

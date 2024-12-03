@@ -183,34 +183,6 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_guid"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_newtable"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -332,34 +304,6 @@
 			"defaultValue": "false"
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"type": "string",
 			"defaultValue": "false"
 		},
@@ -744,27 +688,6 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
-						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart')]"
-					},
-					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
-						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd')]"
-					},
-					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
-						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn')]"
-					},
-					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
-						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn')]"
-					},
-					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
-						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName')]"
-					},
-					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
-						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary')]"
-					},
-					"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-						"value": "[parameters('downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					},
 					"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerStart')]"
 					},
@@ -852,47 +775,6 @@
 					"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
 						"value": "[parameters('prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName')]"
 					},
-					"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
-						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart')]"
-					},
-					"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd": {
-						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd')]"
-					},
-					"runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn": {
-						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn')]"
-					},
-					"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn": {
-						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn')]"
-					},
-					"runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName": {
-						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName')]"
-					},
-					"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary": {
-						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary')]"
-					},
-					"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
-						"value": "[parameters('runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_10')]"
-			]
-		},
-		{
-			"name": "DataVerseToSQL_ArmTemplate_12",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2024-03-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_12.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					},
 					"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]"
 					},
@@ -902,7 +784,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_11')]"
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_10')]"
 			]
 		}
 	]

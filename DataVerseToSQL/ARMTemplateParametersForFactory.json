@@ -134,27 +134,6 @@
 		"kv_adb_iot_test_properties_typeProperties_baseUrl": {
 			"value": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerStart": {
-			"value": "@trigger().outputs.windowStartTime"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_triggerEnd": {
-			"value": "@trigger().outputs.windowEndTime"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_modifiedonColumn": {
-			"value": "modifiedon"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionColumn": {
-			"value": "crc5d_guid"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_tableName": {
-			"value": "crc5d_newtable"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_partitionBySecondary": {
-			"value": "false"
-		},
-		"downtimes_databricksTEST_15mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"value": "false"
-		},
 		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
@@ -246,27 +225,6 @@
 			"value": "false"
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"value": "false"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerStart": {
-			"value": "@trigger().outputs.windowStartTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_triggerEnd": {
-			"value": "@trigger().outputs.windowEndTime"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_modifiedonColumn": {
-			"value": "modifiedon"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionColumn": {
-			"value": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_tableName": {
-			"value": "crc5d_runstartend"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_partitionBySecondary": {
-			"value": "false"
-		},
-		"runstartends_databricksTEST_15min_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"value": "false"
 		},
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
