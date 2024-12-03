@@ -1,5 +1,5 @@
 {
-	"name": "G2 Dataverse to Databricks Users",
+	"name": "G2 Dataverse to Databricks UsersTEST",
 	"properties": {
 		"activities": [
 			{
@@ -18,12 +18,12 @@
 					"source": {
 						"type": "CommonDataServiceForAppsSource",
 						"query": {
-							"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+							"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 							"type": "Expression"
 						}
 					},
 					"dataset": {
-						"referenceName": "RunStartEndsProd",
+						"referenceName": "User",
 						"type": "DatasetReference"
 					}
 				}
@@ -47,7 +47,7 @@
 					},
 					"ifTrueActivities": [
 						{
-							"name": "Get RunStartEnds",
+							"name": "Get Users",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -62,7 +62,7 @@
 								"source": {
 									"type": "CommonDataServiceForAppsSource",
 									"query": {
-										"value": "@concat('<fetch><entity name=\"crc5d_runstartend\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+										"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 										"type": "Expression"
 									}
 								},
@@ -264,13 +264,13 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "RunStartEndsProd",
+									"referenceName": "User",
 									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "ADLS_RunStartEndTEST",
+									"referenceName": "ADLS_UserTEST",
 									"type": "DatasetReference"
 								}
 							]
@@ -280,7 +280,7 @@
 							"type": "DatabricksNotebook",
 							"dependsOn": [
 								{
-									"activity": "Get RunStartEnds",
+									"activity": "Get Users",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -320,37 +320,12 @@
 									"SECONDARY_PARTITION_NAME": {
 										"value": "@pipeline().parameters.secondaryPartitionColumnName",
 										"type": "Expression"
+									},
+									"DROP_DATAVERSE_DEFAULTS": {
+										"value": "@pipeline().parameters.dropDataverseDefaults",
+										"type": "Expression"
 									}
 								}
-							},
-							"linkedServiceName": {
-								"referenceName": "adb_iot_test",
-								"type": "LinkedServiceReference"
-							}
-						},
-						{
-							"name": "run_durations_trigger",
-							"type": "DatabricksNotebook",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [
-								{
-									"activity": "bronze-silver-gold",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/run_duration_trigger"
 							},
 							"linkedServiceName": {
 								"referenceName": "adb_iot_test",
@@ -374,17 +349,21 @@
 			},
 			"partitionColumn": {
 				"type": "string",
-				"defaultValue": "crc5d_runstartend"
+				"defaultValue": "systemuserid"
 			},
 			"tableName": {
 				"type": "string",
-				"defaultValue": "crc5d_runstartend"
+				"defaultValue": "systemuser"
 			},
 			"partitionBySecondary": {
 				"type": "string",
 				"defaultValue": "false"
 			},
 			"secondaryPartitionColumnName": {
+				"type": "string",
+				"defaultValue": "false"
+			},
+			"dropDataverseDefaults": {
 				"type": "string",
 				"defaultValue": "false"
 			}
