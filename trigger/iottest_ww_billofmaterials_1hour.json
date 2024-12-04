@@ -3,21 +3,6 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Stopped",
-		"pipeline": {
-			"pipelineReference": {
-				"referenceName": "G2 Dataverse to DatabricksTEST BOMS",
-				"type": "PipelineReference"
-			},
-			"parameters": {
-				"triggerStart": "@trigger().outputs.windowStartTime",
-				"triggerEnd": "@trigger().outputs.windowEndTime",
-				"modifiedonColumn": "modifiedon",
-				"partitionColumn": "ww_billofmaterialsid",
-				"tableName": "ww_billofmaterials",
-				"partitionBySecondary": "false",
-				"secondaryPartitionColumnName": "false"
-			}
-		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Hour",
