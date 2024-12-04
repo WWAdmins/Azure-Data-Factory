@@ -92,6 +92,82 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/User')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "systemuser"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Winery')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_winery"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/lockcode')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_lockcode"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksDeltaLake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+					"clusterId": "1202-224757-mx7ooohn",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "kv_adb_iot_test",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "DataVerseAccessKey"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DataNow')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -699,6 +775,206 @@
 				"annotations": []
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/G2 Dataverse to Databricks UsersTEST')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "IsNewData",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"dataset": {
+								"referenceName": "User",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "If Condition1",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "IsNewData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@contains(activity('IsNewData').output, 'firstRow')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Get Users",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "CommonDataServiceForAppsSource",
+											"query": {
+												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "User",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_UserTEST",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								},
+								{
+									"name": "bronze-silver-gold",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "Get Users",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 2,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+										"baseParameters": {
+											"END_TIMESTAMP": {
+												"value": "@pipeline().parameters.triggerEnd",
+												"type": "Expression"
+											},
+											"MODIFIEDON_COLUMN": {
+												"value": "@pipeline().parameters.modifiedonColumn",
+												"type": "Expression"
+											},
+											"PARTITION_COLUMN": {
+												"value": "@pipeline().parameters.partitionColumn",
+												"type": "Expression"
+											},
+											"TABLE_NAME": {
+												"value": "@pipeline().parameters.tableName",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION": {
+												"value": "@pipeline().parameters.partitionBySecondary",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION_NAME": {
+												"value": "@pipeline().parameters.secondaryPartitionColumnName",
+												"type": "Expression"
+											},
+											"DROP_DATAVERSE_DEFAULTS": {
+												"value": "@pipeline().parameters.dropDataverseDefaults",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_test",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "systemuserid"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "systemuser"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"dropDataverseDefaults": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/User')]",
 				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
 			]
 		},
@@ -1938,1898 +2214,194 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricksDeltaLake')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/PROD Databricks ww_billofmaterials')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDatabricksDeltaLake",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureDatabricksDeltaLakeDataset",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EskerWWFTP')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "EskerFTPWW",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/EskerFTPWW')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQL003_FOTest')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Filler operation ID",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Status",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Air Ram Screw Capper",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Air Ram Screw Capper Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Alcohol Sterilisation",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Alcohol Sterilisation Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "All Filters Present",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Bottle Code and Guide Rails Set",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Bottle Coder Running and Legible",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Brand",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Brand Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CCP1 Start the Run Check",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CCP1 Start the Run Check Time",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Closure Hopper Empty",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Closure Hopper Empty Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Closure Type",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Closure Type Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Code Height",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Colour",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Colour Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Contact points for glass frag",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork Grade/Size",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Cork Grade/Size Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Corker Headspace Pressure",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Corker Plungers Set",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Corker Vacuum on",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Correct Filters",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Correct wine is bottled sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Count Zeroed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Do not start run until CCP1 is complete",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Do not start run until CCP1 is complete Time",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Docket & Vessel",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Docket & Vessel Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "End of Run Comments",
-						"type": "nvarchar"
-					},
-					{
-						"name": "EOR Bottle Count",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "EOR Bottling To",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "EOR Check Time",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "EOR Flow Meter Check",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "EOR Glass Fragments Check",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "EOR In Bottle",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "EOR Rinse head inspection",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "EOR Rinse head medium",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "EOR Rinser Gas/Water Supply Line1",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "EOR Rinser Gas/Water Supply Line2",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "EOR Rinser Pressure Fluctuations",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Fill Heights",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Filler Centring Bells/Seals Check",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Filler Fill Stems Sterile",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Filler Operation",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Filler Vacuum On",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Filtration Charges",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Flies in the filler room",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Flies sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Glass Bottle Check",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Glass Frag",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Glass Frag Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Glass pump check sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ILS Code Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ILSCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Inert Gas to Filler Bowl",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Inert Gas to Rinser",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Inert Gas to Tanker",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Is this an Organic product",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Jaw Lube Checked",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Jaw Lube Checked Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Manual Jog 1x Bottle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "MF Integrity Verification Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Number on tag(s) Filters",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Number on tag(s) Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Operator Code",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Plain / Printed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Plain/Printed Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Product line check sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Refract BTL",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Refract Tank",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Rinser Medium",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Rinser Medium Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Rollers Lubed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Run",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Sample Attached to Spec Sheet",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Spec sheet read and signed sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Sterilization Filter Integrity Verification Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Sterilization Finish",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Sterilization Membrane Integrity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Sterilization Process",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Sterilization process Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Sterilization RF Integrity Verification Sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Sterilization Rinser Integrity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Sterilization Run End",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Sterilization Run Start",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Sterilization Start",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Sterilization Temperature",
-						"type": "decimal",
-						"precision": 9,
-						"scale": 2
-					},
-					{
-						"name": "Thread Rollers H1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Thread Rollers H2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Thread Rollers H3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Thread Rollers H4",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Thread Rollers H5",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Tuck Rollers  H5",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Tuck Rollers H1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Tuck Rollers H2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Tuck Rollers H3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Tuck Rollers H4",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Visual Colour Match Tank/BTL",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Wine pump (Select & Sign)",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Wine pump sig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "X Ray Density Bottles",
-						"type": "nvarchar"
-					},
-					{
-						"name": "X Ray Limits Rejecting",
-						"type": "nvarchar"
-					},
-					{
-						"name": "X Ray Set On",
-						"type": "nvarchar"
-					},
-					{
-						"name": "Import Sequence Number",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Modified On",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
+				"activities": [
+					{
+						"name": "IsNewData",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"dataset": {
+								"referenceName": "BOM",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "If Condition BOMS",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "IsNewData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@contains(activity('IsNewData').output, 'firstRow')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "BOM_copy",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "CommonDataServiceForAppsSource",
+											"query": {
+												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "BOM",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_ww_billofmaterials_PROD",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								},
+								{
+									"name": "bronze-silver-gold_copy",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "BOM_copy",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 2,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+										"baseParameters": {
+											"END_TIMESTAMP": {
+												"value": "@pipeline().parameters.triggerEnd",
+												"type": "Expression"
+											},
+											"MODIFIEDON_COLUMN": {
+												"value": "@pipeline().parameters.modifiedonColumn",
+												"type": "Expression"
+											},
+											"PARTITION_COLUMN": {
+												"value": "@pipeline().parameters.partitionColumn",
+												"type": "Expression"
+											},
+											"TABLE_NAME": {
+												"value": "@pipeline().parameters.tableName",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION": {
+												"value": "@pipeline().parameters.partitionBySecondary",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION_NAME": {
+												"value": "@pipeline().parameters.secondaryPartitionColumnName",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_prod",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
 					}
 				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Filler operation_Test"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
+				"policy": {
+					"elapsedTimeMetric": {}
 				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "crc5d_density",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "crc5d_radialmovementchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "crc5d_redrawsealcheck",
-						"type": "nvarchar"
-					},
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "new_customertank",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_adjustment",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_adjustmenthasbeenmadesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_averageweight",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_balancecheck",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_capcoloursig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_capilscodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_capprintingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_colour",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_colourcheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkbaseclearofcorksforeignmatter",
-						"type": "bit"
-					},
-					{
-						"name": "ww_corkbrandingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkcolour",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkcolourcheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkdepthaftermuselet",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_corkilscodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkinsertion",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_corkinsertionsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corklengthsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkmoisturesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkplungedepth",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_corkprintingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_datetime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_emptybottleweight",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_fillheight1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_gapingbrokenbridges",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_grossweight",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_headspacemeasurementsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_headspacepressuresig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_hourlytorqueandvolumeid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_inversiontesttocheckforleakers",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_isthemuseletsecure",
-						"type": "bit"
-					},
-					{
-						"name": "ww_isthemuseletuniform",
-						"type": "bit"
-					},
-					{
-						"name": "ww_isthetieupright",
-						"type": "bit"
-					},
-					{
-						"name": "ww_key",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_museletbaseclearofmuseletsfm",
-						"type": "bit"
-					},
-					{
-						"name": "ww_nettweight",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_printing",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_printingcheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pulltucktest",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_pulltucktestchecked",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rimimpression",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_screwcapperchutecheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_screwcapperchutesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_sparkling",
-						"type": "bit"
-					},
-					{
-						"name": "ww_stockcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_stockcodecheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tafillheight1",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_tafillheight2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_tafillheight3",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_tafillheight4",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_tafillheight5",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_tanker",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_tareweight",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_torquebreak1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak10",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak6",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak7",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak8",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak9",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquecap1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap10",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap4",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap5",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap6",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap7",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap8",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap9",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torqueslip1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip10",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip6",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip7",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip8",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip9",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_visualsealonbottle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_winetemperature",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_zorksealcheckok",
-						"type": "bit"
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "ww_billofmaterialsid"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "ww_billofmaterials"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
 					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_hourlytorqueandvolume"
-				}
+				},
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SqlServerTable11')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "crc5d_density",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "crc5d_radialmovementchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "crc5d_redrawsealcheck",
-						"type": "nvarchar"
-					},
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "new_customertank",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_adjustment",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_adjustmenthasbeenmadesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_averageweight",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_balancecheck",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_bucketflowedtime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_bucketskegsflowedintime",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_capcoloursig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_capilscodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_capprintingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_colour",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_colourcheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkbaseclearofcorksforeignmatter",
-						"type": "bit"
-					},
-					{
-						"name": "ww_corkbrandingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkcolour",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkcolourcheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkdepthaftermuselet",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_corkilscodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkinsertion",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_CorkInsertionChecked",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_corkinsertionsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corklengthsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_Corkmoisturereading",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_corkmoisturesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_corkplungedepth",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_corkprintingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_datetime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_emptybottleweight",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight1",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight10",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight11",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight12",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight2",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight3",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight4",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight5",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight6",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight7",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight8",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_emptybottleweight9",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fillheight1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight10",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fillheight11",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fillheight12",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fillheight2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillheight6",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fillheight7",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fillheight8",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fillheight9",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_flowedfrom",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_flowedto",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_fullbottleweight1",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight10",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight11",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight12",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight2",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight3",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight4",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight5",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight6",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight7",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight8",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_fullbottleweight9",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_gapingbrokenbridges",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_grossweight",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_HeadSpaceMeasurement",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_headspacemeasurementsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_HeadSpacePressureMeasurement",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_HeadSpaceMeasurementComments",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_headspacepressuresig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_hourlytorqueandvolumeid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_inversiontesttocheckforleakers",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_isthemuseletsecure",
-						"type": "bit"
-					},
-					{
-						"name": "ww_isthemuseletuniform",
-						"type": "bit"
-					},
-					{
-						"name": "ww_isthetieupright",
-						"type": "bit"
-					},
-					{
-						"name": "ww_key",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_museletbaseclearofmuseletsfm",
-						"type": "bit"
-					},
-					{
-						"name": "ww_nettweight",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_printing",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_printingcheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productcheckedandmatches",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pulltucktest",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_pulltucktestchecked",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_reasonfordeletion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rimimpression",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_screwcapperchutecheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_screwcapperchutesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_sparkling",
-						"type": "bit"
-					},
-					{
-						"name": "ww_stockcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_stockcodecheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tafillheight1",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight10",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight11",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight12",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight2",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight3",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight4",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight5",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight6",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight7",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight8",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tafillheight9",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_tankchangedflowedintime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_tanker",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_tareweight",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_torquebreak1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak10",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak6",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak7",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak8",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquebreak9",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torquecap1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap10",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap4",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap5",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap6",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap7",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap8",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torquecap9",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_torqueslip1",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip10",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip2",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip3",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip4",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip5",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip6",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip7",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip8",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_torqueslip9",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_visualsealonbottle",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_winetemperature",
-						"type": "decimal",
-						"precision": 20,
-						"scale": 7
-					},
-					{
-						"name": "ww_zorksealcheckok",
-						"type": "bit"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_hourlytorqueandvolume"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWMULTI001_Indevin')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "FileServer1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "FileServerLocation",
-						"fileName": "VM SOH By lot code.csv"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Warehouse",
-						"type": "String"
-					},
-					{
-						"name": "Item",
-						"type": "String"
-					},
-					{
-						"name": "Description",
-						"type": "String"
-					},
-					{
-						"name": "Client Stock Code",
-						"type": "String"
-					},
-					{
-						"name": "Client Stock Code2",
-						"type": "String"
-					},
-					{
-						"name": "Lot",
-						"type": "String"
-					},
-					{
-						"name": "On Hand",
-						"type": "String"
-					},
-					{
-						"name": "Allocated",
-						"type": "String"
-					},
-					{
-						"name": "Pending",
-						"type": "String"
-					},
-					{
-						"name": "Unit",
-						"type": "String"
-					},
-					{
-						"name": "Receipted",
-						"type": "String"
-					},
-					{
-						"name": "Last Picked",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/FileServer1')]"
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
 			]
 		}
 	]
