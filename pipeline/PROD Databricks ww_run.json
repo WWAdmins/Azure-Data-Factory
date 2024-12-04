@@ -85,7 +85,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ADLS_IOT_TEST_ww_run",
+									"referenceName": "ADLS_ww_run_PROD",
 									"type": "DatasetReference"
 								}
 							]
