@@ -3,6 +3,21 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "PROD Databricks ww_billofmaterials",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"triggerStart": "@trigger().outputs.windowStartTime",
+				"triggerEnd": "@trigger().outputs.windowEndTime",
+				"modifiedonColumn": "modifiedon",
+				"partitionColumn": "ww_billofmaterialsid",
+				"tableName": "ww_billofmaterials",
+				"partitionBySecondary": "false",
+				"secondaryPartitionColumnName": "false"
+			}
+		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Hour",
