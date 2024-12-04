@@ -183,70 +183,6 @@
 			"type": "string",
 			"defaultValue": "https://kv-adb-iot-test.vault.azure.net/"
 		},
-		"iot-test-trigger-window_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"iot-test-trigger-window_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "ww_billofmaterialsid"
-		},
-		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "ww_billofmaterials"
-		},
-		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"iottest_ww_run_1hour_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"iottest_ww_run_1hour_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"iottest_ww_run_1hour_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"iottest_ww_run_1hour_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "ww_runid"
-		},
-		"iottest_ww_run_1hour_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "ww_run"
-		},
-		"iottest_ww_run_1hour_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
 		"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -426,6 +362,62 @@
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterialsid"
+		},
+		"test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterials"
+		},
+		"test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"test-databricks-ww_run-1day_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"test-databricks-ww_run-1day_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"test-databricks-ww_run-1day_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"test-databricks-ww_run-1day_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_runid"
+		},
+		"test-databricks-ww_run-1day_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_run"
+		},
+		"test-databricks-ww_run-1day_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"test-databricks-ww_run-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
 		}
 	},
 	"variables": {
@@ -2688,168 +2680,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Run')]",
 				"[concat(variables('factoryId'), '/datasets/ADLS_IOT_TEST_ww_run')]",
-				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/IOT_TEST_CDC_databricks')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "WriteToADLS_IOT_TEST",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "IOT_TEST_dataflow",
-								"type": "DataFlowReference",
-								"parameters": {
-									"startTime": {
-										"value": "'@{pipeline().parameters.triggerStart}'",
-										"type": "Expression"
-									},
-									"endTime": {
-										"value": "'@{pipeline().parameters.triggerEnd}'",
-										"type": "Expression"
-									}
-								},
-								"datasetParameters": {
-									"qcendofrun": {},
-									"Run": {},
-									"Bom": {},
-									"productionline": {},
-									"operatorbottlingdowntime": {},
-									"bottlebatchsummary": {},
-									"wwqcendofrunsink": {},
-									"wwrunsink": {},
-									"wwbomsink": {},
-									"wwproductionlinesink": {},
-									"wwoperatorbottlingdowntimesink": {},
-									"wwbottlebatchsummarysink": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "bronze_to_silver",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "WriteToADLS_IOT_TEST",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/bronze-to-silver/ADF Dataverse Bronze to Silver",
-							"baseParameters": {
-								"END_TIMESTAMP": {
-									"value": "@pipeline().parameters.triggerEnd",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "adb_iot_test",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "run_completed_trigger",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "silver_to_gold",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/BI/triggers/Run completed trigger"
-						},
-						"linkedServiceName": {
-							"referenceName": "adb_iot_test",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "silver_to_gold",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "bronze_to_silver",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Repos/databricks-sp-iot-test/adb-iot/ETL/silver-to-gold/dataverse-gold"
-						},
-						"linkedServiceName": {
-							"referenceName": "adb_iot_test",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"concurrency": 1,
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"triggerStart": {
-						"type": "string"
-					},
-					"triggerEnd": {
-						"type": "string"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/IOT_TEST_dataflow')]",
 				"[concat(variables('factoryId'), '/linkedServices/adb_iot_test')]"
 			]
 		},
@@ -44547,121 +44377,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/iot-test-trigger-window')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "IOT_TEST_CDC_databricks",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('iot-test-trigger-window_properties_pipeline_parameters_triggerEnd')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 1,
-					"startTime": "2024-01-29T22:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/IOT_TEST_CDC_databricks')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/iottest_ww_billofmaterials_1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "G2 Dataverse to DatabricksTEST BOMS",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('iottest_ww_billofmaterials_1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 1,
-					"startTime": "2024-11-26T21:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to DatabricksTEST BOMS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/iottest_ww_run_1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "G2 Dataverse to DatabricksTEST Run",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('iottest_ww_run_1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 1,
-					"startTime": "2024-11-26T21:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to DatabricksTEST Run')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtimes-30mins')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -45277,6 +44992,86 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/test-databricks-ww_billofmaterials-1day')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to DatabricksTEST BOMS",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('test-databricks-ww_billofmaterials-1day_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 24,
+					"startTime": "2024-12-04T01:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to DatabricksTEST BOMS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/test-databricks-ww_run-1day')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "G2 Dataverse to DatabricksTEST Run",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('test-databricks-ww_run-1day_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('test-databricks-ww_run-1day_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('test-databricks-ww_run-1day_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('test-databricks-ww_run-1day_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('test-databricks-ww_run-1day_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('test-databricks-ww_run-1day_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('test-databricks-ww_run-1day_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 24,
+					"startTime": "2024-12-03T01:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/G2 Dataverse to DatabricksTEST Run')]"
+			]
 		}
 	]
 }
