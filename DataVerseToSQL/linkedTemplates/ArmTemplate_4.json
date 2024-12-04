@@ -800,7 +800,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -845,7 +845,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -1000,7 +1000,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -1045,7 +1045,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -1088,7 +1088,7 @@
 									],
 									"policy": {
 										"timeout": "0.12:00:00",
-										"retry": 0,
+										"retry": 2,
 										"retryIntervalInSeconds": 30,
 										"secureOutput": false,
 										"secureInput": false
@@ -1419,7 +1419,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -1464,7 +1464,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -1507,7 +1507,7 @@
 									],
 									"policy": {
 										"timeout": "0.12:00:00",
-										"retry": 0,
+										"retry": 2,
 										"retryIntervalInSeconds": 30,
 										"secureOutput": false,
 										"secureInput": false
@@ -2235,7 +2235,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -2280,7 +2280,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},

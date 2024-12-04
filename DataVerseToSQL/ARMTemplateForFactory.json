@@ -307,6 +307,62 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
+		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterialsid"
+		},
+		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_billofmaterials"
+		},
+		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "ww_runid"
+		},
+		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "ww_run"
+		},
+		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
 		"test-databricks-downtimes-1day_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -370,62 +426,6 @@
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
-		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "ww_runid"
-		},
-		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "ww_run"
-		},
-		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-ww_run-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "ww_billofmaterialsid"
-		},
-		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "ww_billofmaterials"
-		},
-		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
 		}
 	},
 	"variables": {
@@ -1896,7 +1896,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -1941,7 +1941,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -2097,7 +2097,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -2142,7 +2142,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -2185,7 +2185,7 @@
 									],
 									"policy": {
 										"timeout": "0.12:00:00",
-										"retry": 0,
+										"retry": 2,
 										"retryIntervalInSeconds": 30,
 										"secureOutput": false,
 										"secureInput": false
@@ -2520,7 +2520,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -2565,7 +2565,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -2608,7 +2608,7 @@
 									],
 									"policy": {
 										"timeout": "0.12:00:00",
-										"retry": 0,
+										"retry": 2,
 										"retryIntervalInSeconds": 30,
 										"secureOutput": false,
 										"secureInput": false
@@ -3583,7 +3583,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -3628,7 +3628,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"ww_billofmaterials\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -3776,7 +3776,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 									"type": "Expression"
 								}
 							},
@@ -3821,7 +3821,7 @@
 										"source": {
 											"type": "CommonDataServiceForAppsSource",
 											"query": {
-												"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"on-or-after\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"on-or-before\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"value": "@concat('<fetch><entity name=\"ww_run\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
 												"type": "Expression"
 											}
 										},
@@ -44743,6 +44743,86 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-ww_billofmaterials-1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks ww_billofmaterials",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2024-12-04T01:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PROD Databricks ww_billofmaterials')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-ww_run-1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks ww_run",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 1,
+					"startTime": "2024-12-04T01:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PROD Databricks ww_run')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/test-databricks-downtimes-1day')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -45197,86 +45277,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-ww_run-1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PROD Databricks ww_run",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 1,
-					"startTime": "2024-12-04T01:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PROD Databricks ww_run')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-ww_billofmaterials-1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PROD Databricks ww_billofmaterials",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 1,
-					"startTime": "2024-12-04T01:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PROD Databricks ww_billofmaterials')]"
-			]
 		}
 	]
 }
