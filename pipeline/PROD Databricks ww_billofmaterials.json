@@ -139,7 +139,7 @@
 								}
 							},
 							"linkedServiceName": {
-								"referenceName": "adb_iot_test",
+								"referenceName": "adb_iot_prod",
 								"type": "LinkedServiceReference"
 							}
 						}
