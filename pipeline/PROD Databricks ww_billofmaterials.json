@@ -85,7 +85,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ADLS_IOT_TEST_ww_billofmaterials",
+									"referenceName": "ADLS_ww_billofmaterials_PROD",
 									"type": "DatasetReference"
 								}
 							]
