@@ -30,7 +30,52 @@
 						},
 						"sqlWriterUseTableLock": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "start",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "start",
+									"type": "DateTimeOffset"
+								}
+							},
+							{
+								"source": {
+									"name": "end",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "end",
+									"type": "DateTimeOffset"
+								}
+							},
+							{
+								"source": {
+									"name": "note",
+									"type": "String"
+								},
+								"sink": {
+									"name": "note",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "machineId",
+									"type": "Int"
+								},
+								"sink": {
+									"name": "machineId",
+									"type": "Int32"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
