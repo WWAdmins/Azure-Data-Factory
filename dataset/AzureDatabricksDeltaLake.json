@@ -9,7 +9,7 @@
 		"type": "AzureDatabricksDeltaLakeDataset",
 		"typeProperties": {
 			"database": "gold",
-			"table": "gold.gold_crc5d_runstartend"
+			"table": "gold_crc5d_runstartend"
 		},
 		"schema": []
 	}
