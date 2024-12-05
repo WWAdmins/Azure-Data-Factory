@@ -8,8 +8,8 @@
 		"annotations": [],
 		"type": "AzureDatabricksDeltaLakeDataset",
 		"typeProperties": {
-			"database": "iottest`.`gold",
-			"table": "gold_crc5d_runstartend"
+			"database": "",
+			"table": ""
 		},
 		"schema": []
 	}
