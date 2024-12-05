@@ -114,6 +114,21 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricksDeltaLake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+					"clusterId": "1202-224757-mx7ooohn",
+					"workspaceResourceId": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourceGroups/rg-adb-iot-test/providers/Microsoft.Databricks/workspaces/adb-iot-test"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CommonDataServiceForApps1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -250,6 +265,39 @@
 						"type": "SecureString",
 						"value": "[parameters('WWSQL003_Test_password')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adb_iot_test')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Azure Databricks TEST Workspace",
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5966805027784641.1.azuredatabricks.net",
+					"authentication": "MSI",
+					"workspaceResourceId": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourceGroups/rg-adb-iot-test/providers/Microsoft.Databricks/workspaces/adb-iot-test",
+					"newClusterNodeType": "Standard_F4",
+					"newClusterNumOfWorker": "1",
+					"newClusterSparkConf": {
+						"spark.databricks.cluster.profile": "singleNode",
+						"spark.master": "local[*]"
+					},
+					"newClusterSparkEnvVars": {
+						"WORKSPACE_ENV": "test",
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterCustomTags": {
+						"ResourceClass": "SingleNode"
+					},
+					"newClusterVersion": "13.3.x-scala2.12",
+					"clusterOption": "Fixed",
+					"newClusterInitScripts": [],
+					"dataSecurityMode": "SINGLE_USER"
 				}
 			},
 			"dependsOn": []
@@ -409,38 +457,6 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/default')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
-			"apiVersion": "2018-06-01",
-			"properties": {},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_DowntimePROD')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiotprod",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iotprod/bronze/dataverse/crc5d_newtable/landing",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
-			]
 		}
 	]
 }
