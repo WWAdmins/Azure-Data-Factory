@@ -12,7 +12,7 @@
 					"referenceName": "kv_adb_iot_test",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "ADF-ManagedIdentity"
+				"secretName": "DataVerseAccessKey"
 			}
 		}
 	}
