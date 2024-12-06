@@ -1,0 +1,29 @@
+{
+	"name": "Jon Costing - Weekly",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "IOT_Run Databricks to sql",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Week",
+				"interval": 1,
+				"startTime": "2024-12-06T00:46:00",
+				"timeZone": "New Zealand Standard Time",
+				"schedule": {
+					"weekDays": [
+						"Saturday"
+					]
+				}
+			}
+		}
+	}
+}
