@@ -1885,6 +1885,59 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_Event_IOT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataNow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "eventId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CodeName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CodeDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "start",
+						"type": "datetimeoffset",
+						"scale": 7
+					},
+					{
+						"name": "end",
+						"type": "datetimeoffset",
+						"scale": 7
+					},
+					{
+						"name": "ratedSpeed",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "runId",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Event_IOT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BOM')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2917,8 +2970,6 @@
 					{
 						"name": "Copy data1",
 						"type": "Copy",
-						"state": "Inactive",
-						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -2931,7 +2982,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureDatabricksDeltaLakeSource",
-								"query": "select * from iottest.gold.gold_jobcosting_run",
+								"query": "select *,date_format(start, 'yyyy-MM-dd HH:mm') formattedstart,date_format(end, 'yyyy-MM-dd HH:mm') formattedend from iottest.gold.gold_jobcosting_run",
 								"exportSettings": {
 									"type": "AzureDatabricksDeltaLakeExportCommand"
 								}
@@ -2940,18 +2991,28 @@
 								"type": "SqlServerSink",
 								"writeBehavior": "upsert",
 								"upsertSettings": {
-									"useTempDB": true
+									"useTempDB": true,
+									"keys": [
+										"note"
+									]
 								},
 								"sqlWriterUseTableLock": false
 							},
 							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "dlsadbiottest",
+									"type": "LinkedServiceReference"
+								},
+								"path": "dls-fs-iot/iottest/gold/Datafactory_DataNow_Staging"
+							},
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
 									{
 										"source": {
-											"name": "start",
-											"type": "DateTime"
+											"name": "formattedstart",
+											"type": "String"
 										},
 										"sink": {
 											"name": "start",
@@ -2960,8 +3021,8 @@
 									},
 									{
 										"source": {
-											"name": "end",
-											"type": "DateTime"
+											"name": "formattedend",
+											"type": "String"
 										},
 										"sink": {
 											"name": "end",
@@ -3294,122 +3355,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-06-29T22:18:51Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Site')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Site",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ww_sitename",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SiteName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_siterunnumberprefix",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SiteRunNumberPrefix",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "statecode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Statecode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_siteidlookup",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "SiteId",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_wwsitecode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SiteCode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_siteid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Site",
-											"type": "Guid"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Site",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "WWSQL003_Site",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-06-21T22:06:22Z"
 			},
 			"dependsOn": []
 		}
