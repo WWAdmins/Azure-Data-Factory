@@ -5,8 +5,6 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -19,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureDatabricksDeltaLakeSource",
-						"query": "select * from iottest.gold.gold_jobcosting_run",
+						"query": "select *.cast(start as datetime) formattedstart from iottest.gold.gold_jobcosting_run",
 						"exportSettings": {
 							"type": "AzureDatabricksDeltaLakeExportCommand"
 						}
@@ -28,11 +26,21 @@
 						"type": "SqlServerSink",
 						"writeBehavior": "upsert",
 						"upsertSettings": {
-							"useTempDB": true
+							"useTempDB": true,
+							"keys": [
+								"note"
+							]
 						},
 						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "dlsadbiottest",
+							"type": "LinkedServiceReference"
+						},
+						"path": "dls-fs-iot/iottest/gold/Datafactory_DataNow_Staging"
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
