@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureDatabricksDeltaLakeSource",
-						"query": "select *.cast(start as datetime) formattedstart from iottest.gold.gold_jobcosting_run",
+						"query": "select *,cast(start as datetime) formattedstart from iottest.gold.gold_jobcosting_run",
 						"exportSettings": {
 							"type": "AzureDatabricksDeltaLakeExportCommand"
 						}
