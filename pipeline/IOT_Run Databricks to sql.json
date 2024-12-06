@@ -56,8 +56,8 @@
 							},
 							{
 								"source": {
-									"name": "end",
-									"type": "DateTime"
+									"name": "formattedend",
+									"type": "String"
 								},
 								"sink": {
 									"name": "end",
