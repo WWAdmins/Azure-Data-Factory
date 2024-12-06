@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureDatabricksDeltaLakeSource",
-						"query": "select *,date_format(start, 'yyyy-MM-dd HH:mm') formattedstart,date_format(end, 'yyyy-MM-dd HH:mm') formattedend from iottest.gold.gold_jobcosting_run",
+						"query": "select *,date_format(start, 'yyyy-MM-dd HH:mm') formattedstart,date_format(end, 'yyyy-MM-dd HH:mm') formattedend from iottest.gold.gold_jobcosting_event",
 						"exportSettings": {
 							"type": "AzureDatabricksDeltaLakeExportCommand"
 						}
@@ -28,7 +28,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								"note"
+								""
 							]
 						},
 						"sqlWriterUseTableLock": false
@@ -46,8 +46,18 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "formattedstart",
+									"name": "CodeName",
 									"type": "String"
+								},
+								"sink": {
+									"name": "CodeName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "start",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "start",
@@ -56,8 +66,8 @@
 							},
 							{
 								"source": {
-									"name": "formattedend",
-									"type": "String"
+									"name": "end",
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "end",
@@ -66,22 +76,12 @@
 							},
 							{
 								"source": {
-									"name": "note",
-									"type": "String"
-								},
-								"sink": {
-									"name": "note",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "machineId",
+									"name": "ratedSpeed",
 									"type": "Int"
 								},
 								"sink": {
-									"name": "machineId",
-									"type": "Int32"
+									"name": "ratedSpeed",
+									"type": "Double"
 								}
 							}
 						]
@@ -95,7 +95,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "wwsql003_Run_IOT",
+						"referenceName": "wwsql003_Event_IOT",
 						"type": "DatasetReference"
 					}
 				]
