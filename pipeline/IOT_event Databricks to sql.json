@@ -28,7 +28,7 @@
 						"upsertSettings": {
 							"useTempDB": true,
 							"keys": [
-								""
+								"note"
 							]
 						},
 						"sqlWriterUseTableLock": false
