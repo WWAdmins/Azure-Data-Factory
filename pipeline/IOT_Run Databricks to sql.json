@@ -46,8 +46,8 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "start",
-									"type": "DateTime"
+									"name": "formattedstart",
+									"type": "String"
 								},
 								"sink": {
 									"name": "start",
