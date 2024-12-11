@@ -418,6 +418,38 @@
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "systemuserid"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "systemuser"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_dropDataverseDefaults": {
+			"type": "string",
+			"defaultValue": "false"
 		}
 	},
 	"variables": {
@@ -2798,6 +2830,118 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureDatabricksDeltaLake')]",
 				"[concat(variables('factoryId'), '/datasets/wwsql003_Run_IOT')]",
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IOT_event Databricks to sql')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDatabricksDeltaLakeSource",
+								"query": "select *,date_format(start, 'yyyy-MM-dd HH:mm') formattedstart,date_format(end, 'yyyy-MM-dd HH:mm') formattedend from iottest.gold.gold_jobcosting_event",
+								"exportSettings": {
+									"type": "AzureDatabricksDeltaLakeExportCommand"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "dlsadbiottest",
+									"type": "LinkedServiceReference"
+								},
+								"path": "dls-fs-iot/iottest/gold/Datafactory_DataNow_Staging"
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CodeName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CodeName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "formattedstart",
+											"type": "String"
+										},
+										"sink": {
+											"name": "start",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "formattedend",
+											"type": "String"
+										},
+										"sink": {
+											"name": "end",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "ratedSpeed",
+											"type": "Int"
+										},
+										"sink": {
+											"name": "ratedSpeed",
+											"type": "Double"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureDatabricksDeltaLake",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "wwsql003_Event_IOT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureDatabricksDeltaLake')]",
+				"[concat(variables('factoryId'), '/datasets/wwsql003_Event_IOT')]",
 				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
 			]
 		},
@@ -36038,6 +36182,61 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_Event_IOT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataNow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "eventId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CodeName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CodeDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "start",
+						"type": "datetimeoffset",
+						"scale": 7
+					},
+					{
+						"name": "end",
+						"type": "datetimeoffset",
+						"scale": 7
+					},
+					{
+						"name": "ratedSpeed",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "runId",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Event_IOT"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataNow')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_Run_IOT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -44527,6 +44726,41 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Job Costing - Weekly')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "IOT_Run Databricks to sql",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Week",
+						"interval": 1,
+						"startTime": "2024-12-06T00:46:00",
+						"timeZone": "New Zealand Standard Time",
+						"schedule": {
+							"weekDays": [
+								"Saturday"
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/IOT_Run Databricks to sql')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtimes-30mins')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -45224,49 +45458,14 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Job Costing - Weekly')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "IOT_Run Databricks to sql",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Week",
-						"interval": 1,
-						"startTime": "2024-12-06T00:46:00",
-						"timeZone": "New Zealand Standard Time",
-						"schedule": {
-							"weekDays": [
-								"Saturday"
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/IOT_Run Databricks to sql')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/IOT_event Databricks to sql')]",
+			"name": "[concat(parameters('factoryName'), '/PROD Databricks Users')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy data1",
-						"type": "Copy",
+						"name": "IsNewData",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -45278,151 +45477,251 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "AzureDatabricksDeltaLakeSource",
-								"query": "select *,date_format(start, 'yyyy-MM-dd HH:mm') formattedstart,date_format(end, 'yyyy-MM-dd HH:mm') formattedend from iottest.gold.gold_jobcosting_event",
-								"exportSettings": {
-									"type": "AzureDatabricksDeltaLakeExportCommand"
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
 								}
 							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": true,
-							"stagingSettings": {
-								"linkedServiceName": {
-									"referenceName": "dlsadbiottest",
-									"type": "LinkedServiceReference"
-								},
-								"path": "dls-fs-iot/iottest/gold/Datafactory_DataNow_Staging"
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "CodeName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CodeName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "formattedstart",
-											"type": "String"
-										},
-										"sink": {
-											"name": "start",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "formattedend",
-											"type": "String"
-										},
-										"sink": {
-											"name": "end",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "ratedSpeed",
-											"type": "Int"
-										},
-										"sink": {
-											"name": "ratedSpeed",
-											"type": "Double"
-										}
-									}
+							"dataset": {
+								"referenceName": "User",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "If Condition1",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "IsNewData",
+								"dependencyConditions": [
+									"Succeeded"
 								]
 							}
-						},
-						"inputs": [
-							{
-								"referenceName": "AzureDatabricksDeltaLake",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
 						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_Event_IOT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@contains(activity('IsNewData').output, 'firstRow')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Get Users",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "CommonDataServiceForAppsSource",
+											"query": {
+												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "User",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_User",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								},
+								{
+									"name": "bronze-silver-gold",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "Get Users",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 2,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+										"baseParameters": {
+											"END_TIMESTAMP": {
+												"value": "@pipeline().parameters.triggerEnd",
+												"type": "Expression"
+											},
+											"MODIFIEDON_COLUMN": {
+												"value": "@pipeline().parameters.modifiedonColumn",
+												"type": "Expression"
+											},
+											"PARTITION_COLUMN": {
+												"value": "@pipeline().parameters.partitionColumn",
+												"type": "Expression"
+											},
+											"TABLE_NAME": {
+												"value": "@pipeline().parameters.tableName",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION": {
+												"value": "@pipeline().parameters.partitionBySecondary",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION_NAME": {
+												"value": "@pipeline().parameters.secondaryPartitionColumnName",
+												"type": "Expression"
+											},
+											"DROP_DATAVERSE_DEFAULTS": {
+												"value": "@pipeline().parameters.dropDataverseDefaults",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_prod",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "systemuserid"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "systemuser"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"dropDataverseDefaults": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureDatabricksDeltaLake')]",
-				"[concat(variables('factoryId'), '/datasets/wwsql003_Event_IOT')]",
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiottest')]"
+				"[concat(variables('factoryId'), '/datasets/User')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_User')]",
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_Event_IOT')]",
+			"name": "[concat(parameters('factoryName'), '/ADLS_User')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "DataNow",
+					"referenceName": "dlsadbiotprod",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "eventId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CodeName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CodeDescription",
-						"type": "nvarchar"
-					},
-					{
-						"name": "start",
-						"type": "datetimeoffset",
-						"scale": 7
-					},
-					{
-						"name": "end",
-						"type": "datetimeoffset",
-						"scale": 7
-					},
-					{
-						"name": "ratedSpeed",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "runId",
-						"type": "int",
-						"precision": 10
-					}
-				],
+				"type": "Parquet",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "Event_IOT"
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iotprod/bronze/dataverse/systemuser/landing",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-systemuser-1day')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks Users",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_secondaryPartitionColumnName')]",
+						"dropDataverseDefaults": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_dropDataverseDefaults')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 24,
+					"startTime": "2024-12-10T21:45:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 1,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DataNow')]"
+				"[concat(variables('factoryId'), '/pipelines/PROD Databricks Users')]"
 			]
 		}
 	]

@@ -13,6 +13,102 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_StockCheckin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Bottles broken",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Damaged Caps",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Damages Labels",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Delete Line",
+						"type": "bit"
+					},
+					{
+						"name": "LPN for returns",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Modified on",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Operator Code",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Production Line",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Returned to stock",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Washer Dryer Used",
+						"type": "bit"
+					},
+					{
+						"name": "Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Record Created On",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Stock checkin",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Stock checkin"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_Stockcheckinentry')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -826,6 +922,59 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Run_IOT"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_Event_IOT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataNow",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "eventId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CodeName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CodeDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "start",
+						"type": "datetimeoffset",
+						"scale": 7
+					},
+					{
+						"name": "end",
+						"type": "datetimeoffset",
+						"scale": 7
+					},
+					{
+						"name": "ratedSpeed",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "runId",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Event_IOT"
 				}
 			},
 			"dependsOn": []
@@ -1892,201 +2041,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "ww_cartonusage"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_cartonusagedetail2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_cartonusagedetailid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_issues",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_cartonusagedetail"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_closurebatchsummary')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "crc5d_ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_closurebatchboxnumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_closurebatchcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_closurebatchcorkexpirydate",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_closurebatchcorkmoisture",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_closurebatchproductiondate",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_closurebatchreferencenumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_closurebatchsequencenumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_closurebatchsummarycomments",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_closurebatchsummaryid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_closurebatchsummaryname",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_closurebatchsummarysupplier",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_closurebatchsuppliercode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_closureils",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_closureowner",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_deletelinename",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_ordernumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_timeclosurebatchloaded",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_closurebatchsummary"
 				}
 			},
 			"dependsOn": []
