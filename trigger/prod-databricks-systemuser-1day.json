@@ -3,6 +3,16 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "PROD Databricks Users",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"triggerStart": "@trigger().outputs.windowStartTime",
+				"triggerEnd": "@trigger().outputs.windowEndTime"
+			}
+		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Hour",
