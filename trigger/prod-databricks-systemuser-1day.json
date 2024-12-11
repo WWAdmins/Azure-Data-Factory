@@ -10,7 +10,13 @@
 			},
 			"parameters": {
 				"triggerStart": "@trigger().outputs.windowStartTime",
-				"triggerEnd": "@trigger().outputs.windowEndTime"
+				"triggerEnd": "@trigger().outputs.windowEndTime",
+				"modifiedonColumn": "modifiedon",
+				"partitionColumn": "systemuserid",
+				"tableName": "systemuser",
+				"partitionBySecondary": "false",
+				"secondaryPartitionColumnName": "false",
+				"dropDataverseDefaults": "false"
 			}
 		},
 		"type": "TumblingWindowTrigger",
