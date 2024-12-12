@@ -53,7 +53,7 @@
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionColumn": {
 			"type": "string",
-			"defaultValue": "crc5d_runstartend"
+			"defaultValue": "crc5d_runstartendid"
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_tableName": {
 			"type": "string",
@@ -201,7 +201,7 @@
 		},
 		"test-databricks-runstartends-1day_properties_pipeline_parameters_partitionColumn": {
 			"type": "string",
-			"defaultValue": "crc5d_runstartend"
+			"defaultValue": "crc5d_runstartendid"
 		},
 		"test-databricks-runstartends-1day_properties_pipeline_parameters_tableName": {
 			"type": "string",

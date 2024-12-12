@@ -168,7 +168,7 @@
 			"value": "modifiedon"
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_partitionColumn": {
-			"value": "crc5d_runstartend"
+			"value": "crc5d_runstartendid"
 		},
 		"prod-databricks-runstartends-30mins_properties_pipeline_parameters_tableName": {
 			"value": "crc5d_runstartend"
@@ -279,7 +279,7 @@
 			"value": "modifiedon"
 		},
 		"test-databricks-runstartends-1day_properties_pipeline_parameters_partitionColumn": {
-			"value": "crc5d_runstartend"
+			"value": "crc5d_runstartendid"
 		},
 		"test-databricks-runstartends-1day_properties_pipeline_parameters_tableName": {
 			"value": "crc5d_runstartend"
