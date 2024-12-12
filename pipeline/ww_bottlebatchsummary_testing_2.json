@@ -299,7 +299,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT MAX(SWITCHOFFSET(modifiedon, '+13:00')) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_bottlebatchsummary_testing];\n",
+						"sqlReaderQuery": "SELECT MAX(modifiedon) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_bottlebatchsummary_testing];\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
