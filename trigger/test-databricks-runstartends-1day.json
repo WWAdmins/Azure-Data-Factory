@@ -12,7 +12,7 @@
 				"triggerStart": "@trigger().outputs.windowStartTime",
 				"triggerEnd": "@trigger().outputs.windowEndTime",
 				"modifiedonColumn": "modifiedon",
-				"partitionColumn": "crc5d_runstartend",
+				"partitionColumn": "crc5d_runstartendid",
 				"tableName": "crc5d_runstartend",
 				"partitionBySecondary": "false",
 				"secondaryPartitionColumnName": "false"
