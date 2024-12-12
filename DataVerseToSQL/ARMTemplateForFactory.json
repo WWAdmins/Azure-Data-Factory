@@ -6991,7 +6991,14 @@
 					{
 						"name": "ww_bottlebatchsummary_testing_2",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Last modifiedon",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -7002,17 +7009,15 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "CommonDataServiceForAppsSource"
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "<fetch>\n  <entity name=\"ww_bottlebatchsummary\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
+									"type": "Expression"
+								}
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": true,
-									"keys": [
-										"ww_bottlebatchsummaryid"
-									]
-								},
+								"writeBehavior": "insert",
 								"sqlWriterUseTableLock": false
 							},
 							"enableStaging": false,
@@ -7268,6 +7273,32 @@
 						]
 					},
 					{
+						"name": "Last modifiedon",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT MAX(modifiedon) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_bottlebatchsummary_testing];\n",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "wwsql003_ww_bottlebatchsummary_testing",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
 						"name": "Stored procedure1",
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
@@ -7287,7 +7318,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "usp_ww_bottlebatchsummary_testing"
+							"storedProcedureName": "[[dbo].[usp_ww_bottlebatchsummary_testing]"
 						},
 						"linkedServiceName": {
 							"referenceName": "WWSQL003",
@@ -45322,6 +45353,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_bottlebatchsummary_testing_2",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -45336,7 +45374,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary_testing_2')]"
 			]
 		},
 		{
