@@ -6787,11 +6787,11 @@
 									},
 									{
 										"source": {
-											"name": "importsequencenumber",
+											"name": "ww_importsequencenumber",
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "importsequencenumber",
+											"name": "ww_importsequencenumber",
 											"type": "Int32"
 										}
 									},
