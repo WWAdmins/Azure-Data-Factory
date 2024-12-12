@@ -243,6 +243,38 @@
 			"type": "string",
 			"defaultValue": "false"
 		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "systemuserid"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "systemuser"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-systemuser-1day_properties_pipeline_parameters_dropDataverseDefaults": {
+			"type": "string",
+			"defaultValue": "false"
+		},
 		"prod-databricks-ww_billofmaterials-1hour_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -418,38 +450,6 @@
 		"ProductionLink_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourcegroups/WineWorks/providers/Microsoft.DataFactory/factories/DataVerseToSQL/integrationruntimes/integrationRuntime1"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "systemuserid"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "systemuser"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-systemuser-1day_properties_pipeline_parameters_dropDataverseDefaults": {
-			"type": "string",
-			"defaultValue": "false"
 		}
 	},
 	"variables": {
@@ -3654,6 +3654,207 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PROD Databricks Users')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "IsNewData",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+									"type": "Expression"
+								}
+							},
+							"dataset": {
+								"referenceName": "User",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						}
+					},
+					{
+						"name": "If Condition1",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "IsNewData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@contains(activity('IsNewData').output, 'firstRow')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Get Users",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "CommonDataServiceForAppsSource",
+											"query": {
+												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
+												"type": "Expression"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "User",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_User",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								},
+								{
+									"name": "bronze-silver-gold",
+									"type": "DatabricksNotebook",
+									"dependsOn": [
+										{
+											"activity": "Get Users",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 2,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
+										"baseParameters": {
+											"END_TIMESTAMP": {
+												"value": "@pipeline().parameters.triggerEnd",
+												"type": "Expression"
+											},
+											"MODIFIEDON_COLUMN": {
+												"value": "@pipeline().parameters.modifiedonColumn",
+												"type": "Expression"
+											},
+											"PARTITION_COLUMN": {
+												"value": "@pipeline().parameters.partitionColumn",
+												"type": "Expression"
+											},
+											"TABLE_NAME": {
+												"value": "@pipeline().parameters.tableName",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION": {
+												"value": "@pipeline().parameters.partitionBySecondary",
+												"type": "Expression"
+											},
+											"SECONDARY_PARTITION_NAME": {
+												"value": "@pipeline().parameters.secondaryPartitionColumnName",
+												"type": "Expression"
+											},
+											"DROP_DATAVERSE_DEFAULTS": {
+												"value": "@pipeline().parameters.dropDataverseDefaults",
+												"type": "Expression"
+											}
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "adb_iot_prod",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"triggerStart": {
+						"type": "string"
+					},
+					"triggerEnd": {
+						"type": "string"
+					},
+					"modifiedonColumn": {
+						"type": "string",
+						"defaultValue": "modifiedon"
+					},
+					"partitionColumn": {
+						"type": "string",
+						"defaultValue": "systemuserid"
+					},
+					"tableName": {
+						"type": "string",
+						"defaultValue": "systemuser"
+					},
+					"partitionBySecondary": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"secondaryPartitionColumnName": {
+						"type": "string",
+						"defaultValue": "false"
+					},
+					"dropDataverseDefaults": {
+						"type": "string",
+						"defaultValue": "false"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/User')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_User')]",
+				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PROD Databricks ww_billofmaterials')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -6454,6 +6655,330 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/BottleBatchSummary')]",
 				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_bottlebatchsummary1')]",
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ww_bottlebatchsummary_testing')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ww_bottlebatchsummary_testing",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CommonDataServiceForAppsSource"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBehavior": "upsert",
+								"upsertSettings": {
+									"useTempDB": true,
+									"keys": [
+										"ww_bottlebatchsummaryid"
+									]
+								},
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "createdon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "createdon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "modifiedon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "statuscode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "statuscode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_amount",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_amount",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_billofmaterials",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_billofmaterials",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlebatch",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottlebatch",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlebatchsummaryid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "ww_bottlebatchsummaryid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_bottlebatchsummaryname",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_bottlebatchsummaryname",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_comments",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_comments",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "importsequencenumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "importsequencenumber",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "ww_deleteline",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_eanbarcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_eanbarcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_hunumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_hunumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_moldcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_moldcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_moldid",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_moldid",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_operatorcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_palletid",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_palletid",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productiondate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_productiondate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_productionline",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_reasonfordeletion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_stockcode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_stockcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_supplierproductcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_supplierproductcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_timeloaded",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_timeloaded",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "BottleBatchSummary",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "wwsql003_ww_bottlebatchsummary_testing",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Stored procedure1",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "ww_bottlebatchsummary_testing",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "usp_ww_bottlebatchsummary_testing"
+						},
+						"linkedServiceName": {
+							"referenceName": "WWSQL003",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/BottleBatchSummary')]",
+				"[concat(variables('factoryId'), '/datasets/wwsql003_ww_bottlebatchsummary_testing')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
 			]
 		},
@@ -28723,6 +29248,31 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_User')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dlsadbiotprod",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "iotprod/bronze/dataverse/systemuser/landing",
+						"fileSystem": "dls-fs-iot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_UserTEST')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -37281,6 +37831,135 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_bottlebatchsummary_testing')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_amount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottlebatch",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlebatchsummaryid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottlebatchsummaryname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "importsequencenumber",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_eanbarcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_hunumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_moldcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_moldid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_palletid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productiondate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_reasonfordeletion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_supplierproductcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_timeloaded",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_bottlebatchsummary_testing"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_cartonusage')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -44842,6 +45521,47 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-systemuser-1day')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks Users",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_secondaryPartitionColumnName')]",
+						"dropDataverseDefaults": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_dropDataverseDefaults')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Hour",
+					"interval": 24,
+					"startTime": "2024-12-10T21:45:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 1,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PROD Databricks Users')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/prod-databricks-ww_billofmaterials-1hour')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -45456,273 +46176,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PROD Databricks Users')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "IsNewData",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-									"type": "Expression"
-								}
-							},
-							"dataset": {
-								"referenceName": "User",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "If Condition1",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "IsNewData",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@contains(activity('IsNewData').output, 'firstRow')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Get Users",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "CommonDataServiceForAppsSource",
-											"query": {
-												"value": "@concat('<fetch><entity name=\"systemuser\"><all-attributes/><filter type=\"and\"><condition attribute=\"modifiedon\" operator=\"ge\" value=\"',pipeline().parameters.triggerStart,'\"/><condition attribute=\"modifiedon\" operator=\"le\" value=\"',pipeline().parameters.triggerEnd,'\"/></filter></entity></fetch>')",
-												"type": "Expression"
-											}
-										},
-										"sink": {
-											"type": "ParquetSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
-											"formatSettings": {
-												"type": "ParquetWriteSettings"
-											}
-										},
-										"enableStaging": false
-									},
-									"inputs": [
-										{
-											"referenceName": "User",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "ADLS_User",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "bronze-silver-gold",
-									"type": "DatabricksNotebook",
-									"dependsOn": [
-										{
-											"activity": "Get Users",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 2,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"notebookPath": "/Repos/databricks-sp-iot-prod/adb-iot/ETL/azure-data-factory/dataverse-bronze-silver-gold",
-										"baseParameters": {
-											"END_TIMESTAMP": {
-												"value": "@pipeline().parameters.triggerEnd",
-												"type": "Expression"
-											},
-											"MODIFIEDON_COLUMN": {
-												"value": "@pipeline().parameters.modifiedonColumn",
-												"type": "Expression"
-											},
-											"PARTITION_COLUMN": {
-												"value": "@pipeline().parameters.partitionColumn",
-												"type": "Expression"
-											},
-											"TABLE_NAME": {
-												"value": "@pipeline().parameters.tableName",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION": {
-												"value": "@pipeline().parameters.partitionBySecondary",
-												"type": "Expression"
-											},
-											"SECONDARY_PARTITION_NAME": {
-												"value": "@pipeline().parameters.secondaryPartitionColumnName",
-												"type": "Expression"
-											},
-											"DROP_DATAVERSE_DEFAULTS": {
-												"value": "@pipeline().parameters.dropDataverseDefaults",
-												"type": "Expression"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "adb_iot_prod",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"triggerStart": {
-						"type": "string"
-					},
-					"triggerEnd": {
-						"type": "string"
-					},
-					"modifiedonColumn": {
-						"type": "string",
-						"defaultValue": "modifiedon"
-					},
-					"partitionColumn": {
-						"type": "string",
-						"defaultValue": "systemuserid"
-					},
-					"tableName": {
-						"type": "string",
-						"defaultValue": "systemuser"
-					},
-					"partitionBySecondary": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"secondaryPartitionColumnName": {
-						"type": "string",
-						"defaultValue": "false"
-					},
-					"dropDataverseDefaults": {
-						"type": "string",
-						"defaultValue": "false"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/User')]",
-				"[concat(variables('factoryId'), '/datasets/ADLS_User')]",
-				"[concat(variables('factoryId'), '/linkedServices/adb_iot_prod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_User')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "dlsadbiotprod",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "iotprod/bronze/dataverse/systemuser/landing",
-						"fileSystem": "dls-fs-iot"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-systemuser-1day')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PROD Databricks Users",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_secondaryPartitionColumnName')]",
-						"dropDataverseDefaults": "[parameters('prod-databricks-systemuser-1day_properties_pipeline_parameters_dropDataverseDefaults')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 24,
-					"startTime": "2024-12-10T21:45:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 1,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PROD Databricks Users')]"
-			]
 		}
 	]
 }
