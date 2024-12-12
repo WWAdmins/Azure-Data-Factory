@@ -372,7 +372,7 @@
 			},
 			"partitionColumn": {
 				"type": "string",
-				"defaultValue": "crc5d_runstartend"
+				"defaultValue": "crc5d_runstartendid"
 			},
 			"tableName": {
 				"type": "string",
