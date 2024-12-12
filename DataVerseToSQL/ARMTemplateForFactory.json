@@ -44998,6 +44998,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_bottlebatchsummary_testing",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -45012,7 +45019,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary_testing')]"
 			]
 		},
 		{
@@ -46176,36 +46184,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Triggertest')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "ww_bottlebatchsummary_testing",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 11,
-						"startTime": "2024-12-12T05:38:00",
-						"timeZone": "New Zealand Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary_testing')]"
-			]
 		}
 	]
 }
