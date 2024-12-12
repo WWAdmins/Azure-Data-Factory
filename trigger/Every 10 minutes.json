@@ -15,6 +15,12 @@
 					"referenceName": "ww_runreportbottlelabelpack",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "ww_bottlebatchsummary_testing",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
