@@ -1,0 +1,24 @@
+{
+	"name": "Triggertest",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ww_bottlebatchsummary_testing",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 11,
+				"startTime": "2024-12-12T05:38:00",
+				"timeZone": "New Zealand Standard Time"
+			}
+		}
+	}
+}
