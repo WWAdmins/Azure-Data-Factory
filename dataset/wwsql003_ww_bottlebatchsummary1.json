@@ -158,7 +158,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "ww_bottlebatchsummary_testing"
+			"table": "ww_bottlebatchsummary"
 		}
 	}
 }
