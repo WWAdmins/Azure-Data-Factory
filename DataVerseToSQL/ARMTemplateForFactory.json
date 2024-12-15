@@ -45643,6 +45643,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "ww_bottlebatchsummary_testing_2",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -45657,7 +45664,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
+				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary_testing_2')]"
 			]
 		},
 		{
