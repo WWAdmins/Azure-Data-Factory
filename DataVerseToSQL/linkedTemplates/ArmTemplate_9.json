@@ -13,6 +13,226 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_prebottlinganalysissignoff1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "crc5d_additionalchargesinformation",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_chargingcomplete",
+						"type": "bit"
+					},
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_additionaltransferszlatrad",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_alcoholrecheckzlaaa",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_authorisation",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_authorisingsignature",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottleavailableat",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_cellarstafftime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cellarstafftimezrsollc",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_co2dorecheckzlagas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_eststarttime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_etxt",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_fiissueemailsent",
+						"type": "bit"
+					},
+					{
+						"name": "ww_filterabilitycasechargezpfsc",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_filterabilitycasechargezpfsc2",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_filterabilityretestzlafi",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_goodtogo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_instructionfromwinemaker",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operator",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_pmsaddition",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_prebottlinganalysissignoffid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_signoff",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_so2recheckfreeftzlaso2",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_soetxt",
+						"type": "bit"
+					},
+					{
+						"name": "ww_sogoodtogo",
+						"type": "bit"
+					},
+					{
+						"name": "ww_sowinemakertobepresentfortaste",
+						"type": "bit"
+					},
+					{
+						"name": "ww_spargeinlinezpssp",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_startupalcoholpass",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_startupalcoholreading",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_tanktransferzlatran",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_tempadjustmentzpcwt",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_winemaker",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_winemakerinstructions",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_winemakertobepresentfortaste",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_winemakertobepresentfortasteoff",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_wwsupplieddryicezpsdi",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_prebottlinganalysissignoff"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_prebottlinganalysissignoff11')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2563,6 +2783,173 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_bottlebatchsummary11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdby",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "createdbyname",
+						"type": "varchar"
+					},
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedby",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "modifiedbyname",
+						"type": "varchar"
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ownerid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "owneridname",
+						"type": "varchar"
+					},
+					{
+						"name": "owneridtype",
+						"type": "varchar"
+					},
+					{
+						"name": "owningbusinessunit",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "owningbusinessunitname",
+						"type": "varchar"
+					},
+					{
+						"name": "owninguser",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "statuscodename",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_amount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_billofmaterialsname",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_bottlebatch",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlebatchsummaryid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottlebatchsummaryname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_deletelinename",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_eanbarcode",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_hunumber",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_moldcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_moldid",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_palletid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productiondate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_stockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_supplierproductcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_timeloaded",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_bottlebatchsummary"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BOM')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -3357,232 +3744,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-06-22T19:45:51Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Breakage Location')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Breakage Location",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": true
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "statecode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "StateCode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_location",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Location",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_breakagelocationid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "BreakageLocation",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "CreatedOn",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ModifiedOn",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "BreakageLocation",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "WWSQL003_BreakageLocation",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-08-10T01:27:10Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Esker FTP File Transfer for POs')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Esker",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"wildcardFileName": "ERPID_*",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "SftpWriteSettings",
-									"operationTimeout": "01:00:00",
-									"useTempFileRename": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "EskerWWFTP",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "EskerSFTP",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Delete1",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "Esker",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "EskerWWFTP",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"logStorageSettings": {
-								"linkedServiceName": {
-									"referenceName": "wineworksinternal",
-									"type": "LinkedServiceReference"
-								},
-								"path": "eskerlogging"
-							},
-							"enableLogging": true,
-							"storeSettings": {
-								"type": "FileServerReadSettings",
-								"recursive": true,
-								"wildcardFileName": "ERPID__ProjectCodes__*",
-								"enablePartitionDiscovery": false
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		}
