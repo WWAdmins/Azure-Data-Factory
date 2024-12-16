@@ -6379,11 +6379,11 @@
 									},
 									{
 										"source": {
-											"name": "ww_importsequencenumber",
+											"name": "importsequencenumber",
 											"type": "Int32"
 										},
 										"sink": {
-											"name": "ww_importsequencenumber",
+											"name": "importsequencenumber",
 											"type": "Int32"
 										}
 									},
@@ -6587,7 +6587,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[usp_ww_bottlebatchsummary]"
+							"storedProcedureName": "[[dbo].[usp_ww_bottlebatchsummary]"
 						},
 						"linkedServiceName": {
 							"referenceName": "WWSQL003",
