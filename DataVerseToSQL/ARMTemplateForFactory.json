@@ -7018,7 +7018,7 @@
 							"sink": {
 								"type": "SqlServerSink",
 								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
+								"sqlWriterUseTableLock": true
 							},
 							"enableStaging": false,
 							"translator": {
