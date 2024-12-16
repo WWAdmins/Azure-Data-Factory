@@ -7017,7 +7017,13 @@
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"writeBehavior": "insert",
+								"writeBehavior": "upsert",
+								"upsertSettings": {
+									"useTempDB": true,
+									"keys": [
+										"ww_bottlebatchsummaryid"
+									]
+								},
 								"sqlWriterUseTableLock": true
 							},
 							"enableStaging": false,
@@ -30117,6 +30123,26 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/BottleBatchSummary1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_bottlebatchsummary"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BreakageLocation')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -38476,6 +38502,175 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_bottlebatchsummary11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdby",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "createdbyname",
+						"type": "varchar"
+					},
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedby",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "modifiedbyname",
+						"type": "varchar"
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ownerid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "owneridname",
+						"type": "varchar"
+					},
+					{
+						"name": "owneridtype",
+						"type": "varchar"
+					},
+					{
+						"name": "owningbusinessunit",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "owningbusinessunitname",
+						"type": "varchar"
+					},
+					{
+						"name": "owninguser",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "statuscodename",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_amount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_billofmaterialsname",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_bottlebatch",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlebatchsummaryid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottlebatchsummaryname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_deletelinename",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_eanbarcode",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_hunumber",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_moldcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_moldid",
+						"type": "varchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_palletid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productiondate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_stockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_supplierproductcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_timeloaded",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_bottlebatchsummary"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_bottlebatchsummary_testing')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -45643,13 +45838,6 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "ww_bottlebatchsummary_testing_2",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -45664,8 +45852,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_bottlebatchsummary_testing_2')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_runreportbottlelabelpack')]"
 			]
 		},
 		{
@@ -46829,195 +47016,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BottleBatchSummary1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Dataverse",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_bottlebatchsummary"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Dataverse')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_bottlebatchsummary11')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdby",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "createdbyname",
-						"type": "varchar"
-					},
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedby",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "modifiedbyname",
-						"type": "varchar"
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ownerid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "owneridname",
-						"type": "varchar"
-					},
-					{
-						"name": "owneridtype",
-						"type": "varchar"
-					},
-					{
-						"name": "owningbusinessunit",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "owningbusinessunitname",
-						"type": "varchar"
-					},
-					{
-						"name": "owninguser",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "statuscodename",
-						"type": "varchar"
-					},
-					{
-						"name": "ww_amount",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_billofmaterialsname",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_bottlebatch",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlebatchsummaryid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_bottlebatchsummaryname",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_deletelinename",
-						"type": "varchar"
-					},
-					{
-						"name": "ww_eanbarcode",
-						"type": "varchar"
-					},
-					{
-						"name": "ww_hunumber",
-						"type": "varchar"
-					},
-					{
-						"name": "ww_moldcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_moldid",
-						"type": "varchar"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_palletid",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productiondate",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_stockcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_supplierproductcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_timeloaded",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_bottlebatchsummary"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
-			]
 		}
 	]
 }

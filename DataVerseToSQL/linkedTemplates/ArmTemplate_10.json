@@ -3283,7 +3283,13 @@
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"writeBehavior": "insert",
+								"writeBehavior": "upsert",
+								"upsertSettings": {
+									"useTempDB": true,
+									"keys": [
+										"ww_bottlebatchsummaryid"
+									]
+								},
 								"sqlWriterUseTableLock": true
 							},
 							"enableStaging": false,
