@@ -4905,7 +4905,7 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 30,
-						"startTime": "2025-01-14T13:47:00",
+						"startTime": "2025-01-14T19:15:00",
 						"timeZone": "New Zealand Standard Time"
 					}
 				}
