@@ -45867,13 +45867,6 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "ww_prebottlinganalysis",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "ww_winery",
 							"type": "PipelineReference"
 						},
@@ -45925,7 +45918,6 @@
 				"[concat(variables('factoryId'), '/pipelines/ww_supervisorsignoffbomhourlycheck')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_hourlycartonusage')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_palletstackinghourly')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysis')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_winery')]"
 			]
 		},
