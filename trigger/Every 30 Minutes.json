@@ -210,12 +210,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "ww_prebottlinganalysis",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "ww_winery",
 					"type": "PipelineReference"
 				}
