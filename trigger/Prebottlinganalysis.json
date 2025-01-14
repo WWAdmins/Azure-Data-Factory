@@ -1,0 +1,24 @@
+{
+	"name": "Prebottlinganalysis",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ww_prebottlinganalysis",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 30,
+				"startTime": "2025-01-14T19:17:00",
+				"timeZone": "New Zealand Standard Time"
+			}
+		}
+	}
+}
