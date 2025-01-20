@@ -314,7 +314,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "An error has occurred!",
 						"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-						"EmailTo": "daniela.gomez@wineworks.co.nz"
+						"EmailTo": "WWSQL_Admins@wineworks.co.nz"
 					}
 				}
 			},
@@ -372,7 +372,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "An error has occurred!",
 						"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-						"EmailTo": "daniela.gomez@wineworks.co.nz"
+						"EmailTo": "WWSQL_Admins@wineworks.co.nz"
 					}
 				}
 			},
@@ -399,7 +399,7 @@
 						"referenceName": "wwsql003_ww_bottlebatchsummary1",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": false
+					"firstRowOnly": true
 				}
 			}
 		],
