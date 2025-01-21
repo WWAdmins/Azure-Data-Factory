@@ -8256,7 +8256,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Clean",
+								"activity": "Last modifiedon",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -8273,11 +8273,20 @@
 						"typeProperties": {
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
-								"query": "<fetch>\r\n  <entity name=\"ww_hourlycartonusage\">\r\n    <all-attributes />\r\n    <filter type=\"and\">\r\n      <condition attribute=\"ww_billofmaterials\" operator=\"not-null\" />\r\n    </filter>\r\n  </entity>\r\n</fetch>\r\n"
+								"query": {
+									"value": "<fetch>\r\n  <entity name=\"ww_hourlycartonusage\">\r\n    <all-attributes />\r\n    <filter type=\"and\">\r\n     \r\n      <condition attribute=\"ww_billofmaterials\" operator=\"not-null\" />\r\n     \r\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\r\n    </filter>\r\n  </entity>\r\n</fetch>\r\n",
+									"type": "Expression"
+								}
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"writeBehavior": "insert",
+								"writeBehavior": "upsert",
+								"upsertSettings": {
+									"useTempDB": true,
+									"keys": [
+										"ww_hourlycartonusageid"
+									]
+								},
 								"sqlWriterUseTableLock": true
 							},
 							"enableStaging": false,
@@ -8684,8 +8693,8 @@
 						}
 					},
 					{
-						"name": "Clean",
-						"type": "SqlServerStoredProcedure",
+						"name": "Last modifiedon",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -8696,11 +8705,18 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_clean_ww_hourlycartonusage]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_hourlycartonusage];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "wwsql003_ww_hourlycartonusage",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": true
 						}
 					}
 				],
