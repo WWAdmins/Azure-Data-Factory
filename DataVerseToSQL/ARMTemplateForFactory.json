@@ -23394,7 +23394,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Clean",
+								"activity": "Last modifiedon",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -23410,11 +23410,22 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "CommonDataServiceForAppsSource"
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "<fetch>\n  <entity name=\"ww_qcendofrun\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
+									"type": "Expression"
+								}
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"writeBehavior": "insert"
+								"writeBehavior": "upsert",
+								"upsertSettings": {
+									"useTempDB": true,
+									"keys": [
+										"ww_qcendofrunid"
+									]
+								},
+								"sqlWriterUseTableLock": true
 							},
 							"enableStaging": false,
 							"translator": {
@@ -23810,8 +23821,8 @@
 						}
 					},
 					{
-						"name": "Clean",
-						"type": "SqlServerStoredProcedure",
+						"name": "Last modifiedon",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -23822,11 +23833,18 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_clean_ww_qcendofrun]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_qcendofrun];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "wwsql003_ww_qcendofrun",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": true
 						}
 					}
 				],
@@ -23852,7 +23870,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Clean",
+								"activity": "Last modifiedon",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -24298,8 +24316,8 @@
 						}
 					},
 					{
-						"name": "Clean",
-						"type": "SqlServerStoredProcedure",
+						"name": "Last modifiedon",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -24310,11 +24328,18 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_clean_ww_qchourlycheck]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_bottlebatchsummary];",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "wwsql003_ww_qchourlycheck1",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": true
 						}
 					}
 				],
