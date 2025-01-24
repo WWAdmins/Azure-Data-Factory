@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Clean",
+						"activity": "Last modifiedon",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -23,11 +23,22 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "CommonDataServiceForAppsSource"
+						"type": "CommonDataServiceForAppsSource",
+						"query": {
+							"value": "<fetch>\n  <entity name=\"ww_supervisorsignoff\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
+							"type": "Expression"
+						}
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"writeBehavior": "insert"
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"ww_supervisorsignoffid"
+							]
+						},
+						"sqlWriterUseTableLock": true
 					},
 					"enableStaging": false,
 					"translator": {
@@ -626,8 +637,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
@@ -657,8 +668,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"method": "POST",
+					"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
 					"body": {
 						"DataFactoryName": "@{pipeline().DataFactory}",
 						"PipelineName": "@{pipeline().Pipeline}",
@@ -669,8 +680,8 @@
 				}
 			},
 			{
-				"name": "Clean",
-				"type": "SqlServerStoredProcedure",
+				"name": "Last modifiedon",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -681,11 +692,17 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[usp_clean_ww_supervisorsignoff]"
-				},
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_supervisorsignoff];",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "wwsql003_ww_supervisorsignoff",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": true
 				}
 			}
 		],
