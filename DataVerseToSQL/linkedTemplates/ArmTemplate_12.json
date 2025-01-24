@@ -287,7 +287,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Clean",
+								"activity": "Last modifiedon",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -802,8 +802,8 @@
 						}
 					},
 					{
-						"name": "Clean",
-						"type": "SqlServerStoredProcedure",
+						"name": "Last modifiedon",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -814,11 +814,8 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_clean_ww_runreportbottlelabelpack]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
+							"source": {},
+							"firstRowOnly": true
 						}
 					}
 				],
