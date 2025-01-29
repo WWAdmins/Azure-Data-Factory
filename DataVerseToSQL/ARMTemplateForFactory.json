@@ -18769,7 +18769,7 @@
 										},
 										"sink": {
 											"name": "crc5d_glassfragmentswithblank",
-											"type": "Int32"
+											"type": "String"
 										}
 									},
 									{
@@ -19284,6 +19284,16 @@
 									},
 									{
 										"source": {
+											"name": "crc5d_rockstopperfiltervalue",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "crc5d_rockstopperfiltervalue",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_samplessig",
 											"type": "String"
 										},
@@ -19319,7 +19329,7 @@
 										},
 										"sink": {
 											"name": "crc5d_shakendorequired",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
