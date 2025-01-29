@@ -10063,6 +10063,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_dco2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_dco2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_do2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_do2",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_endofrunsamples",
 											"type": "Int32"
 										},
