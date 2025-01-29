@@ -26895,12 +26895,32 @@
 									},
 									{
 										"source": {
+											"name": "ww_lowfills",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_lowfills",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_lpn",
 											"type": "String"
 										},
 										"sink": {
 											"name": "ww_lpn",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_missingbottles",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_missingbottles",
+											"type": "Decimal"
 										}
 									},
 									{
