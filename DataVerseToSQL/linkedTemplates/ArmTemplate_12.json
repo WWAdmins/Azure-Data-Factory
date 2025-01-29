@@ -1572,6 +1572,26 @@
 									},
 									{
 										"source": {
+											"name": "crc5d_cleanskinstockcode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "crc5d_cleanskinstockcode",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_cleanskinstockcodereason",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_cleanskinstockcodereason",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_deleteline",
 											"type": "Boolean"
 										},
@@ -1588,6 +1608,26 @@
 										"sink": {
 											"name": "ww_itemcode",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_lasercodematchesreason",
+											"type": "String"
+										},
+										"sink": {
+											"name": "crc5d_lasercodematchesreason",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "crc5d_lasercodematchesrunnumber",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "crc5d_lasercodematchesrunnumber",
+											"type": "Int32"
 										}
 									},
 									{
