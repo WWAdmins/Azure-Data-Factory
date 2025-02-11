@@ -22,8 +22,7 @@
 					"enableLogging": false,
 					"storeSettings": {
 						"type": "FileServerReadSettings",
-						"recursive": true,
-						"wildcardFileName": "tmp",
+						"fileListPath": "tmp2B0B.tmp",
 						"enablePartitionDiscovery": false
 					}
 				}
