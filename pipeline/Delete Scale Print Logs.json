@@ -22,7 +22,7 @@
 					"enableLogging": false,
 					"storeSettings": {
 						"type": "FileServerReadSettings",
-						"fileListPath": "tmp2B0B",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					}
 				}
