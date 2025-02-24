@@ -144,12 +144,6 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "ww_operatorbottlinghourly",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
 					"referenceName": "ww_operatorbottlingdowntime",
 					"type": "PipelineReference"
 				}
