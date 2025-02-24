@@ -43,6 +43,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SQLToDataverseProd'"
 		},
+		"WWSCALE002_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSCALE002'"
+		},
+		"WWSCALE022_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSCALE022'"
+		},
 		"WWSQL003_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWSQL003'",
@@ -150,6 +158,22 @@
 		"SQLToDataverseProd_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "wwdigital@wineworks.co.nz"
+		},
+		"WWSCALE002_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\Wwscale002\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
+		},
+		"WWSCALE002_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "wwdigital02@wineworks.co.nz"
+		},
+		"WWSCALE022_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\Wwscale022\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
+		},
+		"WWSCALE022_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "wwdigital02@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"type": "string",
@@ -640,6 +664,12 @@
 					"FileServer1_password": {
 						"value": "[parameters('FileServer1_password')]"
 					},
+					"WWSCALE002_password": {
+						"value": "[parameters('WWSCALE002_password')]"
+					},
+					"WWSCALE022_password": {
+						"value": "[parameters('WWSCALE022_password')]"
+					},
 					"WWSQL003_connectionString": {
 						"value": "[parameters('WWSQL003_connectionString')]"
 					},
@@ -678,6 +708,18 @@
 					},
 					"FileServer1_properties_typeProperties_userId": {
 						"value": "[parameters('FileServer1_properties_typeProperties_userId')]"
+					},
+					"WWSCALE002_properties_typeProperties_host": {
+						"value": "[parameters('WWSCALE002_properties_typeProperties_host')]"
+					},
+					"WWSCALE002_properties_typeProperties_userId": {
+						"value": "[parameters('WWSCALE002_properties_typeProperties_userId')]"
+					},
+					"WWSCALE022_properties_typeProperties_host": {
+						"value": "[parameters('WWSCALE022_properties_typeProperties_host')]"
+					},
+					"WWSCALE022_properties_typeProperties_userId": {
+						"value": "[parameters('WWSCALE022_properties_typeProperties_userId')]"
 					},
 					"WWSQL003_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
@@ -847,6 +889,26 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_11')]"
+			]
+		},
+		{
+			"name": "DataVerseToSQL_ArmTemplate_13",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_13.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('prod-databricks-downtimes-30mins_properties_pipeline_parameters_triggerStart')]"
@@ -958,26 +1020,6 @@
 					},
 					"prod-databricks-ww_run-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
 						"value": "[parameters('prod-databricks-ww_run-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'DataVerseToSQL_ArmTemplate_11')]"
-			]
-		},
-		{
-			"name": "DataVerseToSQL_ArmTemplate_13",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2024-03-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_13.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					},
 					"test-databricks-downtimes-1day_properties_pipeline_parameters_triggerStart": {
 						"value": "[parameters('test-databricks-downtimes-1day_properties_pipeline_parameters_triggerStart')]"

@@ -13,6 +13,978 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_stockcheckin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "bit"
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottlesbroken",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_damagedcaps",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_damageslabels",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_lpn",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_productionline",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_returnedtostock",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stockcheckinid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_washerdryerused",
+						"type": "bit"
+					},
+					{
+						"name": "ww_washerdryerusedname",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_stockcheckin"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_stockcheckin1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "bit"
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottlesbroken",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_damagedcaps",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_damageslabels",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_lpn",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_productionline",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_returnedtostock",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stockcheckinid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_washerdryerused",
+						"type": "bit"
+					},
+					{
+						"name": "ww_washerdryerusedname",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_stockcheckin"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_stockcheckinentry')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_itemcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_lpn",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_quantity",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_quantitydecimal",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_run",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stockcheckinentryid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_timeloaded",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_stockcheckinentry"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_supervisorsignoff')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_alldgremovedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_anycapbottlechangessig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappercompressioncorrectsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappercorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappercorrectdispenserclearancesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappercutcapssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappergasflowinbottlemouthsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappergasflowmetersig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappermissingcapdetectorsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertankgassig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertopplateneckguidesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertuckchallengetestsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertuckthreadredrawsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcorrectcorkingbellssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkheadspacepressuresig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corktimingsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_depalbottleboardfilledoutsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_depalsummarysheetcorrectsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_fillercorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_fillercorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_fillerlowfilldetectorsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_filtrationcorrecttospecsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_filtrationcorrectvalvesopenclosedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxallcapstorqueddown",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectcompression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectdispenserplateclearance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectscrewcappercompression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectspringsincapperheads",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxtorquesettings",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_missinglabelsensorsonsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_notes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operator",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_petcorrectspringsincappersig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_petlaserpowerturneddownsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_preflightchecksheetcompletedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_pumpflow",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinsercorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinsercorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinserfullcoveragesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinserlowpressurecutoutsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_supervisorsignoffid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_visibleglassonthelinesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_volumedifference",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_supervisorsignoff"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_supervisorsignoffbom')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "crc5d_checkbottlelasercodelegible",
+						"type": "nvarchar"
+					},
+					{
+						"name": "crc5d_correctppe",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_alldgremoved",
+						"type": "bit"
+					},
+					{
+						"name": "ww_alldgremovedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_anycapbottlechanges",
+						"type": "bit"
+					},
+					{
+						"name": "ww_anycapbottlechangessig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_cappercompressioncorrectsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappercorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappercorrectdispenserclearancesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappercutcapssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappergasflowinbottlemouthsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappergasflowmetersig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappermissingcapdetectorsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertankgassig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertopplateneckguidesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertuckchallengetestsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cappertuckthreadredrawsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcorrectcorkingbellssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkcorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corkheadspacepressuresig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_corktimingsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_depalbottleboardfilledoutsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_depalsummarysheetcorrectsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_fillercorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_fillercorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_fillerlowfilldetectorsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_filtrationcorrecttospecsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_filtrationcorrectvalvesopenclosedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labelpreflightchecksheetcompletedsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxallcapstorqueddown",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectcompression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectdispenserplateclearance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectscrewcappercompression",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxcorrectspringsincapperheads",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_luxtorquesettings",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_missinglabelsensorsonsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_name",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_notes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_petcorrectspringsincappersig",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_petlaserpowerturneddownsig",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_preflightchecksheetcompletedsig",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_pumpflow",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinsercorrectchangepartssig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinsercorrectheightsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinserfullcoveragesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rinserlowpressurecutoutsig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_supervisorsignoffbomid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_visibleglassonthelinesig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_volumedifference",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_supervisorsignoffbom"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_supervisorsignoffbomhourlycheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Allknivesbladesandscissorslabelled",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_AllrinserjetsworkingCCP1100",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Anybrokenglassinthemachines",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_BillofMaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_Bottlelasercode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_BottlesincartonGluestripLabelsandPrintco",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_Correctlabelheightandgaps",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Depalbottlerecordfilledoutcorrectly",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Fillerrecordfilledoutcorrectly",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Labelinkjetcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_Labellerrecordfilledoutcorrectly",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_OperatorCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_PallettypeStackingpatternSlipsheetandwrap",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_PPEwornnoeatingdrinkingchewinggum",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_Productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_ScrewcapperclearanceCCP2inspec2530mm",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_SupervisorSignoffBOMHourlyCheckId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_SupervisorSignoffHourlyCheckNae",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_Timeofcheck",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_supervisorsignoffbomhourlycheck"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_tanker')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "bit"
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_site",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_tankerid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_volume",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_tanker"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_winery')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -352,822 +1324,6 @@
 						"          hour",
 						"     )) ~> wwbottlebatchsummarysink"
 					]
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_operatorbottlinghourly21')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_authorisedsig",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_autolevelmanometer",
-						"type": "bit"
-					},
-					{
-						"name": "ww_bardifferential",
-						"type": "bit"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_bottlecodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlecoloursig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlelasersticker",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_bottlelaserstickersig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlenumberasperlasercoder",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_bottlerubmark",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_bottleshapesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_bottlevacuum",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bottlevacuumaccordingtorecipe",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bottlingfrom",
-						"type": "bit"
-					},
-					{
-						"name": "ww_bottlingto",
-						"type": "bit"
-					},
-					{
-						"name": "ww_bowlmn2pressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bowlvacuum",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bucketsflowedintime",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_bucketsflowedtime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_capdetectoronsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_checkdocketandphysicallycheckwineisrun",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_chippednecks",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_co2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_collectexportsamples",
-						"type": "bit"
-					},
-					{
-						"name": "ww_corkervacuum",
-						"type": "bit"
-					},
-					{
-						"name": "ww_corkervacuum08to10bar",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_counterpressureinlet",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_counterpressureoutlet",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_deoxn2pressre",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_deoxvacuumpressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_do2frombottle",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_do2fromvessel",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_exportsamplespicked",
-						"type": "bit"
-					},
-					{
-						"name": "ww_fillerbowlpressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_fillerbowltemperature",
-						"type": "bit"
-					},
-					{
-						"name": "ww_fillerhead",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_fillerspeed",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_fillertemperature40c",
-						"type": "bit"
-					},
-					{
-						"name": "ww_fillertipsealsvisualchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_fillheight",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_fillheightdetectoronsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_filterdifferential",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_filtrationpressuregauge",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_finalfilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_flowmetercheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_foreignbodyvisualcheck",
-						"type": "bit"
-					},
-					{
-						"name": "ww_foreignmattersig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_gasblowonbottle",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gascoveronbowl",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gasfeedtocorker",
-						"type": "bit"
-					},
-					{
-						"name": "ww_gasfeedtocorker1030kpa",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gasflowratetobowlline2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gasflowtocap",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_gaspressuretobottlingtank",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_glassfragments",
-						"type": "bit"
-					},
-					{
-						"name": "ww_glassfragmentscheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_glassfragmentsexplanation",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_inbottle",
-						"type": "bit"
-					},
-					{
-						"name": "ww_intank",
-						"type": "bit"
-					},
-					{
-						"name": "ww_lasercodeasperspec",
-						"type": "bit"
-					},
-					{
-						"name": "ww_lasercodeonbottle",
-						"type": "bit"
-					},
-					{
-						"name": "ww_lenticularfilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_litmuspapertestinproduct",
-						"type": "bit"
-					},
-					{
-						"name": "ww_n2buffervesselpressure",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_neckcheck",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_notes",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorbottlinghourlyid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_palletnumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pittingsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_prefilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_prepcheck2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_prepcheck3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_prepchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pumpnumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_pumpnumberbendpanel",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_pumpspeed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinseheadinspection",
-						"type": "bit"
-					},
-					{
-						"name": "ww_rinseheadmedium",
-						"type": "bit"
-					},
-					{
-						"name": "ww_rinsejetcoveragesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinserbottlegripperclearancesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinsergassupplyco2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsergaswatersupply",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsergaswatersupplyline1",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsergaswatersupplyline2",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsern2pressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinserpressurefluctuations",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsertipsvisualchecksig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rinserwatersupply",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsewater045mprefilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rinsewater12mprefilter",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_rockstopper",
-						"type": "bit"
-					},
-					{
-						"name": "ww_rockstopperfilter",
-						"type": "bit"
-					},
-					{
-						"name": "ww_samplessig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_screencheckfordoserate",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_selflevelling",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_sparkling",
-						"type": "bit"
-					},
-					{
-						"name": "ww_stockcodesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tankchangeflowedintimesig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tankjointscheckedfornleakssig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_tankpressure",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_temperature",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_timeofauthorisedauditcheck",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_timeofcheckmicrosampletaken",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_tkinjectionmanometer",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_velcorinalarmssig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_velcorinchangebottlelightsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_velcorindosingrate",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_velcorntime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_venttubecount",
-						"type": "bit"
-					},
-					{
-						"name": "ww_visualfloatiescheckedsig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_visualleakssig",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_warmingtunnelrunningtemperature",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_winetemperatureinternalprobe40c",
-						"type": "bit"
-					},
-					{
-						"name": "ww_winetempinternalprobe",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_xraychallengetest",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_operatorbottlinghourly"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_stockcheckin1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "bit"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_bottlesbroken",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_comments",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_damagedcaps",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_damageslabels",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_lpn",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_productionline",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_returnedtostock",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_stockcheckinid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_washerdryerused",
-						"type": "bit"
-					},
-					{
-						"name": "ww_washerdryerusedname",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_stockcheckin"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_qcendofrun1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "bit"
-					},
-					{
-						"name": "ww_bottlecounter",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_endofrunsamples",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_endofsamples",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_flowmeter",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_lasercounter",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_magnumwhitetape",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_qcendofrunid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_qcendofrunname",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rejectcounter",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_run",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_runendtime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_qcendofrun"
 				}
 			},
 			"dependsOn": []
@@ -2075,6 +2231,74 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-08-10T01:27:10Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Delete Scale Print Logs')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Delete On WWSCALE002",
+						"type": "Delete",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "WWSCALE002_Print_Logs",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "FileServerReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "Delete On WWSCALE022",
+						"type": "Delete",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "WWSCALE022",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "FileServerReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
@@ -3150,2507 +3374,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-02-07T23:37:49Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_billofmaterials')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "BOM",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Last modifiedon",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "<fetch>\n  <entity name=\"ww_billofmaterials\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
-									"type": "Expression"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": true,
-									"keys": [
-										"ww_billofmaterialsid"
-									]
-								},
-								"sqlWriterUseTableLock": true
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "crc5d_bottlecolour",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_bottlecolour",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_bottlestockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_bottlestockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_corkcolour",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_corkcolour",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_corklength",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_corklength",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_corkprinting",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_corkprinting",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_corkstockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_corkstockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_pallettype",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_pallettype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_screwcapcolour",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_screwcapcolour",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_screwcapprinting",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_screwcapprinting",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "crc5d_screwcapstockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "crc5d_screwcapstockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_backlabel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_backlabel",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_backlabeladditionaltext",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_backlabeladditionaltext",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_backlabelheight",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_backlabelheight",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_backlabelinkjetcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_backlabelinkjetcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_backlabelinkjetplacement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_backlabelinkjetplacement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_billofmaterialsid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_billofmaterialsid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bomid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bomid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bominstructionsforthisrun",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bominstructionsforthisrun",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bomproductionnotes",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bomproductionnotes",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bomsequence",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_bomsequence",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bomspecificinstructions",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bomspecificinstructions",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bomstockcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_bomstockcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bomupdatedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_bomupdatedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bomworkorderid",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_bomworkorderid",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bookingvariety",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bookingvariety",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bookingvintage",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bookingvintage",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottle",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottle",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottledescription",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottledescription",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlelasercode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlelasercode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlemouldcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlemouldcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottles",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_bottles",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlesize",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlesize",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlesperpallet",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_bottlesperpallet",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottletype",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottletype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_carton",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_carton",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonbottletype",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cartonbottletype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartoninkjetplacement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cartoninkjetplacement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartoninkjettext",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cartoninkjettext",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonlabel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cartonlabel",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonowner",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cartonowner",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonsperpallet",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_cartonsperpallet",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonsupplier",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cartonsupplier",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cartonvariety",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cartonvariety",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_casestoprocess",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_casestoprocess",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_casevariability",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_casevariability",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_closure",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_closure",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_completed",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_completed",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_corkstyle",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_corkstyle",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_cover",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_cover",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_covercolour",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_covercolour",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_covercolour1",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_covercolour1",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_covercolour2",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_covercolour2",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_coverprinting",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_coverprinting",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_coverprinttype",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_coverprinttype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_coverstockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_coverstockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_covertype",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_covertype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_depalbottlesperpallet",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_depalbottlesperpallet",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_divider",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_divider",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_extradrygood1",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_extradrygood1",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_extradrygood2",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_extradrygood2",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_filtrationtype",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_filtrationtype",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_frontlabel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_frontlabel",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_frontlabelheight",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_frontlabelheight",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_genericclientinstructions",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_genericclientinstructions",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_hardboardtopcover",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_hardboardtopcover",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_hasformdata",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_hasformdata",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_lastcopied",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_lastcopied",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_otherlabel",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_otherlabel",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_otherlabel2",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_otherlabel2",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_otherlabel2placement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_otherlabel2placement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_otherlabelplacement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_otherlabelplacement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_pallet",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_pallet",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_pallets",
-											"type": "Decimal"
-										},
-										"sink": {
-											"name": "ww_pallets",
-											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_palletstackingpattern",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_palletstackingpattern",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_slipsheet",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_slipsheet",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stockcodedescription",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stockcodedescription",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_useallstock",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_useallstock",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_velcorinrate",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_velcorinrate",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_velcorintreatment",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_velcorintreatment",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_workorderinstructions",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_workorderinstructions",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "BOM",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_billofmaterials",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "BOM",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_ww_billofmaterials]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Data Copy fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "BOM",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "wwsql_admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "wwsql_admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Last modifiedon",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_billofmaterials];",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "wwsql003_ww_billofmaterials",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": true
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_bottlebatchrejects')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Bottle Batch Rejects",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Last modifiedon",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "<fetch>\n  <entity name=\"ww_bottlebatchrejects\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
-									"type": "Expression"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": true,
-									"keys": [
-										"ww_bottlebatchrejectsid"
-									]
-								},
-								"sqlWriterUseTableLock": true
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatchrejectsid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_bottlebatchrejectsid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_broken",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_broken",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_comments",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_comments",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_filler",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_filler",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_lab",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_lab",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_rejectcomments",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_rejectcomments",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "BottleBatchRejects",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_bottlebatchrejects1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Bottle Batch Rejects",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[usp_ww_bottlebatchrejects]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Email on Failure BOM",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Bottle Batch Rejects",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "wwsql_admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "wwsql_admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Last modifiedon",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_bottlebatchrejects];",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "wwsql003_ww_bottlebatchrejects1",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": true
-						}
-					}
-				],
-				"concurrency": 2,
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_bottlebatchsummary')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Bottle Batch Summary",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Last modifiedon",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "<fetch>\n  <entity name=\"ww_bottlebatchsummary\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
-									"type": "Expression"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": true,
-									"keys": [
-										"ww_bottlebatchsummaryid"
-									]
-								},
-								"sqlWriterUseTableLock": true
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_amount",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_amount",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatch",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlebatch",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatchsummaryid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_bottlebatchsummaryid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatchsummaryname",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlebatchsummaryname",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_comments",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_comments",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_importsequencenumber",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_importsequencenumber",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_eanbarcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_eanbarcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_hunumber",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_hunumber",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_moldcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_moldcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_moldid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_moldid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_palletid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_palletid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productiondate",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_productiondate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_supplierproductcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_supplierproductcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_timeloaded",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_timeloaded",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "BottleBatchSummary",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_bottlebatchsummary1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Email on Failure BOM",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Bottle Batch Summary",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Merge Statement",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Bottle Batch Summary",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_ww_bottlebatchsummary]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "SP Fail Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Merge Statement",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "WWSQL_Admins@wineworks.co.nz"
-							}
-						}
-					},
-					{
-						"name": "Last modifiedon",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_bottlebatchsummary];",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "wwsql003_ww_bottlebatchsummary1",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": true
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_bottlebatchsummary_testing_2')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ww_bottlebatchsummary_testing_2",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Last modifiedon",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "<fetch>\n  <entity name=\"ww_bottlebatchsummary\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
-									"type": "Expression"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": true,
-									"keys": [
-										"ww_bottlebatchsummaryid"
-									]
-								},
-								"sqlWriterUseTableLock": true
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_amount",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_amount",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatch",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlebatch",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatchsummaryid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_bottlebatchsummaryid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatchsummaryname",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlebatchsummaryname",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_comments",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_comments",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_importsequencenumber",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_importsequencenumber",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_eanbarcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_eanbarcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_hunumber",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_hunumber",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_moldcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_moldcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_moldid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_moldid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_palletid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_palletid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productiondate",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_productiondate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_supplierproductcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_supplierproductcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_timeloaded",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_timeloaded",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "BottleBatchSummary",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_bottlebatchsummary_testing",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Last modifiedon",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(modifiedon) AS last_modifiedon\nFROM [Dataverse.Staging].[dbo].[ww_bottlebatchsummary_testing];\n",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "wwsql003_ww_bottlebatchsummary_testing",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Stored procedure1",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "ww_bottlebatchsummary_testing_2",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_ww_bottlebatchsummary_testing]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_bottlebatchsummary_testing_3')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ww_bottlebatchsummary_testing_2",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Last modifiedon",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "<fetch>\n  <entity name=\"ww_bottlebatchsummary\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
-									"type": "Expression"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": true,
-									"keys": [
-										"ww_bottlebatchsummaryid"
-									]
-								},
-								"sqlWriterUseTableLock": true
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "createdon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "createdon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "modifiedon",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "statuscode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "statuscode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_amount",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_amount",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_billofmaterials",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatch",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlebatch",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatchsummaryid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "ww_bottlebatchsummaryid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_bottlebatchsummaryname",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_bottlebatchsummaryname",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_comments",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_comments",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_importsequencenumber",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_importsequencenumber",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "ww_deleteline",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_eanbarcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_eanbarcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_hunumber",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_hunumber",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_moldcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_moldcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_moldid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_moldid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_operatorcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_palletid",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_palletid",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productiondate",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_productiondate",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_productionline",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_reasonfordeletion",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_stockcode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ww_stockcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_supplierproductcode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "ww_supplierproductcode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_timeloaded",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "ww_timeloaded",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "BottleBatchSummary",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_ww_bottlebatchsummary_testing",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Last modifiedon",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_bottlebatchsummary_testing];",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "wwsql003_ww_bottlebatchsummary_testing",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Stored procedure1",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "ww_bottlebatchsummary_testing_2",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[usp_ww_bottlebatchsummary_testing_2]"
-						},
-						"linkedServiceName": {
-							"referenceName": "WWSQL003",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		}

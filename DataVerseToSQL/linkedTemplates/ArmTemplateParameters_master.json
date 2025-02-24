@@ -32,6 +32,12 @@
 		"SQLToDataverseProd_password": {
 			"value": ""
 		},
+		"WWSCALE002_password": {
+			"value": ""
+		},
+		"WWSCALE022_password": {
+			"value": ""
+		},
 		"WWSQL003_connectionString": {
 			"value": "integrated security=True;Data Source=WWSQL003;Initial Catalog=Dataverse.Staging;trusted_connection=True"
 		},
@@ -109,6 +115,18 @@
 		},
 		"SQLToDataverseProd_properties_typeProperties_username": {
 			"value": "wwdigital@wineworks.co.nz"
+		},
+		"WWSCALE002_properties_typeProperties_host": {
+			"value": "\\\\Wwscale002\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
+		},
+		"WWSCALE002_properties_typeProperties_userId": {
+			"value": "wwdigital02@wineworks.co.nz"
+		},
+		"WWSCALE022_properties_typeProperties_host": {
+			"value": "\\\\Wwscale022\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
+		},
+		"WWSCALE022_properties_typeProperties_userId": {
+			"value": "wwdigital02@wineworks.co.nz"
 		},
 		"WWSQL003_properties_typeProperties_userName": {
 			"value": "wwdigital02@wineworks.co.nz"
