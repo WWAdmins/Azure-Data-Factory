@@ -1860,7 +1860,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "ww_operatorbottlinghourly1",
+							"referenceName": "ww_operatorbottlinghourly",
 							"type": "PipelineReference"
 						},
 						"parameters": {}

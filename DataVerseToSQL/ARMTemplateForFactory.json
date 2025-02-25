@@ -50270,7 +50270,7 @@
 					},
 					{
 						"pipelineReference": {
-							"referenceName": "ww_operatorbottlinghourly1",
+							"referenceName": "ww_operatorbottlinghourly",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -50321,7 +50321,7 @@
 				"[concat(variables('factoryId'), '/pipelines/ww_hourlycartonusage')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_palletstackinghourly')]",
 				"[concat(variables('factoryId'), '/pipelines/ww_winery')]",
-				"[concat(variables('factoryId'), '/pipelines/ww_operatorbottlinghourly1')]"
+				"[concat(variables('factoryId'), '/pipelines/ww_operatorbottlinghourly')]"
 			]
 		},
 		{
