@@ -281,7 +281,7 @@
 					"domain": "https://adb-6592053876875007.7.azuredatabricks.net",
 					"authentication": "MSI",
 					"workspaceResourceId": "/subscriptions/f4d4a0f0-bfc4-4cf0-84ec-c060b94530c6/resourceGroups/rg-adb-iot-prod/providers/Microsoft.Databricks/workspaces/adb-iot-prod",
-					"newClusterNodeType": "Standard_F4",
+					"newClusterNodeType": "Standard_D4s_v3",
 					"newClusterNumOfWorker": "1",
 					"newClusterSparkConf": {
 						"spark.databricks.cluster.profile": "singleNode",
