@@ -7,7 +7,7 @@
 		"typeProperties": {
 			"host": "\\\\WWMULTI001\\Indevin",
 			"userId": "wwdigital@wineworks.co.nz",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0YzgzMTkwZS0yZjY3LTQ5MWItYjU1Zi1iZDIxMWMwOGIzM2UiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjOThmNjg5MS0yOWU5LTQxY2UtYTBjMy1mODZjMWRiMTUwOGEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1",
