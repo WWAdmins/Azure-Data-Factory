@@ -22317,7 +22317,7 @@
 							"source": {
 								"type": "CommonDataServiceForAppsSource",
 								"query": {
-									"value": "<fetch>\n  <entity name=\"ww_prebottlinganalysis\">\n   \n    <attribute name=\"crc5d_refractvalue\" />\n    <attribute name=\"createdon\" />\n    <attribute name=\"modifiedon\" />\n    <attribute name=\"statuscode\" />\n    <attribute name=\"ww_alc\" />\n    <attribute name=\"ww_alcbydistil\" />\n    <attribute name=\"ww_alcnum\" />\n    <attribute name=\"ww_alcnumrackingvalve\" />\n    <attribute name=\"ww_alcohol\" />\n    <attribute name=\"ww_alcoholbydistillation\" />\n    <attribute name=\"ww_basedo\" />\n    <attribute name=\"ww_co2\" />\n    <attribute name=\"ww_customertankname\" />\n    <attribute name=\"ww_date\" />\n    <attribute name=\"ww_deleteline\" />\n    <attribute name=\"ww_density\" />\n    <attribute name=\"ww_etxt\" />\n    <attribute name=\"ww_fi\" />\n    <attribute name=\"ww_fiissueemailsent\" />\n    <attribute name=\"ww_greentag\" />\n    <attribute name=\"ww_initials\" />\n    <attribute name=\"ww_initialscheck\" />\n    <attribute name=\"ww_location\" />\n    <attribute name=\"ww_lockcode\" />\n    <attribute name=\"ww_lockid\" />\n    <attribute name=\"ww_notes\" />\n    <attribute name=\"ww_operator\" />\n    <attribute name=\"ww_operatorcode\" />\n    <attribute name=\"ww_ph\" />\n    <attribute name=\"ww_prebottlinganalysisid\" />\n    <attribute name=\"ww_prebottlinganalysissummaryname\" />\n    <attribute name=\"ww_productionline\" />\n    <attribute name=\"ww_reasonfordeletion\" />\n    <attribute name=\"ww_refract\" />\n    <attribute name=\"ww_run\" />\n    <attribute name=\"ww_sealid\" />\n    <attribute name=\"ww_sealnumber\" />\n    <attribute name=\"ww_so2f\" />\n    <attribute name=\"ww_tankerlookup\" />\n    <attribute name=\"ww_tankvolume\" />\n    <attribute name=\"ww_temp\" />\n    <attribute name=\"ww_temprackingvalve\" />\n    <attribute name=\"ww_ts02\" />\n    <attribute name=\"ww_ts02num\" />\n    <attribute name=\"ww_tso2\" />\n    <attribute name=\"ww_volumeunder500\" />\n  \n    <filter type=\"and\">\n      <condition attribute=\"ww_tankerlookup\" operator=\"not-null\" />\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
+									"value": "<fetch>\n  <entity name=\"ww_prebottlinganalysis\">\n   \n    <attribute name=\"crc5d_refractvalue\" />\n    <attribute name=\"createdon\" />\n    <attribute name=\"modifiedon\" />\n    <attribute name=\"statuscode\" />\n    <attribute name=\"ww_alc\" />\n    <attribute name=\"ww_alcbydistil\" />\n    <attribute name=\"ww_alcnum\" />\n    <attribute name=\"ww_alcnumrackingvalve\" />\n    <attribute name=\"ww_alcohol\" />\n    <attribute name=\"ww_alcoholbydistillation\" />\n    <attribute name=\"ww_basedo\" />\n    <attribute name=\"ww_co2\" />\n    <attribute name=\"ww_customertankname\" />\n    <attribute name=\"ww_date\" />\n    <attribute name=\"ww_deleteline\" />\n    <attribute name=\"ww_density\" />\n    <attribute name=\"ww_etxt\" />\n    <attribute name=\"ww_fi\" />\n    <attribute name=\"ww_fiissueemailsent\" />\n    <attribute name=\"ww_greentag\" />\n    <attribute name=\"ww_initials\" />\n    <attribute name=\"ww_initialscheck\" />\n    <attribute name=\"ww_location\" />\n    <attribute name=\"ww_lockcode\" />\n    <attribute name=\"ww_lockid\" />\n    <attribute name=\"ww_notes\" />\n    <attribute name=\"ww_operator\" />\n    <attribute name=\"ww_operatorcode\" />\n    <attribute name=\"ww_ph\" />\n    <attribute name=\"ww_prebottlinganalysisid\" />\n    <attribute name=\"ww_prebottlinganalysissummaryname\" />\n    <attribute name=\"ww_productionline\" />\n    <attribute name=\"ww_reasonfordeletion\" />\n    <attribute name=\"ww_refract\" />\n    <attribute name=\"ww_run\" />\n    <attribute name=\"ww_sealid\" />\n    <attribute name=\"ww_sealnumber\" />\n    <attribute name=\"ww_so2f\" />\n    <attribute name=\"ww_tankerlookup\" />\n    <attribute name=\"ww_tankvolume\" />\n    <attribute name=\"ww_temp\" />\n    <attribute name=\"ww_temprackingvalve\" />\n    <attribute name=\"ww_ts02\" />\n    <attribute name=\"ww_ts02num\" />\n    <attribute name=\"ww_tso2\" />\n    <attribute name=\"ww_volumeunder500\" />\n    <attribute name=\"ww_winery\" />\n  \n    <filter type=\"and\">\n      <condition attribute=\"ww_tankerlookup\" operator=\"not-null\" />\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
 									"type": "Expression"
 								}
 							},
@@ -22619,7 +22619,7 @@
 									{
 										"source": {
 											"name": "ww_operatorcode",
-											"type": "String"
+											"type": "Int32"
 										},
 										"sink": {
 											"name": "ww_operatorcode",
@@ -22829,11 +22829,11 @@
 									{
 										"source": {
 											"name": "ww_winery",
-											"type": "String"
+											"type": "Guid"
 										},
 										"sink": {
 											"name": "ww_winery",
-											"type": "String"
+											"type": "Guid"
 										}
 									}
 								]
@@ -22960,7 +22960,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_prebottlinganalysis];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_prebottlinganalysis];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
