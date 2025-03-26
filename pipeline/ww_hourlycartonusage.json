@@ -24,7 +24,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "CommonDataServiceForAppsSource",
-						"query": "<fetch>\r\n  <entity name=\"ww_hourlycartonusage\">\r\n    <all-attributes />\r\n    <filter type=\"and\">\r\n     \r\n      <condition attribute=\"ww_billofmaterials\" operator=\"not-null\" />\r\n     \r\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\r\n    </filter>\r\n  </entity>\r\n</fetch>\r\n"
+						"query": {
+							"value": "<fetch>\r\n  <entity name=\"ww_hourlycartonusage\">\r\n    <all-attributes />\r\n    <filter type=\"and\">\r\n     \r\n      <condition attribute=\"ww_billofmaterials\" operator=\"not-null\" />\r\n     \r\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\r\n    </filter>\r\n  </entity>\r\n</fetch>\r\n",
+							"type": "Expression"
+						}
 					},
 					"sink": {
 						"type": "SqlServerSink",
@@ -451,7 +454,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_hourlycartonusage];",
+						"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_hourlycartonusage];\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
