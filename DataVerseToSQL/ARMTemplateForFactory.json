@@ -28233,7 +28233,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_run];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_run];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -28809,7 +28809,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_runreportbottlelabelpack];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_runreportbottlelabelpack];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -29085,7 +29085,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_site];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_site];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -29471,7 +29471,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_stockcheckin];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_stockcheckin];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -31009,7 +31009,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_supervisorsignoff];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_supervisorsignoff];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -31915,7 +31915,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_supervisorsignoffbom];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_supervisorsignoffbom];\n",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -32361,7 +32361,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_supervisorsignoffbomhourlycheck];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_supervisorsignoffbomhourlycheck];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -32637,7 +32637,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_tanker];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_tanker];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
@@ -32883,7 +32883,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)) AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_winery];",
+								"sqlReaderQuery": "SELECT coalesce(MAX(CAST(SWITCHOFFSET(modifiedon, -DATEPART(TZOFFSET, modifiedon AT TIME ZONE 'New Zealand Standard Time')) AS DATETIME)),'2018-01-01') AS last_modifiedon\nFROM [Dataverse].[dbo].[ww_winery];",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
