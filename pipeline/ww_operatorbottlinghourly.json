@@ -76,6 +76,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_anybottlesbrokeninthelasthour",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_anybottlesbrokeninthelasthour",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_authorisedsig",
 									"type": "Int32"
 								},
