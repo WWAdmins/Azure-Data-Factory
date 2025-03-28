@@ -11550,11 +11550,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "CommonDataServiceForAppsSource",
-								"query": {
-									"value": "<fetch>\n  <entity name=\"ww_operatorbottlingbreakage\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
-									"type": "Expression"
-								}
+								"type": "CommonDataServiceForAppsSource"
 							},
 							"sink": {
 								"type": "SqlServerSink",
@@ -11643,6 +11639,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_breakagehead",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_breakagehead",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_breakagelocation",
 											"type": "Guid"
 										},
@@ -11723,21 +11729,31 @@
 									},
 									{
 										"source": {
-											"name": "ww_locationofbreak",
+											"name": "ww_name",
 											"type": "String"
 										},
 										"sink": {
-											"name": "ww_locationofbreak",
+											"name": "ww_name",
 											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"name": "ww_name",
+											"name": "ww_location",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_location",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_locationofbreak",
 											"type": "String"
 										},
 										"sink": {
-											"name": "ww_name",
+											"name": "ww_locationofbreak",
 											"type": "String"
 										}
 									},
