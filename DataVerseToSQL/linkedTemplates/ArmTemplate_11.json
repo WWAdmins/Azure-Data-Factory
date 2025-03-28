@@ -7883,6 +7883,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_alcoholsprayingvalvesused",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_alcoholsprayingvalvesused",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_averageweight",
 											"type": "Decimal"
 										},
@@ -7963,11 +7973,31 @@
 									},
 									{
 										"source": {
+											"name": "ww_capimpressionacceptable",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_capimpressionacceptable",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_capprintingsig",
 											"type": "String"
 										},
 										"sink": {
 											"name": "ww_capprintingsig",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_chippedneck",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_chippedneck",
 											"type": "String"
 										}
 									},
@@ -8793,6 +8823,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_screwcapmarkings",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_screwcapmarkings",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_screwcapperchutecheckedsig",
 											"type": "String"
 										},
@@ -9093,6 +9133,26 @@
 									},
 									{
 										"source": {
+											"name": "ww_torquebreak11",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak11",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torquebreak12",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torquebreak12",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_torquecap1",
 											"type": "String"
 										},
@@ -9289,6 +9349,36 @@
 										"sink": {
 											"name": "ww_torqueslip9",
 											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip11",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip11",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_torqueslip12",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_torqueslip12",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_visualfloaties",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ww_visualfloaties",
+											"type": "String"
 										}
 									},
 									{
@@ -11550,7 +11640,11 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "CommonDataServiceForAppsSource"
+								"type": "CommonDataServiceForAppsSource",
+								"query": {
+									"value": "<fetch>\n  <entity name=\"ww_operatorbottlingbreakage\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
+									"type": "Expression"
+								}
 							},
 							"sink": {
 								"type": "SqlServerSink",
