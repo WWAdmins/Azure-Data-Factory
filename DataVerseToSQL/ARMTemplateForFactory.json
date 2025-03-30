@@ -28994,6 +28994,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_foreignmatter",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_foreignmatter",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_labelinkjetcode",
 											"type": "String"
 										},
@@ -29054,7 +29064,7 @@
 									},
 									{
 										"source": {
-											"name": "ww_Reasonfordeletion",
+											"name": "ww_reasonfordeletion",
 											"type": "String"
 										},
 										"sink": {
