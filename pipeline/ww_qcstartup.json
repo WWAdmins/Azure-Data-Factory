@@ -9,7 +9,7 @@
 					{
 						"activity": "Last modifiedon",
 						"dependencyConditions": [
-							"Succeeded"
+							"Skipped"
 						]
 					}
 				],
@@ -23,11 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "CommonDataServiceForAppsSource",
-						"query": {
-							"value": "<fetch>\n  <entity name=\"ww_qcstartup\">\n    <all-attributes />\n    <filter>\n      <condition attribute=\"modifiedon\" operator=\"gt\" value=\"@{activity('Last modifiedon').output.firstRow.last_modifiedon}\" />\n    </filter>\n  </entity>\n</fetch>\n",
-							"type": "Expression"
-						}
+						"type": "CommonDataServiceForAppsSource"
 					},
 					"sink": {
 						"type": "SqlServerSink",
@@ -592,6 +588,8 @@
 			{
 				"name": "Last modifiedon",
 				"type": "Lookup",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",

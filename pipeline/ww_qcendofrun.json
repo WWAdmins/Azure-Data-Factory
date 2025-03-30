@@ -276,6 +276,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_qcstartup",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "ww_qcstartup",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_rejectcounter",
 									"type": "Int32"
 								},
