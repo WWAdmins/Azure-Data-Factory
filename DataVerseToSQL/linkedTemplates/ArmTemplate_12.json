@@ -4178,6 +4178,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_startdate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_startdate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_tanker",
 											"type": "String"
 										},
