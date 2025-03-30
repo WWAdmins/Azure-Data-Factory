@@ -12450,6 +12450,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_labeldetectionon",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_labeldetectionon",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_labelfrontheight",
 											"type": "String"
 										},
