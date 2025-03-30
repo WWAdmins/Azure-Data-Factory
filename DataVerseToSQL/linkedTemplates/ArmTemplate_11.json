@@ -15103,6 +15103,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_includevolumeintotal",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_includevolumeintotal",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_initials",
 											"type": "String"
 										},
