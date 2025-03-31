@@ -19465,6 +19465,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_printedon",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "ww_printedon",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_psimportsequencenumber",
 											"type": "Int32"
 										},
