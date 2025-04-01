@@ -229,7 +229,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "ww_prebottlinganalysisTEST"
+			"table": "ww_prebottlinganalysis"
 		}
 	}
 }
