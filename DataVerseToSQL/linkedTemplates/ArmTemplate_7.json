@@ -13,6 +13,25 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_PrebottlingAnalysisSignOff')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Pre-bottling Signoff"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WWSQL003_PrebottlingAnalysisSulphurAdjustments')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1846,59 +1865,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Run_IOT"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_Event_IOT')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "DataNow",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "eventId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CodeName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CodeDescription",
-						"type": "nvarchar"
-					},
-					{
-						"name": "start",
-						"type": "datetimeoffset",
-						"scale": 7
-					},
-					{
-						"name": "end",
-						"type": "datetimeoffset",
-						"scale": 7
-					},
-					{
-						"name": "ratedSpeed",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "runId",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Event_IOT"
 				}
 			},
 			"dependsOn": []
