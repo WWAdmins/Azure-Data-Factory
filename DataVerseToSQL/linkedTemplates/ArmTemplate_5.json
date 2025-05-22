@@ -7,6 +7,15 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"WWSQL003_DV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'WWSQL003_DV'",
+			"defaultValue": "integrated security=True;Data Source=wwsql003;Initial Catalog=DataVerse"
+		},
+		"WWSQL003_DV_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSQL003_DV'"
+		},
 		"WWWEB002_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'WWWEB002'",
@@ -15,6 +24,10 @@
 		"WWWEB002_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
+		},
+		"WWSQL003_DV_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wineworksgroup\\WWG_Service"
 		},
 		"WWWEB002_properties_typeProperties_userName": {
 			"type": "string",
@@ -25,6 +38,28 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_DV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('WWSQL003_DV_connectionString')]",
+					"userName": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('WWSQL003_DV_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -44,25 +79,6 @@
 					"referenceName": "ProductionLink",
 					"type": "IntegrationRuntimeReference"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Databricks_LinkedService_Integration')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Databricks_LinkedService_Integration",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"catalog": "iotprod"
-					}
-				},
-				"annotations": [],
-				"type": "AzureDatabricksDeltaLakeDataset",
-				"typeProperties": {},
-				"schema": []
 			},
 			"dependsOn": []
 		},

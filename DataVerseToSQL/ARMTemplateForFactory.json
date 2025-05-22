@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Dataverse'"
 		},
+		"Databricks_LinkedService_Integration_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_LinkedService_Integration'"
+		},
 		"DataverseTest_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'DataverseTest'"
@@ -98,10 +102,6 @@
 		"wineworksinternal_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'wineworksinternal'"
-		},
-		"Databricks_LinkedService_Integration_accessToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'Databricks_LinkedService_Integration'"
 		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
@@ -1652,6 +1652,211 @@
 				"[concat(variables('factoryId'), '/datasets/EskerWWFTP')]",
 				"[concat(variables('factoryId'), '/datasets/EskerSFTP')]",
 				"[concat(variables('factoryId'), '/linkedServices/wineworksinternal')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Event_IOT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Event_IOT",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDatabricksDeltaLakeSource",
+								"query": "  SELECT \n  eventId,\n  CodeName,\n  date_format(start, 'yyyy-MM-dd HH:mm:ssxxx') AS start,\n  date_format(end, 'yyyy-MM-dd HH:mm:ssxxx') AS end,\n  note,\n  ratedSpeed,\n  productionlineid,\n  runId,\n  iotcode,\n  clientbillableevent\n\nFROM iotprod.gold.gold_jobcosting_event_int\nWHERE eventId IS NOT NULL AND runId IS NOT NULL",
+								"exportSettings": {
+									"type": "AzureDatabricksDeltaLakeExportCommand"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"preCopyScript": "DELETE FROM dbo.Event_IOT",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "dlsadbiotprod",
+									"type": "LinkedServiceReference"
+								},
+								"path": "dls-fs-iot/iotprod/gold/daniela"
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CodeName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CodeName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "start",
+											"type": "String"
+										},
+										"sink": {
+											"name": "start",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "end",
+											"type": "String"
+										},
+										"sink": {
+											"name": "end",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "ratedSpeed",
+											"type": "Int"
+										},
+										"sink": {
+											"name": "ratedSpeed",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "runId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "runId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "note",
+											"type": "String"
+										},
+										"sink": {
+											"name": "note",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "productionlineid",
+											"type": "Int"
+										},
+										"sink": {
+											"name": "productionlineid",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "eventId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "eventId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "iotcode",
+											"type": "Int"
+										},
+										"sink": {
+											"name": "iotcode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "clientbillableevent",
+											"type": "Boolean"
+										},
+										"sink": {
+											"name": "clientbillableevent",
+											"type": "Boolean"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Databricks_LinkedService_Integration",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "wwsql003_Event_IOT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Data Copy fail email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Event_IOT",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "daniela.gomez@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Databricks_LinkedService_Integration')]",
+				"[concat(variables('factoryId'), '/datasets/wwsql003_Event_IOT')]",
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
 			]
 		},
 		{
@@ -4610,6 +4815,161 @@
 				"[concat(variables('factoryId'), '/datasets/ProductionLine')]",
 				"[concat(variables('factoryId'), '/datasets/WWSQL003_ProductionLine')]",
 				"[concat(variables('factoryId'), '/linkedServices/WWSQL003')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Run_IOT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Run_IOT",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDatabricksDeltaLakeSource",
+								"query": "SELECT \n  runId,\n  date_format(start, \"yyyy-MM-dd HH:mm:ssxxx\") as start,\n  date_format(end, \"yyyy-MM-dd HH:mm:ssxxx\") as end,\n  note,\n  machineId\nFROM iotprod.gold.gold_jobcosting_run_int\n",
+								"exportSettings": {
+									"type": "AzureDatabricksDeltaLakeExportCommand"
+								}
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"preCopyScript": "DELETE FROM dbo.Run_IOT",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "dlsadbiotprod",
+									"type": "LinkedServiceReference"
+								},
+								"path": "dls-fs-iot/iotprod/gold/daniela"
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "runId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "runId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "start",
+											"type": "String"
+										},
+										"sink": {
+											"name": "start",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "end",
+											"type": "String"
+										},
+										"sink": {
+											"name": "end",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "note",
+											"type": "String"
+										},
+										"sink": {
+											"name": "note",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "machineId",
+											"type": "Int"
+										},
+										"sink": {
+											"name": "machineId",
+											"type": "Int32"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Databricks_LinkedService_Integration",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "wwsql003_Run_IOT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Data Copy fail email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Run_IOT",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "An error has occurred!",
+								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
+								"EmailTo": "daniela.gomez@wineworks.co.nz"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Databricks_LinkedService_Integration')]",
+				"[concat(variables('factoryId'), '/datasets/wwsql003_Run_IOT')]",
+				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
 			]
 		},
 		{
@@ -31009,6 +31369,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Databricks_LinkedService_Integration')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Databricks_LinkedService_Integration",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"catalog": "iotprod"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLakeDataset",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Databricks_LinkedService_Integration')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DowntimesProd')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -47165,6 +47546,30 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Databricks_LinkedService_Integration')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"catalog": {
+						"type": "string",
+						"defaultValue": "iotprod"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-6592053876875007.7.azuredatabricks.net/",
+					"clusterId": "0407-210132-fr2pz9tw",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('Databricks_LinkedService_Integration_accessToken')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DataverseTest')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -47572,6 +47977,47 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Event_IOT')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Event_IOT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Week",
+						"interval": 1,
+						"startTime": "2025-05-22T22:11:00",
+						"timeZone": "New Zealand Standard Time",
+						"schedule": {
+							"minutes": [
+								30
+							],
+							"hours": [
+								23
+							],
+							"weekDays": [
+								"Sunday"
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Event_IOT')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Every 10 minutes')]",
@@ -48055,6 +48501,41 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/ww_prebottlinganalysis')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Run_IOT')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Run_IOT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Week",
+						"interval": 1,
+						"startTime": "2025-05-22T22:05:00",
+						"timeZone": "New Zealand Standard Time",
+						"schedule": {
+							"weekDays": [
+								"Sunday"
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Run_IOT')]"
 			]
 		},
 		{
@@ -48794,241 +49275,6 @@
 			"apiVersion": "2018-06-01",
 			"properties": {},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Run_IOT')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Run_IOT",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureDatabricksDeltaLakeSource",
-								"query": "SELECT \n  runId,\n  date_format(start, \"yyyy-MM-dd HH:mm:ssxxx\") as start,\n  date_format(end, \"yyyy-MM-dd HH:mm:ssxxx\") as end,\n  note,\n  machineId\nFROM iotprod.gold.gold_jobcosting_run_int\n",
-								"exportSettings": {
-									"type": "AzureDatabricksDeltaLakeExportCommand"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"preCopyScript": "DELETE FROM dbo.Run_IOT",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": true,
-							"stagingSettings": {
-								"linkedServiceName": {
-									"referenceName": "dlsadbiotprod",
-									"type": "LinkedServiceReference"
-								},
-								"path": "dls-fs-iot/iotprod/gold/daniela"
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "runId",
-											"type": "String"
-										},
-										"sink": {
-											"name": "runId",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "start",
-											"type": "String"
-										},
-										"sink": {
-											"name": "start",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "end",
-											"type": "String"
-										},
-										"sink": {
-											"name": "end",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "note",
-											"type": "String"
-										},
-										"sink": {
-											"name": "note",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "machineId",
-											"type": "Int"
-										},
-										"sink": {
-											"name": "machineId",
-											"type": "Int32"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Databricks_LinkedService_Integration",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_Run_IOT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Data Copy fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Run_IOT",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "daniela.gomez@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Databricks_LinkedService_Integration')]",
-				"[concat(variables('factoryId'), '/datasets/wwsql003_Run_IOT')]",
-				"[concat(variables('factoryId'), '/linkedServices/dlsadbiotprod')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Databricks_LinkedService_Integration')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Databricks_LinkedService_Integration",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"catalog": "iotprod"
-					}
-				},
-				"annotations": [],
-				"type": "AzureDatabricksDeltaLakeDataset",
-				"typeProperties": {},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Databricks_LinkedService_Integration')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Databricks_LinkedService_Integration')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"catalog": {
-						"type": "string",
-						"defaultValue": "iotprod"
-					}
-				},
-				"annotations": [],
-				"type": "AzureDatabricksDeltaLake",
-				"typeProperties": {
-					"domain": "https://adb-6592053876875007.7.azuredatabricks.net/",
-					"clusterId": "0407-210132-fr2pz9tw",
-					"accessToken": {
-						"type": "SecureString",
-						"value": "[parameters('Databricks_LinkedService_Integration_accessToken')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Run_IOT')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Run_IOT",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Week",
-						"interval": 1,
-						"startTime": "2025-05-22T22:05:00",
-						"timeZone": "New Zealand Standard Time",
-						"schedule": {
-							"weekDays": [
-								"Sunday"
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Run_IOT')]"
-			]
 		}
 	]
 }

@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Dataverse'"
 		},
+		"Databricks_LinkedService_Integration_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_LinkedService_Integration'"
+		},
 		"DataverseTest_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'DataverseTest'"
@@ -98,10 +102,6 @@
 		"wineworksinternal_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'wineworksinternal'"
-		},
-		"Databricks_LinkedService_Integration_accessToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'Databricks_LinkedService_Integration'"
 		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
@@ -512,6 +512,9 @@
 					"Dataverse_password": {
 						"value": "[parameters('Dataverse_password')]"
 					},
+					"Databricks_LinkedService_Integration_accessToken": {
+						"value": "[parameters('Databricks_LinkedService_Integration_accessToken')]"
+					},
 					"DataverseTest_password": {
 						"value": "[parameters('DataverseTest_password')]"
 					},
@@ -598,9 +601,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"Databricks_LinkedService_Integration_accessToken": {
-						"value": "[parameters('Databricks_LinkedService_Integration_accessToken')]"
 					}
 				}
 			},
@@ -683,12 +683,6 @@
 					"WWSQL003_password": {
 						"value": "[parameters('WWSQL003_password')]"
 					},
-					"WWSQL003_DV_connectionString": {
-						"value": "[parameters('WWSQL003_DV_connectionString')]"
-					},
-					"WWSQL003_DV_password": {
-						"value": "[parameters('WWSQL003_DV_password')]"
-					},
 					"DataNow_properties_typeProperties_server": {
 						"value": "[parameters('DataNow_properties_typeProperties_server')]"
 					},
@@ -724,9 +718,6 @@
 					},
 					"WWSQL003_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_properties_typeProperties_userName')]"
-					},
-					"WWSQL003_DV_properties_typeProperties_userName": {
-						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -748,11 +739,20 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"WWSQL003_DV_connectionString": {
+						"value": "[parameters('WWSQL003_DV_connectionString')]"
+					},
+					"WWSQL003_DV_password": {
+						"value": "[parameters('WWSQL003_DV_password')]"
+					},
 					"WWWEB002_connectionString": {
 						"value": "[parameters('WWWEB002_connectionString')]"
 					},
 					"WWWEB002_password": {
 						"value": "[parameters('WWWEB002_password')]"
+					},
+					"WWSQL003_DV_properties_typeProperties_userName": {
+						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
 					},
 					"WWWEB002_properties_typeProperties_userName": {
 						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"
