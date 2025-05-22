@@ -35,6 +35,61 @@
 							"type": "LinkedServiceReference"
 						},
 						"path": "dls-fs-iot/iotprod/gold/daniela"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "runId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "runId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "start",
+									"type": "String"
+								},
+								"sink": {
+									"name": "start",
+									"type": "DateTimeOffset"
+								}
+							},
+							{
+								"source": {
+									"name": "end",
+									"type": "String"
+								},
+								"sink": {
+									"name": "end",
+									"type": "DateTimeOffset"
+								}
+							},
+							{
+								"source": {
+									"name": "note",
+									"type": "String"
+								},
+								"sink": {
+									"name": "note",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "machineId",
+									"type": "Int"
+								},
+								"sink": {
+									"name": "machineId",
+									"type": "Int32"
+								}
+							}
+						]
 					}
 				},
 				"inputs": [
