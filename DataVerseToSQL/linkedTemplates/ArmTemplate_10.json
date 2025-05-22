@@ -13,6 +13,151 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_run')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "bit"
+					},
+					{
+						"name": "ww_clientcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_clientname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_clientworkorderreference",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_completed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_lastcopied",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_microsneeded",
+						"type": "bit"
+					},
+					{
+						"name": "ww_newupdate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_pendingupdate",
+						"type": "bit"
+					},
+					{
+						"name": "ww_productid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rundate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_runid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_runnumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_runproductionline",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_stocktoconsumecasevariability",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stocktoconsumerun",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stocktoconsumestockcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_stocktoconsumestockcodedescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_variety",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_velcorinrate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_vintage",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_vintagevariety",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_winehandling",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_workorderid",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_workordertype",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_workorderupdatedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_run"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_runreportbottlelabelpack')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3243,122 +3388,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-06-29T22:18:51Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Site')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Site",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "CommonDataServiceForAppsSource"
-							},
-							"sink": {
-								"type": "SqlServerSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "ww_sitename",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SiteName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_siterunnumberprefix",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SiteRunNumberPrefix",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "statecode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Statecode",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_siteidlookup",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "SiteId",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_wwsitecode",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SiteCode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ww_siteid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Site",
-											"type": "Guid"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Site",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "WWSQL003_Site",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-06-21T22:06:22Z"
 			},
 			"dependsOn": []
 		}

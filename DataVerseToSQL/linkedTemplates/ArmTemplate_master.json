@@ -99,6 +99,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'wineworksinternal'"
 		},
+		"Databricks_LinkedService_Integration_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_LinkedService_Integration'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -594,6 +598,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Databricks_LinkedService_Integration_accessToken": {
+						"value": "[parameters('Databricks_LinkedService_Integration_accessToken')]"
 					}
 				}
 			},
@@ -682,12 +689,6 @@
 					"WWSQL003_DV_password": {
 						"value": "[parameters('WWSQL003_DV_password')]"
 					},
-					"WWWEB002_connectionString": {
-						"value": "[parameters('WWWEB002_connectionString')]"
-					},
-					"WWWEB002_password": {
-						"value": "[parameters('WWWEB002_password')]"
-					},
 					"DataNow_properties_typeProperties_server": {
 						"value": "[parameters('DataNow_properties_typeProperties_server')]"
 					},
@@ -726,9 +727,6 @@
 					},
 					"WWSQL003_DV_properties_typeProperties_userName": {
 						"value": "[parameters('WWSQL003_DV_properties_typeProperties_userName')]"
-					},
-					"WWWEB002_properties_typeProperties_userName": {
-						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -749,6 +747,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"WWWEB002_connectionString": {
+						"value": "[parameters('WWWEB002_connectionString')]"
+					},
+					"WWWEB002_password": {
+						"value": "[parameters('WWWEB002_password')]"
+					},
+					"WWWEB002_properties_typeProperties_userName": {
+						"value": "[parameters('WWWEB002_properties_typeProperties_userName')]"
 					}
 				}
 			},

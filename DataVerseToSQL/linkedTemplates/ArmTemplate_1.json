@@ -6,6 +6,10 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
+		},
+		"Databricks_LinkedService_Integration_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_LinkedService_Integration'"
 		}
 	},
 	"variables": {
@@ -27,6 +31,30 @@
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
 			"apiVersion": "2018-06-01",
 			"properties": {},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Databricks_LinkedService_Integration')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"catalog": {
+						"type": "string",
+						"defaultValue": "iotprod"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-6592053876875007.7.azuredatabricks.net/",
+					"clusterId": "0407-210132-fr2pz9tw",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('Databricks_LinkedService_Integration_accessToken')]"
+					}
+				}
+			},
 			"dependsOn": []
 		},
 		{
@@ -396,27 +424,6 @@
 				"linkedServiceName": {
 					"referenceName": "Dataverse",
 					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_billofmaterials"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BillOfMaterials')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLToDataverseProd",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Bill Of Material"
 				},
 				"annotations": [],
 				"type": "CommonDataServiceForAppsEntity",

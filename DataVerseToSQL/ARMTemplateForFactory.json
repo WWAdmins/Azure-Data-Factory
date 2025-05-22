@@ -99,6 +99,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'wineworksinternal'"
 		},
+		"Databricks_LinkedService_Integration_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_LinkedService_Integration'"
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Tejaswi.Datla@wineworks.co.nz"
@@ -48830,6 +48834,61 @@
 									"type": "LinkedServiceReference"
 								},
 								"path": "dls-fs-iot/iotprod/gold/daniela"
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "runId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "runId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "start",
+											"type": "String"
+										},
+										"sink": {
+											"name": "start",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "end",
+											"type": "String"
+										},
+										"sink": {
+											"name": "end",
+											"type": "DateTimeOffset"
+										}
+									},
+									{
+										"source": {
+											"name": "note",
+											"type": "String"
+										},
+										"sink": {
+											"name": "note",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "machineId",
+											"type": "Int"
+										},
+										"sink": {
+											"name": "machineId",
+											"type": "Int32"
+										}
+									}
+								]
 							}
 						},
 						"inputs": [
@@ -48897,8 +48956,11 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureDatabricksDeltaLake",
-					"type": "LinkedServiceReference"
+					"referenceName": "Databricks_LinkedService_Integration",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"catalog": "iotprod"
+					}
 				},
 				"annotations": [],
 				"type": "AzureDatabricksDeltaLakeDataset",
@@ -48906,7 +48968,66 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricksDeltaLake')]"
+				"[concat(variables('factoryId'), '/linkedServices/Databricks_LinkedService_Integration')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Databricks_LinkedService_Integration')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"catalog": {
+						"type": "string",
+						"defaultValue": "iotprod"
+					}
+				},
+				"annotations": [],
+				"type": "AzureDatabricksDeltaLake",
+				"typeProperties": {
+					"domain": "https://adb-6592053876875007.7.azuredatabricks.net/",
+					"clusterId": "0407-210132-fr2pz9tw",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('Databricks_LinkedService_Integration_accessToken')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Run_IOT')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Run_IOT",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Week",
+						"interval": 1,
+						"startTime": "2025-05-22T22:05:00",
+						"timeZone": "New Zealand Standard Time",
+						"schedule": {
+							"weekDays": [
+								"Sunday"
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Run_IOT')]"
 			]
 		}
 	]

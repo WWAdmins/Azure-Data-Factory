@@ -13,6 +13,122 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_labellingissues')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_billofmaterials",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_bottlerub",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_brokenbottles",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_cartonsrejected",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_damagedscrewcaps",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_datetime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_deleteissue",
+						"type": "bit"
+					},
+					{
+						"name": "ww_deleterejects",
+						"type": "bit"
+					},
+					{
+						"name": "ww_glassdefect",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_issue",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labellingissue",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_labellingissuesid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_lowfills",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_totalrejects",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_labellingissues"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_labellingpreflight')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3900,151 +4016,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "ww_qcstartup"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_run')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "createdon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "modifiedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "statuscode",
-						"type": "bit"
-					},
-					{
-						"name": "ww_clientcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_clientname",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_clientworkorderreference",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_completed",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_lastcopied",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_microsneeded",
-						"type": "bit"
-					},
-					{
-						"name": "ww_newupdate",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_pendingupdate",
-						"type": "bit"
-					},
-					{
-						"name": "ww_productid",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_rundate",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_runid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_runnumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_runproductionline",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ww_stocktoconsumecasevariability",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_stocktoconsumerun",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_stocktoconsumestockcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_stocktoconsumestockcodedescription",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_variety",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_velcorinrate",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_vintage",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_vintagevariety",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_winehandling",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_workorderid",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_workordertype",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_workorderupdatedon",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_run"
 				}
 			},
 			"dependsOn": []

@@ -71,6 +71,9 @@
 		"wineworksinternal_connectionString": {
 			"value": ""
 		},
+		"Databricks_LinkedService_Integration_accessToken": {
+			"value": ""
+		},
 		"CommonDataServiceForApps1_properties_typeProperties_username": {
 			"value": "Tejaswi.Datla@wineworks.co.nz"
 		},
