@@ -41,6 +41,46 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "CodeName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CodeName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "start",
+									"type": "String"
+								},
+								"sink": {
+									"name": "start",
+									"type": "DateTimeOffset"
+								}
+							},
+							{
+								"source": {
+									"name": "end",
+									"type": "String"
+								},
+								"sink": {
+									"name": "end",
+									"type": "DateTimeOffset"
+								}
+							},
+							{
+								"source": {
+									"name": "ratedSpeed",
+									"type": "Int"
+								},
+								"sink": {
+									"name": "ratedSpeed",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
 									"name": "runId",
 									"type": "String"
 								},
@@ -51,26 +91,6 @@
 							},
 							{
 								"source": {
-									"name": "start",
-									"type": "String"
-								},
-								"sink": {
-									"name": "start",
-									"type": "DateTimeOffset"
-								}
-							},
-							{
-								"source": {
-									"name": "end",
-									"type": "String"
-								},
-								"sink": {
-									"name": "end",
-									"type": "DateTimeOffset"
-								}
-							},
-							{
-								"source": {
 									"name": "note",
 									"type": "String"
 								},
@@ -81,12 +101,42 @@
 							},
 							{
 								"source": {
-									"name": "machineId",
+									"name": "productionlineid",
 									"type": "Int"
 								},
 								"sink": {
-									"name": "machineId",
+									"name": "productionlineid",
 									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "eventId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "eventId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "iotcode",
+									"type": "Int"
+								},
+								"sink": {
+									"name": "iotcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "clientbillableevent",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "clientbillableevent",
+									"type": "Boolean"
 								}
 							}
 						]
