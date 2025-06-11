@@ -651,7 +651,7 @@
 								},
 								"sink": {
 									"name": "ww_labeldetectionon",
-									"type": "Boolean"
+									"type": "Int32"
 								}
 							},
 							{
