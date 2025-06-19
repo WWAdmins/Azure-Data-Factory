@@ -5230,7 +5230,7 @@
 										},
 										"sink": {
 											"name": "ww_finalfilterpresent",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -5870,7 +5870,7 @@
 										},
 										"sink": {
 											"name": "ww_prefilterpresent",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
@@ -6180,7 +6180,7 @@
 										},
 										"sink": {
 											"name": "ww_rockstopperpresent",
-											"type": "Boolean"
+											"type": "Int32"
 										}
 									},
 									{
