@@ -48569,7 +48569,7 @@
 					"interval": 30,
 					"startTime": "2024-12-02T18:00:00Z",
 					"delay": "00:05:00",
-					"maxConcurrency": 1,
+					"maxConcurrency": 2,
 					"retryPolicy": {
 						"count": 3,
 						"intervalInSeconds": 30
