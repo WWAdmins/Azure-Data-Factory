@@ -71,7 +71,7 @@
 					{
 						"activity": "Esker",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
