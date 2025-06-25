@@ -31,7 +31,7 @@
 						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "SftpWriteSettings",
-							"maxConcurrentConnections": 50,
+							"maxConcurrentConnections": 5,
 							"operationTimeout": "01:00:00",
 							"useTempFileRename": false
 						},
