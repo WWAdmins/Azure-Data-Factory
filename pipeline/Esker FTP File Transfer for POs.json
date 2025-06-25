@@ -131,7 +131,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "An error has occurred!",
 						"ErrorMessage": "Esker PO Upload crashed",
-						"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+						"EmailTo": "Toby.Dunn@wineworks.co.nz"
 					}
 				}
 			},
@@ -162,7 +162,7 @@
 						"PipelineName": "@{pipeline().Pipeline}",
 						"Subject": "An error has occurred!",
 						"ErrorMessage": "Esker PO Upload crashed",
-						"EmailTo": "Tejaswi.Datla@wineworks.co.nz"
+						"EmailTo": "Toby.Dunn@wineworks.co.nz"
 					}
 				}
 			}
