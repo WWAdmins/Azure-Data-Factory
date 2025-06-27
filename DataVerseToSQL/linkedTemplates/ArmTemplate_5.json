@@ -1439,6 +1439,8 @@
 								{
 									"name": "oee-trigger_copy1",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "bronze-silver-gold_copy1",
@@ -1844,6 +1846,8 @@
 								{
 									"name": "run_durations_trigger",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "bronze-silver-gold",
