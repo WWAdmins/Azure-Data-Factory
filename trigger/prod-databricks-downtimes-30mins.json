@@ -2,7 +2,7 @@
 	"name": "prod-databricks-downtimes-30mins",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Minute",
