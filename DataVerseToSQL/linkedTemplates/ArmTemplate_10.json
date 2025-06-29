@@ -13,6 +13,255 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_qcrecheck')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "bit"
+					},
+					{
+						"name": "ww_alcoholinbottle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_alcoholpercentage",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_bottlealcoholfirsttank",
+						"type": "bit"
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_qcrecheckid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_qcrecheckname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_refractbtl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_runname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_visualcolourmatchtankbtl",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_qcrecheck"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_qcstartup')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "bit"
+					},
+					{
+						"name": "ww_alcoholinbottle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_alcoholintank",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_alcoholpercentage",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_blsampleattachedtospecsheet",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlealcoholfirsttank",
+						"type": "bit"
+					},
+					{
+						"name": "ww_bottlecodeandguiderailsset",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_bottlecoderrunningandlegible",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_codeheight",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_countzeroed",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_cunos",
+						"type": "bit"
+					},
+					{
+						"name": "ww_cunosyesno",
+						"type": "bit"
+					},
+					{
+						"name": "ww_customertankername",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_microsneeded",
+						"type": "bit"
+					},
+					{
+						"name": "ww_microsneededyesno",
+						"type": "bit"
+					},
+					{
+						"name": "ww_noticerequired",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_qcstartupid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_qcstartupname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_refract",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_refractbtl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_refracttank",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_rockstopper",
+						"type": "bit"
+					},
+					{
+						"name": "ww_rockstopperyesno",
+						"type": "bit"
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_runname",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_tanker",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_visualcolourmatchtankbtl",
+						"type": "bit"
+					},
+					{
+						"name": "ww_wecs",
+						"type": "bit"
+					},
+					{
+						"name": "ww_wecsyesno",
+						"type": "bit"
+					},
+					{
+						"name": "ww_winemakersignatureid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_qcstartup"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_run')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3189,190 +3438,6 @@
 						"outputs": [
 							{
 								"referenceName": "wwsql003_Run_IOT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/IOT_event Databricks to sql')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureDatabricksDeltaLakeSource",
-								"query": "select *,date_format(start, 'yyyy-MM-dd HH:mm') formattedstart,date_format(end, 'yyyy-MM-dd HH:mm') formattedend from iottest.gold.gold_jobcosting_event",
-								"exportSettings": {
-									"type": "AzureDatabricksDeltaLakeExportCommand"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": true,
-							"stagingSettings": {
-								"linkedServiceName": {
-									"referenceName": "dlsadbiottest",
-									"type": "LinkedServiceReference"
-								},
-								"path": "dls-fs-iot/iottest/gold/Datafactory_DataNow_Staging"
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "CodeName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CodeName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "formattedstart",
-											"type": "String"
-										},
-										"sink": {
-											"name": "start",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "formattedend",
-											"type": "String"
-										},
-										"sink": {
-											"name": "end",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "ratedSpeed",
-											"type": "Int"
-										},
-										"sink": {
-											"name": "ratedSpeed",
-											"type": "Double"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "AzureDatabricksDeltaLake",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_Event_IOT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Indevin FTP File Transfer')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "FileServerReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "SftpWriteSettings",
-									"operationTimeout": "01:00:00",
-									"useTempFileRename": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "WWMULTI001_Indevin",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Indevin_SFTP",
 								"type": "DatasetReference",
 								"parameters": {}
 							}

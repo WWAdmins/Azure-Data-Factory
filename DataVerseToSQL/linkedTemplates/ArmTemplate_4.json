@@ -23,19 +23,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWSCALE002'"
 		},
-		"WWSCALE022_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWSCALE022'"
-		},
-		"WWSQL003_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'WWSQL003'",
-			"defaultValue": "integrated security=True;Data Source=WWSQL003;Initial Catalog=Dataverse.Staging;trusted_connection=True"
-		},
-		"WWSQL003_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWSQL003'"
-		},
 		"DataNow_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "WWSQL003"
@@ -71,24 +58,48 @@
 		"WWSCALE002_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "wwdigital02@wineworks.co.nz"
-		},
-		"WWSCALE022_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "\\\\Wwscale022\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
-		},
-		"WWSCALE022_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "wwdigital02@wineworks.co.nz"
-		},
-		"WWSQL003_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "wwdigital02@wineworks.co.nz"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/QCStartUp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_qcstartup"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Run')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_run"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/RunReportBottleLabelPack')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -427,50 +438,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('WWSCALE002_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSCALE022')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('WWSCALE022_properties_typeProperties_host')]",
-					"userId": "[parameters('WWSCALE022_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWSCALE022_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSQL003')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('WWSQL003_connectionString')]",
-					"userName": "[parameters('WWSQL003_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWSQL003_password')]"
 					}
 				},
 				"connectVia": {
