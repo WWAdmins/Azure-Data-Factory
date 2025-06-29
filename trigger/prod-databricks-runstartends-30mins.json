@@ -3,21 +3,6 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipeline": {
-			"pipelineReference": {
-				"referenceName": "PROD Databricks RunStartEnds",
-				"type": "PipelineReference"
-			},
-			"parameters": {
-				"triggerStart": "@trigger().outputs.windowStartTime",
-				"triggerEnd": "@trigger().outputs.windowEndTime",
-				"modifiedonColumn": "modifiedon",
-				"partitionColumn": "crc5d_runstartendid",
-				"tableName": "crc5d_runstartend",
-				"partitionBySecondary": "false",
-				"secondaryPartitionColumnName": "false"
-			}
-		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Minute",
