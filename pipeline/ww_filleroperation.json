@@ -476,6 +476,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_balancecheckcalibrationcompleted",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_balancecheckcalibrationcompleted",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_bardifferential",
 									"type": "Boolean"
 								},
