@@ -7,6 +7,66 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "crc5d_newtableid"
+		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "crc5d_newtable"
+		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_dropDataverseDefaults": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_modifiedonColumn": {
+			"type": "string",
+			"defaultValue": "modifiedon"
+		},
+		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionColumn": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartendid"
+		},
+		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "crc5d_runstartend"
+		},
+		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionBySecondary": {
+			"type": "string",
+			"defaultValue": "false"
+		},
+		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
+			"type": "string",
+			"defaultValue": "false"
+		},
 		"prod-databricks-systemuser-1day_properties_pipeline_parameters_triggerStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -208,66 +268,6 @@
 			"defaultValue": "false"
 		},
 		"test-databricks-ww_run-1day_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_newtableid"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_newtable"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-downtimes-1hour_properties_pipeline_parameters_dropDataverseDefaults": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_modifiedonColumn": {
-			"type": "string",
-			"defaultValue": "modifiedon"
-		},
-		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionColumn": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartendid"
-		},
-		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "crc5d_runstartend"
-		},
-		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionBySecondary": {
-			"type": "string",
-			"defaultValue": "false"
-		},
-		"prod-databricks-runstartends-1hour_properties_pipeline_parameters_secondaryPartitionColumnName": {
 			"type": "string",
 			"defaultValue": "false"
 		}
@@ -3289,6 +3289,83 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtimes-1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks Downtimes",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]",
+						"dropDataverseDefaults": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_dropDataverseDefaults')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 60,
+					"startTime": "2025-06-29T19:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/prod-databricks-runstartends-1hour')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "PROD Databricks RunStartEnds",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"triggerStart": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerStart')]",
+						"triggerEnd": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerEnd')]",
+						"modifiedonColumn": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_modifiedonColumn')]",
+						"partitionColumn": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionColumn')]",
+						"tableName": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_tableName')]",
+						"partitionBySecondary": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionBySecondary')]",
+						"secondaryPartitionColumnName": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 60,
+					"startTime": "2025-06-29T19:00:00Z",
+					"delay": "00:05:00",
+					"maxConcurrency": 1,
+					"retryPolicy": {
+						"count": 3,
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/prod-databricks-systemuser-1day')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -3545,83 +3622,6 @@
 					"frequency": "Hour",
 					"interval": 24,
 					"startTime": "2024-12-03T01:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-downtimes-1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PROD Databricks Downtimes",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]",
-						"dropDataverseDefaults": "[parameters('prod-databricks-downtimes-1hour_properties_pipeline_parameters_dropDataverseDefaults')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 60,
-					"startTime": "2025-06-29T19:00:00Z",
-					"delay": "00:05:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"count": 3,
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/prod-databricks-runstartends-1hour')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "PROD Databricks RunStartEnds",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"triggerStart": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerStart')]",
-						"triggerEnd": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_triggerEnd')]",
-						"modifiedonColumn": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_modifiedonColumn')]",
-						"partitionColumn": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionColumn')]",
-						"tableName": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_tableName')]",
-						"partitionBySecondary": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_partitionBySecondary')]",
-						"secondaryPartitionColumnName": "[parameters('prod-databricks-runstartends-1hour_properties_pipeline_parameters_secondaryPartitionColumnName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 60,
-					"startTime": "2025-06-29T19:00:00Z",
 					"delay": "00:05:00",
 					"maxConcurrency": 1,
 					"retryPolicy": {
