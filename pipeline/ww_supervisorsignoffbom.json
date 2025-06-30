@@ -296,6 +296,16 @@
 							},
 							{
 								"source": {
+									"name": "ww_cleanskinstockcode",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_cleanskinstockcode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
 									"name": "ww_corkcorrectchangepartssig",
 									"type": "String"
 								},
@@ -482,6 +492,26 @@
 								"sink": {
 									"name": "ww_labellerscissorscheck",
 									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_lasercodematchesrunnumber",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "ww_lasercodematchesrunnumber",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_lux",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_lux",
+									"type": "Boolean"
 								}
 							},
 							{
@@ -712,6 +742,16 @@
 								"sink": {
 									"name": "ww_rinserlowpressurecutoutsig",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ww_screwcap",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "ww_screwcap",
+									"type": "Boolean"
 								}
 							},
 							{
