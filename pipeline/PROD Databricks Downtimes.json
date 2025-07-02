@@ -93,6 +93,8 @@
 						{
 							"name": "bronze-silver-gold_copy1",
 							"type": "DatabricksNotebook",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Downtimes_copy1",
