@@ -2145,6 +2145,8 @@
 								{
 									"name": "bronze-silver-gold",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "Get RunStartEnds",
@@ -2568,6 +2570,8 @@
 								{
 									"name": "bronze-silver-gold_copy",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "BOM_copy",
@@ -3493,6 +3497,8 @@
 								{
 									"name": "bronze-silver-gold_copy1",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "Downtimes_copy1",
@@ -3875,6 +3881,8 @@
 								{
 									"name": "bronze-silver-gold",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "Get RunStartEnds",
@@ -4068,6 +4076,8 @@
 								{
 									"name": "bronze-silver-gold",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "Get Users",
@@ -4269,6 +4279,8 @@
 								{
 									"name": "bronze-silver-gold_copy",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "BOM_copy",
@@ -4462,6 +4474,8 @@
 								{
 									"name": "bronze-silver-gold_copy",
 									"type": "DatabricksNotebook",
+									"state": "Inactive",
+									"onInactiveMarkAs": "Succeeded",
 									"dependsOn": [
 										{
 											"activity": "Run copy",
