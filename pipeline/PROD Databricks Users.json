@@ -93,6 +93,8 @@
 						{
 							"name": "bronze-silver-gold",
 							"type": "DatabricksNotebook",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Get Users",
