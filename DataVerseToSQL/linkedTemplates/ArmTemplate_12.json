@@ -1248,6 +1248,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_bottlelightcolour",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_Bottlelightcolour",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_bottlenumberasperlasercoder",
 											"type": "Int32"
 										},
@@ -2538,6 +2548,16 @@
 									},
 									{
 										"source": {
+											"name": "ww_velcorinalarms",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_velcorinalarms",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "ww_velcorinalarmssig",
 											"type": "String"
 										},
@@ -2594,6 +2614,16 @@
 										"sink": {
 											"name": "ww_velcorindosingrate",
 											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_velcorintestscriptinproduct",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "ww_velcorintestscriptinproduct",
+											"type": "Int32"
 										}
 									},
 									{
