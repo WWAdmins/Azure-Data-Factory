@@ -284,6 +284,26 @@
 											"name": "CreatedOn",
 											"type": "DateTime"
 										}
+									},
+									{
+										"source": {
+											"name": "ww_gasthroughs",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_gasthroughs",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "ww_waterflushsterilisationloss",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ww_waterflushsterilisationloss",
+											"type": "Decimal"
+										}
 									}
 								]
 							}
