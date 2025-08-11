@@ -13,6 +13,22 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/WWWEB002')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WWWEB0021')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2816,154 +2832,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "ww_filleroperation"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_hourlycartonusage')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WWSQL003",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "ww_alcohol",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_alcoholna",
-						"type": "bit"
-					},
-					{
-						"name": "ww_barcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_barcodena",
-						"type": "bit"
-					},
-					{
-						"name": "ww_billofmaterials",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_cartonclosure",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_cartoncode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_cartondamage",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_cartonfibretear",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_cartoninkjetcorrectcode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_cartonskew",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_cartonvarietyvintage",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_country",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CreatedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_deleteline",
-						"type": "bit"
-					},
-					{
-						"name": "ww_dividerused",
-						"type": "bit"
-					},
-					{
-						"name": "ww_dividersils",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_hourlycartonusageid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "importsequencenumber",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_key",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_lotcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ModifiedOn",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "ww_operatorcode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ww_productionline",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "ww_quantity",
-						"type": "decimal",
-						"precision": 11,
-						"scale": 5
-					},
-					{
-						"name": "ww_runnumber",
-						"type": "nvarchar"
-					},
-					{
-						"name": "statuscode",
-						"type": "int",
-						"precision": 10
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "ww_hourlycartonusage"
 				}
 			},
 			"dependsOn": []

@@ -13,6 +13,146 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_qchourlycheck1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "statuscode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_authorisedsig",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_co2",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_collectexportsamples",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_comments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_deleteline",
+						"type": "bit"
+					},
+					{
+						"name": "ww_do",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_exportsamplespicked",
+						"type": "bit"
+					},
+					{
+						"name": "ww_flowmeterreading",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_foreignmatter",
+						"type": "decimal",
+						"precision": 11,
+						"scale": 5
+					},
+					{
+						"name": "ww_micro",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_qcbottlecode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_qchourlycheckid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_qcscrewcapscode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_samplessig",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_tankinuse",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_tankjointscheckedforleaks",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_timeofauthorisedauditcheck",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_timeofcheck",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_visualcolourmatchtankbtl",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_qchourlycheck"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/wwsql003_ww_qcrecheck')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1980,6 +2120,68 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/WWSQL003_ww_qceoryield')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WWSQL003",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "createdon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "modifiedon",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ww_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_notes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_operatorcode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ww_productionline",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_qceoryieldid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ww_yieldinvestigationdone",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ww_run",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ww_qceoryield"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BOM')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -3127,321 +3329,6 @@
 								"EmailTo": "Toby.Dunn@wineworks.co.nz"
 							}
 						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Event_IOT')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Event_IOT",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureDatabricksDeltaLakeSource",
-								"query": "  SELECT \n  eventId,\n  CodeName,\n  date_format(start, 'yyyy-MM-dd HH:mm:ssxxx') AS start,\n  date_format(end, 'yyyy-MM-dd HH:mm:ssxxx') AS end,\n  note,\n  ratedSpeed,\n  productionlineid,\n  runId,\n  iotcode,\n  clientbillableevent\n\nFROM iotprod.gold.gold_jobcosting_event_int\nWHERE eventId IS NOT NULL AND runId IS NOT NULL",
-								"exportSettings": {
-									"type": "AzureDatabricksDeltaLakeExportCommand"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"preCopyScript": "DELETE FROM dbo.Event_IOT",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": true,
-							"stagingSettings": {
-								"linkedServiceName": {
-									"referenceName": "dlsadbiotprod",
-									"type": "LinkedServiceReference"
-								},
-								"path": "dls-fs-iot/iotprod/gold/daniela"
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "CodeName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "CodeName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "start",
-											"type": "String"
-										},
-										"sink": {
-											"name": "start",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "end",
-											"type": "String"
-										},
-										"sink": {
-											"name": "end",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "ratedSpeed",
-											"type": "Int"
-										},
-										"sink": {
-											"name": "ratedSpeed",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"name": "runId",
-											"type": "String"
-										},
-										"sink": {
-											"name": "runId",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "note",
-											"type": "String"
-										},
-										"sink": {
-											"name": "note",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "productionlineid",
-											"type": "Int"
-										},
-										"sink": {
-											"name": "productionlineid",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "eventId",
-											"type": "String"
-										},
-										"sink": {
-											"name": "eventId",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "iotcode",
-											"type": "Int"
-										},
-										"sink": {
-											"name": "iotcode",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "clientbillableevent",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "clientbillableevent",
-											"type": "Boolean"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "Databricks_LinkedService_Integration",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_Event_IOT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Data Copy fail email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Event_IOT",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://prod-24.australiasoutheast.logic.azure.com:443/workflows/d77213c4f1ec4ab89956fb3256ee6f0b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JdvR2R2i-AADVzAwGjO9cFUL5shYwrH-ITahY10Tw-0",
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "An error has occurred!",
-								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "daniela.gomez@wineworks.co.nz"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/IOT_Run Databricks to sql')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureDatabricksDeltaLakeSource",
-								"query": "select *,date_format(start, 'yyyy-MM-dd HH:mm') formattedstart,date_format(end, 'yyyy-MM-dd HH:mm') formattedend from iottest.gold.gold_jobcosting_run",
-								"exportSettings": {
-									"type": "AzureDatabricksDeltaLakeExportCommand"
-								}
-							},
-							"sink": {
-								"type": "SqlServerSink",
-								"writeBehavior": "upsert",
-								"upsertSettings": {
-									"useTempDB": true,
-									"keys": [
-										"note"
-									]
-								},
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": true,
-							"stagingSettings": {
-								"linkedServiceName": {
-									"referenceName": "dlsadbiottest",
-									"type": "LinkedServiceReference"
-								},
-								"path": "dls-fs-iot/iottest/gold/Datafactory_DataNow_Staging"
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "formattedstart",
-											"type": "String"
-										},
-										"sink": {
-											"name": "start",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "formattedend",
-											"type": "String"
-										},
-										"sink": {
-											"name": "end",
-											"type": "DateTimeOffset"
-										}
-									},
-									{
-										"source": {
-											"name": "note",
-											"type": "String"
-										},
-										"sink": {
-											"name": "note",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "machineId",
-											"type": "Int"
-										},
-										"sink": {
-											"name": "machineId",
-											"type": "Int32"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "AzureDatabricksDeltaLake",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "wwsql003_Run_IOT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
 					}
 				],
 				"policy": {
