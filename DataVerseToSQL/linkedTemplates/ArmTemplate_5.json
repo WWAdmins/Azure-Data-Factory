@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "DataVerseToSQL"
 		},
+		"WWSCALE002_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'WWSCALE002'"
+		},
 		"WWSCALE022_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWSCALE022'"
@@ -38,6 +42,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'WWWEB002'"
 		},
+		"WWSCALE002_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "\\\\Wwscale002\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
+		},
+		"WWSCALE002_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "wwdigital02@wineworks.co.nz"
+		},
 		"WWSCALE022_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "\\\\Wwscale022\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
@@ -63,6 +75,28 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/WWSCALE002')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('WWSCALE002_properties_typeProperties_host')]",
+					"userId": "[parameters('WWSCALE002_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('WWSCALE002_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/WWSCALE022')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -147,24 +181,6 @@
 				"connectVia": {
 					"referenceName": "ProductionLink",
 					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ww_qceoryield')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Dataverse",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "CommonDataServiceForAppsEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "ww_qceoryield"
 				}
 			},
 			"dependsOn": []

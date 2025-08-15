@@ -671,9 +671,6 @@
 					"FileServer1_password": {
 						"value": "[parameters('FileServer1_password')]"
 					},
-					"WWSCALE002_password": {
-						"value": "[parameters('WWSCALE002_password')]"
-					},
 					"DataNow_properties_typeProperties_server": {
 						"value": "[parameters('DataNow_properties_typeProperties_server')]"
 					},
@@ -694,12 +691,6 @@
 					},
 					"FileServer1_properties_typeProperties_userId": {
 						"value": "[parameters('FileServer1_properties_typeProperties_userId')]"
-					},
-					"WWSCALE002_properties_typeProperties_host": {
-						"value": "[parameters('WWSCALE002_properties_typeProperties_host')]"
-					},
-					"WWSCALE002_properties_typeProperties_userId": {
-						"value": "[parameters('WWSCALE002_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -721,6 +712,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"WWSCALE002_password": {
+						"value": "[parameters('WWSCALE002_password')]"
+					},
 					"WWSCALE022_password": {
 						"value": "[parameters('WWSCALE022_password')]"
 					},
@@ -741,6 +735,12 @@
 					},
 					"WWWEB002_password": {
 						"value": "[parameters('WWWEB002_password')]"
+					},
+					"WWSCALE002_properties_typeProperties_host": {
+						"value": "[parameters('WWSCALE002_properties_typeProperties_host')]"
+					},
+					"WWSCALE002_properties_typeProperties_userId": {
+						"value": "[parameters('WWSCALE002_properties_typeProperties_userId')]"
 					},
 					"WWSCALE022_properties_typeProperties_host": {
 						"value": "[parameters('WWSCALE022_properties_typeProperties_host')]"

@@ -19,10 +19,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FileServer1'"
 		},
-		"WWSCALE002_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'WWSCALE002'"
-		},
 		"DataNow_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "WWSQL003"
@@ -50,14 +46,6 @@
 		"FileServer1_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "wwdigital@wineworks.co.nz"
-		},
-		"WWSCALE002_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "\\\\Wwscale002\\c$\\Users\\ILSSRV\\AppData\\Local\\Temp"
-		},
-		"WWSCALE002_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "wwdigital02@wineworks.co.nz"
 		}
 	},
 	"variables": {
@@ -356,6 +344,24 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ww_qceoryield')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dataverse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CommonDataServiceForAppsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "ww_qceoryield"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DataNow')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -416,28 +422,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('FileServer1_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WWSCALE002')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('WWSCALE002_properties_typeProperties_host')]",
-					"userId": "[parameters('WWSCALE002_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('WWSCALE002_password')]"
 					}
 				},
 				"connectVia": {

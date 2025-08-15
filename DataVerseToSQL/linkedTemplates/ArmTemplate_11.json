@@ -33,7 +33,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureDatabricksDeltaLakeSource",
-								"query": "  SELECT \n  eventId,\n  CodeName,\n  date_format(start, 'yyyy-MM-dd HH:mm:ssxxx') AS start,\n  date_format(end, 'yyyy-MM-dd HH:mm:ssxxx') AS end,\n  note,\n  ratedSpeed,\n  productionlineid,\n  runId,\n  iotcode,\n  clientbillableevent\n\nFROM iotprod.gold.gold_jobcosting_event_int\nWHERE eventId IS NOT NULL AND runId IS NOT NULL",
+								"query": "  SELECT \n  eventId,\n  CodeName,\n  date_format(start, 'yyyy-MM-dd HH:mm:ssxxx') AS start,\n  date_format(end, 'yyyy-MM-dd HH:mm:ssxxx') AS end,\n  note,\n  ratedSpeed,\n  productionlineid,\n  runId,\n  iotcode,\n  clientbillableevent\n\nFROM iotprod.gold.gold_jobcosting_event_int\nWHERE eventId IS NOT NULL AND runId IS NOT NULL ",
 								"exportSettings": {
 									"type": "AzureDatabricksDeltaLakeExportCommand"
 								}
@@ -201,7 +201,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "daniela.gomez@wineworks.co.nz"
+								"EmailTo": ""
 							}
 						}
 					}
@@ -877,7 +877,7 @@
 								"PipelineName": "@{pipeline().Pipeline}",
 								"Subject": "An error has occurred!",
 								"ErrorMessage": "The ADF pipeline has crashed! Please check the logs.",
-								"EmailTo": "daniela.gomez@wineworks.co.nz"
+								"EmailTo": "wwsql_admins@wineworks.co.nz"
 							}
 						}
 					}
